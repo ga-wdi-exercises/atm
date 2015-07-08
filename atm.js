@@ -3,13 +3,18 @@ var textField = $("#textField");
 var depositButton = $("#depositButton");
 var withdrawlButton = $("#withdrawlButton");
 var enteredAmount;
+var balance = 0
+
 
 function addMoney(){
   enteredAmount=$("#textField").val();
-  console.log("val()")
+  balanceField.html("$" + enteredAmount)
+  console.log(newBalance)
+  var newBalance = enteredAmount
+
 }
 
-textField.on("click", addMoney);
+depositButton.on("click", addMoney);
 
 //user clicks text field
 //user enters a numnerical value into text field
