@@ -8,23 +8,29 @@ $("div.balance").css({
 
 // - As a user, I want to deposit money into one of the bank accounts
 //set up event listener for click on the Deposit button
-$("#checkingAddMoney").on("click", addUpTheChecking);
-//$("#savingsAddMoney").on("click", addUpTheMoney);
+$("#checkingAddMoney").on("click", addUpTheMoney);
+$("#savingsAddMoney").on("click", addUpTheMoney);
 
 // on "deposit" button click, execute this function
-function addUpTheChecking(){
+function addUpTheMoney(){
     //get the current balance of the account we're accessing
-    var result = $("#checkingBalance").text();
+    var prevBalance = $(this).siblings("div.balance");
+    var result = prevBalance.text();
+    //get the current account balance without the $
     var currentBalance = parseInt(result.replace("$", ""));
+
     //get value of the input and set as var newEntry
-    var newEntry = parseInt($("#moneyInTheBank").val());
-    console.log(newEntry);
+    var newEntry = parseInt($(this).siblings("input.moneyInTheBank").val());
+
     // add value of newEntry to text content of our account
-    $("#checkingBalance").text( function(){
+    $(prevBalance).text( function(){
         var total = newEntry + currentBalance;
         return "$" + total;
     });
-    $("#moneyInTheBank").val("");
+    // clear the value of the input field
+    $(this).siblings("input.moneyInTheBank").val("");
+    // set the background-color of the account to grey when money is addded
+    $(this).siblings("div.balance").css("background-color", "#E3E3E3")
 }
 
 
