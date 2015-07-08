@@ -1,9 +1,11 @@
-var checkingBalance = document.querySelector("div#checking_balance");
+var checkingBalance = $(".account .balance");
 checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 
+var checkingInput = $("")
 var checkingDeposit = function(amount){
   checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-
+  //target and get value inside text box
+  //
 }
 
 function checkingWithdrawal(amount){
