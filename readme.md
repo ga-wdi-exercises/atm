@@ -4,6 +4,8 @@
 
 We 're going to build an application to keep track of the checking and savings balances. You can play with an example of what a working version will do in the `atm-obfuscate` folder.
 
+## USE jQUERY
+
 ###User Stories
 - As a user, I want to deposit money into one of the bank accounts
 - As a user, I want to withdraw money from one of the bank accounts
