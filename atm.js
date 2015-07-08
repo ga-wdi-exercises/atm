@@ -1,3 +1,6 @@
+function overDraft(){
+  console.log("overDraft fired!");
+};
 
 
 // CHECKING ACCOUNT
@@ -16,12 +19,18 @@ function checkingDeposit(){
 }
 
 function checkingWithdrawal(){
+  if (checkingBalance <= 0){
+
+    overDraft();
+
+  } else{
+
   var depositAmount = parseFloat($(checkingInput).val());
   checkingBalance -= depositAmount;
   checkingInput.val("");
   checkingDisplay.html("$"+checkingBalance);
   checkingDisplay.css("background-color","red");
-
+}
 
 }
 
@@ -53,8 +62,9 @@ savingsDisplay.html("$"+ savingsBalance);
 checkingDisplay.html("$"+checkingBalance);
 
 $(".checking_account input[value=Deposit]").on("click",checkingDeposit);
-$(".savings_account input[value=Deposit]").on("click",savingsDeposit);
 $(".checking_account input[value=Withdraw]").on("click",checkingWithdrawal);
+
+$(".savings_account input[value=Deposit]").on("click",savingsDeposit);
 $(".savings_account input[value=Withdraw]").on("click",savingsWithdrawal);
 
-//when I withdraw with it being zero 
+//when I withdraw with it being zero
