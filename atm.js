@@ -37,7 +37,7 @@ function addUpTheMoney(){
     $(this).siblings("div.balance").css("background-color", "#E3E3E3")
 }
 
-// // - As a user, I want to withdraw money from one of the bank accounts. Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
+// // As a user, I want to withdraw money from one of the bank accounts. Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
 
 // on "withdraw" click =
 function subtractMoney() {
@@ -52,48 +52,51 @@ function subtractMoney() {
 
     // subtract value of html of div.balance
     $(prevBalance).text( function(){
+        // get the new total balance
         var total = currentBalance - newWithdrawal;
-        // if newWithdrawal would take the account into negatives, ignore newWithdrawal
-        if (total > 0){
-            return "$" + total;
+        console.log(total);
+        // setting up overdraft protection with and if-else statement! first we set up the savings half of the function
+        if ($(this) == $("#withdrawFromSavings")){
+            // if newWithdrawal would take the account into negatives, ignore newWithdrawal
+            if (total > 0){
+                return "$" + total;
+            } else {
+                return "$" + currentBalance;
+            }
+        //if the withdrawal comes from checking, we run this part of the function
         } else {
-            return "$" + currentBalance;
-        }
-    });
+            // if the total is >0, print the new total
+            if (total > 0){
+                return "$" + total;
+            // in case of over draft, run this portion of the function:
+            } else {
+                // set the savings balance to the overdrafted amount
+                $("#savingsBalance").text( function(){
+                    // get the current savings balance. It wasn't working for me when I tried to do it in one variable, so I split into two
+                    var stringBalance = $("#savingsBalance").text();
+                    var savingsBalance = parseInt(stringBalance.replace("$", ""));
+                    // add savings balance and total (because total is a negative value, it should end up being subtracted)
+                    var overdraft = savingsBalance + total;
+                    //new savings account balance!
+                    return "$" + overdraft;
+                });
+                // change balance to 0 in checking. sad face.
+                $(this).css("background-color", "#FF003E");
+                return "$" + 0;
 
+            }
+
+        }
     // clear value of input.text
     $(this).siblings("input.moneyInTheBank").val("");
-
+});
 }
+ // - As a user, I want overdraft protection What happens when the user wants to withdraw more money from the checking account than is in the account?
 
 
-//
-// // - As a user, I want overdraft protection
-// //   - What happens when the user wants to withdraw more money from the checking account than is in the account?
-//
-//
-// var checkingBalance = document.querySelector("div#checking_balance");
-// checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-//
-// var checkingDeposit = function(amount){
-//   checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-//
-// }
-//
-// function checkingWithdrawal(amount){
-//
-// }
-//
-// function savingsDeposit(amount){
-//
-// }
-//
-// function savingsWithdrawal(amount){
-//
-// }
 
-// an eventListerner for each button, each one a "click"
 
 
 // don't delete the line below! This is the closing of your document.ready
+
 });
