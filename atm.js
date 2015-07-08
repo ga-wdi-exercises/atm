@@ -38,15 +38,23 @@ function addUpTheMoney(){
 }
 
 // As a user, I want to withdraw money from one of the bank accounts. Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
-
+var balanceSum;
+function getSumBalances() {
+    var cBalance = $("#checkingBalance").text();
+    var checkingBalance = parseInt(cBalance.replace("$", ""));
+    var sBalance = $("#savingsBalance").text();
+    var savingsBalance = parseInt(sBalance.replace("$", ""));
+    balanceSum = savingsBalance + checkingBalance;
+    return balanceSum;
+}
 // on "withdraw" click =
 function subtractMoney() {
+    getSumBalances();
     //get the current balance of the account we're accessing
     var prevBalance = $(this).siblings("div.balance");
     var result = prevBalance.text();
     //get the current account balance without the $
     var currentBalance = parseInt(result.replace("$", ""));
-
     //get value of the input and set as var newWithdrawal
     var newWithdrawal = parseInt($(this).siblings("input.moneyInTheBank").val());
 
@@ -54,7 +62,7 @@ function subtractMoney() {
     $(prevBalance).text( function(){
         // get the new total balance
         var total = currentBalance - newWithdrawal;
-        console.log(total);
+
         // setting up overdraft protection with and if-else statement! first we set up the savings half of the function
         if ($(this) == $("#withdrawFromSavings")){
             // if newWithdrawal would take the account into negatives, ignore newWithdrawal
@@ -64,12 +72,14 @@ function subtractMoney() {
                 return "$" + currentBalance;
             }
         //if the withdrawal comes from checking, we run this part of the function
+        } else if (newWithdrawal > balanceSum){
+            alert("Not enough money for that!")
         } else {
             // if the total is >0, print the new total
             if (total > 0){
                 return "$" + total;
             // in case of over draft, run this portion of the function:
-            } else {
+            }  else {
                 var confirmOverdraft = confirm("Do you want to overdraft your account?");
                 if (confirmOverdraft == true){
                 // set the savings balance to the overdrafted amount
