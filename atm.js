@@ -1,27 +1,28 @@
 $(document).ready(function() {  ///DON'T DELETE
 
+
+
+var cBal = 0;
+
+$("#cDepositButton").on("click", function() {
+  var cAmt = parseInt($("#cplaceholder").val());
+  // alert("$" + (cAmt + cBal)) //testing
+  cBal = (cBal + cAmt)
+  $("#checkingBalance").text("$" + cBal)
+})
+
+
+}) ///CLOSING TAG DON'T DELETE
+
+
 // As a user, I want to deposit money into one of the bank accounts
   //user inputs new number amount (a variable) checkingAmount
   //user clicks deposit button
     //new number amount + old number amount (default = 0)
     //total should replace $0
     //input field should go back to default
-
-var cBal = 0;
-
-$("#cDepositButton").on("click", function() {
-  var cAmt = parseInt($("#cplaceholder").val());
-  alert("$" + (cAmt + cBal)) //returning $NaN0 .. cAmt is NaN?
-})
-
 // Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
 // var cBal = parseInt($("#checkingBalance").text().replace("$", ""));
-
-
-
-}) ///CLOSING TAG DON'T DELETE
-
-
 
 //Notes to self
 
