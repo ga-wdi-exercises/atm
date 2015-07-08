@@ -7,6 +7,7 @@ $('#checking_deposit').on('click', function() {
 
     cBalance.html('$' + newChecking)
     currentChecking = cBalance.html();
+    cInput.val('')
 })
 
 // var cInput =  $('#checking_input');
@@ -16,6 +17,10 @@ $('#checking_deposit').on('click', function() {
 
 $('#checking_withdraw').on('click', function(){
 
-  alert('test')
+  newChecking = parseFloat(cBalance.html().substr(1)) - parseInt(cInput.val())
+  cBalance.html('$' + newChecking)
+
+  currentChecking = cBalance.html();
+  cInput.val('')
 
 })
