@@ -14,9 +14,15 @@ function checkingDeposit(){
   //target and get value inside text box
 }
 
-// function checkingWithdrawal(amount){
-//
-// }
+function checkingWithdrawal(){
+  var depositAmount = parseFloat($(checkingInput).val());
+  checkingBalance -= depositAmount;
+  checkingInput.val("");
+  checkingDisplay.html("$"+checkingBalance);
+  checkingDisplay.css("background-color","red");
+
+
+}
 //
 
 var savingsDisplay = $(".savings_account .balance");
@@ -37,3 +43,4 @@ function savingsDeposit(){
 // an eventListerner for each button, each one a "click"
 $(".checking_account input[value=Deposit]").on("click",checkingDeposit);
 $(".savings_account input[value=Deposit]").on("click",savingsDeposit);
+$(".checking_account input[value=Withdraw]").on("click",checkingWithdrawal);
