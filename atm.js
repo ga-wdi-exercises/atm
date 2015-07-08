@@ -41,7 +41,7 @@ function savingsDeposit(){
 
 function savingsWithdrawal(){
   var depositAmount = parseFloat($(savingsInput).val());
-  checkingBalance -= depositAmount;
+  savingsBalance -= depositAmount;
   savingsInput.val("");
   savingsDisplay.html("$"+ savingsBalance);
   savingsDisplay.css("background-color","red");
