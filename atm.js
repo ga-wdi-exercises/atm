@@ -7,8 +7,17 @@ var cBal = 0;
 $("#cDepositButton").on("click", function() {
   var cAmt = parseInt($("#cplaceholder").val());
   // alert("$" + (cAmt + cBal)) //testing
-  cBal = (cBal + cAmt)
+  cBal = (cBal + cAmt);
   $("#checkingBalance").text("$" + cBal)
+})
+
+
+$("#cWithdrawButton").on("click", function() {
+  // alert("withdraw button!")
+  // alert(cBal);
+  var cAmt = parseInt($("#cplaceholder").val());
+  cBal = (cBal - cAmt);
+  $("#checkingBalance").text("$" + cBal);
 })
 
 
