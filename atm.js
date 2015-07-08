@@ -1,21 +1,10 @@
-var checkingBalance = document.querySelector("div#checking_balance");
-checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+cDeposit = $('#checking_deposit')
 
-var checkingDeposit = function(amount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+$(cDeposit).on('click', function (event){
 
-}
+    var currentBalance = $('.balance').eq(0);
+    depositInput = $('#checking_input');
+    newBalance = ('$' + (depositInput + currentBalance.html())
 
-function checkingWithdrawal(amount){
-
-}
-
-function savingsDeposit(amount){
-
-}
-
-function savingsWithdrawal(amount){
-
-}
-
-// an eventListerner for each button, each one a "click"
+    currentBalance.html('$' + newBalance)
+})
