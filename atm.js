@@ -1,6 +1,8 @@
 
 var checkingBalance = 0;
 var savingsBalance = 0;
+
+// CHECKING ACCOUNT
 var checkingDisplay = $(".checking_account .balance");
 var checkingInput = $(".checking_input");
 function checkingDeposit(){
@@ -11,7 +13,6 @@ function checkingDeposit(){
   checkingDisplay.css("background-color","#61c419");
 
 
-  //target and get value inside text box
 }
 
 function checkingWithdrawal(){
@@ -23,10 +24,12 @@ function checkingWithdrawal(){
 
 
 }
-//
+
+ //SAVINGS ACCOUNT
 
 var savingsDisplay = $(".savings_account .balance");
 var savingsInput = $(".savings_input");
+
 function savingsDeposit(){
   var depositAmount = parseFloat($(savingsInput).val());
   savingsBalance += depositAmount;
@@ -35,12 +38,16 @@ function savingsDeposit(){
   savingsDisplay.css("background-color","#61c419");
 
 }
-//
-// function savingsWithdrawal(amount){
-//
-// }
 
-// an eventListerner for each button, each one a "click"
+function savingsWithdrawal(){
+  var depositAmount = parseFloat($(savingsInput).val());
+  checkingBalance -= depositAmount;
+  savingsInput.val("");
+  savingsDisplay.html("$"+ savingsBalance);
+  savingsDisplay.css("background-color","red");
+}
+
 $(".checking_account input[value=Deposit]").on("click",checkingDeposit);
 $(".savings_account input[value=Deposit]").on("click",savingsDeposit);
 $(".checking_account input[value=Withdraw]").on("click",checkingWithdrawal);
+$(".savings_account input[value=Withdraw]").on("click",savingsWithdrawal);
