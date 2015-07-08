@@ -1,10 +1,21 @@
-cDeposit = $('#checking_deposit')
 
-$(cDeposit).on('click', function (event){
+$('#checking_deposit').on('click', function() {
+    cInput =  $('#checking_input');
+    cBalance = $('.balance').eq(0)
 
-    var currentBalance = $('.balance').eq(0);
-    depositInput = $('#checking_input');
-    newBalance = ('$' + (depositInput + currentBalance.html())
+    newChecking = parseFloat(cBalance.html().substr(1)) + parseInt(cInput.val())
 
-    currentBalance.html('$' + newBalance)
+    cBalance.html('$' + newChecking)
+    currentChecking = cBalance.html();
+})
+
+// var cInput =  $('#checking_input');
+// var cBalance = $('.balance').eq(0)
+// var currentChecking = cBalance.html();
+// var newChecking = (parseFloat(cBalance.html().substr(1)) + parseInt(cInput.val()))
+
+$('#checking_withdraw').on('click', function(){
+
+  alert('test')
+
 })
