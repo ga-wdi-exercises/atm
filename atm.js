@@ -11,6 +11,10 @@ $("div.balance").css({
 $("#checkingAddMoney").on("click", addUpTheMoney);
 $("#savingsAddMoney").on("click", addUpTheMoney);
 
+//set up event listener for click on the Withdrawal button
+$("#withdrawFromChecking").on("click", subtractMoney);
+$("#withdrawFromSavings").on("click", subtractMoney);
+
 // on "deposit" button click, execute this function
 function addUpTheMoney(){
     //get the current balance of the account we're accessing
@@ -33,15 +37,36 @@ function addUpTheMoney(){
     $(this).siblings("div.balance").css("background-color", "#E3E3E3")
 }
 
+// // - As a user, I want to withdraw money from one of the bank accounts. Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
 
-// // - As a user, I want to withdraw money from one of the bank accounts
-// //   - Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
 // on "withdraw" click =
-//     get value of input.text and set as var newWithdrawal
-//     subtract value of html of div.balance
-//     if newWithdrawal > div.balance.value, ignore newWithdrawal
-//     clear value of input.text
-//
+function subtractMoney() {
+    //get the current balance of the account we're accessing
+    var prevBalance = $(this).siblings("div.balance");
+    var result = prevBalance.text();
+    //get the current account balance without the $
+    var currentBalance = parseInt(result.replace("$", ""));
+
+    //get value of the input and set as var newWithdrawal
+    var newWithdrawal = parseInt($(this).siblings("input.moneyInTheBank").val());
+
+    // subtract value of html of div.balance
+    $(prevBalance).text( function(){
+        var total = currentBalance - newWithdrawal;
+        // if newWithdrawal would take the account into negatives, ignore newWithdrawal
+        if (total > 0){
+            return "$" + total;
+        } else {
+            return "$" + currentBalance;
+        }
+    });
+
+    // clear value of input.text
+    $(this).siblings("input.moneyInTheBank").val("");
+
+}
+
+
 //
 // // - As a user, I want overdraft protection
 // //   - What happens when the user wants to withdraw more money from the checking account than is in the account?
