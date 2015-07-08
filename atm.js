@@ -37,7 +37,7 @@ function addUpTheMoney(){
     $(this).siblings("div.balance").css("background-color", "#E3E3E3")
 }
 
-// As a user, I want to withdraw money from one of the bank accounts. Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
+// set up a variable and a function to total up the balance of money in both accounts
 var balanceSum;
 function getSumBalances() {
     var cBalance = $("#checkingBalance").text();
