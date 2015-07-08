@@ -37,7 +37,7 @@ function addUpTheMoney(){
     $(this).siblings("div.balance").css("background-color", "#E3E3E3")
 }
 
-// // As a user, I want to withdraw money from one of the bank accounts. Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
+// As a user, I want to withdraw money from one of the bank accounts. Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
 
 // on "withdraw" click =
 function subtractMoney() {
@@ -70,6 +70,8 @@ function subtractMoney() {
                 return "$" + total;
             // in case of over draft, run this portion of the function:
             } else {
+                var confirmOverdraft = confirm("Do you want to overdraft your account?");
+                if (confirmOverdraft == true){
                 // set the savings balance to the overdrafted amount
                 $("#savingsBalance").text( function(){
                     // get the current savings balance. It wasn't working for me when I tried to do it in one variable, so I split into two
@@ -83,20 +85,15 @@ function subtractMoney() {
                 // change balance to 0 in checking. sad face.
                 $(this).css("background-color", "#FF003E");
                 return "$" + 0;
-
             }
-
         }
+
+    }
     // clear value of input.text
     $(this).siblings("input.moneyInTheBank").val("");
 });
 }
- // - As a user, I want overdraft protection What happens when the user wants to withdraw more money from the checking account than is in the account?
 
-
-
-
-
-// don't delete the line below! This is the closing of your document.ready
+// note to self: don't delete the line below! This is the closing of your document.ready
 
 });
