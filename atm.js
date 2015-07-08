@@ -1,16 +1,14 @@
-$(document).ready(function() {  ///DON'T DELETE
-
-
+$(document).ready(function() { ///DON'T DELETE
 
 var cBal = 0;
+var sBal = 0;
 
 $("#cDepositButton").on("click", function() {
-  var cAmt = parseInt($("#cplaceholder").val());
+  var cAmt = parseInt($("#cplaceholder").val);
   // alert("$" + (cAmt + cBal)) //testing
   cBal = (cBal + cAmt);
   $("#checkingBalance").text("$" + cBal)
 })
-
 
 $("#cWithdrawButton").on("click", function() {
   // alert("withdraw button!")
@@ -20,6 +18,17 @@ $("#cWithdrawButton").on("click", function() {
   $("#checkingBalance").text("$" + cBal);
 })
 
+$("#sDepositButton").on("click", function() {
+  var sAmt = parseInt($("#sAmt").val());
+  sBal = (sBal + sAmt);
+  $("#sBal").text("$" + sBal)
+})
+
+("#sWithdrawButton").on("click", function() {
+  var sAmt = parseInt("#sAmt").val(); //variable that the user inputs
+  sBal = (sBal - sAmt);  //determine new balance total
+  $("#sBal").text("$" + sBal);      //enter new balance total in the $0 spot
+})
 
 }) ///CLOSING TAG DON'T DELETE
 
