@@ -10,23 +10,23 @@
       <div><img src="ga.png" /></div>
       <div class="title">Bank of GA</div>
     </div>
-    
+
     <div class="account">
       <h2>Checking</h2>
-      <div class="balance">$0</div>
-      <input type="text" placeholder="enter an amount" />
-      <input type="button" value="Deposit" />
-      <input type="button" value="Withdraw" />
+      <div id="checkingBalance" class="balance">$0</div>
+      <input class="moneyInTheBank" type="text" placeholder="enter an amount" />
+      <input id="checkingAddMoney" class="depositButton" type="button" value="Deposit" />
+      <input id="withdrawFromChecking" class="withdrawalButton" type="button" value="Withdraw" />
     </div>
 
     <div class="account">
       <h2>Savings</h2>
-      <div class="balance">$0</div>
-      <input type="text" placeholder="enter an amount" />
-      <input type="button" value="Deposit" />
-      <input type="button" value="Withdraw" />
+      <div id="savingsBalance" class="balance">$0</div>
+      <input class="moneyInTheBank" type="text" placeholder="enter an amount" />
+      <input id="savingsAddMoney" class="depositButton" type="button" value="Deposit" />
+      <input id="withdrawFromSavings" class="withdrawalButton" type="button" value="Withdraw" />
     </div>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
     <script src="atm.js"></script>
   </body>
 </html>
