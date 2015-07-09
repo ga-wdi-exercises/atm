@@ -14,11 +14,12 @@ function checkingDeposit(){
 
 
 function checkingWithdrawal(){
-  console.log("check wd");
   var newWithdrawal = parseInt($("#checkingInput").val());
   var balance = parseInt($(".checking_balance").html().replace("$",""));
-  var newBalance = balance - newWithdrawal;
-  $(".checking_balance").text("$" + newBalance);
+  if( newWithdrawal <= balance ){
+    var newBalance = balance - newWithdrawal;
+    $(".checking_balance").text("$" + newBalance);
+  }
   $("#checkingInput").val("");
 }
 
@@ -33,8 +34,10 @@ function savingsDeposit(){
 function savingsWithdrawal(){
   var newWithdrawal = parseInt($("#savingsInput").val());
   var balance = parseInt($(".savings_balance").html().replace("$",""));
-  var newBalance = balance - newWithdrawal;
-  $(".savings_balance").text("$" + newBalance);
+  if( newWithdrawal <= balance ){
+    var newBalance = balance - newWithdrawal;
+    $(".savings_balance").text("$" + newBalance);
+  }
   $("#savingsInput").val("");
 }
 
