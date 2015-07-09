@@ -2,24 +2,29 @@ var totalCheckingBalance = 0;
 var totalSavingBalance = 0;
 //deposit button for Checking
 $("#depositCheckingButton").on("click", function (){
-  console.log(totalCheckingBalance)
+  $("#checkingDisplay").text("$ " + totalCheckingBalance);
+  console.log(totalCheckingBalance);
   var addingBalance = parseInt($("#checkingInput").val());
-return totalCheckingBalance +=  addingBalance})
+  totalCheckingBalance +=  addingBalance;
+  return $("#checkingDisplay").text("$ " + totalCheckingBalance)})
 //Withdraw button for Checking
 $("#withdrawCheckingButton").on("click", function (){
   console.log(totalCheckingBalance)
   var withdrawingBalance = parseInt($("#checkingInput").val());
-  return totalCheckingBalance -=  withdrawingBalance})
+  totalCheckingBalance -=  withdrawingBalance;
+return $("#checkingDisplay").text("$ " + totalCheckingBalance) })
 //deposit button for Savings
 $("#depositSavingsButton").on("click", function (){
   console.log(totalSavingBalance);
   var depositBalance = parseInt($("#savingsInput").val());
-return totalSavingBalance +=  depositBalance})
+  totalSavingBalance +=  depositBalance;
+return $("#savingsDisplay").text("$ " + totalSavingBalance)})
 //withdraw button for savings
 $("#withdrawSavingsButton").on("click", function (){
   console.log(totalSavingBalance)
     var withdrawSavingBalance = parseInt($("#savingsInput").val());
-    return totalSavingBalance -=  withdrawSavingBalance})
+    totalSavingBalance -=  withdrawSavingBalance
+  return $("#savingsDisplay").text("$ " + totalSavingBalance)})
 
 
 /* var checkingBalance = checkingBalance + $("checkingInput").val();
