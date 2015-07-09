@@ -14,8 +14,13 @@ $("#cWithdrawButton").on("click", function() {
   // alert("withdraw button!")
   // alert(cBal);
   var cAmt = parseInt($("#cplaceholder").val());
+  if (cBal > cAmt) {
   cBal = (cBal - cAmt);
   $("#checkingBalance").text("$" + cBal);
+  }
+  else {
+    alert("you can't do that!")
+  }
 })
 
 $("#sDepositButton").on("click", function() {
@@ -29,6 +34,9 @@ $("#sWithdrawButton").on("click", function() {
   sBal = (sBal - sAmt);
   $("#savingsBalance").text("$" + sBal);
 })
+
+
+
 
 }) ///CLOSING TAG DON'T DELETE
 
