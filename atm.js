@@ -23,7 +23,7 @@ function checkingWithdrawal(){
   } else if ( newWithdrawal <= totalBalance){
     $("#checking_balance").text("$0");
     $("#checking_balance").addClass("zero");
-    var newBalance = savingsBalance + balance - newWithdrawal;
+    var newBalance = totalBalance - newWithdrawal;
     $("#savings_balance").text("$" + newBalance);
   }
   $("#checkingInput").val("");
