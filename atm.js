@@ -17,9 +17,9 @@ var saveWithdrawButton = $('saveWithdrawButton');
 var checkingBalance = $("#checking_balance");
 var savingsBalance = $('#savings_balance');
 
-
 var currentCheckBalance = 0;
 var currentSaveBalance = 0;
+
 // checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 
 // var checkingDeposit = function(amount){
@@ -27,28 +27,38 @@ var currentSaveBalance = 0;
 
 // };
 
-function deposit (amount){
+function deposit (deposit){
     //be able to deposit depending on which button is pushed
 
-    if (checkingInput> 1){
+    if (deposit == checkingInput){
         // add amount to checking balance
-        currentCheckBalance = currentCheckBalance + parseInt(amount);
+        currentCheckBalance = currentCheckBalance + parseInt(deposit);
         console.log(currentCheckBalance);
         // triggered by eventListerner
         // checkingBalance = parseInt(checkingBalance.html());
     }
-    return currentCheckBalance;
 
-    if (savingsInput > 1){
+    else if (deposit == savingsInput){
         // add amount to savings balance
-        currentSaveBalance = currentSaveBalance + parseInt(amount);
+        currentSaveBalance = currentSaveBalance + parseInt(deposit);
         console.log(currentSaveBalance);
         // triggered by eventListerner
         // savingsBalance = parseInt(checkingBalance.html());
     }
-    return currentSaveBalance;
+    return currentCheckBalance || currentSaveBalance;
 }
 
+// balance window function
+
+function balanceWindow (accountBalance, accountBalance2){
+    var checkBalanceWindow = $('#checkBalanceWindow');
+    var saveBalanceWindow = $('#saveBalanceWindow');
+
+    checkBalanceWindow.html(currentCheckBalance);
+    saveBalanceWindow.html(currentSaveBalance);
+};
+
+balanceWindow(currentCheckBalance, currentSaveBalance);
 // event listeners
 
 // checking deposit button
@@ -79,6 +89,10 @@ $('#saveDepositButton').click('click', function(event){
 $('#saveWithdrawButton').click('click', function(event){
     console.log('saveWithdrawButton');
 });
+
+
+
+
 // function checkingWithdrawal(amount){
 
 // }
