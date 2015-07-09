@@ -17,6 +17,13 @@ $(document).ready(function(){
 $(".cwithdrawalButton").on("click",function(){
   console.log("i clicked the withdrawal button")
 var withdrawal = parseInt($(".input").val())
-
+var balance=$(".cBalance").text()
+balance= parseInt(balance.replace("$", ""))
+  var newBalance= balance - withdrawal
+   $(".cBalance").text("$" + newBalance)
 })
+
+//Saving Money
+
+
 })
