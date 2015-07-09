@@ -96,3 +96,6 @@ $(".savings_account input[value=Withdraw]").on("click",function(){
          savingsWithdrawal;
       }
     });
+
+    //V2.0 refactor all this into a clean object you can use.
+     //how do I wrap this into a object ?
