@@ -6,11 +6,11 @@ $(document).ready(function() {
 
 //Global Vars
 
-var checkingInput = $('#checkingInput');
+var checkingInput = $('#checkingInput').val();
 var checkDepositButton = $('#checkDepositButton');
 var checkWithdrawButton = $('#checkWithdrawButton');
 
-var savingsInput = $('savingsInput');
+var savingsInput = $('savingsInput').val();
 var saveDepositButton = $('saveDepositButton');
 var saveWithdrawButton = $('saveWithdrawButton');
 
@@ -26,8 +26,14 @@ var savingsBalance = $('#savings_balance');
 function deposit (amount){
     //be able to deposit depending on which button is pushed
 
-    if (checkingInput == true){
+    if (amount > 1){
+        var currentBalance = 0;
+        console.log(amount);
+
         // add amount to checking balance
+        currentBalance = currentBalance + amount;
+        console.log(currentBalance);
+
         // triggered by eventListerner
         // checkingBalance = parseInt(checkingBalance.html());
     }
@@ -41,12 +47,15 @@ function deposit (amount){
     return savingsBalance;
 }
 
-// event listeners 
+// event listeners
 
 // checking deposit button
 
 $('#checkDepositButton').click('click', function(event){
-    console.log('checkDepositButton');
+    event.preventDefault();
+    console.log(checkingInput);
+    // take #checkingingInput; store it; pass it to deposit()
+    deposit(checkingInput);
 });
 
 // withdraw deposit button
@@ -59,6 +68,8 @@ $('#checkWithdrawButton').click('click', function(event){
 
 $('#saveDepositButton').click('click', function(event){
     console.log('saveDepositButton');
+    // take #savingsInput; store it; pass it to deposit()
+    deposit(savingsInput);
 });
 
 // withdraw savings button
