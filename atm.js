@@ -1,8 +1,12 @@
-// var checkingBalance = document.querySelector("div#checking_balance");
-// checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+var checkingBalance = 0;
+var savingsBalance = 0;
 
 var checkingDeposit = function(amount){
-  alert("CD");
+ var amount = parseInt($("#checkingAmount").val());
+ checkingBalance = checkingBalance + amount;
+ $("#checkingBalance").html("$"+checkingBalance);
+ $("#checkingAmount").val($(this).attr('placeholder'));
+
 }
 
 function checkingWithdrawal(amount){
