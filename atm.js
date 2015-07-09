@@ -7,13 +7,11 @@ var balance = 0
 
 
 function addMoney(){
-  enteredAmount=$("#textField").val();
-  balanceField.html("$" + enteredAmount)
-  console.log(newBalance)
-  var newBalance = enteredAmount
-
+  enteredAmount=parseInt(textField.val());
+  balance = balance + enteredAmount;
+  balanceField.html("$" + balance)
+  console.log(balance)
 }
-
 depositButton.on("click", addMoney);
 
 //user clicks text field
