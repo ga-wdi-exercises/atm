@@ -19,7 +19,7 @@ body {
 }
 
 .account {
-  background-color: #6C9A74;
+  background-color: #E3E3E3;
   border: 1px solid #295A33;
   border-radius: 15px;
   display: inline-block;
@@ -29,8 +29,8 @@ body {
 }
 
 .balance {
-  background-color: #E3E3E3;
   border: 1px solid #676767;
+  background-color: #6C9A74;
   border-radius: 15px;
   font-family: 'Ruluko', sans-serif;
   font-size: 50px;
