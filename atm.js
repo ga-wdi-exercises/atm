@@ -1,21 +1,22 @@
-var checkingBalance = document.querySelector("div#checking_balance");
-checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+$(document).ready(function(){
 
-var checkingDeposit = function(amount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+//Deposit Money
+  $(".cdepositButton").on("click",function(){
+    console.log("i clicked the deposit button")
+    var deposit = parseInt($(".input").val())
+    //console.log(deposit)
+   var balance=$(".cBalance").text()
+   //console.log(balance)
+   balance= parseInt(balance.replace("$", ""))
+  var newBalance= deposit + balance
+ //console.log(balance)
+ $(".cBalance").text("$" + newBalance)
+ })
 
-}
+//Withdraw Money
+$(".cwithdrawalButton").on("click",function(){
+  console.log("i clicked the withdrawal button")
+var withdrawal = parseInt($(".input").val())
 
-function checkingWithdrawal(amount){
-
-}
-
-function savingsDeposit(amount){
-
-}
-
-function savingsWithdrawal(amount){
-
-}
-
-// an eventListerner for each button, each one a "click"
+})
+})
