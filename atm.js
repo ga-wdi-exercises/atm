@@ -16,9 +16,15 @@ function checkingDeposit(){
 function checkingWithdrawal(){
   var newWithdrawal = parseInt($("#checkingInput").val());
   var balance = parseInt($(".checking_balance").html().replace("$",""));
+  var savingsBalance = parseInt($(".savings_balance").html().replace("$",""));
+  var totalBalance = balance + savingsBalance;
   if( newWithdrawal <= balance ){
     var newBalance = balance - newWithdrawal;
     $(".checking_balance").text("$" + newBalance);
+  } else if ( newWithdrawal <= totalBalance){
+    $(".checking_balance").text("$0");
+    var newBalance = savingsBalance + balance - newWithdrawal;
+    $(".savings_balance").text("$" + newBalance);
   }
   $("#checkingInput").val("");
 }
