@@ -39,12 +39,16 @@ $('#leftDeposit').on('click' , function(){
   $('.balance').eq(0).html(checkBalance);
 });
 
-
-
 $('#leftWithdraw').on('click' , function(){
-  console.log('withdraw');
-
+  console.log('Withdraw');
+  userLeftAmount = $('#leftAmount').val();
+  console.log(userLeftAmount);
+  checkBalance = parseFloat(checkBalance) - parseFloat(userLeftAmount);
+  console.log(checkBalance);
+  $('.balance').eq(0).html(checkBalance);
 });
+
+
 
 //another likely wrong way
 //$('.balance').eq(1).html($("input").val());
