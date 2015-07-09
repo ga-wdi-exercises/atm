@@ -3,7 +3,9 @@ var savingsBalance = 0;
 
 var checkingDeposit = function(amount){
  var amount = parseInt($("#checkingAmount").val());
- checkingBalance = checkingBalance + amount;
+ if (amount) {
+   checkingBalance = checkingBalance + amount;
+ }
  $("#checkingBalance").html("$"+checkingBalance);
  $("#checkingAmount").val($(this).attr('placeholder'));
 
@@ -11,21 +13,27 @@ var checkingDeposit = function(amount){
 
 function checkingWithdrawal(amount){
   var amount = parseInt($("#checkingAmount").val());
-  checkingBalance = checkingBalance - amount;
+  if (amount) {
+    checkingBalance = checkingBalance - amount;
+  }
   $("#checkingBalance").html("$"+checkingBalance);
   $("#checkingAmount").val($(this).attr('placeholder'));
 }
 
 function savingsDeposit(amount){
   var amount = parseInt($("#savingsAmount").val());
-  savingsBalance = savingsBalance + amount;
+  if (amount) {
+    savingsBalance = savingsBalance + amount;
+  }
   $("#savingsBalance").html("$"+savingsBalance);
   $("#savingsAmount").val($(this).attr('placeholder'));
 }
 
 function savingsWithdrawal(amount){
   var amount = parseInt($("#savingsAmount").val());
-  savingsBalance = savingsBalance - amount;
+  if (amount) {
+    savingsBalance = savingsBalance - amount;
+  }
   $("#savingsBalance").html("$"+savingsBalance);
   $("#savingsAmount").val($(this).attr('placeholder'));
 }
