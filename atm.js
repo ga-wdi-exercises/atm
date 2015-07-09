@@ -1,9 +1,5 @@
-//my likely bad code
-// var checkBal = $('.balance').eq(0).html();
-// var checkSave = $('.balance').eq(1).html();
-
-
 var checkBalance = 0;
+var saveBalance = 0;
 
 //left side number, currently null
 // var checkingBalance = document.querySelector("div#checking_balance");
@@ -34,7 +30,7 @@ $('#leftDeposit').on('click' , function(){
   console.log('Deposit');
   userLeftAmount = $('#leftAmount').val();
   console.log(userLeftAmount);
-  checkBalance = parseFloat(userLeftAmount) + parseFloat(checkBalance);
+  checkBalance = parseInt(userLeftAmount) + parseInt(checkBalance);
   console.log(checkBalance);
   $('.balance').eq(0).html(checkBalance);
 });
@@ -43,12 +39,28 @@ $('#leftWithdraw').on('click' , function(){
   console.log('Withdraw');
   userLeftAmount = $('#leftAmount').val();
   console.log(userLeftAmount);
-  checkBalance = parseFloat(checkBalance) - parseFloat(userLeftAmount);
+  checkBalance = parseInt(checkBalance) - parseInt(userLeftAmount);
   console.log(checkBalance);
   $('.balance').eq(0).html(checkBalance);
 });
 
 
 
-//another likely wrong way
-//$('.balance').eq(1).html($("input").val());
+
+$('#rightDeposit').on('click' , function(){
+  console.log('Deposit');
+  userRightAmount = $('#rightAmount').val();
+  console.log(userRightAmount);
+  saveBalance = parseInt(saveBalance) + parseInt(userRightAmount);
+  console.log(saveBalance);
+  $('.balance').eq(1).html(saveBalance);
+});
+
+$('#rightWithdraw').on('click' , function(){
+  console.log('Withdraw');
+  userRightAmount = $('#rightAmount').val();
+  console.log(userRightAmount);
+  saveBalance = parseInt(saveBalance) - parseInt(userRightAmount);
+  console.log(saveBalance);
+  $('.balance').eq(1).html(saveBalance);
+});
