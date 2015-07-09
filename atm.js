@@ -10,12 +10,16 @@ var checkingInput = $('#checkingInput').val();
 var checkDepositButton = $('#checkDepositButton');
 var checkWithdrawButton = $('#checkWithdrawButton');
 
-var savingsInput = $('savingsInput').val();
+var savingsInput = $('#savingsInput').val();
 var saveDepositButton = $('saveDepositButton');
 var saveWithdrawButton = $('saveWithdrawButton');
 
 var checkingBalance = $("#checking_balance");
 var savingsBalance = $('#savings_balance');
+
+
+var currentCheckBalance = 0;
+var currentSaveBalance = 0;
 // checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 
 // var checkingDeposit = function(amount){
@@ -26,25 +30,23 @@ var savingsBalance = $('#savings_balance');
 function deposit (amount){
     //be able to deposit depending on which button is pushed
 
-    if (amount > 1){
-        var currentBalance = 0;
-        console.log(amount);
-
+    if (checkingInput> 1){
         // add amount to checking balance
-        currentBalance = currentBalance + amount;
-        console.log(currentBalance);
-
+        currentCheckBalance = currentCheckBalance + parseInt(amount);
+        console.log(currentCheckBalance);
         // triggered by eventListerner
         // checkingBalance = parseInt(checkingBalance.html());
     }
-    return checkingBalance;
+    return currentCheckBalance;
 
-    if (savingsInput == true){
+    if (savingsInput > 1){
         // add amount to savings balance
+        currentSaveBalance = currentSaveBalance + parseInt(amount);
+        console.log(currentSaveBalance);
         // triggered by eventListerner
         // savingsBalance = parseInt(checkingBalance.html());
     }
-    return savingsBalance;
+    return currentSaveBalance;
 }
 
 // event listeners
