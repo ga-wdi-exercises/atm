@@ -17,7 +17,10 @@ function checkingWithdrawal(amount){
 }
 
 function savingsDeposit(amount){
-  alert("SD");
+  var amount = parseInt($("#savingsAmount").val());
+  savingsBalance = savingsBalance + amount;
+  $("#savingsBalance").html("$"+savingsBalance);
+  $("#savingsAmount").val($(this).attr('placeholder'));
 }
 
 function savingsWithdrawal(amount){
