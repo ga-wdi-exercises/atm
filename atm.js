@@ -13,7 +13,7 @@ var checkingDeposit = function(amount){
 
 function checkingWithdrawal(amount){
   var amount = parseInt($("#checkingAmount").val());
-  if (amount) {
+  if (amount && amount <= checkingBalance) {
     checkingBalance = checkingBalance - amount;
   }
   $("#checkingBalance").html("$"+checkingBalance);
@@ -31,7 +31,7 @@ function savingsDeposit(amount){
 
 function savingsWithdrawal(amount){
   var amount = parseInt($("#savingsAmount").val());
-  if (amount) {
+  if (amount && amount <= savingsBalance) {
     savingsBalance = savingsBalance - amount;
   }
   $("#savingsBalance").html("$"+savingsBalance);
