@@ -32,31 +32,57 @@ function savingsWithdrawal(amount){
 // an eventListerner for each button, each one a "click"
 */	
 
-var $deposit = $("input#deposit") ; //deposit button
-var $withdraw = $("input#withdraw") ; //withdraw button
-var $userInput = $("input#input") ; //input field
+var $deposit = $("input#deposit") ; 
+var $withdraw = $("input#withdraw") ; 
+var $userInput = $("input#input") ; 
 var $checkingBalance = $("div#checking_balance") ;
 var $balance = $("div.balance") ; 
-
-// var currentTotal = function() {
-// 	$balance = $userInput.val() + $checkingBalance.substring(1) ; 
-// }
+var currentTotal ;
 
 $deposit.click( function() {
-	var currentTotal = parseInt($userInput.val()) + parseInt($("div.balance").html().substring(1)) ;
-	console.log( currentTotal) ;
-	$balance.html( "$" + currentTotal ) ;
-	$userInput.val(null) ;
+	if ( parseInt($userInput.val()) >= 0 ) {
+		currentTotal = parseInt($userInput.val()) + parseInt($("div.balance").html().substring(1)) ;
+		$balance.html( "$" + currentTotal ) ;
+		$userInput.val(null) ;
+	} else {
+		alert( "Input can't be negative value" ) ; 
+		$userInput.val(null) ;
+	}
 
 })	
-
-
-
-
-
 $withdraw.click( function() {
-	console.log( "withdraw" )
-})	
+	if ( parseInt($userInput.val()) >= 0 && 
+		 parseInt($userInput.val()) <= parseInt($("div.balance").html().substring(1))) {
+		currentTotal = parseInt($("div.balance").html().substring(1)) - parseInt($userInput.val()) ;
+		$balance.html( "$" + currentTotal ) ;
+		$userInput.val(null) ;	
+	} else {
+		alert( "No shopping for you. Go work." ) ;
+		$userInput.val(null) ; 
+	}	
+})
+	
+
+// $deposit.click( function() {
+// 	currentTotal = parseInt($userInput.val()) + parseInt($("div.balance").html().substring(1)) ;
+// 	$balance.html( "$" + currentTotal ) ;
+// 	$userInput.val(null) ;
+
+// })	
+
+// $withdraw.click( function() {
+// 	currentTotal = parseInt($("div.balance").html().substring(1)) - parseInt($userInput.val()) ;
+// 	$balance.html( "$" + currentTotal ) ;
+// 	$userInput.val(null) ;	
+// })
+
+
+
+
+// $withdraw.click( function() {
+// 	console.log( "withdraw" )
+// })	
+
 
 
 
