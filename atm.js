@@ -1,5 +1,5 @@
+
 function overDraft(){
-  //if checking is zero instead pull from savings
   if (savingsBalance > 0) {
     var depositAmount = parseFloat($(checkingInput).val());
     savingsBalance -= depositAmount;
@@ -78,12 +78,23 @@ checkingDisplay.html("$"+checkingBalance);
 $(".checking_account input[value=Deposit]").on("click",function(){
     if (isNaN(this) == false){
         checkingDeposit;
-    }else{
-      $(this).html("you are a idiot!");
     }
     });
-$(".checking_account input[value=Withdraw]").on("click",checkingWithdrawal);
-$(".savings_account input[value=Deposit]").on("click",savingsDeposit);
-$(".savings_account input[value=Withdraw]").on("click",savingsWithdrawal);
+$(".checking_account input[value=Withdraw]").on("click", function(){
+      if (isNaN(this) == false){
+          checkingWithdrawal;
+      }
+
+    });
+$(".savings_account input[value=Deposit]").on("click",function(){
+      if (isNaN(this) == false){
+         savingsDeposit;
+      }
+    });
+$(".savings_account input[value=Withdraw]").on("click",function(){
+      if (isNaN(this) == false){
+         savingsWithdrawal;
+      }
+    });
 
 //when I withdraw with it being zero
