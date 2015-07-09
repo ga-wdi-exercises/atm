@@ -95,13 +95,14 @@ function subtractMoney() {
                 // change balance to 0 in checking. sad face.
                 $(this).css("background-color", "#FF003E");
                 return "$" + 0;
+                }
             }
+
         }
 
-    }
+    });
     // clear value of input.text
     $(this).siblings("input.moneyInTheBank").val("");
-});
 }
 
 // note to self: don't delete the line below! This is the closing of your document.ready
