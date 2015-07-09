@@ -1,9 +1,11 @@
 $(document).ready (function (){
   //alert("Ready to go!")
 
-
+var sInput;
 var cInput;
 var cBalance = 0;
+var sBalance = 0;
+
 
 
 // function savingsDeposit(amount){
@@ -24,13 +26,21 @@ var cBalance = 0;
 //
 // ###User Stories
 // COMMIT ONE - As a user, I want to deposit money into one of the bank accounts
+//CHECKING
 $("#cDepositButton").on("click", function(event){
   cInput = $("#cField").val();
   cBalance = cBalance + parseFloat(cInput) ;
   $(".balance:nth-child(2)").eq(0).html(cBalance);
   $("#cField").val("");
 })
-
+//SAVINGS
+$("#sDepositButton").on("click", function(event){
+  sInput = $("#sField").val();
+  console.log(sInput)
+  sBalance = sBalance + parseFloat(sInput);
+  $(".balance:nth-child(2)").eq(1).html(sBalance);
+  $("#sField").val("");
+})
 // COMMIT TWO - As a user, I want to withdraw money from one of the bank accounts
 // $("#cWithdrawButton").on("click", function(event){
 //   cInput = $("#cField").val();
@@ -40,27 +50,41 @@ $("#cDepositButton").on("click", function(event){
 // })
 
 // COMMIT THREE - Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
+// $("#cWithdrawButton").on("click", function(event){
+//   cInput = $("#cField").val();
+//       if (parseFloat(cInput) < cBalance) {
+//           cBalance = cBalance - parseFloat(cInput) ;
+//           $(".balance:nth-child(2)").eq(0).html(cBalance);
+//           $("#cField").val("");}
+//       else {
+//           alert("Insufficient Funds");
+//           $("#cField").val("");}
+// })
+// COMMIT FOUR - As a user, I want overdraft protection
 $("#cWithdrawButton").on("click", function(event){
   cInput = $("#cField").val();
       if (parseFloat(cInput) < cBalance) {
           cBalance = cBalance - parseFloat(cInput) ;
           $(".balance:nth-child(2)").eq(0).html(cBalance);
           $("#cField").val("");}
+      else if (parseFloat(cInput) < sBalance) {
+          sBalance = sBalance - parseFloat(cInput) ;
+          $(".balance:nth-child(2)").eq(1).html(sBalance);
+          $("#cField").val("");
+      }
       else {
           alert("Insufficient Funds");
           $("#cField").val("");}
 })
-// COMMIT FOUR - As a user, I want overdraft protection
 
+// - What happens when the user wants to withdraw more money from the checking account than is in the account?
+See above
 
-// COMMIT FIVE - What happens when the user wants to withdraw more money from the checking account than is in the account?
+//- If a withdrawal can be covered by the balances in both accounts, take the balance of the account withdrawn from down to $0 and take the rest of the withdrawal from the other account.
+See above
 
-
-// COMMIT SIX - If a withdrawal can be covered by the balances in both accounts, take the balance of the account withdrawn from down to $0 and take the rest of the withdrawal from the other account.
-
-
-// COMMIT SEVEN - If the withdrawal amount is more than the combined account balance, ignore it.
-
+// - If the withdrawal amount is more than the combined account balance, ignore it.
+see above
 
 // COMMIT EIGHT - As a user, I want the color of my back account to reflect it's balance (there's a CSS class called .zero already written for this!)
 
