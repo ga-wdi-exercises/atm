@@ -20,15 +20,20 @@ $(checkDepositButton).click(function() { // Set up Checking Deposit button
 });
 
 $(checkWithdrawlButton).click(function() {
-
   event.preventDefault(); // Prevents Default Refresh
   var withAmount = parseInt($( userInput ).val()); // Get Withdrawl Value
-  var balance = parseInt($( "#check-balance" ).text().replace("$", "")) // Remove $ from Balance HTML
-  var newBalance = "$" + (balance - withAmount) // New Balance Value + '$'
-  $( "#check-balance" ).html(newBalance); // Replace Balance HTML with New Balance Value
+  var balance = parseInt($( "#check-balance" ).text().replace("$", "")) // Remove '$' from Balance HTML
 
+  if((balance - withAmount) > 0){
+    var newBalance = "$" + (balance - withAmount) // New Balance Value + '$'
+    $( "#check-balance" ).html(newBalance); // Replace Balance HTML with New Balance Value
+  }
+  else {
+    $( "#check-balance" ).html("$0"); // Ensure Balance cannot go below $0
+  }
   console.log("Check Withdrawl button is working");
 });
+
 
 function savingsDeposit(amount){
 
