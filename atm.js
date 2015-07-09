@@ -18,6 +18,17 @@ $(document).ready(function() {
     $(".balance").eq(0).html("$" + accountBalance);
   })
 
+  //Withdrawal
+  withdrawButton.on("click", function(){
+    event.preventDefault();
+    var withdrawAmount = $("input:first").val();
+    if(accountBalance >= withdrawAmount){
+      accountBalance -= parseInt(withdrawAmount);
+      console.log("account balance is " + accountBalance);
+      $(".balance").eq(0).html("$" + accountBalance);
+    }
+  })
+
 
 //Whin withdraw button is clicked, read user input and subtract it from the total
 //add logic to make sure the balance is not zero
