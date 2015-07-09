@@ -19,18 +19,10 @@ var savingsNew = Number(parseFloat($(".account input").eq(3).val()));
 var savingsDepositButton = $(":button").eq(2);
 var savingsWithdrawButton = $(":button").eq(3);
 
-function savingsWithdrawal(){
-  savingsBalance = Number(parseFloat($(".balance").eq(1).html().replace("$", "")));
-  savingsNew = Number(parseFloat($(".account input").eq(3).val()));
-  savingsBalance = (savingsBalance - savingsNew);
-  $(".balance").eq(1).html("$" + savingsBalance);
-  }
-
 function zeroBalance (){
 $(".account").eq(0).addClass("zero");
 $(".account").eq(1).addClass("zero")
 }
-
 zeroBalance()
 
 // an eventListerner for each button, each one a "click"
