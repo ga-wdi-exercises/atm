@@ -13,6 +13,7 @@ var atm = {
 	$checkingBalance : $("div#chBalance") , 
 	$savingsBalance : $("div#savBalance") ,
 
+
 //atm has some functions
 	setUpAtm : function() {
 		this.setUpChecking() ;
@@ -22,20 +23,23 @@ var atm = {
 	setUpChecking: function () {
 		var self = this;
 		this.$checkingDepositBtn.click( function() {
-			//is input valid?
 			var amount = parseInt(self.$userCheckingInput.val()) ;
 			checkingAccount.deposit(amount) ;
 			self.$checkingBalance.html( "$" + checkingAccount.getBalance() ) ;
 			self.$userCheckingInput.val(null) ;
-
-			//display errors if deposit failed
-			//display also checkingAccount.getOverdraftBalance()
 		});
 
 		this.$checkingWithdrawBtn.click( function() {
 			var amount = parseInt(self.$userCheckingInput.val()) ;
-			checkingAccount.withdraw(amount) ;
-			self.$checkingBalance.html( "$" + checkingAccount.getBalance()) ;
+			if ( amount > checkingAccount.withdraw.balance) {
+				checkingAccount.withdraw(amount) ;
+				self.$checkingBalance.html( "$" + checkingAccount.getBalance()) ;
+			} else {
+				checkingAccount.withdraw(amount) ;
+				self.$checkingBalance.html( "$" + checkingAccount.getOverdraftBalance()) ;
+				$("#chHeader").html("Your Overdraft Balance");
+			}
+			
 			self.$userCheckingInput.val(null);
 		})
 		
@@ -72,10 +76,12 @@ var checkingAccount = {
 		if ( amount > 0 ) {
 			if ( this.balance >= amount ) {
 				this.balance -= amount ;
-			} 
-			// else if ( overdraftBalance > 0 )
+			} else if ( this.overdraftBalance >= this.balance+amount) {
+				this.balance -= amount ; 
+				this.overdraftBalance += this.balance ;
+			}
 		}
-		return; //?
+		return ; //?
 	},
 
 	deposit: function (amount) {
@@ -89,6 +95,10 @@ var checkingAccount = {
 
 	getBalance: function () {
 		return this.balance ; 
+	},
+
+	getOverdraftBalance: function() {
+		return this.overdraftBalance ;
 	}
 }
 //end of checking account object
