@@ -13,7 +13,7 @@ function checkingDeposit(){
 }
 
 
-function checkingWithdrawal(amount){
+function checkingWithdrawal(){
   console.log("check wd");
   var newWithdrawal = parseInt($("#checkingInput").val());
   var balance = parseInt($(".checking_balance").html().replace("$",""));
@@ -22,25 +22,23 @@ function checkingWithdrawal(amount){
   $("#checkingInput").val("");
 }
 
-function savingsDeposit(amount){
-
+function savingsDeposit(){
+  var newDeposit = parseInt($("#savingsInput").val());
+  var balance = parseInt($(".savings_balance").html().replace("$",""));
+  var newBalance = newDeposit + balance;
+  $(".savings_balance").text("$" + newBalance);
+  $("#savingsInput").val("");
 }
 
-function savingsWithdrawal(amount){
-
+function savingsWithdrawal(){
+  var newWithdrawal = parseInt($("#savingsInput").val());
+  var balance = parseInt($(".savings_balance").html().replace("$",""));
+  var newBalance = balance - newWithdrawal;
+  $(".savings_balance").text("$" + newBalance);
+  $("#savingsInput").val("");
 }
 
-// an eventListener for each button, each one a "click"
-// click checking deposit
 $(":button").eq(0).on("click", checkingDeposit);
-// click checking withdrawal
 $(":button").eq(1).on("click", checkingWithdrawal);
-
-// click saving deposit
-$(":button").eq(2).on("click", function(){
-  console.log("click sav dep");
-})
-// click saving deposit
-$(":button").eq(3).on("click", function(){
-  console.log("click sav wd");
-})
+$(":button").eq(2).on("click", savingsDeposit);
+$(":button").eq(3).on("click", savingsWithdrawal);
