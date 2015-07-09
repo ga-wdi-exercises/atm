@@ -24,7 +24,10 @@ function savingsDeposit(amount){
 }
 
 function savingsWithdrawal(amount){
-  alert("SW");
+  var amount = parseInt($("#savingsAmount").val());
+  savingsBalance = savingsBalance - amount;
+  $("#savingsBalance").html("$"+savingsBalance);
+  $("#savingsAmount").val($(this).attr('placeholder'));
 }
 
 // an eventListerner for each button, each one a "click"
