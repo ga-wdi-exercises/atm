@@ -4,7 +4,7 @@ var cBal = 0;
 var sBal = 0;
 
 $("#cDepositButton").on("click", function() {
-  var cAmt = parseInt($("#cplaceholder").val);
+  var cAmt = parseInt($("#cplaceholder").val());
   // alert("$" + (cAmt + cBal)) //testing
   cBal = (cBal + cAmt);
   $("#checkingBalance").text("$" + cBal)
@@ -19,15 +19,15 @@ $("#cWithdrawButton").on("click", function() {
 })
 
 $("#sDepositButton").on("click", function() {
-  var sAmt = parseInt($("#sAmt").val());
+  var sAmt = parseInt($("#splaceholder").val());
   sBal = (sBal + sAmt);
-  $("#sBal").text("$" + sBal)
+  $("#savingsBalance").text("$" + sBal);
 })
 
-("#sWithdrawButton").on("click", function() {
-  var sAmt = parseInt("#sAmt").val(); //variable that the user inputs
-  sBal = (sBal - sAmt);  //determine new balance total
-  $("#sBal").text("$" + sBal);      //enter new balance total in the $0 spot
+$("#sWithdrawButton").on("click", function() {
+  var sAmt = parseInt($("#splaceholder").val());
+  sBal = (sBal - sAmt);
+  $("#savingsBalance").text("$" + sBal);
 })
 
 }) ///CLOSING TAG DON'T DELETE
@@ -40,6 +40,7 @@ $("#sDepositButton").on("click", function() {
     //total should replace $0
     //input field should go back to default
 // Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
+
 // var cBal = parseInt($("#checkingBalance").text().replace("$", ""));
 
 //Notes to self
