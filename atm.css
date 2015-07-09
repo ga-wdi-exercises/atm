@@ -38,6 +38,10 @@ body {
   padding: 25px 0px;
 }
 
+.message {
+  font-size: 30px;
+}
+
 .zero {
   background-color: #F52F4F;
   color: #FFFFFF;
