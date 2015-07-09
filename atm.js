@@ -8,63 +8,67 @@ $(document).ready(function() {
 
 	// Add an event to checking's deposit button.
 	$("#addToChecking").on("click", function() {
-		// Use parseInt to receive the value of the input you are targeting.
-		var depositMoney = parseInt($("#checkingInput").val());
-		// Use parseInt to ...
-		var accountBalance = parseInt($("#checkingBalance").text().replace("$", "")); // Had lots ofhelp here.
-			console.log("Checking balance.")
-		// Create a string for the new balance.
-		// Add ()s to avoid repeating numbers.
-		var newBalance = "$" + (accountBalance + depositMoney); // Had help here.
-		// Total balance and show the new balance.
-		$("#checkingBalance").text(newBalance);
-			console.log("Added $" + depositMoney + " to the checking account.");
+		console.log("Button works.")
+		// User should be abe to deposit money to checking.
+		var depositMoneyToChecking = parseInt($("#checkingInput").val());
+		
+		// User should be able to view current balance.
+		var checkingBalance = parseInt($("#checkingBalance").text().replace("$", "")); // Had lots ofhelp here.
+		
+		// User should be able to view updated balance.
+		var newCheckingBalance = "$" + (checkingBalance + depositMoneyToChecking);
+		
+		$("#checkingBalance").text(newCheckingBalance);
+			console.log("Added $" + depositMoneyToChecking + " to the checking account.");
 	});
 
-	// Repeat the same funtion as the checking account.
+	// Add an event to savings's deposit button.
 	$("#addToSavings").on("click", function() {
-		var depositMoney = parseInt($("#savingsInput").val());
-		var accountBalance = parseInt($("#savingsBalance").text().replace("$", ""));
-			console.log("Checking balance.")
-		var newBalance = "$" + (accountBalance + depositMoney);
-		$("#savingsBalance").text(newBalance);
-			console.log("Added $" + depositMoney + " to the savings account.");
+		console.log("Button works.")
+		// User should be abe to deposit money to savings.
+		var depositMoneyToSavings = parseInt($("#savingsInput").val());
+		
+		// User should be able to view current balance.
+		var savingsBalance = parseInt($("#savingsBalance").text().replace("$", "")); // Had lots ofhelp here.
+		
+		// User should be able to view updated balance.
+		var newSavingsBalance = "$" + (savingsBalance + depositMoneyToSavings);
+		
+		$("#savingsBalance").text(newSavingsBalance);
+			console.log("Added $" + depositMoneyToSavings + " to the savings account.");
 	});
 
+	// Add an event to checking's withdraw button.
+	$("#withdrawFromChecking").on("click", function() {
+		console.log("Button works.")
+		// User should be abe to withdraw money from checking.
+		var withdrawMoneyFromChecking = parseInt($("#checkingInput").val());
+		
+		// User should be able to view current balance.
+		var checkingBalance = parseInt($("#checkingBalance").text().replace("$", "")); // Had lots ofhelp here.
+		
+		// User should be able to view updated balance.
+		var newCheckingBalance = "$" + (checkingBalance - withdrawMoneyFromChecking); // Subtract money!
+		
+		$("#checkingBalance").text(newCheckingBalance);
+			console.log("Withdrew $" + withdrawMoneyFromChecking + " from the checking account.");
+	});
 
-	// Repeat the same funtion as the checking account.
+	// Add an event to savings's withdraw button.
 	$("#withdrawFromSavings").on("click", function() {
-		var accountBalance = parseInt($("#checkingBalance").text().replace("$", ""));
-			console.log("Checking balance.")
-		var newBalance = "$" + (accountBalance - withdrawMoney);
-		$("#checkingBalance").text(newBalance);
-			console.log("Withdrew $" + depositMoney + " from the checking account.");
+		console.log("Button works.")
+		// User should be abe to withdraw money from savings.
+		var withdrawMoneyFromSavings = parseInt($("#savingsInput").val());
+		
+		// User should be able to view current balance.
+		var savingsBalance = parseInt($("#savingsBalance").text().replace("$", "")); // Had lots ofhelp here.
+		
+		// User should be able to view updated balance.
+		var newSavingsBalance = "$" + (savingsBalance - withdrawMoneyFromSavings); // Subtract money!
+		
+		$("#savingsBalance").text(newSavingsBalance);
+			console.log("Withdrew $" + withdrawMoneyFromSavings + " from the savings account.");
 	});
+
+	// 
 });
-
-
-
-
-// User wants to deposit money.
-
-
-
-
-// var checkingDeposit = function(amount){
-//   checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-
-// }
-
-// function checkingWithdrawal(amount){
-
-// }
-
-// function savingsDeposit(amount){
-
-// }
-
-// function savingsWithdrawal(amount){
-
-// }
-
-// an eventListerner for each button, each one a "click"
