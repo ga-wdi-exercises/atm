@@ -50,15 +50,20 @@ function deposit (deposit){
 
 // balance window function
 
-function balanceWindow (accountBalance, accountBalance2){
+function balanceWindow (accountBalance){
     var checkBalanceWindow = $('#checkBalanceWindow');
     var saveBalanceWindow = $('#saveBalanceWindow');
 
-    checkBalanceWindow.html(currentCheckBalance);
-    saveBalanceWindow.html(currentSaveBalance);
+    if (accountBalance == currentCheckBalance){
+        checkBalanceWindow.html(currentCheckBalance);
+    }
+    else if (accountBalance == currentSaveBalance){
+        saveBalanceWindow.html(currentSaveBalance);
+    }
+
 };
 
-balanceWindow(currentCheckBalance, currentSaveBalance);
+balanceWindow(currentCheckBalance);
 // event listeners
 
 // checking deposit button
@@ -68,12 +73,13 @@ $('#checkDepositButton').click('click', function(event){
     console.log(checkingInput);
     // take #checkingingInput; store it; pass it to deposit()
     deposit(checkingInput);
+    balanceWindow(currentCheckBalance);
 });
 
 // withdraw deposit button
 
 $('#checkWithdrawButton').click('click', function(event){
-    console.log('checkWithdrawButton');
+    console.log(checkWithdrawButton);
 });
 
 // save deposit button
@@ -82,6 +88,7 @@ $('#saveDepositButton').click('click', function(event){
     console.log('saveDepositButton');
     // take #savingsInput; store it; pass it to deposit()
     deposit(savingsInput);
+    balanceWindow(currentSaveBalance);
 });
 
 // withdraw savings button
