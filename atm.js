@@ -11,7 +11,9 @@ $("#depositCheckingButton").on("click", function (){
 $("#withdrawCheckingButton").on("click", function (){
   console.log(totalCheckingBalance)
   var withdrawingBalance = parseInt($("#checkingInput").val());
-  totalCheckingBalance -=  withdrawingBalance;
+  if (totalCheckingBalance > withdrawingBalance){
+  totalCheckingBalance -=  withdrawingBalance;}
+  else alert("Withdrawing too much money!")
 return $("#checkingDisplay").text("$ " + totalCheckingBalance) })
 //deposit button for Savings
 $("#depositSavingsButton").on("click", function (){
@@ -23,7 +25,9 @@ return $("#savingsDisplay").text("$ " + totalSavingBalance)})
 $("#withdrawSavingsButton").on("click", function (){
   console.log(totalSavingBalance)
     var withdrawSavingBalance = parseInt($("#savingsInput").val());
-    totalSavingBalance -=  withdrawSavingBalance
+    if (totalSavingBalance > withdrawSavingBalance){
+    totalSavingBalance -=  withdrawSavingBalance}
+    else alert("Withdrawing too much money!")
   return $("#savingsDisplay").text("$ " + totalSavingBalance)})
 
 
