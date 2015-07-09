@@ -1,15 +1,15 @@
 var checkingBalance = document.querySelector("div.checking_balance").innerHTML;
-/*checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );*/
-
-//document.querySelector("div.checking_balance").innerHTML = parseInt(document.querySelector("input").value)
 
 
 function checkingDeposit(){
-  var newDeposit = parseInt($("#checkingInput").val());
-  var balance = parseInt($(".checking_balance").html().replace("$",""));
-  var newBalance = newDeposit + balance;
-  $(".checking_balance").text("$" + newBalance);
-  $("#checkingInput").val("");
+//  if (!isNaN($("checkingInput").val())){
+    var newDeposit = parseInt($("#checkingInput").val());
+    var balance = parseInt($(".checking_balance").html().replace("$",""));
+    var newBalance = newDeposit + balance;
+    $(".checking_balance").text("$" + newBalance);
+    $(".checking_balance").removeClass("zero");
+    $("#checkingInput").val("");
+//  }
 }
 
 
@@ -18,11 +18,12 @@ function checkingWithdrawal(){
   var balance = parseInt($(".checking_balance").html().replace("$",""));
   var savingsBalance = parseInt($(".savings_balance").html().replace("$",""));
   var totalBalance = balance + savingsBalance;
-  if( newWithdrawal <= balance ){
+  if( newWithdrawal < balance ){
     var newBalance = balance - newWithdrawal;
     $(".checking_balance").text("$" + newBalance);
   } else if ( newWithdrawal <= totalBalance){
     $(".checking_balance").text("$0");
+    $(".checking_balance").addClass("zero");
     var newBalance = savingsBalance + balance - newWithdrawal;
     $(".savings_balance").text("$" + newBalance);
   }
@@ -34,15 +35,19 @@ function savingsDeposit(){
   var balance = parseInt($(".savings_balance").html().replace("$",""));
   var newBalance = newDeposit + balance;
   $(".savings_balance").text("$" + newBalance);
+  $(".savings_balance").removeClass("zero");
   $("#savingsInput").val("");
 }
 
 function savingsWithdrawal(){
   var newWithdrawal = parseInt($("#savingsInput").val());
   var balance = parseInt($(".savings_balance").html().replace("$",""));
-  if( newWithdrawal <= balance ){
+  if( newWithdrawal < balance ){
     var newBalance = balance - newWithdrawal;
     $(".savings_balance").text("$" + newBalance);
+  } else if ( newWithdrawal = balance ){
+    $(".savings_balance").text("$0");
+    $(".savings_balance").addClass("zero");
   }
   $("#savingsInput").val("");
 }
