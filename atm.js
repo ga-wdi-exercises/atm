@@ -1,5 +1,15 @@
 function overDraft(){
-  console.log("overDraft fired!");
+  //if checking is zero instead pull from savings
+  if (savingsBalance > 0) {
+    var depositAmount = parseFloat($(checkingInput).val());
+    savingsBalance -= depositAmount;
+    checkingInput.val("");
+    savingsDisplay.html("$"+ savingsBalance);
+    savingsDisplay.css("background-color","red");
+    $("body").append("<h1>Overdraft! YOU ARE BROKE FOOL!</h1>");
+
+  }
+
 };
 
 
@@ -9,6 +19,7 @@ var checkingBalance = 10;
 var checkingDisplay = $(".checking_account .balance");
 var checkingInput = $(".checking_input");
 function checkingDeposit(){
+
   var depositAmount = parseFloat($(checkingInput).val());
   checkingBalance += depositAmount;
   checkingInput.val("");
@@ -43,6 +54,7 @@ var savingsInput = $(".savings_input");
 
 function savingsDeposit(){
   var depositAmount = parseFloat($(savingsInput).val());
+
   savingsBalance += depositAmount;
   savingsInput.val("");
   savingsDisplay.html("$" + savingsBalance);
@@ -51,19 +63,26 @@ function savingsDeposit(){
 }
 
 function savingsWithdrawal(){
-  var depositAmount = parseFloat($(savingsInput).val());
-  savingsBalance -= depositAmount;
-  savingsInput.val("");
-  savingsDisplay.html("$"+ savingsBalance);
-  savingsDisplay.css("background-color","red");
+    if (savingsBalance > 0) {
+      var depositAmount = parseFloat($(savingsInput).val());
+      savingsBalance -= depositAmount;
+      savingsInput.val("");
+      savingsDisplay.html("$"+ savingsBalance);
+      savingsDisplay.css("background-color","red");
+    }
 }
 
 savingsDisplay.html("$"+ savingsBalance);
 checkingDisplay.html("$"+checkingBalance);
 
-$(".checking_account input[value=Deposit]").on("click",checkingDeposit);
+$(".checking_account input[value=Deposit]").on("click",function(){
+    if (isNaN(this) == false){
+        checkingDeposit;
+    }else{
+      $(this).html("you are a idiot!");
+    }
+    });
 $(".checking_account input[value=Withdraw]").on("click",checkingWithdrawal);
-
 $(".savings_account input[value=Deposit]").on("click",savingsDeposit);
 $(".savings_account input[value=Withdraw]").on("click",savingsWithdrawal);
 
