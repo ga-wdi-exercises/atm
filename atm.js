@@ -32,16 +32,24 @@ $("#cDepositButton").on("click", function(event){
 })
 
 // COMMIT TWO - As a user, I want to withdraw money from one of the bank accounts
-$("#cWithdrawButton").on("click", function(event){
-  cInput = $("#cField").val();
-  cBalance = cBalance - parseFloat(cInput) ;
-  $(".balance:nth-child(2)").eq(0).html(cBalance);
-  $("#cField").val("");
-})
+// $("#cWithdrawButton").on("click", function(event){
+//   cInput = $("#cField").val();
+//   cBalance = cBalance - parseFloat(cInput) ;
+//   $(".balance:nth-child(2)").eq(0).html(cBalance);
+//   $("#cField").val("");
+// })
 
 // COMMIT THREE - Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
-
-
+$("#cWithdrawButton").on("click", function(event){
+  cInput = $("#cField").val();
+      if (parseFloat(cInput) < cBalance) {
+          cBalance = cBalance - parseFloat(cInput) ;
+          $(".balance:nth-child(2)").eq(0).html(cBalance);
+          $("#cField").val("");}
+      else {
+          alert("Insufficient Funds");
+          $("#cField").val("");}
+})
 // COMMIT FOUR - As a user, I want overdraft protection
 
 
