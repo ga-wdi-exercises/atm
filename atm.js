@@ -31,8 +31,13 @@ $("#sDepositButton").on("click", function() {
 
 $("#sWithdrawButton").on("click", function() {
   var sAmt = parseInt($("#splaceholder").val());
+  if (sBal > sAmt) {
   sBal = (sBal - sAmt);
   $("#savingsBalance").text("$" + sBal);
+  }
+  else {
+    alert("YOU HAVE NO MONEY. womp womp")
+  }
 })
 
 
