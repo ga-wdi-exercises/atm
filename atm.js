@@ -19,18 +19,18 @@ function savingsWithdrawal(amount){
 
 // an eventListerner for each button, each one a "click"
 
-$("#checking .deposit").on("click", function() {
+$("#checkingDeposit").on("click", function() {
   checkingDeposit();
 });
 
-$("#checking .withdrawal").on("click", function() {
+$("#checkingWithdrawal").on("click", function() {
   checkingWithdrawal();
 });
 
-$("#savings .deposit").on("click", function() {
+$("#savingsDeposit").on("click", function() {
   savingsDeposit();
 });
 
-$("#savings .withdrawal").on("click", function() {
+$("#savingsWithdrawal").on("click", function() {
   savingsWithdrawal();
 });
