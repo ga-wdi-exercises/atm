@@ -7,8 +7,8 @@
 //}
 $(".checkingDeposit").on("click", function checkingDeposit(amount){
   console.log("checking Deposit")
-  var inputAmount = $("input").val();
-  $(".balance").text("$" + inputAmount)
+  var inputAmount = $("input.checkingAmount").val();
+  $("#checking_balance.balance").html("$" + inputAmount)
 })
 
 $(".checkingWithdrawal").on("click", function checkingWithdrawal(amount){
@@ -17,6 +17,8 @@ console.log("checking withdrawal")
 
 $(".savingsDeposit").on("click", function savingsDeposit(amount){
 console.log("savings Deposit")
+var inputAmount = $("input.savingsAmount").val();
+$("#savings_balance.balance").html("$" + inputAmount)
 })
 
 $(".savingsWithdrawal").on("click", function savingsWithdrawal(amount){
