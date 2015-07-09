@@ -1,50 +1,50 @@
 // Set variables for checking and saving
-var checkingBalance = $(".balance").eq(0);
-checkingBalance.html("$0");
-var savingBalance = $(".balance").eq(1);
-savingBalance.html("$0");
+var cBalance = $(".balance").eq(0);
+cBalance.html("$0");
+var sBalance = $(".balance").eq(1);
+sBalance.html("$0");
 
 // Set variables for input fields
-var checkingInput = $(":text").eq(0);
-var savingInput = $(":text").eq(1);
+var cInput = $(":text").eq(0);
+var sInput = $(":text").eq(1);
 
 // Set variables for buttons
-var checkingDepositButton = $(":button").eq(0);
-var checkingWithdrawButton = $(":button").eq(1);
-var savingDepositButton = $(":button").eq(2);
-var savingWithdrawButton = $(":button").eq(3);
+var cDepositButton = $(":button").eq(0);
+var cWithdrawButton = $(":button").eq(1);
+var sDepositButton = $(":button").eq(2);
+var sWithdrawButton = $(":button").eq(3);
 
 // Deposit money to checking
-checkingDepositButton.click(function (e){ 
-	var amount = parse( checkingInput.val() );
+cDepositButton.click(function (e){ 
+	var amount = parse( cInput.val() );
 	e.preventDefault();
 	console.log(amount);
-	checkingBalance.html('$' + ( parse( checkingBalance.html() ) + amount ) );
-	checkingInput.val('');
+	cBalance.html('$' + ( parse( cBalance.html() ) + amount ) );
+	cInput.val('');
 });
 // Withdraw money from checking
-checkingWithdrawButton.click(function (e){
-	var amount = parse( checkingInput.val() );
+cWithdrawButton.click(function (e){
+	var amount = parse( cInput.val() );
 	e.preventDefault();
 	console.log(amount);
-	checkingBalance.html('$' + ( parse( checkingBalance.html() ) - amount ) );
-	checkingInput.val('');
+	cBalance.html('$' + ( parse( cBalance.html() ) - amount ) );
+	cInput.val('');
 });
 // Deposit money to savings
-savingDepositButton.click(function (e){ 
-	var amount = parse( savingInput.val() );
+sDepositButton.click(function (e){ 
+	var amount = parse( sInput.val() );
 	e.preventDefault();
 	console.log(amount);
-	savingBalance.html('$' + ( parse( savingBalance.html() ) + amount ) );
-	savingInput.val('');
+	sBalance.html('$' + ( parse( sBalance.html() ) + amount ) );
+	sInput.val('');
 });
 // Withdraw money from savings
-savingWithdrawButton.click(function (e){ 
-	var amount = parse( savingInput.val() );
+sWithdrawButton.click(function (e){ 
+	var amount = parse( sInput.val() );
 	e.preventDefault();
 	console.log(amount);
-	savingBalance.html('$' + ( parse( savingBalance.html() ) - amount ) );
-	savingInput.val('');
+	sBalance.html('$' + ( parse( sBalance.html() ) - amount ) );
+	sInput.val('');
 });
 
 // Easily parse any numbers for use
