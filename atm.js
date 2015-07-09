@@ -1,5 +1,4 @@
-var checkingBalance = document.querySelector("div#checking_balance").innerHTML;
-
+var checkingBalance = $("#checking_balance").html();
 
 function checkingDeposit(){
   if (!isNaN(parseInt($("#checkingInput").val()))){
