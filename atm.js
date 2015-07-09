@@ -3,17 +3,19 @@
 $(document).ready(function() {
   var accountBalance = 0;
   var inputBox = $("input:first")[0];
-  //var userAmount = $("input:first").val();
   var depositButton = $("input").eq(1);
   var withdrawButton = $("input").eq(2);
   //$("input").eq(1).attr("value") is "Deposit"
   //$("input").eq(2).attr("value") is "Withdraw"
+  //$("input:first").val() is the value of the input box;
 
   //When Deposit button is clicked, read user input and add it to the total
   depositButton.on("click", function(){
     event.preventDefault();
     accountBalance += parseInt($("input:first").val());
     console.log("account balance is " + accountBalance);
+    //Change the html element that indicates account balance
+    $(".balance").eq(0).html("$" + accountBalance);
   })
 
 
