@@ -34,9 +34,9 @@ $('#leftDeposit').on('click' , function(){
   console.log('Deposit');
   userLeftAmount = $('#leftAmount').val();
   console.log(userLeftAmount);
-  checkBalance = parseInt(userLeftAmount) + parseInt(checkBalance);
+  checkBalance = parseFloat(userLeftAmount) + parseFloat(checkBalance);
   console.log(checkBalance);
-
+  $('.balance').eq(0).html(checkBalance);
 });
 
 
