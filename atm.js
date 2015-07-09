@@ -10,7 +10,10 @@ var checkingDeposit = function(amount){
 }
 
 function checkingWithdrawal(amount){
-  alert("CW");
+  var amount = parseInt($("#checkingAmount").val());
+  checkingBalance = checkingBalance - amount;
+  $("#checkingBalance").html("$"+checkingBalance);
+  $("#checkingAmount").val($(this).attr('placeholder'));
 }
 
 function savingsDeposit(amount){
