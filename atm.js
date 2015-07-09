@@ -96,5 +96,3 @@ $(".savings_account input[value=Withdraw]").on("click",function(){
          savingsWithdrawal;
       }
     });
-
-//when I withdraw with it being zero
