@@ -1,18 +1,47 @@
 var balanceField = $("#balanceField");
 var textField = $("#textField");
 var depositButton = $("#depositButton");
-var withdrawlButton = $("#withdrawlButton");
+var withdrawButton = $("#withdrawButton");
+var balance = 0;
+var savingsBalanceField = $("#savingsBalanceField");
+var savingsTextField = $("#savingsTextField");
+var savingsDepositButton = $("#savingsDepositButton");
+var savingsWithdrawButton = $("#savingsWithdrawButton");
+var savingsBalance = 0;
 var enteredAmount;
-var balance = 0
 
-
-function addMoney(){
+depositButton.on("click", depositMoney);
+function depositMoney(){
   enteredAmount=parseInt(textField.val());
   balance = balance + enteredAmount;
-  balanceField.html("$" + balance)
-  console.log(balance)
+  balanceField.html("$" + balance);
+  //console.log(balance);
 }
-depositButton.on("click", addMoney);
+withdrawButton.on("click", withdrawMoney);
+function withdrawMoney(){
+  enteredAmount=parseInt(textField.val());
+  balance = balance - enteredAmount;
+  balanceField.html("$" + balance);
+  //console.log(balance);
+}
+savingsWithdrawButton.on("click", savingsWithdrawMoney);
+function savingsWithdrawMoney(){
+  savingsEnteredAmount=parseInt(savingsTextField.val());
+  savingsBalance = savingsBalance - savingsEnteredAmount;
+  savingsBalanceField.html("$" + savingsBalance);
+  //console.log(savingsBalance);
+}
+savingsDepositButton.on("click", savingsDepositMoney);
+function savingsDepositMoney(){
+  savingsEnteredAmount=parseInt(savingsTextField.val());
+  savingsBalance = savingsBalance + savingsEnteredAmount;
+  savingsBalanceField.html("$" + savingsBalance);
+  //console.log(savingsBalance);
+}
+
+
+
+
 
 //user clicks text field
 //user enters a numnerical value into text field
