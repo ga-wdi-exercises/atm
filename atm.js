@@ -1,8 +1,3 @@
-// document ready
-
-$(document).ready(function(){
-    console.log("ready");
-
 //Global Vars
 
 var currentCheckBalance = 0;
@@ -15,16 +10,32 @@ var currentSaveBalance = 0;
 $('#checkDepositButton').click('click', function(){
     var deposit = $('#checkingInput').val();
     currentCheckBalance = currentCheckBalance + parseInt(deposit);
-    console.log(currentCheckBalance);
     $('#checkBalanceWindow').text('$' + currentCheckBalance);
+
+    // zero balance color change
+    if (currentCheckBalance == 0){
+        $('#checkBalanceWindow').css('background-color', 'red');
+    }
+    else if (currentCheckBalance > 0){
+        $('#checkBalanceWindow').css('background-color', '');
+    }
 });
 
 // withdraw deposit button
 
 $('#checkWithdrawButton').click('click', function(){
     var withdraw = $('#checkingInput').val();
-    currentCheckBalance = currentCheckBalance - parseInt(withdraw);
-    $('#checkBalanceWindow').text('$' + currentCheckBalance);
+    if (currentCheckBalance >= withdraw){
+        currentCheckBalance = currentCheckBalance - parseInt(withdraw);
+        $('#checkBalanceWindow').text('$' + currentCheckBalance);
+    }
+    // zero balance color change
+    if (currentCheckBalance == 0){
+        $('#checkBalanceWindow').css('background-color', 'red');
+    }
+    else if (currentCheckBalance > 0){
+        $('#checkBalanceWindow').css('background-color', '');
+    }
 });
 
 // save deposit button
@@ -33,14 +44,34 @@ $('#saveDepositButton').click('click', function(){
     var deposit = $('#savingsInput').val();
     currentSaveBalance = currentSaveBalance + parseInt(deposit);
     $('#saveBalanceWindow').text('$' + currentSaveBalance);
+
+    // zero balance color change
+    if (currentSaveBalance == 0){
+        $('#saveBalanceWindow').css('background-color', 'red');
+    }
+    else if (currentSaveBalance > 0){
+        $('#saveBalanceWindow').css('background-color', '');
+    }
 });
 
 // withdraw savings button
 
 $('#saveWithdrawButton').click('click', function(){
     var withdraw = $('#savingsInput').val();
-    currentSaveBalance = currentSaveBalance - parseInt(withdraw);
-    $('#saveBalanceWindow').text('$' + currentSaveBalance);
-});
+    if (currentSaveBalance >= withdraw){
+        currentSaveBalance = currentSaveBalance - parseInt(withdraw);
+        $('#saveBalanceWindow').text('$' + currentSaveBalance);
+    }
+
+    // zero balance color change
+    if (currentSaveBalance == 0){
+        $('#saveBalanceWindow').css('background-color', 'red');
+    }
+    else if (currentSaveBalance > 0){
+        $('#saveBalanceWindow').css('background-color', '');
+    }
 
 });
+
+
+
