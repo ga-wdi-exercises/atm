@@ -1,12 +1,12 @@
-var checkingBalance = document.querySelector("div#checking_balance");
-checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+//var checkingBalance = document.querySelector("div#checking_balance");
+var checkingBalance = parseInt(document.querySelector("div#checking_balance").innerHTML.replace("$", ""));
 
 //Instantiate var savingsBalance in the style of var checkingBalance
-var savingsBalance = document.querySelector("div#savings_balance");
-savingsBalance = parseInt( savingsBalance.innerHTML.replace("$", "") );
+//var savingsBalance = document.querySelector("div#savings_balance");
+savingsBalance = parseInt(document.querySelector("div#savings_balance").innerHTML.replace("$", ""));
 
 var checkingDeposit = function(amount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+  // checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
   //When the user presses the deposit button in the first "account" div...
     //Set their input equal to amount
     //Add amount to checkingBalance, i.e. checkingBalance += amount
@@ -30,6 +30,7 @@ function checkingWithdrawal(amount){
 }
 
 function savingsDeposit(amount){
+  // savingsBalance = parseInt( savingsBalance.innerHTML.replace("$", "") );
   //When the user presses the deposit button in the second "account" div...
     //Set their input equal to amount
     //Add amount to savingsBalance, i.e. savingsBalance += amount
