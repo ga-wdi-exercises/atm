@@ -1,21 +1,64 @@
-var checkingBalance = document.querySelector("div#checking_balance");
-checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+$(document).ready (function(){
+$('#checking_deposit').on('click', function() {
+    cInput =  $('#checking_input');
+    cBalance = $('.balance').eq(0)
 
-var checkingDeposit = function(amount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+    newChecking = parseFloat(cBalance.html().substr(1)) + parseInt(cInput.val())
 
-}
+    cBalance.html('$' + newChecking)
+    currentChecking = cBalance.html();
+    $(cBalance).removeClass('zero')
+    cInput.val('')
 
-function checkingWithdrawal(amount){
 
-}
+})
 
-function savingsDeposit(amount){
 
-}
+$('#checking_withdraw').on('click', function(){
 
-function savingsWithdrawal(amount){
+  newChecking = parseFloat(cBalance.html().substr(1)) - parseInt(cInput.val())
 
-}
 
-// an eventListerner for each button, each one a "click"
+
+    if (newChecking > 0){
+        cBalance.html('$' + newChecking)
+        currentChecking = cBalance.html();
+        cInput.val('')
+      }
+    if (newChecking === 0){
+      cBalance.html('$' + newChecking)
+      cBalance.addClass('zero')
+      cInput.val('');
+    }
+})
+
+$('#savings_deposit').on('click', function() {
+    sInput =  $('#savings_input');
+    sBalance = $('.balance').eq(1)
+
+    newSavings = parseFloat(sBalance.html().substr(1)) + parseInt(sInput.val())
+
+    sBalance.html('$' + newSavings)
+    currentSavings = sBalance.html();
+    $(sBalance).removeClass('zero')
+    sInput.val('')
+})
+
+$('#savings_withdraw').on('click', function() {
+    sInput =  $('#savings_input');
+    sBalance = $('.balance').eq(1)
+
+
+    newSavings = parseFloat(sBalance.html().substr(1)) - parseInt(sInput.val())
+  if(newSavings > 0){
+    sBalance.html('$' + newSavings)
+    currentSavings = sBalance.html();
+    sInput.val('')
+  }
+  if (newSavings === 0){
+    sBalance.html('$' + newSavings)
+    sBalance.addClass('zero')
+    sInput.val('');
+  }
+  })
+})
