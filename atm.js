@@ -15,16 +15,22 @@ var checkingDeposit = function(amount){
 function checkingWithdrawal(amount){
   //When the user presses the withdrawal button in the first "account" div...
     //Set their input equal to amount
-    //If checkingBalance + savingsBalance minus amount is less than $0
-      //do nothing
-    //Else if checkingBalance minus amount is less than $0
-      //Set checkingBalance to $0 and
-      //Reinstate class zero
-      //Subtract (amount-checkingBalance) from savingsBalance
-      //Update the savings balance div
-    //Else
-      //Subtract amount from checkingBalance
+    if((checkingBalance - amount) < 0){
+      if(((checkingBalance + savingsBalance) - amount) > 0){
+        savingsBalance -= (amount - checkingBalance);
+        //Update the savings balance div
+        checkingBalance = 0;
+        //Reinstate class zero
+      }
+      else {
+        alert("Insufficient funds");
+      }
+    }
+    else {
+      checkingBalance -= amount;
       //Update the "balance" div to reflect the new checkingBalance
+    }
+    console.log(checkingBalance);
 }
 
 function savingsDeposit(amount){
@@ -39,16 +45,22 @@ function savingsDeposit(amount){
 function savingsWithdrawal(amount){
   //When the user presses the withdrawal button in the second "account" div...
     //Set their input equal to amount
-    //If checkingBalance + savingsBalance minus amount is less than $0
-      //do nothing
-    //Else if savingsBalance minus amount is less than $0
-      //Set savingsBalance to $0 and
-      //Reinstate class zero
-      //Subtract (amount - savingsBalance) from checkingBalance
-      //Update the checking balance div
-    //Else
-      //Subtract amount from savingsBalance
+    if((savingsBalance - amount) < 0){
+      if(((checkingBalance + savingsBalance) - amount) > 0){
+        checkingBalance -= (amount - savingsBalance);
+        //Update the checking balance div
+        savingsBalance = 0;
+        //Reinstate class zero
+      }
+      else {
+        alert("Insufficient funds");
+      }
+    }
+    else {
+      savingsBalance -= amount;
       //Update the "balance" div to reflect the new checkingBalance
+    }
+    console.log(savingsBalance);
 }
 
 // - Are there ways to refactor your code to make it DRYer or more Object-Oriented?
