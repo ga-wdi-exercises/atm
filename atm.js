@@ -10,8 +10,8 @@ $("input[value='Deposit']").eq(0).on("click", function(){
     checkingBalance += deposit;//Add amount to checkingBalance, i.e. checkingBalance += amount
     $("div#checking_balance").html("$ " + checkingBalance)//Update the "balance" div to reflect the new checkingBalance
     if(checkingBalance > 0) {
-      $("div.account").eq(0).removeClass("zero");
-    };//Remove class zero
+      $("div.account").eq(0).removeClass("zero");//Remove class zero
+    };
 })
 
 $("input[value='Withdraw']").eq(0).on("click", function(){
@@ -22,7 +22,6 @@ $("input[value='Withdraw']").eq(0).on("click", function(){
         savingsBalance -= (withdrawal - checkingBalance);
         $("div#savings_balance").html("$ " + savingsBalance);//Update the savings balance div
         checkingBalance = 0;
-        $("div.account").eq(0).addClass("zero");
       }
       else {
         alert("Insufficient funds");
@@ -30,6 +29,9 @@ $("input[value='Withdraw']").eq(0).on("click", function(){
     }
     else {
       checkingBalance -= withdrawal;
+      if (checkingBalance == 0) {
+        $("div.account").eq(0).addClass("zero");
+      }
     }
   $("div#checking_balance").html("$ " + checkingBalance);//Update the "balance" div to reflect the new checkingBalance
 })
@@ -44,23 +46,25 @@ $("input[value='Deposit']").eq(1).on("click", function(){
     };
 })
 
-function savingsWithdrawal(amount){
+$("input[value='Withdraw']").eq(1).on("click", function(){
   //When the user presses the withdrawal button in the second "account" div...
-    //Set their input equal to amount
-    if((savingsBalance - amount) < 0){
-      if(((checkingBalance + savingsBalance) - amount) > 0){
-        checkingBalance -= (amount - savingsBalance);
-        //Update the checking balance div
+    var withdrawal = parseInt($("input#savings_input").val());//Set their input equal to amount
+    if((savingsBalance - withdrawal) < 0){
+      if(((checkingBalance + savingsBalance) - withdrawal) > 0){
+        checkingBalance -= (withdrawal - savingsBalance);
+        $("div#checking_balance").html("$ " + checkingBalance);//Update the checking balance div
         savingsBalance = 0;
-        //Reinstate class zero
+        $("div.account").eq(1).addClass("zero");//Reinstate class zero
       }
       else {
         alert("Insufficient funds");
       }
     }
     else {
-      savingsBalance -= amount;
-      //Update the "balance" div to reflect the new checkingBalance
+      savingsBalance -= withdrawal;
+      if (savingsBalance == 0) {
+        $("div.account").eq(1).addClass("zero");
+      }
     }
-    console.log(savingsBalance);
-}
+    $("div#savings_balance").html("$ " + savingsBalance); //Update the "balance" div to reflect the new checkingBalance
+})
