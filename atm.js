@@ -8,46 +8,58 @@ sBalance.html("$0");
 var cInput = $("#cInput");
 var sInput = $("#sInput");
 
-// Set variables for buttons
-var cDepositButton = $("#cDeposit");
-var cWithdrawButton = $("#cWithdraw");
-var sDepositButton = $("#sDeposit");
-var sWithdrawButton = $("#sWithdraw");
+$("#cDeposit").click(function (e){
+	e.preventDefault();
+	var deposit = parseFloat( $("#cInput").val() );
+	var total = parseInt(cBalance.text().replace("$", ""));
+	var newTotal = "$" + (total + deposit);
+	cBalance.html(newTotal);
+})
+// Withdraw money from checking, with overdraft protection
+$("#cWithdraw").click(function (e){
+	e.preventDefault();
+	var withdraw = parseFloat( $("#cInput").val() );
+	var cTotal = parseInt(cBalance.text().replace("$", ""));
+	var sTotal = parseInt(sBalance.text().replace("$", ""));
+	var combineTotal = cTotal + sTotal;
+	if(combineTotal - withdraw >= 0) {
+		if(cTotal - withdraw >= 0) {
+			console.log("Withdraw from checking!");
+			newTotal = "$" + (cTotal - withdraw);
+			cBalance.html(newTotal);
+		} else {
+			console.log("Withdraw from savings, overdraft protection!!");
+			sBalance.html( sTotal - (withdraw - cTotal) );
+			cBalance.html( "$0" );
+		}
+	} else {
+		console.log("Can't withdraw, bitch!");
+	}
+})
 
-// Deposit money to checking
-cDepositButton.click(function (e){ 
-	var amount = parse( cInput.val() );
+$("#sDeposit").click(function (e){
 	e.preventDefault();
-	console.log(amount);
-	cBalance.html('$' + ( parse( cBalance.html() ) + amount ) );
-	cInput.val('');
-});
-// Withdraw money from checking
-cWithdrawButton.click(function (e){
-	var amount = parse( cInput.val() );
-	e.preventDefault();
-	console.log(amount);
-	cBalance.html('$' + ( parse( cBalance.html() ) - amount ) );
-	cInput.val('');
-});
-// Deposit money to savings
-sDepositButton.click(function (e){ 
-	var amount = parse( sInput.val() );
-	e.preventDefault();
-	console.log(amount);
-	sBalance.html('$' + ( parse( sBalance.html() ) + amount ) );
-	sInput.val('');
-});
-// Withdraw money from savings
-sWithdrawButton.click(function (e){ 
-	var amount = parse( sInput.val() );
-	e.preventDefault();
-	console.log(amount);
-	sBalance.html('$' + ( parse( sBalance.html() ) - amount ) );
-	sInput.val('');
-});
+	var deposit = parseFloat( $("#sInput").val() );
+	var total = parseInt(sBalance.text().replace("$", ""));
+	var newTotal = "$" + (total + deposit);
+	sBalance.html(newTotal);
+})
 
-// Easily parse any numbers for use
-function parse(amount) {
-	return parseFloat( amount.replace("$", "") );
-}
+$("#sWithdraw").click(function (e){
+	e.preventDefault();
+	var withdraw = parseFloat( $("#sInput").val() );
+	var total = parseInt(sBalance.text().replace("$", ""));
+	if(total - withdraw >= 0) {
+		var newTotal = "$" + (total - withdraw);
+		sBalance.html(newTotal);
+	} else {
+		console.log("Can't withdraw from savings, not enough moolah!")
+	}
+})
+
+/* 
+cBalance.addClass("zero");
+cBalance.removeClass("zero");
+sBalance.addClass("zero");
+sBalance.removeClass("zero");
+*/
