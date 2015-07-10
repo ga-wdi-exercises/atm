@@ -18,7 +18,7 @@ body {
   font-size: 50px;
 }
 
-.account {
+.checking_account, .savings_account {
   background-color: #6C9A74;
   border: 1px solid #295A33;
   border-radius: 15px;
