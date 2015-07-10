@@ -14,7 +14,7 @@ $(".account").eq(1).addClass("zero")
 }
 zeroBalance()
 
-checkingDepositButton.click(function checkingDeposit(){
+checkingDepositButton.click(function checkingDeposit(event){
   event.preventDefault();
   checkingBalance = Number(parseFloat($(".balance").eq(0).html().replace("$", "")));
   checkingNew = Number(parseFloat($(".account input").eq(0).val()));
@@ -22,7 +22,7 @@ checkingDepositButton.click(function checkingDeposit(){
   $(".balance").eq(0).html("$" + checkingBalance);
   $(".account").eq(0).removeClass("zero")})
 
-checkingWithdrawButton.click(function checkingWithdrawal(){
+checkingWithdrawButton.click(function checkingWithdrawal(event){
   event.preventDefault();
   checkingBalance = Number(parseFloat($(".balance").eq(0).html().replace("$", "")));
   checkingNew = Number(parseFloat($(".account input").eq(0).val()));
@@ -49,7 +49,7 @@ checkingWithdrawButton.click(function checkingWithdrawal(){
   {$(".account").eq(1).removeClass("zero")}
 })
 
-savingsDepositButton.click(function savingsDeposit(){
+savingsDepositButton.click(function savingsDeposit(event){
   event.preventDefault();
   savingsBalance = Number(parseFloat($(".balance").eq(1).html().replace("$", "")));
   savingsNew = Number(parseFloat($(".account input").eq(3).val()));
@@ -57,7 +57,7 @@ savingsDepositButton.click(function savingsDeposit(){
   $(".balance").eq(1).html("$" + savingsBalance);
   $(".account").eq(1).removeClass("zero")})
 
-savingsWithdrawButton.click(function savingsWithdrawal(){
+savingsWithdrawButton.click(function savingsWithdrawal(event){
   event.preventDefault();
   savingsBalance = Number(parseFloat($(".balance").eq(1).html().replace("$", "")));
   savingsNew = Number(parseFloat($(".account input").eq(3).val()));
