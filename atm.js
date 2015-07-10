@@ -1,18 +1,7 @@
-// As a user, I want the color of my back account to reflect its balance (there's a CSS class called .zero already written for this!)
-// Are there ways to refactor your code to make it DRYer or more Object-Oriented?
-// Tips
-//
-// Tackle making your accounts work individually first
-// Then tackle them working together with overdraft protection
-// Only start working with the DOM after you have the logic down
-
-//CheckingAccountVariables
 var checkingBalance = Number(parseFloat($(".balance").eq(0).html().replace("$", "")));
 var checkingNew = Number(parseFloat($(".account input").eq(0).val()));
 var checkingDepositButton = $(":button").eq(0);
 var checkingWithdrawButton = $(":button").eq(1);
-
-//SavingsAccountVariables
 
 var savingsBalance = Number(parseFloat($(".balance").eq(1).html().replace("$", "")));
 var savingsNew = Number(parseFloat($(".account input").eq(3).val()));
@@ -25,7 +14,6 @@ $(".account").eq(1).addClass("zero")
 }
 zeroBalance()
 
-// an eventListerner for each button, each one a "click"
 checkingDepositButton.click(function checkingDeposit(){
   event.preventDefault();
   checkingBalance = Number(parseFloat($(".balance").eq(0).html().replace("$", "")));
@@ -56,7 +44,9 @@ checkingWithdrawButton.click(function checkingWithdrawal(){
   if (checkingBalance > 0)
   {$(".account").eq(0).removeClass("zero")}
   else if (checkingBalance === 0)
-{$(".account").eq(0).addClass("zero")}
+  {$(".account").eq(0).addClass("zero")}
+  if (savingsBalance > 0)
+  {$(".account").eq(1).removeClass("zero")}
 })
 
 savingsDepositButton.click(function savingsDeposit(){
@@ -90,4 +80,6 @@ savingsWithdrawButton.click(function savingsWithdrawal(){
   {$(".account").eq(1).removeClass("zero")}
   else if (savingsBalance === 0)
 {$(".account").eq(1).addClass("zero")}
+  if (checkingBalance === 0)
+  {$(".account").eq(0).addClass("zero")}
 })
