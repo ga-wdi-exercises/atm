@@ -14,13 +14,27 @@ var atm = {
     }.bind(this));
   },
   withdraw: function(account, amount){
+    if (parseFloat(amount) > this.balance[account.toLowerCase()]){
+      alert("overdraft protection coming soon!");
+      return;
+    }
+    else if (isNaN(parseFloat(amount))){
+      alert("please enter amount in digits");
+      return;
+    }
     this.balance[account.toLowerCase()] -= parseFloat(amount);
     $("#"+account.toLowerCase()+ " .balance")[0].textContent = ("$" + this.balance[account.toLowerCase()]);    // These are workarounds due to problems with this.updateDisplay();
+    if (this.balance[account.toLowerCase()] === 0){$("#"+account.toLowerCase()+ " .balance").addClass("zero");}
   },
   deposit: function(account, amount){
+    if (isNaN(parseFloat(amount))){
+      alert("please enter amount in digits");
+      return;
+    }
     this.balance[account.toLowerCase()] += parseFloat(amount);
     console.log(this.balance[account.toLowerCase()]);
     $("#"+account.toLowerCase()+ " .balance")[0].textContent = ("$" + this.balance[account.toLowerCase()]);
+    if (this.balance[account.toLowerCase()] > 0){$("#"+account.toLowerCase()+ " .balance").removeClass("zero");}
   }
   // updateDisplay: function(){
   //   console.log($("#checking .balance"));
@@ -62,25 +76,3 @@ atm.listen();
 //   }
 // }
 // checking.listen();
-
-// var checkingBalance = $("div#checkingBalance");
-// checkingBalance = parseInt( checkingBalance.html().replace("$", "") );
-//
-// var checkingDeposit = function(amount){
-//   checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-//
-// }
-//
-// function checkingWithdrawal(amount){
-//
-// }
-//
-// function savingsDeposit(amount){
-//
-// }
-//
-// function savingsWithdrawal(amount){
-//
-// }
-//
-// // an eventListerner for each button, each one a "click"
