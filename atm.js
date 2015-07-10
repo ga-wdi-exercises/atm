@@ -9,6 +9,7 @@ var atm = {
   },
   listen: function(){
     $(".account").on("click", function() {
+      event.preventDefault();
       var actionType = $(event.target).val();//Deposit of withdraw
       var accountType = $(event.target).prevAll("h2").html();//Checking or savings
       var amount = parseInt($(event.target).prevAll("[type=text]").val());//amount
@@ -21,20 +22,19 @@ var atm = {
     }.bind(this))
   },
   deposit: function(account,amount){
-    event.preventDefault();
     account = account.toLowerCase();
     this.accounts[account] += amount;
-    console.log("checking balance is " + atm.accounts.checking);
-    console.log("savings balance is " + atm.accounts.savings);
     $(event.target).prevAll("[type=text]").val(""); //empty the form after submission
+    console.log("savings balance is " + atm.accounts.savings);
+    console.log("checking balance is " + atm.accounts.checking);
   },
-  withdraw: function(transaction,account,amount){
-    event.preventDefault();
-    var withdrawAmount = $("input:first").val();
-    if(accountBalance >= withdrawAmount){
-      accountBalance -= parseInt(withdrawAmount);
+  withdraw: function(account,amount){
+    account = account.toLowerCase();
+    if(this.accounts[account] >= amount){
+      this.accounts[account] -= amount;
       $(event.target).prevAll("[type=text]").val(""); //empty the form after submission
-      $(".balance").eq(0).html("$" + accountBalance);
+      console.log("savings balance is " + atm.accounts.savings);
+      console.log("checking balance is " + atm.accounts.checking);
     }
   }
 }
