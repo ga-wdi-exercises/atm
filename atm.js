@@ -1,76 +1,74 @@
 
 $(document).ready (function(){
 
-var cTotal= 0;
-var sTotal = 0
+  //Checkings account
+    //when click on deposit,
+      //enter and store amount,
+      //show amount entered
+      //add from the total amount
+    //when click on withdraw
+      //enter and subtract amount
+      //show amount entered
+      //subtract from the total amount
+  //Savings account
+    //repeat steps for checking
+
+  //Make sure the balance in an account can't go negative. If a user tries to
+  //withdraw more money than exists in the account, ignore the transaction.
+
+var cTotal = 0;
+var sTotal = 0;
 
 //Checking
   $("#cDepositButton").on("click", function() {
-    var cAmount = parseFloat($("#cPlaceHolder").val());
-    cTotal += cAmount;
+    var cDepositUserInput = parseFloat($("#cPlaceHolder").val());
+    cTotal += cDepositUserInput;
     $("#cBalance").text("$ " + cTotal);
   });
 
   $("#cWithdrawButton").on("click", function() {
-    var cAmount = parseFloat($("#cPlaceHolder").val());
-    cTotal -= cAmount;
-    $("#cBalance").text("$ " + cTotal);
+    var cWithdrawUserInput = parseFloat($("#cPlaceHolder").val());
+    if (cTotal >= cWithdrawUserInput) {
+      cTotal -= cWithdrawUserInput;
+      $("#cBalance").text("$ " + cTotal);
+    }else if (cTotal < cWithdrawUserInput) {
+      var answer = confirm("You don't have enought money. Would you like to withdraw from savings?");
+        if ("ok") {
+          if (sTotal >= cWithdrawUserInput){
+            sTotal -= cWithdrawUserInput;
+            $("#sBalance").text("$" + sTotal);
+          }else {
+            alert("You don't have enough money.")
+          }
+        }
+    }
   });
 
 //Savings
   $("#sDepositButton").on("click", function() {
-    var sAmount = parseFloat($("#sPlaceHolder").val());
-    sTotal += sAmount;
+    var sDepositUserInput = parseFloat($("#sPlaceHolder").val());
+    sTotal += sDepositUserInput;
     $("#sBalance").text("$ " + sTotal);
   });
 
   $("#sWithdrawButton").on("click", function() {
-    var sAmount = parseFloat($("#sPlaceHolder").val());
-    sTotal -= sAmount;
-    $("#sBalance").text("$ " + sTotal);
+    var sWithdrawUserInput = parseFloat($("#sPlaceHolder").val());
+    if ( sTotal >= sWithdrawUserInput) {
+      sTotal -= sWithdrawUserInput;
+      $("#sBalance").text("$ " + sTotal);
+    }else {
+      alert("You don't have enough money.")
+    }
   });
 
 
+//overdraft protection
+  //when amount goes below zero from withdrawing,
+    //alert will pop up telling the user there is not enought money
+    //prevent the withdraw from happening
 
-
-
-
-
-
-
-
+//   if (cTotal < 0) {
+//     alert.jquery("You don't have enough money to withdraw this amount!");
+//     };
+//
 });
-
-
-
-/*var checkingBalance = document.querySelector("div#checking_balance");
-//checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-
-var checkingDeposit = function(amount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-
-}
-
-function checkingWithdrawal(amount){
-
-}
-
-function savingsDeposit(amount){
-
-}
-
-function savingsWithdrawal(amount){
-
-}*/
-
-// an eventListerner for each button, each one a "click"
-
-//Checking account
-  //when click on deposit,
-    //enter and store amount,
-    //show amount entered
-    //add from the total amount
-  //when click on withdraw
-    //enter and subtract amount
-    //show amount entered
-    //subtract from the total amount
