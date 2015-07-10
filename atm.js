@@ -1,7 +1,7 @@
 $(document).ready(function(){
 
-  checkingAmount = $("#checkingBalance");
-  savingAmount = $("#savingBalance");
+  checkingAmount = $(".balance.checking");
+  savingAmount = $(".balance.saving");
 
   checkingInput = $("input.checkingInput");
   savingInput = $("input.savingInput");
@@ -28,6 +28,7 @@ $(document).ready(function(){
       $("div#checkingBalance").text("$" + newAmount);
 
       checkingInput.val("");
+
     }
 
     function withdrawCheckingMoney(){
