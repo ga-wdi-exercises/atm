@@ -24,7 +24,7 @@ if (totalAccountBalance > withdrawingBalance && totalCheckingBalance < withdrawi
   $("#savingsDisplay").text("$ " + totalSavingBalance);
   $("#checkingDisplay").text("$ " + totalCheckingBalance);
 }
-  else if (totalCheckingBalance > withdrawingBalance){
+  else if (totalCheckingBalance >= withdrawingBalance){
   totalCheckingBalance -=  withdrawingBalance;
   totalAccountBalance -= totalCheckingBalance;}
   else alert("Withdrawing too much money!");
@@ -51,7 +51,7 @@ $("#withdrawSavingsButton").on("click", function (){
       $("#savingsDisplay").text("$ " + totalSavingBalance);
       $("#checkingDisplay").text("$ " + totalCheckingBalance);
     }
-    else if (totalSavingBalance > withdrawSavingBalance){
+    else if (totalSavingBalance >= withdrawSavingBalance){
     totalSavingBalance -=  withdrawSavingBalance;
     totalAccountBalance -= totalSavingBalance}
     else alert("Withdrawing too much money!!")
