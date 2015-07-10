@@ -7,54 +7,66 @@ var checkWithdrawlButton = $(".account").children().eq(4); // Checking Withdrawl
 var balanceDisplaySavings = $(".account").children().eq(6); // Selects Savings Balance HTML Area
 var userInputSavings = $(".account").children().eq(7); // Selects Savings User Input
 var savingsDepositButton = $(".account").children().eq(8); // Savings Deposit Button
-var savingsDepositButton = $(".account").children().eq(9); // Savings Withdrawl Button
+var savingsWithdrawlButton = $(".account").children().eq(9); // Savings Withdrawl Button
 
 $(checkDepositButton).click(function() { // Set up Checking Deposit button
   event.preventDefault(); // Prevents Default Refresh
   var depAmount = parseInt($( userInputChecking ).val()); // Get Deposit Value
-  var balance = parseInt(balanceDisplay.html().replace("$", "")) // Remove '$' from Balance HTML
-  var newBalance = "$" + (balance + depAmount) // New Balance Value + '$'
+  var balanceChecking = parseInt(balanceDisplay.html().replace("$", "")); // Remove '$' from Balance HTML
+  var newBalance = "$" + (balanceChecking + depAmount); // New Balance Value + '$'
   balanceDisplay.html(newBalance); // Replace Balance HTML with New Balance Value
 
   console.log("depAmount is: " + depAmount)
   console.log("depAmount type is: " + typeof(depAmount))
-  console.log("balance is: " + balance)
+  console.log("balance is: " + balanceChecking)
   console.log("balanceDisplay is: " + balanceDisplay)
   console.log("newbalance is: " + newBalance)
-  console.log("Check Deposit button is working");
+  console.log("Check Deposit button is working")
 });
 
-$(checkWithdrawlButton).click(function() {
+$(checkWithdrawlButton).click(function() { // Set up Checking Withdrawl and Overdraft Protection
   event.preventDefault(); // Prevents Default Refresh
   var withAmount = parseInt($( userInputChecking ).val()); // Get Withdrawl Value
-  var balance = parseInt(balanceDisplay.html().replace("$", "")) // Remove '$' from Balance HTML
+  var balanceChecking = parseInt(balanceDisplay.html().replace("$", "")); // Remove '$' from Checking Balance HTML
+  var balanceSavings = parseInt(balanceDisplaySavings.html().replace("$", "")); // Remove '$' from Checking Balance HTML
+  var totalBalance = balanceChecking + balanceSavings; // Get Total Balance Value
 
-  if((balance - withAmount) > 0){
-    var newBalance = "$" + (balance - withAmount) // New Balance Value + '$'
+  if((balanceChecking - withAmount) > 0){ // Checking Withdraw 
+    var newBalance = "$" + (balanceChecking - withAmount); // New Balance Value + '$'
     balanceDisplay.html(newBalance); // Replace Balance HTML with New Balance Value
   }
-  else {
+  else if((totalBalance - withAmount) > 0){ // Overdraft only if Total Value is enough
+    var balanceOverdraft = withAmount - balanceChecking; // Find how much can be withdrawn
     balanceDisplay.html("$0"); // Ensure Balance cannot go below $0
+    var newbalanceSavings = "$" + (balanceSavings - balanceOverdraft); // Subtract Overdraft Value from Savings Value
+    balanceDisplay.html(newbalanceSavings); // Set Checking Balance to New Balance after Overdraft
+    balanceDisplaySavings.html("$0"); // Set Savings Balance to '$' When Overdraft happens
   }
-  console.log("Check Withdrawl button is working");
+  console.log("Check Withdrawl button is working")
+  console.log("New Savings Balance is: " + newbalanceSavings)
 });
 
-$(savingsDepositButton).click(function(){
+$(savingsDepositButton).click(function() { // Set up Savings Deposit Button
   event.preventDefault(); // Prevents Default Refresh
   var depAmount = parseInt($( userInputSavings ).val()); // Get Deposit Value
-  var balance = parseInt(balanceDisplaySavings.html().replace("$", "")) // Remove '$' from Balance HTML
-  var newBalance = "$" + (balance + depAmount) // New Balance Value + '$'
+  var balanceSavings = parseInt(balanceDisplaySavings.html().replace("$", "")); // Remove '$' from Balance HTML
+  var newBalance = "$" + (balanceSavings + depAmount); // New Balance Value + '$'
   balanceDisplaySavings.html(newBalance); // Replace Balance HTML with New Balance Value
 
-  console.log("Savings Deposit button is working");
+  console.log("Savings Deposit button is working")
 });
 
-function savingsWithdrawal(amount){
+$(savingsWithdrawlButton).click(function() { // Set up Savings Withdrawl Button
+  event.preventDefault(); // Prevents Default Refresh
+  var withAmount = parseInt($( userInputSavings ).val()); // Get Withdrawl Value
+  var balanceSavings = parseInt(balanceDisplaySavings.html().replace("$", "")); // Remove '$' from Balance HTML
 
-}
-
-// An eventListener for each button, each one a "click"
-
+  if((balanceSavings - withAmount) > 0){
+    var newBalance = "$" + (balanceSavings - withAmount); // New Balance Value + '$'
+    balanceDisplaySavings.html(newBalance); // Replace Balance HTML with New Balance Value
+  }
+  console.log("Savings Withdrawl button is working")
+});
 
 // Code to discuss:
 // var checkingBalance = document.querySelector("div#checking_balance");
