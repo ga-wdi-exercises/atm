@@ -3,73 +3,99 @@ $(document).ready(function(){
   checkingAmount = $("#checkingBalance");
   savingAmount = $("#savingBalance");
 
-  checkingInputAmount = $("input.checkingInputAmount");
-  savingInputAmount = $("input.savingInputAmount");
+  checkingInput = $("input.checkingInput");
+  savingInput = $("input.savingInput");
 
-  checkingDepositButton = $(".checkingDepositButton");
-  checkingWithdrawButton = $(".checkingWithdrawButton");
-  savingDepositButton = $(".savingDepositButton");
-  savingWithdrawButton = $(".savingWithdrawButton");
+  checkingDeposit = $(".checkingDeposit");
+  checkingWithdraw = $(".checkingWithdraw");
+  savingDeposit = $(".savingDeposit");
+  savingWithdraw = $(".savingWithdraw");
 
-  // deposit checking
-  checkingDepositButton.on("click", depositMoney);
+  checkingDeposit.on("click", depositCheckingMoney);
+  checkingWithdraw.on("click", withdrawCheckingMoney);
 
-    function depositMoney(){
-      var balance = checkingAmount.text();
-      currentBalance = parseInt(balance.replace("$", ""));
+  savingDeposit.on("click", depositSavingMoney);
+  savingWithdraw.on("click", withdrawSavingMoney);
 
-      var deposit = parseInt(checkingInputAmount.val());
-      var newBalance = deposit + currentBalance;
-      checkingAmount.text("$" + newBalance);
+    function depositCheckingMoney(){
 
-    // placeholder clear after entering value
-      checkingInputAmount.val("");
-    };
+      var balance = $("#checkingBalance").text();
+      checkingCurrentBalance = parseInt(balance.replace("$", ""));
 
-  // withdraw checking
-  checkingWithdrawButton.on("click", withdrawMoney);
-    function withdrawMoney(){
-      var balance = checkingAmount.text();
-      currentBalance = parseInt(balance.replace("$", ""));
+      var deposit = parseInt(checkingInput.val());
 
-      var withdraw = parseInt(checkingInputAmount.val());
-      var newBalance = currentBalance - withdraw;
-      checkingAmount.text("$" + newBalance);
+      var newAmount = checkingCurrentBalance + deposit;
+      $("div#checkingBalance").text("$" + newAmount);
 
-    // placeholder clear after entering value
-      checkingInputAmount.val("");
+      checkingInput.val("");
     }
 
-  // deposit saving
-  savingDepositButton.on("click", depositMoney)
-  function depositMoney(){
-    var balance = savingAmount.text();
-    currentBalance = parseInt(balance.replace("$", ""));
+    function withdrawCheckingMoney(){
 
-    var deposit = parseInt(savingInputAmount.val());
-    var newBalance = deposit + currentBalance;
-    savingAmount.text("$" + newBalance);
+      var balance = $("#checkingBalance").text();
+      checkingCurrentBalance = parseInt(balance.replace("$", ""));
 
-  // placeholder clear after entering value
-    savingInputAmount.val("");
-  };
+      var withdraw = parseInt(checkingInput.val());
 
-  // withdraw saving
-  savingWithdrawButton.on("click", withdrawMoney);
-  function withdrawMoney(){
-    var balance = savingAmount.text();
-    currentBalance = parseInt(balance.replace("$", ""));
+      var savingCurrentBalance = $("#savingBalance").text();
+      savingCurrentBalance = parseInt(savingCurrentBalance.replace("$", ""));
 
-    var withdraw = parseInt(savingInputAmount.val());
-    var newBalance = currentBalance - withdraw;
-    savingAmount.text("$" + newBalance);
+      var overDraftProtection = checkingCurrentBalance + savingCurrentBalance - withdraw;
 
-  // placeholder clear after entering value
-    savingInputAmount.val("");
-  }
+        if (checkingCurrentBalance >= withdraw){
+          var sum = checkingCurrentBalance - withdraw;
+          $("div#checkingBalance").text("$" + sum);
+        }
+        else if (overDraftProtection >= 0){
+          $("div#checkingBalance").text("$" + 0);
+          $("#savingBalance").text("$" + overDraftProtection);
+        }
+        else {
+          alert ("Not enough money to withdraw!")
+        }
 
 
+      checkingInput.val("");
+    }
 
+    function depositSavingMoney(){
 
+      var balance = $("#savingBalance").text();
+      savingCurrentBalance = parseInt(balance.replace("$", ""));
+
+      var deposit = parseInt(savingInput.val());
+
+      var newAmount = savingCurrentBalance + deposit;
+      $("div#savingBalance").text("$" + newAmount);
+
+      savingInput.val("");
+    }
+
+    function withdrawSavingMoney(){
+
+      var balance = $("#savingBalance").text();
+      savingCurrentBalance = parseInt(balance.replace("$", ""));
+
+      var withdraw = parseInt(savingInput.val());
+
+      var checkingCurrentBalance = $("#checkingBalance").text();
+      checkingCurrentBalance = parseInt(checkingCurrentBalance.replace("$", ""));
+
+      var overDraftProtection = checkingCurrentBalance + savingCurrentBalance - withdraw;
+
+        if (savingCurrentBalance >= withdraw){
+          var sum = savingCurrentBalance - withdraw;
+          $("div#savingBalance").text("$" + sum);
+        }
+        else if (overDraftProtection >= 0){
+          $("div#savingBalance").text("$" + 0);
+          $("#checkingBalance").text("$" + overDraftProtection);
+        }
+        else {
+          alert ("Not enough money to withdraw!")
+        }
+
+      savingInput.val("");
+    }
 // this is for closing document.ready
 })
