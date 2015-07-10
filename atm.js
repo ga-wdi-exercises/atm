@@ -7,15 +7,14 @@ $(document).ready(function() {
 	console.log("Bank is ready.");
 
 	// Add an event to checking's deposit button.
+	// User should be abe to deposit money to checking.
+	// User should be able to view current balance.
+	// User should be able to view updated balance.
+
 	$("#addToChecking").on("click", function() {
-		console.log("Button works.")
-		// User should be abe to deposit money to checking.
+
 		var depositMoneyToChecking = parseInt($("#checkingInput").val());
-		
-		// User should be able to view current balance.
-		var checkingBalance = parseInt($("#checkingBalance").text().replace("$", "")); // Had lots ofhelp here.
-		
-		// User should be able to view updated balance.
+		var checkingBalance = parseInt($("#checkingBalance").text().replace("$", "")); // Had lots ofhelp here since innerHTML wasn't working for me,
 		var newCheckingBalance = "$" + (checkingBalance + depositMoneyToChecking);
 		
 		$("#checkingBalance").text(newCheckingBalance);
@@ -23,15 +22,14 @@ $(document).ready(function() {
 	});
 
 	// Add an event to savings's deposit button.
+	// User should be abe to deposit money to savings.
+	// User should be able to view current balance.
+	// User should be able to view updated balance.
+
 	$("#addToSavings").on("click", function() {
-		console.log("Button works.")
-		// User should be abe to deposit money to savings.
+
 		var depositMoneyToSavings = parseInt($("#savingsInput").val());
-		
-		// User should be able to view current balance.
-		var savingsBalance = parseInt($("#savingsBalance").text().replace("$", "")); // Had lots ofhelp here.
-		
-		// User should be able to view updated balance.
+		var savingsBalance = parseInt($("#savingsBalance").text().replace("$", ""));
 		var newSavingsBalance = "$" + (savingsBalance + depositMoneyToSavings);
 		
 		$("#savingsBalance").text(newSavingsBalance);
@@ -39,36 +37,50 @@ $(document).ready(function() {
 	});
 
 	// Add an event to checking's withdraw button.
+	// User should be abe to withdraw money from checking.
+	// User should be able to view current balance.
+	// User should be able to view updated balance.
+
 	$("#withdrawFromChecking").on("click", function() {
-		console.log("Button works.")
-		// User should be abe to withdraw money from checking.
+
 		var withdrawMoneyFromChecking = parseInt($("#checkingInput").val());
-		
-		// User should be able to view current balance.
-		var checkingBalance = parseInt($("#checkingBalance").text().replace("$", "")); // Had lots ofhelp here.
-		
-		// User should be able to view updated balance.
-		var newCheckingBalance = "$" + (checkingBalance - withdrawMoneyFromChecking); // Subtract money!
-		
-		$("#checkingBalance").text(newCheckingBalance);
+		var checkingBalance = parseInt($("#checkingBalance").text().replace("$", ""));
+		var newCheckingBalance = "$" + (checkingBalance - withdrawMoneyFromChecking);
+
+		$("#checkingBalance").text(newcheckingBalance);
 			console.log("Withdrew $" + withdrawMoneyFromChecking + " from the checking account.");
-	});
+	});	
 
 	// Add an event to savings's withdraw button.
+	// User should be abe to withdraw money from savings.
+	// User should be able to view current balance.
+	// User should be able to view updated balance.
+
 	$("#withdrawFromSavings").on("click", function() {
-		console.log("Button works.")
-		// User should be abe to withdraw money from savings.
+
 		var withdrawMoneyFromSavings = parseInt($("#savingsInput").val());
-		
-		// User should be able to view current balance.
-		var savingsBalance = parseInt($("#savingsBalance").text().replace("$", "")); // Had lots ofhelp here.
-		
-		// User should be able to view updated balance.
-		var newSavingsBalance = "$" + (savingsBalance - withdrawMoneyFromSavings); // Subtract money!
+		var savingsBalance = parseInt($("#savingsBalance").text().replace("$", ""));
+		var newSavingsBalance = "$" + (savingsBalance - withdrawMoneyFromSavings);
 		
 		$("#savingsBalance").text(newSavingsBalance);
 			console.log("Withdrew $" + withdrawMoneyFromSavings + " from the savings account.");
 	});
+};	
 
-	// 
-});
+
+	// 	// var widthrawMoney = parseInt($("#checkingInput").val());
+	// 	// 	console.log("Withdraw worked.");
+	// 	// var withdrawMoneyFromChecking = parseInt($("#checkingInput").val());
+	// 	// var withdrawMoneyFromSavings = parseInt($("#savingsInput").val());
+	// 	// var checkingBalance = parseInt($("#checkingBalance").text().replace("$", ""));
+	// 	// var newCheckingBalance = "$" + (checkingBalance - withdrawMoneyFromChecking);
+
+
+	// 	// $("#checkingBalance").text(newCheckingBalance);
+	// 	// $("#checkingBalance").addClass("zero");
+	// 	// console.log("...");
+	// 		// if (newCheckingBalance < 0){
+	// 		// 	return withdrawMoneyFromSavings + depositMoneyToChecking;	
+	// 		// 	console.log("Withdrew $" + withdrawMoneyFromChecking + " from checking account.");
+	// 	});
+	// });
