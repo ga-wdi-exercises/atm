@@ -1,59 +1,42 @@
 //Checking account
 //Define players
 $(document).ready(function() {
-  var accountBalance = 0;
-  var inputBox = $("input:first")[0];
-  var depositButton = $("input").eq(1);
-  var withdrawButton = $("input").eq(2);
-  //$("input").eq(1).attr("value") is "Deposit"
-  //$("input").eq(2).attr("value") is "Withdraw"
-  //$("input:first").val() is the value of the input box;
 
-  //When Deposit button is clicked, read user input and add it to the total
-  depositButton.on("click", function(){
+var atm = {
+  accounts: {
+    checking: 0,
+    savings: 0
+  },
+  listen: function(){
+    document.querySelector(".account").addEventListener("click", function() {
+      console.log($(event.target).val());//Deposit of withdraw
+      if($(event.target).val() === "Deposit"){
+        this.deposit()
+      }
+      if($(event.target).val() === "Withdraw"){
+        this.withdraw()
+      }
+    }.bind(this))
+  },
+  deposit: function(){
     event.preventDefault();
     accountBalance += parseInt($("input:first").val());
-    console.log("account balance is " + accountBalance);
+    $("input:first").val(""); //empty the form after submission
     //Change the html element that indicates account balance
     $(".balance").eq(0).html("$" + accountBalance);
-  })
-
-  //Withdrawal
-  withdrawButton.on("click", function(){
+  },
+  withdraw: function(){
     event.preventDefault();
     var withdrawAmount = $("input:first").val();
     if(accountBalance >= withdrawAmount){
       accountBalance -= parseInt(withdrawAmount);
-      console.log("account balance is " + accountBalance);
+      $("input:first").val(""); //empty the form after submission
       $(".balance").eq(0).html("$" + accountBalance);
     }
-  })
+  }
+}
 
-
-//Whin withdraw button is clicked, read user input and subtract it from the total
-//add logic to make sure the balance is not zero
-
-// var checkingBalance = document.querySelector("div#checking_balance");
-// checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-//
-// var checkingDeposit = function(amount){
-//   checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-//
-// }
-//
-// function checkingWithdrawal(amount){
-//
-// }
-//
-// function savingsDeposit(amount){
-//
-// }
-//
-// function savingsWithdrawal(amount){
-//
-// }
-//
-// // an eventListerner for each button, each one a "click"
+atm.listen()
 
 
 
