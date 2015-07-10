@@ -1,21 +1,63 @@
-var checkingBalance = document.querySelector("div#checking_balance");
-checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+var checkBalance = 0;
+var saveBalance = 0;
 
-var checkingDeposit = function(amount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 
-}
 
-function checkingWithdrawal(amount){
+$('#leftDeposit').on('click' , function(){
+  console.log('Deposit');
+  userLeftAmount = $('#leftAmount').val();
+  console.log(userLeftAmount);
+  checkBalance = parseInt(userLeftAmount) + parseInt(checkBalance);
+  console.log(checkBalance);
+  $('.balance').eq(0).html(checkBalance);
 
-}
+});
 
-function savingsDeposit(amount){
+$('#leftWithdraw').on('click' , function(){
+  console.log('Withdraw');
+  userLeftAmount = $('#leftAmount').val();
+  console.log(userLeftAmount);
+  checkBalance = parseInt(checkBalance) - parseInt(userLeftAmount);
+  console.log(checkBalance);
+  $('.balance').eq(0).html(checkBalance);
 
-}
+  if (checkBalance < 0){
+  $('.balance').eq(0).html('you broke');
+  $('.balance').css("background-color" , "red");
+  }
+  else{
+  $('.balance').eq(0).html(checkBalance);
+  }
 
-function savingsWithdrawal(amount){
+});
 
-}
 
-// an eventListerner for each button, each one a "click"
+
+
+$('#rightDeposit').on('click' , function(){
+  console.log('Deposit');
+  userRightAmount = $('#rightAmount').val();
+  console.log(userRightAmount);
+  saveBalance = parseInt(saveBalance) + parseInt(userRightAmount);
+  console.log(saveBalance);
+  $('.balance').eq(1).html(saveBalance);
+});
+
+$('#rightWithdraw').on('click' , function(){
+  console.log('Withdraw');
+  userRightAmount = $('#rightAmount').val();
+  console.log(userRightAmount);
+  saveBalance = parseInt(saveBalance) - parseInt(userRightAmount);
+  console.log(saveBalance);
+  $('.balance').eq(1).html(saveBalance);
+
+
+  if (saveBalance < 0){
+  $('.balance').eq(1).html('you broke');
+  $('.balance').css("background-color" , "red");
+  }
+  else{
+  $('.balance').eq(1).html(saveBalance);
+  }
+
+});
