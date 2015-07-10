@@ -1,4 +1,4 @@
-<!doctype html>
+<!-- <!doctype html>
 <html>
   <head>
     <title>ATM</title>
@@ -10,7 +10,7 @@
       <div><img src="ga.png" /></div>
       <div class="title">Bank of GA</div>
     </div>
-    
+
     <div class="account">
       <h2>Checking</h2>
       <div class="balance">$0</div>
@@ -27,6 +27,41 @@
       <input type="button" value="Withdraw" />
     </div>
 
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
+        type="text/javascript"></script>
+    <script src="atm.js"></script>
+  </body>
+</html> -->
+
+<!doctype html>
+<html>
+  <head>
+    <title>ATM</title>
+    <meta charset="utf-8">
+    <link rel="stylesheet" href="atm.css">
+  </head>
+  <body>
+    <div class="header">
+      <div><img src="ga.png" /></div>
+      <div class="title">Bank of GA</div>
+    </div>
+
+    <div class="checking account">
+      <h2>Checking</h2>
+      <div class="checking balance">$0</div>
+      <input id="checkingInput" type="text" placeholder="enter an amount" />
+      <input id="checkingDeposit" type="button" value="Deposit" />
+      <input id="checkingWithdraw" type="button" value="Withdraw" />
+    </div>
+
+    <div class="savings account">
+      <h2>Savings</h2>
+      <div class="savings balance">$100</div>
+      <input id="savingsInput" type="text" placeholder="enter an amount" />
+      <input id="savingsDeposit" type="button" value="Deposit" />
+      <input id="savingsWithdraw" type="button" value="Withdraw" />
+    </div>
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script src="atm.js"></script>
   </body>
 </html>
