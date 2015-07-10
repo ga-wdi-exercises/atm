@@ -1,12 +1,12 @@
 window.onload = function () {
  $("div.account").addClass("zero");
  };
-
+//Shorten these?
 var checkingBalance = parseInt(document.querySelector("div#checking_balance").innerHTML.replace("$", ""));
 var savingsBalance = parseInt(document.querySelector("div#savings_balance").innerHTML.replace("$", ""));
 
 $("input[value='Deposit']").eq(0).on("click", function(){
-    var deposit = parseInt($("input#checking_deposit").val());//Set their input equal to amount
+    var deposit = parseInt($("input#checking_input").val());//Set their input equal to amount
     checkingBalance += deposit;//Add amount to checkingBalance, i.e. checkingBalance += amount
     $("div#checking_balance").html("$ " + checkingBalance)//Update the "balance" div to reflect the new checkingBalance
     if(checkingBalance > 0) {
@@ -14,30 +14,29 @@ $("input[value='Deposit']").eq(0).on("click", function(){
     };//Remove class zero
 })
 
-function checkingWithdrawal(amount){
+$("input[value='Withdraw']").eq(0).on("click", function(){
   //When the user presses the withdrawal button in the first "account" div...
-    //Set their input equal to amount
-    if((checkingBalance - amount) < 0){
-      if(((checkingBalance + savingsBalance) - amount) > 0){
-        savingsBalance -= (amount - checkingBalance);
-        //Update the savings balance div
+    var withdrawal = parseInt($("input#checking_input").val());//Set their input equal to amount
+    if((checkingBalance - withdrawal) < 0){
+      if(((checkingBalance + savingsBalance) - withdrawal) > 0){
+        savingsBalance -= (withdrawal - checkingBalance);
+        $("div#savings_balance").html("$ " + savingsBalance);//Update the savings balance div
         checkingBalance = 0;
-        //Reinstate class zero
+        $("div.account").eq(0).addClass("zero");
       }
       else {
         alert("Insufficient funds");
       }
     }
     else {
-      checkingBalance -= amount;
-      //Update the "balance" div to reflect the new checkingBalance
+      checkingBalance -= withdrawal;
     }
-    console.log(checkingBalance);
-}
+  $("div#checking_balance").html("$ " + checkingBalance);//Update the "balance" div to reflect the new checkingBalance
+})
 
 $("input[value='Deposit']").eq(1).on("click", function(){
   //When the user presses the deposit button in the second "account" div...
-    var deposit = parseInt($("input#savings_deposit").val());//Set their input equal to amount
+    var deposit = parseInt($("input#savings_input").val());//Set their input equal to amount
     savingsBalance += deposit; //Add amount to savingsBalance, i.e. savingsBalance += amount
     $("div#savings_balance").html("$ " + savingsBalance)//Update the "balance" div to reflect the new savingsBalance
     if(savingsBalance > 0) {
@@ -65,19 +64,3 @@ function savingsWithdrawal(amount){
     }
     console.log(savingsBalance);
 }
-
-// - Are there ways to refactor your code to make it DRYer or more Object-Oriented?
-//
-// ###Tips
-// * Tackle making your accounts work individually first
-// * Then tackle them working together with overdraft protection
-// * Only start working with the DOM after you have the logic down
-//
-// ###Resources
-// * [What is window.onload for?](https://developer.mozilla.org/en-US/docs/Web/API/GlobalEventHandlers.onload)
-// * [Adding Event Listeners so things happen when you click](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget.addEventListener)
-// * [Adding or removing a CSS class using JS](https://developer.mozilla.org/en-US/docs/Web/API/Element.classList)
-// * [Changing HTML with JavaScript](https://developer.mozilla.org/en-US/docs/Web/API/Element.innerHTML)
-
-//var checkingBalance = document.querySelector("div#checking_balance");
-//var savingsBalance = document.querySelector("div#savings_balance");
