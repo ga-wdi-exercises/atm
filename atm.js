@@ -25,6 +25,7 @@ var atm = {
     account = account.toLowerCase();
     this.accounts[account] += amount;
     $(event.target).prevAll("[type=text]").val(""); //empty the form after submission
+    this.updateDisplay();
     console.log("savings balance is " + atm.accounts.savings);
     console.log("checking balance is " + atm.accounts.checking);
   },
@@ -33,9 +34,14 @@ var atm = {
     if(this.accounts[account] >= amount){
       this.accounts[account] -= amount;
       $(event.target).prevAll("[type=text]").val(""); //empty the form after submission
+      this.updateDisplay();
       console.log("savings balance is " + atm.accounts.savings);
       console.log("checking balance is " + atm.accounts.checking);
     }
+  },
+  updateDisplay: function(){
+    $(".balance").eq(0).html("$" + atm.accounts.checking);
+    $(".balance").eq(1).html("$" + atm.accounts.savings);
   }
 }
 
