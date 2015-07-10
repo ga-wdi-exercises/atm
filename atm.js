@@ -20,7 +20,7 @@ $("input").eq(3).on("keypress", function(event) {
     var savingsAccountUserInput = Number(parseFloat($("input").eq(3).val()));
     var savingsTotal = (parseFloat($("div.balance").eq(1).html().substr(1))) + savingsAccountUserInput;
     $("div.balance").eq(1).html("$" + savingsTotal.toFixed(2));
-    $("input".eq(3).val(""));
+    $("input").eq(3).val("");
     $(".account").eq(1).removeClass("zero");
   }
 });
