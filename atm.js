@@ -1,13 +1,24 @@
+//add event listener to listen for click on deposit button
+//when deposit button is clicked, change div with balance
 
-// $("input").val();
-$(".deposit_button").on("click",function(){
-  console.log("does it work?")
+ $(".Cdepbutton").on("click", function(){
+  var userEntry = $(".Ctext").val();
+  console.log(userEntry);
+  $('.balance').eq(0).val(userEntry);
 });
+  // var checkingDeposit = function(amount){
+  // checkingBalance = parseInt(balance.innerHTML.replace("$", "") );
+
+
+  //when button is pressed perform a function
+  // $("input").val(); //get the user input
+                //put user input into a class
 
 
 
 
 
+//http://stackoverflow.com/questions/8637752/jquery-nth-child-append
 
 
 
@@ -46,3 +57,4 @@ $(".deposit_button").on("click",function(){
 // }
 //
 // // an eventListerner for each button, each one a "click"
+// $("input").val();
