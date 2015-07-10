@@ -11,7 +11,7 @@ $( document ).ready(function() {
     console.log(newBalance);
     $("#checking").text("$" + newBalance)
     if (checking > 0) {
-      $(".account").removeClass("zero")
+      $(".checkingAccount").removeClass("zero")
 
     }
   })
@@ -28,11 +28,11 @@ $( document ).ready(function() {
       $("#checking").text("$0")
       var newSavingsBalance = (savings - overDraft)
       $("#savings").text("$" + newSavingsBalance)
-      $(".account").addClass("zero")
+      $(".checkingAccount").addClass("zero")
     }
 
     //I could not get the savings to prevent a negative balance when overdraft
-    else if ((newBalance == 0) && (newSavingsBalance ==0)){
+    else if ((newBalance <= 0) || (newSavingsBalance <= 0)){
         console.log("oops");
         return;
       }
@@ -51,6 +51,10 @@ $( document ).ready(function() {
     var newBalance = savings + inputSavings
     console.log(newBalance);
     $("#savings").text("$" + newBalance)
+    if (savings > 0) {
+      $(".savingsAccount").removeClass("zero")
+
+    }
   })
 
   //subtract inputSavings from savingsBalance
@@ -63,5 +67,8 @@ $( document ).ready(function() {
     }
     console.log(newBalance);
     $("#savings").text("$" + newBalance)
+    if (savings = 0) {
+      $(".savingsAccount").removeClass("zero")
+    }
   })
 });
