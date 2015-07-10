@@ -1,3 +1,5 @@
+"use strict";
+
 // var checkingBalance = document.querySelector("div#checking_balance");
 // checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "")
 
@@ -14,7 +16,7 @@ $(document).ready(function() {
 	$("#addToChecking").on("click", function() {
 
 		var depositMoneyToChecking = parseInt($("#checkingInput").val());
-		var checkingBalance = parseInt($("#checkingBalance").text().replace("$", "")); // Had lots ofhelp here since innerHTML wasn't working for me,
+		var checkingBalance = parseInt($("#checkingBalance").text().replace("$", "")); // Had lots of help here since innerHTML wasn't working for me.
 		var newCheckingBalance = "$" + (checkingBalance + depositMoneyToChecking);
 		
 		$("#checkingBalance").text(newCheckingBalance);
@@ -47,7 +49,7 @@ $(document).ready(function() {
 		var checkingBalance = parseInt($("#checkingBalance").text().replace("$", ""));
 		var newCheckingBalance = "$" + (checkingBalance - withdrawMoneyFromChecking);
 
-		$("#checkingBalance").text(newcheckingBalance);
+		$("#checkingBalance").text(newCheckingBalance);
 			console.log("Withdrew $" + withdrawMoneyFromChecking + " from the checking account.");
 	});	
 
@@ -65,7 +67,7 @@ $(document).ready(function() {
 		$("#savingsBalance").text(newSavingsBalance);
 			console.log("Withdrew $" + withdrawMoneyFromSavings + " from the savings account.");
 	});
-};	
+});	
 
 	// $("#checkingBalance").addClass("zero");
 
