@@ -35,17 +35,15 @@ function checkingWithdrawal(amount){
     console.log(checkingBalance);
 }
 
-function savingsDeposit(amount){
-  // savingsBalance = parseInt( savingsBalance.innerHTML.replace("$", "") );
+$("input[value='Deposit']").eq(1).on("click", function(){
   //When the user presses the deposit button in the second "account" div...
-    //Set their input equal to amount
-    savingsBalance += amount; //Add amount to savingsBalance, i.e. savingsBalance += amount
-    console.log(savingsBalance);
-    //Update the "balance" div to reflect the new savingsBalance
+    var deposit = parseInt($("input#savings_deposit").val());//Set their input equal to amount
+    savingsBalance += deposit; //Add amount to savingsBalance, i.e. savingsBalance += amount
+    $("div#savings_balance").html("$ " + savingsBalance)//Update the "balance" div to reflect the new savingsBalance
     if(savingsBalance > 0) {
       $("div.account").eq(1).removeClass("zero");
     };
-}
+})
 
 function savingsWithdrawal(amount){
   //When the user presses the withdrawal button in the second "account" div...
