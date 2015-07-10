@@ -1,16 +1,14 @@
-//var checkingBalance = document.querySelector("div#checking_balance");
 var checkingBalance = parseInt(document.querySelector("div#checking_balance").innerHTML.replace("$", ""));
 
 //Instantiate var savingsBalance in the style of var checkingBalance
-//var savingsBalance = document.querySelector("div#savings_balance");
-savingsBalance = parseInt(document.querySelector("div#savings_balance").innerHTML.replace("$", ""));
+var savingsBalance = parseInt(document.querySelector("div#savings_balance").innerHTML.replace("$", ""));
 
 var checkingDeposit = function(amount){
   // checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
   //When the user presses the deposit button in the first "account" div...
     //Set their input equal to amount
-    //Add amount to checkingBalance, i.e. checkingBalance += amount
-    //Update the "balance" div to reflect the new checkingBalance
+    checkingBalance += amount;//Add amount to checkingBalance, i.e. checkingBalance += amount
+    console.log(checkingBalance);//Update the "balance" div to reflect the new checkingBalance
     //Remove class zero
 }
 
@@ -33,7 +31,8 @@ function savingsDeposit(amount){
   // savingsBalance = parseInt( savingsBalance.innerHTML.replace("$", "") );
   //When the user presses the deposit button in the second "account" div...
     //Set their input equal to amount
-    //Add amount to savingsBalance, i.e. savingsBalance += amount
+    savingsBalance += amount; //Add amount to savingsBalance, i.e. savingsBalance += amount
+    console.log(savingsBalance);
     //Update the "balance" div to reflect the new savingsBalance
 }
 
@@ -64,3 +63,6 @@ function savingsWithdrawal(amount){
 // * [Adding Event Listeners so things happen when you click](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget.addEventListener)
 // * [Adding or removing a CSS class using JS](https://developer.mozilla.org/en-US/docs/Web/API/Element.classList)
 // * [Changing HTML with JavaScript](https://developer.mozilla.org/en-US/docs/Web/API/Element.innerHTML)
+
+//var checkingBalance = document.querySelector("div#checking_balance");
+//var savingsBalance = document.querySelector("div#savings_balance");
