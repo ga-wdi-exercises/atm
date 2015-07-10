@@ -1,6 +1,5 @@
 
 $(document).ready (function(){
-
   //Checkings account
     //when click on deposit,
       //enter and store amount,
@@ -31,12 +30,18 @@ var sTotal = 0;
     if (cTotal >= cWithdrawUserInput) {
       cTotal -= cWithdrawUserInput;
       $("#cBalance").text("$ " + cTotal);
+      //Make sure the balance in an account can't go negative. If a user tries to
+      //withdraw more money than exists in the account, ignore the transaction.
     }else if (cTotal < cWithdrawUserInput) {
       var answer = confirm("You don't have enought money. Would you like to withdraw from savings?");
         if ("ok") {
           if (sTotal >= cWithdrawUserInput){
             sTotal -= cWithdrawUserInput;
             $("#sBalance").text("$" + sTotal);
+          //overdraft protection
+            //when amount goes below zero from withdrawing,
+              //alert will pop up telling the user there is not enought money
+              //prevent the withdraw from happening
           }else {
             alert("You don't have enough money.")
           }
@@ -60,15 +65,4 @@ var sTotal = 0;
       alert("You don't have enough money.")
     }
   });
-
-
-//overdraft protection
-  //when amount goes below zero from withdrawing,
-    //alert will pop up telling the user there is not enought money
-    //prevent the withdraw from happening
-
-//   if (cTotal < 0) {
-//     alert.jquery("You don't have enough money to withdraw this amount!");
-//     };
-//
 });
