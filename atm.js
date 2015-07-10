@@ -96,5 +96,5 @@ $(document).ready(function(){
 
       savingInput.val("");
     }
-// this is for closing document.ready
+
 })
