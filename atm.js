@@ -1,9 +1,9 @@
 window.onload = function () {
  $("div.account").addClass("zero");
  };
-//Shorten these?
-var checkingBalance = parseInt(document.querySelector("div#checking_balance").innerHTML.replace("$", ""));
-var savingsBalance = parseInt(document.querySelector("div#savings_balance").innerHTML.replace("$", ""));
+
+var checkingBalance = parseInt($("div#checking_balance").html().replace("$", ""));
+var savingsBalance = parseInt($("div#savings_balance").html().replace("$", ""));
 
 $("input[value='Deposit']").eq(0).on("click", function(){
     var deposit = parseInt($("input#checking_input").val());//Set their input equal to amount
@@ -22,6 +22,7 @@ $("input[value='Withdraw']").eq(0).on("click", function(){
         savingsBalance -= (withdrawal - checkingBalance);
         $("div#savings_balance").html("$ " + savingsBalance);//Update the savings balance div
         checkingBalance = 0;
+        $("div.account").eq(0).addClass("zero");
       }
       else {
         alert("Insufficient funds");
