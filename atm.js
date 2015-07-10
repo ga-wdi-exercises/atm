@@ -1,3 +1,7 @@
+window.onload = function () {
+ $("div.account").addClass("zero");
+ };
+
 var checkingBalance = parseInt(document.querySelector("div#checking_balance").innerHTML.replace("$", ""));
 
 //Instantiate var savingsBalance in the style of var checkingBalance
