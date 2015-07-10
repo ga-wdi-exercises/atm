@@ -16,6 +16,9 @@ $(checkDepositButton).click(function() { // Set up Checking Deposit button
   var newBalance = "$" + (balanceChecking + depAmount); // New Balance Value + '$'
   balanceDisplay.html(newBalance); // Replace Balance HTML with New Balance Value
 
+  if(newBalance !== "$0"){
+    $(".account").first().css("background-color","#6C9A74");
+  }
   console.log("depAmount is: " + depAmount)
   console.log("depAmount type is: " + typeof(depAmount))
   console.log("balance is: " + balanceChecking)
@@ -31,13 +34,12 @@ $(checkWithdrawlButton).click(function() { // Set up Checking Withdrawl and Over
   var balanceSavings = parseInt(balanceDisplaySavings.html().replace("$", "")); // Remove '$' from Checking Balance HTML
   var totalBalance = balanceChecking + balanceSavings; // Get Total Balance Value
 
-  if((balanceChecking - withAmount) > 0){ // Checking Withdraw 
+  if((balanceChecking - withAmount) > 0){ // Checking Withdraw
     var newBalance = "$" + (balanceChecking - withAmount); // New Balance Value + '$'
     balanceDisplay.html(newBalance); // Replace Balance HTML with New Balance Value
   }
-  else if((totalBalance - withAmount) > 0){ // Overdraft only if Total Value is enough
+  else if((totalBalance - withAmount) >= 0){ // Overdraft only if Total Value is enough
     var balanceOverdraft = withAmount - balanceChecking; // Find how much can be withdrawn
-    balanceDisplay.html("$0"); // Ensure Balance cannot go below $0
     var newbalanceSavings = "$" + (balanceSavings - balanceOverdraft); // Subtract Overdraft Value from Savings Value
     balanceDisplay.html(newbalanceSavings); // Set Checking Balance to New Balance after Overdraft
     balanceDisplaySavings.html("$0"); // Set Savings Balance to '$' When Overdraft happens
@@ -53,6 +55,9 @@ $(savingsDepositButton).click(function() { // Set up Savings Deposit Button
   var newBalance = "$" + (balanceSavings + depAmount); // New Balance Value + '$'
   balanceDisplaySavings.html(newBalance); // Replace Balance HTML with New Balance Value
 
+  if(newBalance !== "$0"){ // If balance is set, background will be green
+    $(".account:eq(1)").css("background-color","#6C9A74");
+  }
   console.log("Savings Deposit button is working")
 });
 
@@ -67,6 +72,14 @@ $(savingsWithdrawlButton).click(function() { // Set up Savings Withdrawl Button
   }
   console.log("Savings Withdrawl button is working")
 });
+
+if(balanceDisplay.html() === "$0"){ // If balance is '$0', background will be .zero
+  $(".account").first().addClass("zero");
+}
+if(balanceDisplaySavings.html() === "$0"){ // If balance is '$0', background will be .zero
+  $(".account:eq(1)").addClass("zero");
+}
+
 
 // Code to discuss:
 // var checkingBalance = document.querySelector("div#checking_balance");
