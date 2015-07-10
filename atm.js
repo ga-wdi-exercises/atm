@@ -1,21 +1,77 @@
-var checkingBalance = document.querySelector("div#checking_balance");
-checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+//Global Vars
 
-var checkingDeposit = function(amount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+var currentCheckBalance = 0;
+var currentSaveBalance = 0;
 
-}
+// event listeners
 
-function checkingWithdrawal(amount){
+// checking deposit button
 
-}
+$('#checkDepositButton').click('click', function(){
+    var deposit = $('#checkingInput').val();
+    currentCheckBalance = currentCheckBalance + parseInt(deposit);
+    $('#checkBalanceWindow').text('$' + currentCheckBalance);
 
-function savingsDeposit(amount){
+    // zero balance color change
+    if (currentCheckBalance == 0){
+        $('#checkBalanceWindow').css('background-color', 'red');
+    }
+    else if (currentCheckBalance > 0){
+        $('#checkBalanceWindow').css('background-color', '');
+    }
+});
 
-}
+// withdraw deposit button
 
-function savingsWithdrawal(amount){
+$('#checkWithdrawButton').click('click', function(){
+    var withdraw = $('#checkingInput').val();
+    if (currentCheckBalance >= withdraw){
+        currentCheckBalance = currentCheckBalance - parseInt(withdraw);
+        $('#checkBalanceWindow').text('$' + currentCheckBalance);
+    }
+    // zero balance color change
+    if (currentCheckBalance == 0){
+        $('#checkBalanceWindow').css('background-color', 'red');
+    }
+    else if (currentCheckBalance > 0){
+        $('#checkBalanceWindow').css('background-color', '');
+    }
+});
 
-}
+// save deposit button
 
-// an eventListerner for each button, each one a "click"
+$('#saveDepositButton').click('click', function(){
+    var deposit = $('#savingsInput').val();
+    currentSaveBalance = currentSaveBalance + parseInt(deposit);
+    $('#saveBalanceWindow').text('$' + currentSaveBalance);
+
+    // zero balance color change
+    if (currentSaveBalance == 0){
+        $('#saveBalanceWindow').css('background-color', 'red');
+    }
+    else if (currentSaveBalance > 0){
+        $('#saveBalanceWindow').css('background-color', '');
+    }
+});
+
+// withdraw savings button
+
+$('#saveWithdrawButton').click('click', function(){
+    var withdraw = $('#savingsInput').val();
+    if (currentSaveBalance >= withdraw){
+        currentSaveBalance = currentSaveBalance - parseInt(withdraw);
+        $('#saveBalanceWindow').text('$' + currentSaveBalance);
+    }
+
+    // zero balance color change
+    if (currentSaveBalance == 0){
+        $('#saveBalanceWindow').css('background-color', 'red');
+    }
+    else if (currentSaveBalance > 0){
+        $('#saveBalanceWindow').css('background-color', '');
+    }
+
+});
+
+
+
