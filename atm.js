@@ -5,14 +5,14 @@ var sBalance = $(".balance").eq(1);
 sBalance.html("$0");
 
 // Set variables for input fields
-var cInput = $(":text").eq(0);
-var sInput = $(":text").eq(1);
+var cInput = $("#cInput");
+var sInput = $("#sInput");
 
 // Set variables for buttons
-var cDepositButton = $(":button").eq(0);
-var cWithdrawButton = $(":button").eq(1);
-var sDepositButton = $(":button").eq(2);
-var sWithdrawButton = $(":button").eq(3);
+var cDepositButton = $("#cDeposit");
+var cWithdrawButton = $("#cWithdraw");
+var sDepositButton = $("#sDeposit");
+var sWithdrawButton = $("#sWithdraw");
 
 // Deposit money to checking
 cDepositButton.click(function (e){ 
