@@ -1,21 +1,51 @@
-var checkingBalance = document.querySelector("div#checking_balance");
-checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+$( document ).ready(function() {
+    console.log( "ready!" );
+});
 
-var checkingDeposit = function(amount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 
-}
+//add value of inputChecking to #checking
+$("#checkingDeposit").click(function(){
+  var inputChecking = parseInt($("#inputChecking").val());
+  var checking = $("#checking").text();
+  checking = parseInt(checking.replace("$", ""))
+  var newBalance = checking + inputChecking
+  console.log(newBalance);
+  $("#checking").text("$" + newBalance)
+})
 
-function checkingWithdrawal(amount){
+//subtract inputChecking from #checking
+$("#checkingWithdrawal").click(function(){
+  var inputChecking = parseInt($("#inputChecking").val());
+  var checking = $("#checking").text();
+  checking = parseInt(checking.replace("$", ""))
+  var newBalance = checking - inputChecking
+    if (newBalance <0) { //prevents negative balances
+      return;
+    }
+  console.log(newBalance);
+  $("#checking").text("$" + newBalance)
 
-}
+})
 
-function savingsDeposit(amount){
+//add inputSavings to savings
+$("#savingsDeposit").click(function(){
+  var inputSavings = parseInt($("#inputSavings").val());
+  var savings = $("#savings").text();
+  savings = parseInt(savings.replace("$", ""))
+  var newBalance = savings + inputSavings
+  console.log(newBalance);
+  $("#savings").text("$" + newBalance)
+})
 
-}
-
-function savingsWithdrawal(amount){
-
-}
-
-// an eventListerner for each button, each one a "click"
+//subtract inputSavings from savingsBalance
+$("#savingsWithdrawal").click(function(){
+  var inputSavings = parseInt($("#inputSavings").val());
+  var savings = $("#savings").text();
+  savings = parseInt(savings.replace("$", ""))
+  var newBalance = savings - inputSavings
+  if (newBalance <0) { //prevents negative balances
+    return;
+  }
+  console.log(newBalance);
+  $("#savings").text("$" + newBalance)
+})
