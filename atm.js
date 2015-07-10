@@ -54,7 +54,6 @@ $(document).ready(function(){
           alert ("Not enough money to withdraw!")
         }
 
-
       checkingInput.val("");
     }
 
