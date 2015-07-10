@@ -48,6 +48,18 @@ function deposit (deposit){
     return currentCheckBalance || currentSaveBalance;
 }
 
+function withdraw (withdraw){
+    if (withdraw == checkingInput){
+        currentCheckBalance = currentCheckBalance - parseInt(withdraw);
+    }
+
+    else if (withdraw == savingsInput){
+        currentSaveBalance = currentSaveBalance - parseInt(withdraw);
+        console.log('withdraw output');
+    }
+    return currentCheckBalance && currentSaveBalance;
+}
+
 // balance window function
 
 function balanceWindow (accountBalance){
@@ -80,6 +92,9 @@ $('#checkDepositButton').click('click', function(event){
 
 $('#checkWithdrawButton').click('click', function(event){
     console.log(checkWithdrawButton);
+    event.preventDefault();
+    withdraw(checkingInput);
+    balanceWindow(currentCheckBalance);
 });
 
 // save deposit button
@@ -95,6 +110,9 @@ $('#saveDepositButton').click('click', function(event){
 
 $('#saveWithdrawButton').click('click', function(event){
     console.log('saveWithdrawButton');
+    event.preventDefault();
+    withdraw(savingsInput);
+    balanceWindow(currentSaveBalance);
 });
 
 
