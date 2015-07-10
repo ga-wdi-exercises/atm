@@ -1,4 +1,10 @@
 
+var atm = {
+
+  
+
+}
+
 
 // Listeners
 
@@ -41,8 +47,10 @@ function WithdrawC() {
     $( "#checking .balance").addClass( "zero");
   }
 
-  if (sumChecking < 0 && sumSavings > 0) {
-    if (sumSavings < 0) {
+  if (sumChecking < 0 && sumSavings >= 0) {
+    if (sumSavings <= 0) {
+      $( "#savings .balance").addClass( "zero");
+      sumChecking = 0;
       return alert("You don't have enough money for this transaction.")
     }
     // Overdraft amount ( ex. -10 + 50 = 40)
@@ -87,8 +95,10 @@ function WithdrawS() {
     $( "#savings .balance").addClass( "zero");
   }
 
-  if (sumSavings < 0 && sumChecking > 0) {
-    if (sumChecking < 0) {
+  if (sumSavings < 0 && sumChecking >= 0) {
+    if (sumChecking <= 0) {
+      $( "#checking .balance").addClass( "zero");
+      sumSavings = 0;
       return alert("You don't have enough money for this transaction.")
     }
     // Overdraft amount ( ex. -10 + 50 = 40)
