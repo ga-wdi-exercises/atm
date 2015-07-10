@@ -67,6 +67,7 @@ $(document).ready(function() {
 	});
 };	
 
+	// $("#checkingBalance").addClass("zero");
 
 	// 	// var widthrawMoney = parseInt($("#checkingInput").val());
 	// 	// 	console.log("Withdraw worked.");
