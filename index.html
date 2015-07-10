@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <link rel="stylesheet" href="atm.css">
   </head>
+
   <body>
     <div class="header">
       <div><img src="ga.png" /></div>
@@ -13,20 +14,21 @@
 
     <div class="account">
       <h2>Checking</h2>
-      <div class="balance" id="checking_balance">$0</div>
-      <input type="text" placeholder="enter an amount" />
-      <input type="button" value="Deposit" />
-      <input type="button" value="Withdraw" />
+      <div class="balance" id="checkingBalance">$0</div>
+      <input class="checkingInputAmount" type="text" placeholder="enter an amount" />
+      <input class="checkingDeposit" type="button" value="Deposit" />
+      <input class="checkingWithdraw" type="button" value="Withdraw" />
     </div>
 
     <div class="account">
       <h2>Savings</h2>
-      <div class="balance" id="saving_balance">$0</div>
-      <input type="text" placeholder="enter an amount" />
-      <input type="button" value="Deposit" />
-      <input type="button" value="Withdraw" />
+      <div class="balance" id="savingBalance">$0</div>
+      <input class="savingInputAmount" type="text" placeholder="enter an amount" />
+      <input class="savingDeposit" type="button" value="Deposit" />
+      <input class="savingWithdraw" type="button" value="Withdraw" />
     </div>
 
+    <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
     <script src="atm.js"></script>
   </body>
 </html>
