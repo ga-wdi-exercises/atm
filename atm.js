@@ -1,83 +1,97 @@
-var bankAccount = {
-  elements: {
-    checkingDepositButton: document.getElementsByTagName("input")[1],
-    checkingWithdrawButton: document.getElementsByTagName("input")[2],
-    savingDepositButton: document.getElementsByTagName("input")[4],
-    savingWithdrawButton: document.getElementsByTagName("input")[5]
-  },
-  listen: function(){
-    this.elements.checkingDepositButton.addEventListener("click", function(){
-      console.log("work")
-      
-    }.bind(this))
+$(document).ready(function(){
+
+  checkingAmount = $("#checkingBalance");
+  savingAmount = $("#savingBalance");
+  checkingDeposit = $(".checkingDeposit");
+  checkingWithdraw = $(".checkingWithdraw");
+  savingsDeposit = $(".savingDeposit");
+  savingWithdraw = $(".savingWithdraw");
 
 
-    this.elements.checkingWithdrawButton.addEventListener("click", function(){
-      console.log("work")
-    }.bind(this))
-
-
-    this.elements.savingDepositButton.addEventListener("click", function(){
-      console.log("work")
-    }.bind(this))
-
-    this.elements.savingWithdrawButton.addEventListener("click", function(){
-      console.log("work")
-    }.bind(this))
-  }
-}
-bankAccount.listen();
+  // deposit checking
+  checkingDeposit.on("click", function (){
+    console.log("work")
+  })
 
 
 
 
+  // withdraw checking
+  checkingWithdraw.on("click", function (){
+    console.log("work")
+
+  })
+
+
+
+
+  // deposit saving
+  savingDeposit.on("click", function (){
+    console.log("work")
+  })
+
+
+  // withdraw saving
+  savingWithdraw.on("click", function(){
+    console.log("work")
+  })
+
+
+
+
+// this is for closing document.ready
+})
 
 
 
 
 
 
-// var checkingBalance = document.querySelector("div#checking_balance");
-// checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+
+
+// $(document).ready(function(){
 //
-// var savingBalance = document.querySelector("div#saving_balance");
-// savingBalance = parseInt( savingBalance.innerHTML.replace("$", "") );
-//
-//
-// var depositChecking = document.getElementsByTagName("input")[1].addEventListener("click", function(){
-//   console.log("working")
-//
-// })
-//
-// var WithdrawChecking = document.getElementsByTagName("input")[2].addEventListener("click", function(){
-//   console.log("working")
-// })
-//
-// var depositSaving = document.getElementsByTagName("input")[4].addEventListener("click", function(){
-//   console.log("working")
-// })
-//
-// var withdrawSaving = document.getElementsByTagName("input")[5].addEventListener("click", function(){
-//   console.log("working")
-// })
+//   // deposit checking money using deposit butoon
+//   $(".checkingDepositButton").on("click", function(){
+//     console.log("I clicked the deposit button")
+//     var deposit = parseFloat($("balance.checking").val());
+//     var balance = $("#checking_balance").text()
+//     balance = parseFloat(balance.replace("$",""))
+//     var newBalance = deposit + balance
+//     $("#checking_balance").text("$" + newBalance)
+//   })
 //
 //
 //
-// var checkingDeposit = function(amount){
-//   checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 //
-// }
+// //   // withdraw checking money using withdraw button
+//   $(".checkingWithdrawButton").on("click", function(){
+//     console.log("I clicked the withdraw button")
+//     var withdraw = parseInt((".checkingInput").val())
+//     var balance = $("#checking_balance").text()
+//     balance = parseInt(balance.replace("$",""))
+//     var newBalance = withdraw + balance
+//     $("#checking_balance").text("$" + newBalance)
+//   })
 //
-// function checkingWithdrawal(amount){
+//   // deposit saving money using deposit button
+//   $(".savingDepositButton").on("click", function(){
+//     console.log("I clicked the deposit button")
+//     var deposit = parseInt((".savingInput").val())
+//     var balance = $("#saving_balance").text()
+//     balance = parseInt(balance.replace("$",""))
+//     var newBalance = depsoit + balance
+//     $("#saving_balance").text("$" + newBalance)
+//   })
 //
-// }
+//   // withdraw saving money using withdraw button
+//   $(".savingWithdrawButton").on("click", function(){
+//     console.log("I clicked the withdraw button")
+//     var withdraw = parseInt((".savingInput").val())
+//     var balance = $("#saving_balance").text()
+//     balance = parseInt(balance.replace("$",""))
+//     var newBalance = withdraw + balance
+//     $("#saving_balance").text("$" + newBalance)
+//   })
 //
-// function savingsDeposit(amount){
-//
-// }
-//
-// function savingsWithdrawal(amount){
-//
-// }
-//
-// // an eventListerner for each button, each one a "click"
+// // this is for closing document ready()
