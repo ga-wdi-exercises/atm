@@ -5,10 +5,14 @@
 //  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 
 //}
+checkDepositTotal = 0;
 $(".checkingDeposit").on("click", function checkingDeposit(amount){
   console.log("checking Deposit")
-  var inputAmount = $("input.checkingAmount").val();
-  $("#checking_balance.balance").html("$" + inputAmount)
+
+  var inputAmount = parseInt($("input.checkingAmount").val(),10);
+    checkDepositTotal = inputAmount + checkDepositTotal;
+  $("#checking_balance.balance").html("$" + checkDepositTotal)
+
 })
 
 $(".checkingWithdrawal").on("click", function checkingWithdrawal(amount){
