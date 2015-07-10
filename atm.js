@@ -1,21 +1,60 @@
-var checkingBalance = document.querySelector("div#checking_balance");
-checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+checkDepositTotal = 0;
+$(".checkingDeposit").on("click", function checkingDeposit(amount){
+  console.log("checking Deposit")
+  var inputAmount = parseInt($("input.checkingAmount").val(),10);
+  checkDepositTotal += inputAmount;
+  $("#checking_balance.balance").html("$" + checkDepositTotal);
+  $(".checkingAccount").removeClass("zero");
+});
 
-var checkingDeposit = function(amount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 
+$(".checkingWithdrawal").on("click", function checkingWithdrawal(amount){
+console.log("checking withdrawal")
+if(checkDepositTotal - parseInt($("input.checkingAmount").val(),10) >= 0 ) {
+  var inputAmount = parseInt($("input.checkingAmount").val(),10);
+  checkDepositTotal -= inputAmount;
+  $("#checking_balance.balance").html("$" + checkDepositTotal);
 }
-
-function checkingWithdrawal(amount){
-
+else if (checkDepositTotal - parseInt($("input.checkingAmount").val(),10) < 0 ) {
+  if(savingsDepositTotal - parseInt($("input.checkingAmount").val(),10) >= 0 ) {
+  var inputAmount = parseInt($("input.checkingAmount").val(),10);
+  savingsDepositTotal -= inputAmount;
+  $("#savings_balance.balance").html("$" + savingsDepositTotal)
 }
+else {
+  $(".checkingAccount").addClass("zero");
+  $(".savingsAccount").addClass("zero");
+  alert("Not enough funds");
+    }
+  }
+});
 
-function savingsDeposit(amount){
+savingsDepositTotal = 0;
+$(".savingsDeposit").on("click", function savingsDeposit(amount){
+console.log("savings Deposit")
+var inputAmount = parseInt($("input.savingsAmount").val(),10);
+savingsDepositTotal += inputAmount;
+$("#savings_balance.balance").html("$" + savingsDepositTotal);
+$(".savingsAccount").removeClass("zero");
+});
 
+$(".savingsWithdrawal").on("click", function savingsWithdrawal(amount){
+console.log("savings withdrawal")
+if(savingsDepositTotal - parseInt($("input.savingsAmount").val(),10) >= 0 ) {
+  var inputAmount = parseInt($("input.savingsAmount").val(),10);
+  savingsDepositTotal -= inputAmount;
+  $("#savings_balance.balance").html("$" + savingsDepositTotal)
 }
-
-function savingsWithdrawal(amount){
-
+else if (savingsDepositTotal - parseInt($("input.savingsAmount").val(),10) < 0 ) {
+  if(checkDepositTotal - parseInt($("input.savingsAmount").val(),10) >= 0 ) {
+  var inputAmount = parseInt($("input.savingsAmount").val(),10);
+  checkDepositTotal -= inputAmount;
+  $("#checking_balance.balance").html("$" + checkDepositTotal)
 }
-
-// an eventListerner for each button, each one a "click"
+else {
+  $(".checkingAccount").addClass("zero");
+  $(".savingsAccount").addClass("zero");
+  alert("Not enough funds");
+    }
+  }
+});
