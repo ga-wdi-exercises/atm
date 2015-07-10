@@ -9,7 +9,9 @@ var atm = {
   },
   listen: function(){
     document.querySelector(".account").addEventListener("click", function() {
-      console.log($(event.target).val());//Deposit of withdraw
+      var actionType = $(event.target).val();//Deposit of withdraw
+      var accountType = $(event.target).prevAll("h2").html();//Checking or savings
+      var amount = parseInt($(event.target).prevAll("[type=text]").val());//amount
       if($(event.target).val() === "Deposit"){
         this.deposit()
       }
@@ -18,14 +20,14 @@ var atm = {
       }
     }.bind(this))
   },
-  deposit: function(){
+  deposit: function(transaction,account,amount){
     event.preventDefault();
-    accountBalance += parseInt($("input:first").val());
+    accounts.this += parseInt($("input:first").val());
     $("input:first").val(""); //empty the form after submission
     //Change the html element that indicates account balance
     $(".balance").eq(0).html("$" + accountBalance);
   },
-  withdraw: function(){
+  withdraw: function(transaction,account,amount){
     event.preventDefault();
     var withdrawAmount = $("input:first").val();
     if(accountBalance >= withdrawAmount){
