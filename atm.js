@@ -1,21 +1,19 @@
-var checkingBalance = document.querySelector("div#checking_balance");
-checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+$(document).ready(function(){
 
-var checkingDeposit = function(amount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+var checkingBalance = 0;
+var savingsBalance = 0;
 
-}
+$("#c-depbtn").on("click", function(){
+  var userInput = $("#c-text").val();
+  checkingBalance += userInput;
+  $("#c-balance").html(checkingBalance);
+});
 
-function checkingWithdrawal(amount){
+$("#s-depbtn").on("click", function(){
+  var userInput = $("#s-text").val();
+  savingsBalance += userInput;
+  $("#s-balance").html(savingsBalance);
+});
 
-}
 
-function savingsDeposit(amount){
-
-}
-
-function savingsWithdrawal(amount){
-
-}
-
-// an eventListerner for each button, each one a "click"
+});
