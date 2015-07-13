@@ -1,60 +1,19 @@
-//add event listener to listen for click on deposit button
-//when deposit button is clicked, change div with balance
+$(document).ready(function(){
 
- $(".Cdepbutton").on("click", function(){
-  var userEntry = $(".Ctext").val();
-  console.log(userEntry);
-  $('.balance').eq(0).val(userEntry);
+var checkingBalance = 0;
+var savingsBalance = 0;
+
+$("#c-depbtn").on("click", function(){
+  var userInput = $("#c-text").val();
+  checkingBalance += userInput;
+  $("#c-balance").html(checkingBalance);
 });
-  // var checkingDeposit = function(amount){
-  // checkingBalance = parseInt(balance.innerHTML.replace("$", "") );
+
+$("#s-depbtn").on("click", function(){
+  var userInput = $("#s-text").val();
+  savingsBalance += userInput;
+  $("#s-balance").html(savingsBalance);
+});
 
 
-  //when button is pressed perform a function
-  // $("input").val(); //get the user input
-                //put user input into a class
-
-
-
-
-
-//http://stackoverflow.com/questions/8637752/jquery-nth-child-append
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// var checkingBalance = document.querySelector("div#checking_balance");
-// checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-//
-// var checkingDeposit = function(amount){
-//   checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-//
-// }
-//
-// function checkingWithdrawal(amount){
-//
-// }
-//
-// function savingsDeposit(amount){
-//
-// }
-//
-// function savingsWithdrawal(amount){
-//
-// }
-//
-// // an eventListerner for each button, each one a "click"
-// $("input").val();
+});
