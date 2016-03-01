@@ -1,44 +1,69 @@
-$(document).ready() {
+
 //select / create elements to work with
-
-
-//make a constructor function for both checking and svings accounts
-function Accnt () {
-  this.totalBal = 0;
-  this.checkingDeposit = function(amount) {
-    this.totalBal += amount;
-  };
-  this.checkingWithdrawal = function(amount) {
-    this.totalBal -= amount;
-  };
-}
-
-var checkingBalance = document.querySelector(".balance");
-checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-
-var checkingDeposit = function(amount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-
-}
-
-function checkingWithdrawal(amount){
-
-}
-
-function savingsDeposit(amount){
-
-}
-
-function savingsWithdrawal(amount){
-
-}
-
-// an eventListerner for each button, each one a "click"
-});
+console.log('ready');
+var checkingBox = $('#check-input');
+var checkingBoxVal = parseInt(checkingBox.val());
+var savingsBox = $('#savings-input');
+var savingsBoxVal = savingsBox.val();
+  //checking buttons
+var checkDBtn = $('#checkbtn-d');
+var checkWBtn = $('#checkbtn-w');
+  //savings buttons
+var savingsDBtn = $('#savingsbtn-d');
+var savingsWBtn = $('#savingsbtn-w');
 
 // As a user, I want to deposit money into one of the bank accounts
   //make bank accounts
-// As a user, I want to withdraw money from one of the bank accounts
+function Accnt() {
+    this.totalBal = 0;
+    // As a user, I want to withdraw money from one of the bank accounts
+    this.deposit = function(dep) {
+      this.totalBal += dep;
+    };
+    this.withdrawal = function(amount) {
+      this.totalBal -= amount;
+    };
+  }
+var checkingAccnt = new Accnt();
+var savingsAccnt = new Accnt();
+
+//event handlers
+  //onclick, deposit
+checkDBtn.click(function(e) {
+  checkingAccnt.deposit(parseInt(checkingBox.val()));
+  checkingBox.val('');
+  console.log(checkingAccnt.totalBal);
+});
+
+
+//make a constructor function for both checking and svings accounts
+
+
+// var checkingBalance = document.querySelector(".balance");
+// checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+//
+// var checkingDeposit = function(amount){
+//   checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+//
+// }
+//
+// function checkingWithdrawal(amount){
+//
+// }
+//
+// function savingsDeposit(amount){
+//
+// }
+//
+// function savingsWithdrawal(amount){
+//
+// }
+
+// an eventListerner for each button, each one a "click"
+
+
+
+
 // Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
 // As a user, I want overdraft protection
 // What happens when the user wants to withdraw more money from the checking account than is in the account?
