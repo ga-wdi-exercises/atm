@@ -1,10 +1,13 @@
-var checkingBalance = document.querySelector("div#checking_balance");
-checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 
-var checkingDeposit = function(amount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+var checkingDeposit = function(){
+  $('input[value="Deposit"]').on("click", function() {
+    console.log("click");
+    $("#checking_balance").text("$" + parseInt($("#amountEntry").val()));
+  });
+};
 
-}
+
+
 
 function checkingWithdrawal(amount){
 
@@ -19,3 +22,5 @@ function savingsWithdrawal(amount){
 }
 
 // an eventListerner for each button, each one a "click"
+
+checkingDeposit();
