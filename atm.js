@@ -5,6 +5,7 @@ var checkingBox = $('#check-input');
 var checkingBoxVal = parseInt(checkingBox.val());
 var savingsBox = $('#savings-input');
 var savingsBoxVal = savingsBox.val();
+var checkBalanceDisplay = $('#checking-display');
   //checking buttons
 var checkDBtn = $('#checkbtn-d');
 var checkWBtn = $('#checkbtn-w');
@@ -31,9 +32,10 @@ var savingsAccnt = new Accnt();
   //checking account
   //on deposit click, deposit
 checkDBtn.click(function() {
-  checkingAccnt.deposit(parseInt(checkingBox.val()));
-  checkingBox.val('');
-  console.log(checkingAccnt.totalBal);
+    checkingAccnt.deposit(parseInt(checkingBox.val()));
+    checkingBox.val('');
+
+    console.log(checkingAccnt.totalBal);
 });
   //on withdraw click, withdraw
 checkWBtn.click(function() {
