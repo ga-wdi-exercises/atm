@@ -1,19 +1,10 @@
 
 //lopped off $ in html for now
-
 var checkingBalance = $("#checking_balance");
+var savingsBalance = $("#savings_balance");
 //checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-
-//sends amount to checkingBalance
-var checkingDeposit = function(amount){
-  checkingBalance.push(amount);
-};
 var checkTotal = 0;
-
-//loop for checking balance
-function checkingSum() {
-
-}
+var saveTotal = 0;
 
 //returns sum of checkingBalance array!
 var getCheckingBalance = function() {
@@ -24,21 +15,66 @@ var getCheckingBalance = function() {
   return checkTotal;
 };
 
+//sends amount to checkingBalance
+var checkingDeposit = function(amount){
+  checkingBalance.push(amount);
+};
+
 function checkingWithdrawal(amount){
-  checkingBalance.push(-amount);
-  checkingSum();
-  return (checkTotal);
+  getCheckingBalance();
+  if (amount > checkTotal) {
+    return "can't let you do that";
+  }else{
+    checkingBalance.push(-amount);
+    checkTotal = checkTotal - amount;
+    return checkTotal;
+  }
 }
 
+//run the most current savings balance
+var getSavingsBalance = function() {
+  saveTotal = 0;
+  for (var i=0; i < savingsBalance.length; i++){
+    saveTotal = saveTotal + saveBalance[i];
+  }
+  return saveTotal;
+};
+//sends amount to savingsBalance array
 function savingsDeposit(amount){
-
+  savingsBalance.push(amount);
 }
 
 function savingsWithdrawal(amount){
-
+  getSavingsBalance();
+  if (amount > saveTotal) {
+    return "can't let you do that";
+  }else{
+    savingsBalance.push(-amount);
+    saveTotal = saveTotal - amount;
+    return saveTotal;
+  }
 }
 
 // an eventListerner for each button, each one a "click"
+
+//not sure if worth attempting to DRY up with only 4 events listeners
+//checking Deposit
+$(':button').eq(0).on("click", function() {
+  console.log("I was clicked - checkings deposit");
+});
+//checking withdraw
+$(':button').eq(1).on("click", function() {
+  console.log("I was clicked - checkings withdraw");
+});
+//savings deposit
+$(':button').eq(2).on("click", function() {
+  console.log("I was clicked - savings deposit");
+});
+//savings withdraw
+$(':button').eq(3).on("click", function() {
+  console.log("I was clicked - savings withdraw");
+});
+
 /*
 As a user, I want to deposit money into one of the bank accounts
 As a user, I want to withdraw money from one of the bank accounts
