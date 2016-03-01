@@ -1,40 +1,45 @@
 function MyATM(){
   this.amounts = [];
   this.bank = {
-    input: $("#newEntry"),
     total: $(".balance"),
     form: $("#myChecking"),
+    input: $("#newEntry"),
   };
 }
 
 MyATM.prototype.calculateTotal = function(){
-  var total = this.bank.total + this.bank.input;
+  var total;
+  for(var i = 0; i <= this.amounts.length; i++){
+    total += this.amounts[i];
+  }
   return total;
 };
 
-
-
 var checking = new MyATM();
 
-var checkingBalance = $("#checkingBalance");
-// checkingBalance = parseInt($(".checkingBalance").append("$", "") );
+var checkingBalance = $("#checkingBalance").addClass("zero");
+
+// checkingBalance = parseInt($("#checkingBalance").append("$", "") );
 
 // parseInt( checkingBalance.innerHTML.replace("$", "") );
 
 checking.bank.form.on("submit",function(event){
   event.preventDefault();
   var userInput = parseInt(checking.bank.input.val());
-  console.log(userInput);
+  // this pushes the input into an array
   checking.amounts.push(userInput);
   // this clears the input
   checking.bank.input.val("");
+  //
   var newTotal = checking.calculateTotal();
-  checkingBalance.val(newTotal.toFixed(2));
+  checkingBalance = parseInt($("#checkingBalance").html(newTotal));
+  console.log(userInput);
+  console.log("total " + newTotal);
 }
 );
 
 var checkingDeposit = function(amount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+
 };
 
 
@@ -52,8 +57,6 @@ function savingsWithdrawal(amount){
 
 // What elements should we create variables for?
 
-
-
 // What events should we listen for?
 //
 // What elements need to be created?
@@ -63,6 +66,7 @@ function savingsWithdrawal(amount){
 // What do we need to keep track of?
 //
 // What can be calculated from the things we need to keep track of?
+
 
 // when the user submits either form:
 //   bonus: check to make sure it's a number

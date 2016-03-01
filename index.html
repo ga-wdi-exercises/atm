@@ -13,7 +13,7 @@
 
   <div class="account">
     <h2>Checking</h2>
-    <div class="balance" id="checkingBalance">$0</div>
+    <div class="balance" id="checkingBalance" value="0">$0</div>
     <form id="myChecking">
       <input type="text" id="newEntry" placeholder="enter an amount" />
       <input type="button" value="Deposit" />
@@ -26,8 +26,8 @@
     <div class="balance" id="savingsBalance">$0</div>
     <form id="mySavings">
       <input type="text" placeholder="enter an amount" />
-      <input type="button" value="Deposit" />
-      <input type="button" value="Withdraw" />
+      <input type="button" value="Deposit" id="deposit" />
+      <input type="button" value="Withdraw" id="withdraw" />
     </form>
   </div>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
