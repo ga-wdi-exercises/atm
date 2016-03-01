@@ -6,58 +6,37 @@ var savingsBalance = $("#savings_balance");
 var checkTotal = 0;
 var saveTotal = 0;
 
-//returns sum of checkingBalance array!
-var getCheckingBalance = function() {
-  checkTotal = 0;
-  for (var i=0; i < checkingBalance.length; i++){
-    checkTotal = checkTotal + checkingBalance[i];
-  }
-  return checkTotal;
-};
-
 //sends amount to checkingBalance
 var checkingDeposit = function(amount){
-  checkingBalance.push(amount);
+  checkTotal = checkTotal + amount;
 };
 
+//removes number from checking total unless larger than
 function checkingWithdrawal(amount){
-  getCheckingBalance();
   if (amount > checkTotal) {
     return "can't let you do that";
   }else{
-    checkingBalance.push(-amount);
     checkTotal = checkTotal - amount;
     return checkTotal;
   }
 }
 
-//run the most current savings balance
-var getSavingsBalance = function() {
-  saveTotal = 0;
-  for (var i=0; i < savingsBalance.length; i++){
-    saveTotal = saveTotal + saveBalance[i];
-  }
-  return saveTotal;
-};
-//sends amount to savingsBalance array
+//increase save total
 function savingsDeposit(amount){
-  savingsBalance.push(amount);
+  saveTotal = saveTotal + amount;
 }
 
 function savingsWithdrawal(amount){
-  getSavingsBalance();
   if (amount > saveTotal) {
     return "can't let you do that";
   }else{
-    savingsBalance.push(-amount);
     saveTotal = saveTotal - amount;
     return saveTotal;
   }
 }
 
+//not sure if worth attempting to DRY up with only 4 events listeners - perhaps in an object??
 // an eventListerner for each button, each one a "click"
-
-//not sure if worth attempting to DRY up with only 4 events listeners
 //checking Deposit
 $(':button').eq(0).on("click", function() {
   console.log("I was clicked - checkings deposit");
@@ -75,7 +54,7 @@ $(':button').eq(3).on("click", function() {
   console.log("I was clicked - savings withdraw");
 });
 
-/*
+/* Pseudocode for halp:
 As a user, I want to deposit money into one of the bank accounts
 As a user, I want to withdraw money from one of the bank accounts
 Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
