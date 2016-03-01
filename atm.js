@@ -12,19 +12,22 @@ var checkTotal = 0;
 
 //loop for checking balance
 function checkingSum() {
-  for (var i=0; i < checkingBalance.length; i++){
-    checkTotal = checkTotal + checkingBalance[i];
-  }
+
 }
 
 //returns sum of checkingBalance array!
 var getCheckingBalance = function() {
-  checkingSum();
+  checkTotal = 0;
+  for (var i=0; i < checkingBalance.length; i++){
+    checkTotal = checkTotal + checkingBalance[i];
+  }
   return checkTotal;
 };
 
 function checkingWithdrawal(amount){
-
+  checkingBalance.push(-amount);
+  checkingSum();
+  return (checkTotal);
 }
 
 function savingsDeposit(amount){
