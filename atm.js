@@ -7,7 +7,7 @@ var checkingDeposit = function(amount){
 }
 
 function checkingWithdrawal(amount){
-
+ return
 }
 
 function savingsDeposit(amount){
