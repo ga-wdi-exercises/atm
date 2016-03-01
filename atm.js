@@ -1,7 +1,7 @@
 
 //lopped off $ in html for now
-var checkingBalance = $("#checking_balance");
-var savingsBalance = $("#savings_balance");
+// var checkingBalance = $("#checking_balance");
+// var savingsBalance = $("#savings_balance");
 //checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 var checkTotal = 0;
 var saveTotal = 0;
@@ -21,11 +21,14 @@ function checkingWithdrawal(amount){
       checkTotal = 0;
       //take it out of savings!
       saveTotal = saveTotal - amount;
+      $('.balance').eq(0).html(checkTotal);
+      $('.balance').eq(1).html(saveTotal);
       return saveTotal;
     }else{
     return "can't let you do that";}
   }else{
     checkTotal = checkTotal - amount;
+    $('.balance').eq(0).html(checkTotal);
     return checkTotal;
   }
 }
@@ -33,6 +36,7 @@ function checkingWithdrawal(amount){
 //increase save total
 function savingsDeposit(amount){
   saveTotal = saveTotal + amount;
+  // $('.balance').eq(1).html(saveTotal);
 }
 
 function savingsWithdrawal(amount){
@@ -41,11 +45,14 @@ function savingsWithdrawal(amount){
       amount = amount - saveTotal;
       saveTotal = 0;
       checkTotal = checkTotal - amount;
+      $('.balance').eq(1).html(saveTotal);
+      $('.balance').eq(0).html(checkTotal);
       return checkTotal;
     }else{
     return "can't let you do that";}
   }else{
     saveTotal = saveTotal - amount;
+    $('.balance').eq(1).html(saveTotal);
     return saveTotal;
   }
 }
@@ -54,19 +61,30 @@ function savingsWithdrawal(amount){
 // an eventListerner for each button, each one a "click"
 //checking Deposit
 $(':button').eq(0).on("click", function() {
-  console.log("I was clicked - checkings deposit");
+  var newNum = $("input").eq(0).val();
+  checkingDeposit(parseInt(newNum));
+  $('.balance').eq(0).html(checkTotal);
 });
 //checking withdraw
 $(':button').eq(1).on("click", function() {
   console.log("I was clicked - checkings withdraw");
+  var newNum = $("input").eq(0).val();
+  checkingWithdrawal(parseInt(newNum));
+  $('.balance').eq(0).html(checkTotal);
+  $('.balance').eq(1).html(saveTotal);
 });
 //savings deposit
 $(':button').eq(2).on("click", function() {
-  console.log("I was clicked - savings deposit");
+  var newNum = $("input").eq(3).val();
+  savingsDeposit(parseInt(newNum));
+  $('.balance').eq(1).html(saveTotal);
 });
 //savings withdraw
 $(':button').eq(3).on("click", function() {
-  console.log("I was clicked - savings withdraw");
+  var newNum = $("input").eq(3).val();
+  savingsWithdrawal(parseInt(newNum));
+  $('.balance').eq(0).html(checkTotal);
+  $('.balance').eq(1).html(saveTotal);
 });
 
 /* Pseudocode for halp:
