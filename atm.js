@@ -1,5 +1,19 @@
 $(document).ready() {
-var checkingBalance = document.querySelector("div#checking_balance");
+//select / create elements to work with
+
+
+//make a constructor function for both checking and svings accounts
+function Accnt () {
+  this.totalBal = 0;
+  this.checkingDeposit = function(amount) {
+    this.totalBal += amount;
+  };
+  this.checkingWithdrawal = function(amount) {
+    this.totalBal -= amount;
+  };
+}
+
+var checkingBalance = document.querySelector(".balance");
 checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 
 var checkingDeposit = function(amount){
