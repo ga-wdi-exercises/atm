@@ -11,13 +11,17 @@ var checkingDeposit = function(amount){
   checkTotal = checkTotal + amount;
 };
 
-//removes number from checking total unless larger than
+//removes number from checking total
 function checkingWithdrawal(amount){
+  //first check if withdraw is more than in acct
   if (amount > checkTotal) {
-    if (amount < (checkTotal + saveTotal)){
+    //if it is, then check the sum of both accounts
+    if (amount <= (checkTotal + saveTotal)){
       amount = amount - checkTotal;
       checkTotal = 0;
+      //take it out of savings!
       saveTotal = saveTotal - amount;
+      return saveTotal;
     }else{
     return "can't let you do that";}
   }else{
@@ -33,7 +37,13 @@ function savingsDeposit(amount){
 
 function savingsWithdrawal(amount){
   if (amount > saveTotal) {
-    return "can't let you do that";
+    if (amount <= (checkTotal + saveTotal)){
+      amount = amount - saveTotal;
+      saveTotal = 0;
+      checkTotal = checkTotal - amount;
+      return checkTotal;
+    }else{
+    return "can't let you do that";}
   }else{
     saveTotal = saveTotal - amount;
     return saveTotal;
