@@ -1,10 +1,16 @@
-var checkingBalance = document.querySelector("div#checking_balance");
+var bankAccount= {
+  checking: [],
+  savings: []
+};
+
+
+var checkingBalance =  document.querySelector("div#checking_balance");
 checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 
 var checkingDeposit = function(amount){
   checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 
-}
+};
 
 function checkingWithdrawal(amount){
 
