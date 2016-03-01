@@ -14,7 +14,12 @@ var checkingDeposit = function(amount){
 //removes number from checking total unless larger than
 function checkingWithdrawal(amount){
   if (amount > checkTotal) {
-    return "can't let you do that";
+    if (amount < (checkTotal + saveTotal)){
+      amount = amount - checkTotal;
+      checkTotal = 0;
+      saveTotal = saveTotal - amount;
+    }else{
+    return "can't let you do that";}
   }else{
     checkTotal = checkTotal - amount;
     return checkTotal;
