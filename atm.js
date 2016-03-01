@@ -17,24 +17,31 @@ var savingsWBtn = $('#savingsbtn-w');
 function Accnt() {
     this.totalBal = 0;
     // As a user, I want to withdraw money from one of the bank accounts
-    this.deposit = function(dep) {
-      this.totalBal += dep;
+    this.deposit = function(dep_amnt) {
+      this.totalBal += dep_amnt;
     };
-    this.withdrawal = function(amount) {
-      this.totalBal -= amount;
+    this.withdrawal = function(withdraw_amnt) {
+      this.totalBal = this.totalBal - withdraw_amnt;
     };
   }
 var checkingAccnt = new Accnt();
 var savingsAccnt = new Accnt();
 
 //event handlers
-  //onclick, deposit
-checkDBtn.click(function(e) {
+  //checking account
+  //on deposit click, deposit
+checkDBtn.click(function() {
   checkingAccnt.deposit(parseInt(checkingBox.val()));
   checkingBox.val('');
   console.log(checkingAccnt.totalBal);
 });
-
+  //on withdraw click, withdraw
+checkWBtn.click(function() {
+  checkingAccnt.withdrawal(parseInt(checkingBox.val()));
+  checkingBox.val('');
+  console.log(checkingAccnt.totalBal);
+})
+  //savings account
 
 //make a constructor function for both checking and svings accounts
 
