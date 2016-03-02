@@ -1,9 +1,7 @@
 
 function MyATM(){
-  this.amounts = [];
+  this.total = 0;
   this.bank = {
-    total: 0,
-    form: $("#myChecking"),
     input: $("#newEntry"),
     deposit: $("#deposit"),
     withdraw: $("#withdraw")
@@ -24,41 +22,51 @@ var checkingBalance = $("#checkingBalance").addClass("zero");
 
 $("input.deposit").on("click",function(event){
   event.preventDefault();
+  // this makes sure the input is an integer
   var userInput = parseInt(checking.bank.input.val(), 10);
-  // this adds the amount to the total
-  checking.bank.total = checking.bank.total + userInput;
-  console.log("I'm the userInput: " + userInput);
+  checkingDeposit(userInput);
   // this clears the input
   checking.bank.input.val("");
-  //
-  checkingBalance = ($("#checkingBalance").html("$" + checking.bank.total));
 }
+);
+
+$("input.withdraw").on("click",function(event){
+  event.preventDefault();
+    var userInput = parseInt(checking.bank.input.val(), 10);
+    checkingWithdraw(userInput);
+    // this clears the input
+    checking.bank.input.val("");
+  }
 );
 
 // this adds the user input to the running total
 var checkingDeposit = function(amount){
-  var newTotal = checking.bank.total + userInput;
-  console.log("New total: " + checking.bank.total);
-  console.log(newTotal);
+  checking.total = checking.total + amount;
+  console.log("New total: " + checking.total);
+  // console.log(newTotal);
   $("#checkingBalance").removeClass("zero");
+  checkingBalance = ($("#checkingBalance").html("$" + checking.total));
+  return checking.total;
 };
 
-
-function checkingWithdrawal(amount){
-  if (this.bank.total == 0 || checking.bank.total < amount){
-    console.log("Doing nothing, you're broke");
-  }else if(checking.bank.total > amount){
-    checking.bank.total = this.bank.total - Math.abs(amount);
+// this
+function checkingWithdraw(amount){
+  if (checking.total === 0 || checking.total < amount){
+    console.log("Nice try, but you're effing broke");
+  }else if(checking.total >= amount){
+    checking.total = checking.total - Math.abs(amount);
+    console.log("New total: " + checking.total);
+    checkingBalance = ($("#checkingBalance").html("$" + checking.total));
   }
-  }
+}
 
 function savingsDeposit(amount){
   savingsBalance = savingsBalance + amount;
-  this.bank.total = this.bank.total + amount;
+  this.total = this.total + amount;
 }
 
 function savingsWithdrawal(amount){
-  this.bank.total = this.bank.total - amount;
+  this.total = this.total - amount;
 }
 
 /////////
@@ -75,14 +83,7 @@ function savingsWithdrawal(amount){
 
 // What can be calculated from the things we need to keep track of?
 
-
-// when the user submits either form:
-//   bonus: check to make sure it's a number
-//   get the input
-//     make sure the decimals work // parseFloat
-//   add the input to the total
-  //   update the total html
-//   clear the input
+//////////
 
 // an eventListerner for each button, each one a "click"
 
