@@ -8,7 +8,6 @@ function intializeBank(c, s) {
   savingsBalance = s;
   $('.checking').html('$' + checkingBalance);
   $('.savings').html('$' + savingsBalance);
-
 }
 
 var getCheckingInput = function() {
@@ -17,7 +16,6 @@ var getCheckingInput = function() {
   return input;
 };
 
-// note to self: this method is very similar to above. look into passing values to combine
 function getSavingsInput() {
   var input = $('#savingsInput').val();
   $('#savingsInput').val('');
@@ -90,7 +88,7 @@ function overdrawWarning() {
     $('#sAccount').removeClass('zero');
   }
 
-  if(checkingBalance <= 0)   {
+  if(checkingBalance <= 0) {
       $('#cAccount').addClass('zero');
     }
     else {
