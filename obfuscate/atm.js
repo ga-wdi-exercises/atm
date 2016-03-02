@@ -4,9 +4,15 @@ var checkingUserInput = $("#checking_amount")
 var checkingTotal = 0
 var checkingDisplay = $("#checking_balance")
 
+var savingDepositButton = $("#savings_deposit")
+var savingWithdrawlButton = $("#savings_withdraw")
+var savingUserInput = $("#savings_amount")
+var savingTotal = 0
+var savingDisplay = $("#savings_balance")
+
 checkingDepositButton.on("click", function (){
 checkingTotal += parseFloat(checkingUserInput.val());
-display.html(checkingTotal)
+checkingDisplay.html(checkingTotal)
 console.log(checkingUserInput.val());
 })
 
@@ -17,6 +23,18 @@ checkingWithdrawlButton.on("click", function(){
 })
 
 // if checkingUserInput(total = <0)
+
+savingDepositButton.on("click", function (){
+savingTotal += parseFloat(savingUserInput.val());
+savingDisplay.html(savingTotal)
+console.log(savingUserInput.val());
+})
+
+savingWithdrawlButton.on("click", function(){
+  savingTotal -= parseFloat(savingUserInput.val());
+  savingDisplay.html(savingTotal)
+  console.log(savingUserInput.val());
+
 
 //
 // CashRegister.prototype.calculateTotal = function(){
