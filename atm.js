@@ -49,7 +49,7 @@ $("input.depositS").on("click",function(event){
   var userInput = parseInt(pnc.savings.input.val(), 10);
   savingsDeposit(userInput);
   // this clears the input
-  pnc.checking.input.val("");
+  pnc.savings.input.val("");
 }
 );
 
@@ -58,7 +58,7 @@ $("input.withdrawS").on("click",function(event){
   event.preventDefault();
     var userInput = parseInt(pnc.savings.input.val(), 10);
     // this clears the input
-    pnc.checking.input.val("");
+    pnc.savings.input.val("");
     savingsWithdraw(userInput);
   }
 );
