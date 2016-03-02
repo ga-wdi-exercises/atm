@@ -1,7 +1,3 @@
-//lopped off $ in html for now
-// var checkingBalance = $("#checking_balance");
-// var savingsBalance = $("#savings_balance");
-//checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 var checkTotal = 0;
 var saveTotal = 0;
 
@@ -20,14 +16,10 @@ function checkingWithdrawal(amount){
       checkTotal = 0;
       //take it out of savings!
       saveTotal = saveTotal - amount;
-      $('.balance').eq(0).html(checkTotal);
-      $('.balance').eq(1).html(saveTotal);
       return saveTotal;
-    }else{
-    return "can't let you do that";}
+    }else{}
   }else{
     checkTotal = checkTotal - amount;
-    $('.balance').eq(0).html(checkTotal);
     return checkTotal;
   }
 }
@@ -35,28 +27,21 @@ function checkingWithdrawal(amount){
 //increase save total
 function savingsDeposit(amount){
   saveTotal = saveTotal + amount;
-  // $('.balance').eq(1).html(saveTotal);
 }
-
+//withdraw from savings
 function savingsWithdrawal(amount){
   if (amount > saveTotal) {
     if (amount <= (checkTotal + saveTotal)){
       amount = amount - saveTotal;
       saveTotal = 0;
       checkTotal = checkTotal - amount;
-      $('.balance').eq(1).html(saveTotal);
-      $('.balance').eq(0).html(checkTotal);
       return checkTotal;
-    }else{
-    return "can't let you do that";}
+    }else{}
   }else{
     saveTotal = saveTotal - amount;
-    $('.balance').eq(1).html(saveTotal);
     return saveTotal;
   }
 }
-
-//not sure if worth attempting to DRY up with only 4 events listeners - perhaps in an object??
 // an eventListerner for each button, each one a "click"
 //checking Deposit
 $(':button').eq(0).on("click", function() {
@@ -64,7 +49,9 @@ $(':button').eq(0).on("click", function() {
   }else{
     var newNum = $("input").eq(0).val();
     checkingDeposit(parseInt(newNum));
-    $('.balance').eq(0).html(checkTotal);
+    $('.balance').eq(0).html("$"+checkTotal);
+    checkColorSave();
+    checkColorCheck();
   }
 });
 //checking withdraw
@@ -73,8 +60,10 @@ $(':button').eq(1).on("click", function() {
   }else{
     var newNum = $("input").eq(0).val();
     checkingWithdrawal(parseInt(newNum));
-    $('.balance').eq(0).html(checkTotal);
-    $('.balance').eq(1).html(saveTotal);
+    $('.balance').eq(0).html("$"+checkTotal);
+    $('.balance').eq(1).html("$"+saveTotal);
+    checkColorSave();
+    checkColorCheck();
   }
 });
 //savings deposit
@@ -83,7 +72,9 @@ $(':button').eq(2).on("click", function() {
   }else{
     var newNum = $("input").eq(3).val();
     savingsDeposit(parseInt(newNum));
-    $('.balance').eq(1).html(saveTotal);
+    $('.balance').eq(1).html("$"+saveTotal);
+    checkColorSave();
+    checkColorCheck();
   }
 });
 //savings withdraw
@@ -92,17 +83,23 @@ $(':button').eq(3).on("click", function() {
   }else{
     var newNum = $("input").eq(3).val();
     savingsWithdrawal(parseInt(newNum));
-    $('.balance').eq(0).html(checkTotal);
-    $('.balance').eq(1).html(saveTotal);
+    $('.balance').eq(0).html("$"+checkTotal);
+    $('.balance').eq(1).html("$"+saveTotal);
+    checkColorSave();
+    checkColorCheck();
   }
 });
 
-/* Pseudocode for halp:
-As a user, I want to deposit money into one of the bank accounts
-As a user, I want to withdraw money from one of the bank accounts
-Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
-As a user, I want overdraft protection
-What happens when the user wants to withdraw more money from the checking account than is in the account?
-If a withdrawal can be covered by the balances in both accounts, take the balance of the account withdrawn from down to $0 and take the rest of the withdrawal from the other account.
-If the withdrawal amount is more than the combined account balance, ignore it.
-*/
+function checkColorSave(){
+if ($('.balance').eq(1).html()=="$0"){
+  $('.balance').eq(1).addClass("zero");
+}else{$('.balance').eq(1).removeClass("zero");}
+}
+checkColorSave();
+
+function checkColorCheck(){
+if ($('.balance').eq(0).html()=="$0"){
+  $('.balance').eq(0).addClass("zero");
+}else{$('.balance').eq(0).removeClass("zero");}
+}
+checkColorCheck();
