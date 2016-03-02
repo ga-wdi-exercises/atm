@@ -1,9 +1,12 @@
+
 function MyATM(){
   this.amounts = [];
   this.bank = {
-    total: $(".balance"),
+    total: 0,
     form: $("#myChecking"),
     input: $("#newEntry"),
+    deposit: $("#deposit"),
+    withdraw: $("#withdraw")
   };
 }
 
@@ -19,56 +22,57 @@ var checking = new MyATM();
 
 var checkingBalance = $("#checkingBalance").addClass("zero");
 
-// checkingBalance = parseInt($("#checkingBalance").append("$", "") );
-
-// parseInt( checkingBalance.innerHTML.replace("$", "") );
-
-checking.bank.form.on("submit",function(event){
+$("input.deposit").on("click",function(event){
   event.preventDefault();
   var userInput = parseInt(checking.bank.input.val(), 10);
-  // this pushes the input into an array
-  checking.amounts.push(userInput);
+  // this adds the amount to the total
+  checking.bank.total = checking.bank.total + userInput;
+  console.log("I'm the userInput: " + userInput);
   // this clears the input
   checking.bank.input.val("");
   //
-  var newTotal = checking.calculateTotal();
-  checkingBalance = parseInt($("#checkingBalance").html(newTotal), 10);
-  console.log(userInput);
-  console.log("total " + newTotal);
+  checkingBalance = ($("#checkingBalance").html("$" + checking.bank.total));
 }
 );
 
+// this adds the user input to the running total
 var checkingDeposit = function(amount){
+  var newTotal = checking.bank.total + userInput;
+  console.log("New total: " + checking.bank.total);
+  console.log(newTotal);
+  $("#checkingBalance").removeClass("zero");
 };
 
 
 function checkingWithdrawal(amount){
-  if (checking.bank.total == 0){
+  if (this.bank.total == 0 || checking.bank.total < amount){
     console.log("Doing nothing, you're broke");
-  }else if(checking.bank.total > 0){
-    console.log("I can add stuff");
+  }else if(checking.bank.total > amount){
+    checking.bank.total = this.bank.total - Math.abs(amount);
   }
   }
-
 
 function savingsDeposit(amount){
-
+  savingsBalance = savingsBalance + amount;
+  this.bank.total = this.bank.total + amount;
 }
 
 function savingsWithdrawal(amount){
-
+  this.bank.total = this.bank.total - amount;
 }
+
+/////////
 
 // What elements should we create variables for?
 
 // What events should we listen for?
-//
+
 // What elements need to be created?
-//
+
 // How is user input handled?
-//
+
 // What do we need to keep track of?
-//
+
 // What can be calculated from the things we need to keep track of?
 
 
@@ -79,7 +83,6 @@ function savingsWithdrawal(amount){
 //   add the input to the total
   //   update the total html
 //   clear the input
-
 
 // an eventListerner for each button, each one a "click"
 
