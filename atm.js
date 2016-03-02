@@ -90,6 +90,7 @@ $(':button').eq(3).on("click", function() {
   }
 });
 
+//these functions check the balances and if zero sets the class to zero
 function checkColorSave(){
 if ($('.balance').eq(1).html()=="$0"){
   $('.balance').eq(1).addClass("zero");
