@@ -1,4 +1,3 @@
-
 //lopped off $ in html for now
 // var checkingBalance = $("#checking_balance");
 // var savingsBalance = $("#savings_balance");
@@ -61,30 +60,41 @@ function savingsWithdrawal(amount){
 // an eventListerner for each button, each one a "click"
 //checking Deposit
 $(':button').eq(0).on("click", function() {
-  var newNum = $("input").eq(0).val();
-  checkingDeposit(parseInt(newNum));
-  $('.balance').eq(0).html(checkTotal);
+  if ($("input").eq(0).val() === "") {
+  }else{
+    var newNum = $("input").eq(0).val();
+    checkingDeposit(parseInt(newNum));
+    $('.balance').eq(0).html(checkTotal);
+  }
 });
 //checking withdraw
 $(':button').eq(1).on("click", function() {
-  console.log("I was clicked - checkings withdraw");
-  var newNum = $("input").eq(0).val();
-  checkingWithdrawal(parseInt(newNum));
-  $('.balance').eq(0).html(checkTotal);
-  $('.balance').eq(1).html(saveTotal);
+  if ($("input").eq(0).val()===""){
+  }else{
+    var newNum = $("input").eq(0).val();
+    checkingWithdrawal(parseInt(newNum));
+    $('.balance').eq(0).html(checkTotal);
+    $('.balance').eq(1).html(saveTotal);
+  }
 });
 //savings deposit
 $(':button').eq(2).on("click", function() {
-  var newNum = $("input").eq(3).val();
-  savingsDeposit(parseInt(newNum));
-  $('.balance').eq(1).html(saveTotal);
+  if($("input").eq(3).val() === ""){
+  }else{
+    var newNum = $("input").eq(3).val();
+    savingsDeposit(parseInt(newNum));
+    $('.balance').eq(1).html(saveTotal);
+  }
 });
 //savings withdraw
 $(':button').eq(3).on("click", function() {
-  var newNum = $("input").eq(3).val();
-  savingsWithdrawal(parseInt(newNum));
-  $('.balance').eq(0).html(checkTotal);
-  $('.balance').eq(1).html(saveTotal);
+  if ($("input").eq(3).val()===""){
+  }else{
+    var newNum = $("input").eq(3).val();
+    savingsWithdrawal(parseInt(newNum));
+    $('.balance').eq(0).html(checkTotal);
+    $('.balance').eq(1).html(saveTotal);
+  }
 });
 
 /* Pseudocode for halp:
