@@ -1,10 +1,11 @@
 
 function MyATM(){
-  this.total = 0;
-  this.bank = {
-    input: $("#newEntry"),
+  this.balance = 0;
+  this.checking = {
+    input: $("#newChecking"),
     deposit: $("#deposit"),
-    withdraw: $("#withdraw")
+    withdraw: $("#withdraw"),
+    total: 0
   };
 }
 
@@ -16,47 +17,50 @@ MyATM.prototype.calculateTotal = function(){
   return total;
 };
 
-var checking = new MyATM();
+var pnc = new MyATM();
 
 var checkingBalance = $("#checkingBalance").addClass("zero");
 
 $("input.deposit").on("click",function(event){
   event.preventDefault();
   // this makes sure the input is an integer
-  var userInput = parseInt(checking.bank.input.val(), 10);
+  var userInput = parseInt(pnc.checking.input.val(), 10);
   checkingDeposit(userInput);
   // this clears the input
-  checking.bank.input.val("");
+  pnc.checking.input.val("");
 }
 );
 
 $("input.withdraw").on("click",function(event){
   event.preventDefault();
-    var userInput = parseInt(checking.bank.input.val(), 10);
+    var userInput = parseInt(pnc.checking.input.val(), 10);
     checkingWithdraw(userInput);
     // this clears the input
-    checking.bank.input.val("");
+    pnc.checking.input.val("");
   }
 );
 
 // this adds the user input to the running total
 var checkingDeposit = function(amount){
-  checking.total = checking.total + amount;
-  console.log("New total: " + checking.total);
+  var checkingTotal = pnc.checking.total + amount;
+  console.log("New checking total: " + pnc.checking.total);
   // console.log(newTotal);
   $("#checkingBalance").removeClass("zero");
-  checkingBalance = ($("#checkingBalance").html("$" + checking.total));
-  return checking.total;
+  checkingBalance = ($("#checkingBalance").html("$" + checkingTotal));
+  pnc.checking.total = checkingTotal;
+  pnc.balance = pnc.checking.total + pnc.balance;
 };
 
 // this
 function checkingWithdraw(amount){
-  if (checking.total === 0 || checking.total < amount){
+  if (pnc.checking.total === 0 || pnc.checking.total < amount){
     console.log("Nice try, but you're effing broke");
-  }else if(checking.total >= amount){
-    checking.total = checking.total - Math.abs(amount);
-    console.log("New total: " + checking.total);
-    checkingBalance = ($("#checkingBalance").html("$" + checking.total));
+  }else if(pnc.total >= amount){
+    pnc.checking.total = pnc.checking.total - Math.abs(amount);
+    pnc.balance = pnc.checking.total + pnc.balance;
+    console.log("New checking total: " + pnc.checking.total);
+    console.log("New total balance: " + pnc.total);
+    checkingBalance = ($("#checkingBalance").html("$" + pnc.checking.total));
   }
 }
 
@@ -95,7 +99,7 @@ function savingsWithdrawal(amount){
 
 // As a user, I want overdraft protection
 
-// What happens when the user wants to withdraw more money from the checking account than is in the account?
+// What happens when the user wants to withdraw more money from the pnc account than is in the account?
 
 // If a withdrawal can be covered by the balances in both accounts, take the balance of the account withdrawn from down to $0 and take the rest of the withdrawal from the other account.
 
