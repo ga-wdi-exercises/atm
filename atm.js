@@ -19,15 +19,9 @@ var savingsWBtn = $('#savingsbtn-w');
 checkBalanceDisplay.addClass('zero');
 savingsDisplay.addClass('zero');
 
-// As a user, I want to deposit money into one of the bank accounts
   //make bank account constructor
 function Accnt() {
     this.totalBal = 0;
-    // As a user, I want to withdraw money from one of the bank accounts
-    // if(this.totalBal === 0) {
-    //   checkBalanceDisplay.addClass('zero');
-    //   savingsDisplay.addClass('zero');
-    // }
     this.deposit = function(dep_amnt) {
       return this.totalBal += dep_amnt;
     };
@@ -41,7 +35,7 @@ var savingsAccnt = new Accnt();
 
 //event handlers
   //checking account
-    //on deposit click, deposit
+    //on checking deposit click, deposit
 checkDBtn.click(function() {
     checkingAccnt.deposit(parseInt(checkingBox.val()));
     checkingBox.val('');
@@ -49,10 +43,10 @@ checkDBtn.click(function() {
     checkBalanceDisplay.html('$' + checkingAccnt.totalBal);
     console.log('checking balance total: ' + checkingAccnt.totalBal);
 });
-    //on withdraw click, withdraw
+    //on check withdraw click, withdraw
 checkWBtn.click(function() {
-  // Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
   var withdraw_amnt = parseInt(checkingBox.val());
+  // Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
     // If a withdrawal can be covered by the balances in both accounts, take the balance of the account withdrawn from down to $0 and take the rest of the withdrawal from the other account.
   if (withdraw_amnt >= checkingAccnt.totalBal && checkingAccnt.totalBal >= 0 && withdraw_amnt <= savingsAccnt.totalBal) {
       checkBalanceDisplay.addClass('zero');
@@ -73,6 +67,7 @@ checkWBtn.click(function() {
         checkBalanceDisplay.addClass('zero');
       }
       checkBalanceDisplay.html('$' + checkingAccnt.totalBal);
+      console.log('total savings balance:' + savingsAccnt.totalBal);
       console.log('total checking balance:' + checkingAccnt.totalBal);
   }
   // If the withdrawal amount is more than the combined account balance, ignore it.
@@ -87,7 +82,7 @@ checkWBtn.click(function() {
     savingsBox.val('');
     savingsDisplay.removeClass('zero');
     savingsDisplay.html('$' + savingsAccnt.totalBal);
-    console.log(savingsAccnt.totalBal);
+    console.log('total savings balance:' + savingsAccnt.totalBal);
   })
     //on click, withdraw
   savingsWBtn.click(function() {
@@ -104,8 +99,10 @@ checkWBtn.click(function() {
       if(checkingAccnt.totalBal === 0) {
         checkBalanceDisplay.addClass('zero');
       }
-      checkBalanceDisplay.html('$' + savingsAccnt.totalBal);
+      checkBalanceDisplay.html('$' + checkingAccnt.totalBal);
       console.log('total savings balance:' + savingsAccnt.totalBal);
+      console.log('total checking balance:' + checkingAccnt.totalBal);
+
     } else if (withdraw_amnt <= savingsAccnt.totalBal) {
       savingsAccnt.withdrawal(withdraw_amnt);
       savingsBox.val('');
