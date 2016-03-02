@@ -23,7 +23,17 @@ function getSavingsInput() {
 }
 
 function checkingDeposit() {
-  checkingBalance += parseInt(getCheckingInput());
+  var input = parseInt(getCheckingInput());
+  if(savingsBalance < 0)
+  {
+    // balance out savings debt before adding to checking
+    input += savingsBalance;
+    savingsBalance = 0;
+    checkingBalance += input;
+  }
+  else {
+    checkingBalance += input;
+  }
   displayBalance();
 }
 
@@ -31,6 +41,7 @@ function checkingWithdrawal() {
   var input = parseInt(getCheckingInput());
   if(checkingBalance < input)
   {
+    // remove money from savings to cover extra amount needed
     input -= checkingBalance;
     checkingBalance = 0;
     savingsBalance -= input;
