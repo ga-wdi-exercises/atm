@@ -1,43 +1,28 @@
-var checking =
-var savings =
+var checkingDepositButton = $("#checking_deposit")
+var checkingWithdrawlButton = $("#checking_withdraw")
+var checkingUserInput = $("#checking_amount")
+var checkingTotal = 0
+var checkingDisplay = $("#checking_balance")
 
+checkingDepositButton.on("click", function (){
+checkingTotal += parseFloat(checkingUserInput.val());
+display.html(checkingTotal)
+console.log(checkingUserInput.val());
+})
 
-function ATMTrans (){
-  this.entries = [];
-  this.els = {
-    form: $("entry")
-    entries: $("entries")
-    // deposit: $("")
-    // withdrawl: $("")
-    total: $("amount")
-  }
-}
+checkingWithdrawlButton.on("click", function(){
+  checkingTotal -= parseFloat(checkingUserInput.val());
+  checkingDisplay.html(checkingTotal)
+  console.log(checkingUserInput.val());
+})
 
-
-
-
-ATMTrans.prototype.calculateTotal = function(){
-  var checkingTotal =0;
-  for(var i = 0; i <this.entries.length; i++){
-    total += this.entries[i];
-  }
-  return total;
-}
-
-var newDeposit = new ATMTrans();
-var newWithdrawl = new ATMTrans();
-
-newDeposit.els.form.on("submit", function(event){
-event.preventDefault();
-
-
-newWithdrawl.els.form.on("submit", function(event){
-event.preventDefault();
-
-var userInput = parseFloat(newDeposit.els.input.val());
-parseFloat(newWithdrawl.els.input.val())
+// if checkingUserInput(total = <0)
 
 //
-// add entry: deposit money into checking
-// see new total
-// add new entry: withdrawl money from checking
+// CashRegister.prototype.calculateTotal = function(){
+//   var total = 0;
+//   for( var i = 0; i < this.entries.length; i++ ){
+//     total += this.entries[i];
+//   }
+//   return total;
+// }
