@@ -16,18 +16,18 @@ var getCheckingInput = function() {
 };
 
 // note to self: this method is very similar to above. look into passing values to combine
-var getSavingsInput = function() {
+function getSavingsInput() {
   var input = $('#savingsInput').val();
   $('#savingsInput').val('');
   return input;
-};
+}
 
-var checkingDeposit = function(){
+function checkingDeposit() {
   checkingBalance += parseInt(getCheckingInput());
   displayBalance();
-};
+}
 
-function checkingWithdrawal(){
+function checkingWithdrawal() {
   var input = parseInt(getCheckingInput());
   if(checkingBalance < input)
   {
@@ -38,17 +38,15 @@ function checkingWithdrawal(){
   else {
     checkingBalance -= input;
   }
-
   displayBalance();
-
 }
 
-function savingsDeposit(){
+function savingsDeposit() {
   savingsBalance += parseInt(getSavingsInput());
   displayBalance();
 }
 
-function savingsWithdrawal(){
+function savingsWithdrawal() {
   savingsBalance -= parseInt(getSavingsInput());
   displayBalance();
 }
@@ -56,6 +54,17 @@ function savingsWithdrawal(){
 function displayBalance() {
   $('.checking').html('$' + checkingBalance);
   $('.savings').html('$' + savingsBalance);
+  overdrawWarning();
+}
+
+function overdrawWarning() {
+  if(savingsBalance < 0)
+  {
+    $('.account').css('background-color', 'red');
+  }
+  else {
+    $('.account').css('background-color', '#6C9A74');
+  }
 }
 
 // an eventListerner for each button, each one a "click"
