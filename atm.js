@@ -6,7 +6,9 @@ var savingsBalance;
 function intializeBank(c, s) {
   checkingBalance = c;
   savingsBalance = s;
-  displayBalance();
+  $('.checking').html('$' + checkingBalance);
+  $('.savings').html('$' + savingsBalance);
+
 }
 
 var getCheckingInput = function() {
@@ -24,8 +26,7 @@ function getSavingsInput() {
 
 function checkingDeposit() {
   var input = parseInt(getCheckingInput());
-  if(savingsBalance < 0)
-  {
+  if(savingsBalance < 0) {
     // balance out savings debt before adding to checking
     input += savingsBalance;
     savingsBalance = 0;
@@ -39,8 +40,12 @@ function checkingDeposit() {
 
 function checkingWithdrawal() {
   var input = parseInt(getCheckingInput());
-  if(checkingBalance < input)
-  {
+  var combinedBalance = savingsBalance + checkingBalance;
+
+  if(combinedBalance < input) {
+    alert('Not enough funds for this action');
+  }
+  else if(checkingBalance < input) {
     // remove money from savings to cover extra amount needed
     input -= checkingBalance;
     checkingBalance = 0;
@@ -58,7 +63,16 @@ function savingsDeposit() {
 }
 
 function savingsWithdrawal() {
-  savingsBalance -= parseInt(getSavingsInput());
+  input = parseInt(getSavingsInput());
+
+  var combinedBalance = savingsBalance + checkingBalance;
+
+  if(combinedBalance < input) {
+    alert('Not enough funds for this action');
+  }
+  else {
+    savingsBalance -= input;
+  }
   displayBalance();
 }
 
@@ -69,13 +83,19 @@ function displayBalance() {
 }
 
 function overdrawWarning() {
-  if(savingsBalance < 0)
-  {
-    $('.account').addClass('zero');
+  if(savingsBalance <= 0) {
+    $('#sAccount').addClass('zero');
   }
   else {
-    $('.account').removeClass('zero');
+    $('#sAccount').removeClass('zero');
   }
+
+  if(checkingBalance <= 0)   {
+      $('#cAccount').addClass('zero');
+    }
+    else {
+      $('#cAccount').removeClass('zero');
+    }
 }
 
 // an eventListerner for each button, each one a "click"
