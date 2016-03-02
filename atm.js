@@ -21,7 +21,7 @@ var savInput = $("input").eq(3);
 function checkingDeposit() {
   chkDepButton.on("click", function() {
     checkingBalance += parseInt(chkInput.val());
-    chkBalLocation.html(checkingBalance);
+    chkBalLocation.html("$" + checkingBalance);
     console.log(checkingBalance);
   });
 //user enters number into input field
@@ -35,9 +35,11 @@ checkingDeposit();
 
 function checkingWithdrawal(){
   chkWitButton.on("click", function() {
-    checkingBalance -= parseInt(chkInput.val());
-    chkBalLocation.html(checkingBalance);
-    console.log(checkingBalance);
+    if (chkInput.val() <= checkingBalance) {
+      checkingBalance -= parseInt(chkInput.val());
+      chkBalLocation.html("$" + checkingBalance);
+      console.log(checkingBalance);
+    }
   });
 }
 checkingWithdrawal();
@@ -46,7 +48,7 @@ function savingsDeposit(amount){
   savDepButton.on("click", function() {
     console.log(savingsBalance);
     savingsBalance += parseInt(savInput.val());
-    savBalLocation.html(savingsBalance);
+    savBalLocation.html("$" + savingsBalance);
     console.log(savingsBalance);
   });
 }
@@ -54,11 +56,18 @@ savingsDeposit();
 
 function savingsWithdrawal(amount){
   savWitButton.on("click", function() {
-    savingsBalance -= parseInt(savInput.val());
-    savBalLocation.html(savingsBalance);
-    console.log(savingsBalance);
+    if (savInput.val() <= savingsBalance) {
+      savingsBalance -= parseInt(savInput.val());
+      savBalLocation.html("$" + savingsBalance);
+      console.log(savingsBalance);
+    }
   });
 }
 savingsWithdrawal();
 
-// an eventListerner for each button, each one a "click"
+// checking/savings balance cannot go below 0
+  //if input value for deposit is greater than balance, do not add value to balance
+
+
+//user cannot withdraw more than the existing balance.
+  ////While input value < balance, run withdrwal function
