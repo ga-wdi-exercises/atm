@@ -1,7 +1,5 @@
 // var checkingBalance = document.querySelector(".checking_balance").innerHTML;
-extraAmount = 0;
-
-
+var extraAmount = 0;
 
 checkingDeposit = function(){
   inputAmount = parseInt($('.inputField').val());
@@ -35,8 +33,6 @@ savingsDeposit2 = function(amount){
     savingsUpdate();
   }
 }
-
-
 
 $(".deposit").on('click',checkingDeposit)
 $(".withdraw").on('click',checkingWithdrawal)
