@@ -1,51 +1,40 @@
 
 $(document).ready(function(){
 
-var savingsBalance = parseInt($("#savings_balance").html().replace("$", ""));
-var checkingBalance = $("#checking_balance").html().replace("$", "");
-var checkingEntry = $("#checkingEntry").val();
-
-
-
+var checkingBalance = $("#checking_balance");
+var checkingEntry = $("#checkingEntry");
+var savingsBalance = $("#savings_balance");
+var savingsEntry = $("#savingsEntry");
 
 
   $('#depositChecking').on("click", function() {
-    $("#checking_balance").text("$" + (parseInt($("#checking_balance").html().replace("$", "")) + parseInt($("#checkingEntry").val())));
-    $("#checkingEntry").val('');
-    $("#checkingEntry").focus();
+    checkingBalance.text("$" + (parseInt(checkingBalance.html().replace("$", "")) + parseInt(checkingEntry.val())));
+    checkingEntry.val('');
+    checkingEntry.focus();
   });
 
   $('#withdrawChecking').on("click", function() {
-    $("#checking_balance").text("$" + (parseInt($("#checking_balance").html().replace("$", "")) - parseInt($("#checkingEntry").val())));
-    $("#checkingEntry").val('');
-    $("#checkingEntry").focus();
+    checkingBalance.text("$" + (parseInt(checkingBalance.html().replace("$", "")) - parseInt(checkingEntry.val())));
+    checkingEntry.val('');
+    checkingEntry.focus();
 
-
-    if ($("#checkingEntry").val() > parseInt($("#checking_balance").html().replace("$", ""))) {
-
-      var difference = $("#checkingEntry").val() - parseInt($("#checking_balance").html().replace("$", ""));
-
-      $("#checking_balance").text(parseInt($("#savings_balance").html().replace("$", "")) - $("checkingEntry"));
+    if (checkingEntry.val() > parseInt(checkingBalance.html().replace("$", ""))) {
+      var difference = checkingEntry.val() - parseInt(checkingBalance.html().replace("$", ""));
+      checkingBalance.text("$0");
+      savingsBalance.text("$" + (parseInt(savingsBalance.html().replace("$", "")) - difference));
     }
-
-
-
-
-
-
-
   });
 
   $('#depositSavings').on("click", function() {
-    $("#savings_balance").text("$" + (parseInt($("#savings_balance").html().replace("$", "")) + parseInt($("#savingsEntry").val())));
-    $("#savingsEntry").val('');
-    $("#savingsEntry").focus();
+    savingsBalance.text("$" + (parseInt(savingsBalance.html().replace("$", "")) + parseInt(savingsEntry.val())));
+    savingsEntry.val('');
+    savingsEntry.focus();
   });
 
   $('#withdrawSavings').on("click", function() {
-    $("#savings_balance").text("$" + (parseInt($("#savings_balance").html().replace("$", "")) - parseInt($("#savingsEntry").val())));
-    $("#savingsEntry").val('');
-    $("#savingsEntry").focus();
+    savingsBalance.text("$" + (parseInt(savingsBalance.html().replace("$", "")) - parseInt(savingsEntry.val())));
+    savingsEntry.val('');
+    savingsEntry.focus();
   });
 
 });
