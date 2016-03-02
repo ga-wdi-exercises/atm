@@ -9,7 +9,7 @@ function MyATM(){
 
 MyATM.prototype.calculateTotal = function(){
   var total;
-  for(var i = 0; i <= this.amounts.length; i++){
+  for(var i = 0; i < this.amounts.length; i++){
     total += this.amounts[i];
   }
   return total;
@@ -25,27 +25,31 @@ var checkingBalance = $("#checkingBalance").addClass("zero");
 
 checking.bank.form.on("submit",function(event){
   event.preventDefault();
-  var userInput = parseInt(checking.bank.input.val());
+  var userInput = parseInt(checking.bank.input.val(), 10);
   // this pushes the input into an array
   checking.amounts.push(userInput);
   // this clears the input
   checking.bank.input.val("");
   //
   var newTotal = checking.calculateTotal();
-  checkingBalance = parseInt($("#checkingBalance").html(newTotal));
+  checkingBalance = parseInt($("#checkingBalance").html(newTotal), 10);
   console.log(userInput);
   console.log("total " + newTotal);
 }
 );
 
 var checkingDeposit = function(amount){
-
 };
 
 
 function checkingWithdrawal(amount){
+  if (checking.bank.total == 0){
+    console.log("Doing nothing, you're broke");
+  }else if(checking.bank.total > 0){
+    console.log("I can add stuff");
+  }
+  }
 
-}
 
 function savingsDeposit(amount){
 
