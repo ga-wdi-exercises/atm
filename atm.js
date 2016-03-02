@@ -5,7 +5,6 @@
 // // checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 // //
 // //
-// // //talking about a deposit
 // // var checkingDeposit = function(amount){
 // //   checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 //
@@ -13,7 +12,7 @@
 // var inputValue = function
 //
 // function checkingWithdrawal(){
-//   c
+//
 //
 // }
 //
@@ -30,7 +29,6 @@
 
 //ATM PSEUDOCODE//
 // load page with the input places and buttons with $0 balance in both accounts
-  //function of preventDefault with event so that the page doesn't reload
 
   //two divs created with accounts as classes created as classes
     //varCheckingAccountDiv = #account1
@@ -62,7 +60,8 @@
             //else if #savings_withdraw button clicked, function
               //var savingsTotal = savingsBalance.value - savings_withdraw.value
 
-              
+  //setLimits of totals
+    //if (div.balance *div with class balance* < 0
 
   //changeBackgroundcolor
     //if (checkingTotal  <= 0) {
