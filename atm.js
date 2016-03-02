@@ -47,7 +47,7 @@ checkWBtn.click(function() {
   var withdraw_amnt = parseInt(checkingBox.val());
     // If a withdrawal can be covered by the balances in both accounts, take the balance of the account withdrawn from down to $0 and take the rest of the withdrawal from the other account.
   if (withdraw_amnt >= checkingAccnt.totalBal &&
-    checkingAccnt.totalBal > 0 &&
+    checkingAccnt.totalBal >= 0 &&
     savingsAccnt.totalBal > 0) {
     checkingLeftOver = checkingAccnt.withdrawal(withdraw_amnt);
     checkingAccnt.totalBal = 0;
@@ -55,8 +55,8 @@ checkWBtn.click(function() {
     checkBalanceDisplay.html('$' + checkingAccnt.totalBal);
     savingsAccnt.withdrawal(Math.abs(checkingLeftOver));
     savingsDisplay.html('$' + savingsAccnt.totalBal);
-
-  } else if (withdraw_amnt < checkingAccnt.totalBal) {
+  } else if (withdraw_amnt <= checkingAccnt.totalBal) {
+    checkBalanceDisplay.removeClass('zero');
     checkingAccnt.withdrawal(withdraw_amnt);
     checkingBox.val('');
     checkBalanceDisplay.html('$' + checkingAccnt.totalBal);
@@ -81,7 +81,7 @@ checkWBtn.click(function() {
     var withdraw_amnt = parseInt(savingsBox.val());
 
     if (withdraw_amnt >= savingsAccnt.totalBal &&
-      savingsAccnt.totalBal > 0 &&
+      savingsAccnt.totalBal >= 0 &&
       checkingAccnt.totalBal > 0) {
       savingsLeftOver = savingsAccnt.withdrawal(withdraw_amnt);
       savingsAccnt.totalBal = 0;
@@ -90,7 +90,7 @@ checkWBtn.click(function() {
       checkingAccnt.withdrawal(Math.abs(savingsLeftOver));
       checkBalanceDisplay.html('$' + checkingAccnt.totalBal);
 
-    } else if (withdraw_amnt < savingsAccnt.totalBal) {
+    } else if (withdraw_amnt <= savingsAccnt.totalBal) {
       savingsAccnt.withdrawal(withdraw_amnt);
       savingsBox.val('');
       savingsDisplay.html('$' + savingsAccnt.totalBal);
@@ -99,6 +99,7 @@ checkWBtn.click(function() {
       console.log('overdraft warning! entered amount can\t be converd');
     }
   })
+
 
 
 
