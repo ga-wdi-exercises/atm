@@ -22,7 +22,20 @@ function checkingWithdrawal(amount){
   amount.preventDefault();
   var checkingInputValue = parseInt(checkingInput.val());
   if (checkingInputValue > newCheckingTotal) {
-    checkingInput.val("");
+    if ((newSavingsTotal - (checkingInputValue - newCheckingTotal)) >= 0) {
+      newSavingsTotal = newSavingsTotal - (checkingInputValue - newCheckingTotal);
+      newCheckingTotal = 0;
+      checkingBalance.addClass("zero");
+      if (newSavingsTotal === 0){
+        savingsBalance.addClass("zero");
+      }
+      checkingBalance.html("$" + (newCheckingTotal));
+      savingsBalance.html("$" + (newSavingsTotal));
+      checkingInput.val("");
+    }
+    else {
+      checkingInput.val("");
+    }
   }
   else {
     newCheckingTotal = newCheckingTotal - checkingInputValue;
@@ -49,7 +62,20 @@ function savingsWithdrawal(amount){
   amount.preventDefault();
   var savingsInputValue = parseInt(savingsInput.val());
   if (savingsInputValue > newSavingsTotal) {
-    savingsInput.val("");
+    if ((newCheckingTotal - (savingsInputValue - newSavingsTotal)) >= 0) {
+      newCheckingTotal = newCheckingTotal - (savingsInputValue - newSavingsTotal);
+      newSavingsTotal = 0;
+      savingsBalance.addClass("zero");
+      if (newCheckingTotal === 0){
+        checkingBalance.addClass("zero");
+      }
+      savingsBalance.html("$" + (newSavingsTotal));
+      checkingBalance.html("$" + (newCheckingTotal));
+      savingsInput.val("");
+    }
+    else {
+      savingsInput.val("");
+    }
   }
   else {
     newSavingsTotal = newSavingsTotal - savingsInputValue;
@@ -60,10 +86,8 @@ function savingsWithdrawal(amount){
     }
   }
 }
-
 $("#checkingDepositButton").on("click", checkingDeposit);
 $("#checkingWithdrawalButton").on("click", checkingWithdrawal);
 $("#savingsDepositButton").on("click", savingsDeposit);
 $("#savingsWithdrawalButton").on("click", savingsWithdrawal);
-
 });
