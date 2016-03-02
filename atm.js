@@ -69,8 +69,10 @@ checkWBtn.click(function() {
   } else if (withdraw_amnt <= checkingAccnt.totalBal) {
       checkingAccnt.withdrawal(withdraw_amnt);
       checkingBox.val('');
+      if(checkingAccnt.totalBal === 0) {
+        checkBalanceDisplay.addClass('zero');
+      }
       checkBalanceDisplay.html('$' + checkingAccnt.totalBal);
-      checkBalanceDisplay.addClass('zero');
       console.log('total checking balance:' + checkingAccnt.totalBal);
   }
   // If the withdrawal amount is more than the combined account balance, ignore it.
@@ -103,11 +105,13 @@ checkWBtn.click(function() {
         checkBalanceDisplay.addClass('zero');
       }
       checkBalanceDisplay.html('$' + savingsAccnt.totalBal);
-      console.log('total savings balance:' + checkingAccnt.totalBal);
+      console.log('total savings balance:' + savingsAccnt.totalBal);
     } else if (withdraw_amnt <= savingsAccnt.totalBal) {
-      savingsDisplay.addClass('zero');
       savingsAccnt.withdrawal(withdraw_amnt);
       savingsBox.val('');
+      if(savingsAccnt.totalBal === 0) {
+        savingsDisplay.addClass('zero');
+      }
       savingsDisplay.html('$' + savingsAccnt.totalBal);
       console.log('total savings balance:' + savingsAccnt.totalBal);
     } else {
