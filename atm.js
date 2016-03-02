@@ -6,7 +6,6 @@ var checkingEntry = $("#checkingEntry");
 var savingsBalance = $("#savings_balance");
 var savingsEntry = $("#savingsEntry");
 
-
   $('#depositChecking').on("click", function() {
     checkingBalance.text("$" + (parseInt(checkingBalance.html().replace("$", "")) + parseInt(checkingEntry.val())));
     checkingEntry.val('');
@@ -42,8 +41,4 @@ var savingsEntry = $("#savingsEntry");
       checkingBalance.text("$" + (parseInt(checkingBalance.html().replace("$", "")) - difference1));
     }
   });
-
-}); //end $(document).ready(function(){
-
-
-// Had some trouble knowing when to use .text() .val() or .html()
+});
