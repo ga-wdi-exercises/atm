@@ -3,8 +3,6 @@ function MyATM(){
   this.balance = 0;
   this.checking = {
     input: $("#newChecking"),
-    // deposit: $("#deposit"),
-    // withdraw: $("#withdraw"),
     total: 0
   };
   this.savings = {
@@ -13,31 +11,29 @@ function MyATM(){
   };
 }
 
-MyATM.prototype.calculateTotal = function(){
-  var total;
-  for(var i = 0; i < this.amounts.length; i++){
-    total += this.amounts[i];
-  }
-  return total;
+MyATM.prototype.balance = function(){
+  this.myBalance = this.checking.total + this.savings.total;
 };
 
 var pnc = new MyATM();
 
-var checkingBalance = $("#checkingBalance");
-var savingsBalance = $("#savingsBalance");
-// .addClass("zero");
+var checkingBalance = $("#checkingBalance").addClass("zero");;
+var savingsBalance = $("#savingsBalance").addClass("zero");;
 
-$("input.deposit").on("click",function(event){
+
+// checking deposit button event listener
+$("input.depositC").on("click",function(event){
   event.preventDefault();
   // this makes sure the input is an integer
-  var userInput = parseInt(pnc.checking.input.val(), 10) || parseInt(pnc.savings.input.val(), 10);
+  var userInput = parseInt(pnc.checking.input.val(), 10);
   checkingDeposit(userInput);
   // this clears the input
   pnc.checking.input.val("");
 }
 );
 
-$("input.withdraw").on("click",function(event){
+// checking withdrawal button event listener
+$("input.withdrawC").on("click",function(event){
   event.preventDefault();
     var userInput = parseInt(pnc.checking.input.val(), 10);
     checkingWithdraw(userInput);
@@ -46,24 +42,44 @@ $("input.withdraw").on("click",function(event){
   }
 );
 
-// this adds the user input to the checking total
+// savings deposit button event listener
+$("input.depositS").on("click",function(event){
+  event.preventDefault();
+  // this makes sure the input is an integer
+  var userInput = parseInt(pnc.savings.input.val(), 10);
+  savingsDeposit(userInput);
+  // this clears the input
+  pnc.checking.input.val("");
+}
+);
+
+// savings withdrawal event listener
+$("input.withdrawS").on("click",function(event){
+  event.preventDefault();
+    var userInput = parseInt(pnc.savings.input.val(), 10);
+    // this clears the input
+    pnc.checking.input.val("");
+    savingsWithdraw(userInput);
+  }
+);
+
+// adds the user input to the checking total
 var checkingDeposit = function(amount){
   var checkingTotal = pnc.checking.total + amount;
   $("#checkingBalance").removeClass("zero");
   checkingBalance = ($("#checkingBalance").html("$" + checkingTotal));
   pnc.checking.total = checkingTotal;
-  newBalance = checkingTotal + pnc.balance;
-  pnc.balance = checkingTotal;
+  var newBalance = checkingTotal + pnc.balance;
+  pnc.balance = newBalance;
   console.log("Total balance: " + pnc.balance);
   console.log("New checking total: " + pnc.checking.total);
 };
 
-// this subtracts the user input from the checking total
+// subtracts the user input from the checking total
 function checkingWithdraw(amount){
-  if (pnc.checking.total === 0 || pnc.checking.total < amount){
+  if (pnc.checking.total === 0 || pnc.checking.total < amount || pnc.balance < amount){
     console.log("Nice try, but you're effing broke");
   }else if(pnc.checking.total >= amount){
-    console.log("This should work but...");
     pnc.checking.total = pnc.checking.total - Math.abs(amount);
     pnc.balance = pnc.checking.total + pnc.balance;
     console.log("New checking total: " + pnc.checking.total);
@@ -72,15 +88,27 @@ function checkingWithdraw(amount){
   }
 }
 
+// adds the user input to the savings total
 function savingsDeposit(amount){
   var savingsTotal = pnc.savings.total + amount;
+  $("#savingsBalance").removeClass("zero");
   console.log("New savings total: " + pnc.savings.total);
-  savingsBalance = savingsBalance + amount;
-  this.total = this.total + amount;
+  savingsBalance = ($("#savingsBalance").html("$" + savingsTotal));
+  pnc.savings.total = savingsTotal;
+  var newBalance = savingsTotal + pnc.balance;
+  pnc.balance = newBalance;
+  console.log("Total balance: " + pnc.balance);
 }
 
-function savingsWithdrawal(amount){
-  this.total = this.total - amount;
+// subtracts the user input from the savings total
+function savingsWithdraw(amount){
+  if (pnc.savings.total === 0 || pnc.savings.total < amount || pnc.balance < amount){
+    console.log("Nice try, but your savings account says, 'You're effing broke!'");
+  }else if(pnc.savings.total >= amount){
+    pnc.savings.total = pnc.savings.total - Math.abs(amount);
+    pnc.balance = pnc.checking.total + pnc.balance;
+    checkingBalance = ($("#savingsBalance").html("$" + pnc.savings.total));
+  }
 }
 
 /////////
