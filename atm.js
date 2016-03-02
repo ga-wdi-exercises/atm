@@ -35,6 +35,15 @@ var savingsEntry = $("#savingsEntry");
     savingsBalance.text("$" + (parseInt(savingsBalance.html().replace("$", "")) - parseInt(savingsEntry.val())));
     savingsEntry.val('');
     savingsEntry.focus();
+
+    if (savingsEntry.val() > parseInt(savingsBalance.html().replace("$", ""))) {
+      var difference1 = savingsEntry.val() - parseInt(savingsBalance.html().replace("$", ""));
+      savingsBalance.text("$0");
+      checkingBalance.text("$" + (parseInt(checkingBalance.html().replace("$", "")) - difference1));
+    }
   });
 
-});
+}); //end $(document).ready(function(){
+
+
+// Had some trouble knowing when to use .text() .val() or .html()
