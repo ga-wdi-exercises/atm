@@ -71,10 +71,10 @@ function displayBalance() {
 function overdrawWarning() {
   if(savingsBalance < 0)
   {
-    $('.account').css('background-color', 'red');
+    $('.account').addClass('zero');
   }
   else {
-    $('.account').css('background-color', '#6C9A74');
+    $('.account').removeClass('zero');
   }
 }
 
