@@ -1,106 +1,101 @@
-
-
-var checkingBalance;
-var savingsBalance;
-
-function intializeBank(c, s) {
-  checkingBalance = c;
-  savingsBalance = s;
-  $('.checking').html('$' + checkingBalance);
-  $('.savings').html('$' + savingsBalance);
+function Bank(c, s) {
+  this.checkingBalance = c;
+  this.savingsBalance = s;
+  $('.checking').html('$' + this.checkingBalance);
+  $('.savings').html('$' + this.savingsBalance);
 }
 
-var getCheckingInput = function() {
+Bank.prototype.getCheckingInput = function () {
   var input = $('#checkInput').val();
   $('#checkInput').val('');
   return input;
 };
 
-function getSavingsInput() {
+Bank.prototype.getSavingsInput = function () {
   var input = $('#savingsInput').val();
   $('#savingsInput').val('');
   return input;
-}
+};
 
-function checkingDeposit() {
-  var input = parseInt(getCheckingInput());
-  if(savingsBalance < 0) {
-    // balance out savings debt before adding to checking
-    input += savingsBalance;
-    savingsBalance = 0;
-    checkingBalance += input;
-  }
-  else {
-    checkingBalance += input;
-  }
-  displayBalance();
-}
+Bank.prototype.displayBalance = function () {
+  $('.checking').html('$' + this.checkingBalance);
+  $('.savings').html('$' + this.savingsBalance);
+  this.overdrawWarning();
+};
 
-function checkingWithdrawal() {
-  var input = parseInt(getCheckingInput());
-  var combinedBalance = savingsBalance + checkingBalance;
-
-  if(combinedBalance < input) {
-    alert('Not enough funds for this action');
-  }
-  else if(checkingBalance < input) {
-    // remove money from savings to cover extra amount needed
-    input -= checkingBalance;
-    checkingBalance = 0;
-    savingsBalance -= input;
-  }
-  else {
-    checkingBalance -= input;
-  }
-  displayBalance();
-}
-
-function savingsDeposit() {
-  savingsBalance += parseInt(getSavingsInput());
-  displayBalance();
-}
-
-function savingsWithdrawal() {
-  input = parseInt(getSavingsInput());
-
-  var combinedBalance = savingsBalance + checkingBalance;
-
-  if(combinedBalance < input) {
-    alert('Not enough funds for this action');
-  }
-  else {
-    savingsBalance -= input;
-  }
-  displayBalance();
-}
-
-function displayBalance() {
-  $('.checking').html('$' + checkingBalance);
-  $('.savings').html('$' + savingsBalance);
-  overdrawWarning();
-}
-
-function overdrawWarning() {
-  if(savingsBalance <= 0) {
+Bank.prototype.overdrawWarning = function () {
+  if(this.savingsBalance <= 0) {
     $('#sAccount').addClass('zero');
   }
   else {
     $('#sAccount').removeClass('zero');
   }
 
-  if(checkingBalance <= 0) {
+  if(this.checkingBalance <= 0) {
       $('#cAccount').addClass('zero');
     }
     else {
       $('#cAccount').removeClass('zero');
     }
-}
+};
 
-// an eventListerner for each button, each one a "click"
-$('#checkDeposit').on('click', checkingDeposit);
-$('#checkWithdraw').on('click', checkingWithdrawal);
-$('#saveDeposit').on('click', savingsDeposit);
-$('#saveWithdraw').on('click', savingsWithdrawal);
+Bank.prototype.checkDeposit = function () {
+  var input = parseInt(this.getCheckingInput());
+  if(this.savingsBalance < 0) {
+    // balance out savings debt before adding to checking
+    input += this.savingsBalance;
+    this.savingsBalance = 0;
+    this.checkingBalance += input;
+  }
+  else {
+    this.checkingBalance += input;
+  }
+  this.displayBalance();
+};
 
-// start bank
-intializeBank(0, 0);
+Bank.prototype.checkingWithdrawal = function () {
+  var input = parseInt(this.getCheckingInput());
+  var combinedBalance = this.savingsBalance + this.checkingBalance;
+
+  if(combinedBalance < input) {
+    alert('Not enough funds for this action');
+  }
+  else if(this.checkingBalance < input) {
+    // remove money from savings to cover extra amount needed
+    input -= this.checkingBalance;
+    this.checkingBalance = 0;
+    this.savingsBalance -= input;
+  }
+  else {
+    this.checkingBalance -= input;
+  }
+  this.displayBalance();
+};
+
+Bank.prototype.savingsDeposit = function () {
+  this.savingsBalance += parseInt(this.getSavingsInput());
+  this.displayBalance();
+};
+
+Bank.prototype.savingsWithdrawal = function () {
+  input = parseInt(this.getSavingsInput());
+
+  var combinedBalance = this.savingsBalance + this.checkingBalance;
+
+  if(combinedBalance < input) {
+    alert('Not enough funds for this action');
+  }
+  else {
+    this.savingsBalance -= input;
+  }
+  this.displayBalance();
+};
+
+// init Bank
+var atm = new Bank(0,0);
+
+// // an eventListerner for each button, each one a "click"
+$('#checkDeposit').on('click', atm.checkingDeposit);
+$('#checkWithdraw').on('click', atm.checkingWithdrawal);
+$('#saveDeposit').on('click', atm.savingsDeposit);
+$('#saveWithdraw').on('click', atm.savingsWithdrawal);
