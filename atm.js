@@ -80,11 +80,17 @@ function checkingWithdraw(amount){
   if (pnc.checking.total === 0 || pnc.checking.total < amount || pnc.balance < amount){
     console.log("Nice try, but you're effing broke");
   }else if(pnc.checking.total >= amount){
-    pnc.checking.total = pnc.checking.total - Math.abs(amount);
-    pnc.balance = pnc.checking.total + pnc.balance;
+    var checkingTotal = pnc.checking.total - Math.abs(amount);
+    pnc.checking.total = checkingTotal;
     console.log("New checking total: " + pnc.checking.total);
-    console.log("New total balance: " + pnc.total);
+    var newBalance = checkingTotal + pnc.balance;
+    pnc.balance = newBalance;
+    console.log("Total balance: " + pnc.balance);
     checkingBalance = ($("#checkingBalance").html("$" + pnc.checking.total));
+  }else if(pnc.balance >= amount){
+    console.log("Current balance: " + pnc.balance);
+    var newBalance = pnc.balance - (pnc.checking.total + amount);
+    pnc.savings.total = pnc.savings.total - pnc.balance;
   }
 }
 
