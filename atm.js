@@ -1,7 +1,13 @@
 
 
-var checkingBalance = parseInt($('.checking').html());
-var savingsBalance = parseInt($('.savings').html());
+var checkingBalance;
+var savingsBalance;
+
+function intializeBank(c, s) {
+  checkingBalance = c;
+  savingsBalance = s;
+  displayBalance();
+}
 
 var getCheckingInput = function() {
   var input = $('#checkInput').val();
@@ -22,7 +28,17 @@ var checkingDeposit = function(){
 };
 
 function checkingWithdrawal(){
-  checkingBalance -= parseInt(getCheckingInput());
+  var input = parseInt(getCheckingInput());
+  if(checkingBalance < input)
+  {
+    input -= checkingBalance;
+    checkingBalance = 0;
+    savingsBalance -= input;
+  }
+  else {
+    checkingBalance -= input;
+  }
+
   displayBalance();
 
 }
@@ -47,3 +63,6 @@ $('#checkDeposit').on('click', checkingDeposit);
 $('#checkWithdraw').on('click', checkingWithdrawal);
 $('#saveDeposit').on('click', savingsDeposit);
 $('#saveWithdraw').on('click', savingsWithdrawal);
+
+// start bank
+intializeBank(0, 0);
