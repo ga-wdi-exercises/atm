@@ -30,14 +30,11 @@ Checkings.prototype.calculateTotal = function(){
 depCheck.on("click", function(event) {
   event.preventDefault();
   var userInput = parseFloat(checkReg.els.entCheck.val());
-  console.log(userInput);
   checkReg.entries.push(userInput);
-  console.log(checkReg.entries);
   //calculate total
-  console.log(checkReg.calculateTotal());
   var newTotal = checkReg.calculateTotal();
   //update html for the total
-  checkReg.els.balCheck.html(newTotal.toFixed(2));
+  checkReg.els.balCheck.html("$" + newTotal.toFixed(2));
   //clear the input
   checkReg.els.entCheck.val("");
 });
@@ -46,9 +43,21 @@ depCheck.on("click", function(event) {
 //When withdraw button is clicked, subtract value from sum of arrays
 witCheck.on("click", function(event) {
   event.preventDefault();
-  var userInput = parseFloat(checkReg.els.entCheck.val());
-  console.log((checkReg.els.balCheck.val()) - userInput);
-  //Subtract value from sum of array values
+  //Make value a negative number and push to entries array
+  var userInput = -Math.abs(checkReg.els.entCheck.val());
+  checkReg.entries.push(userInput);
+  //calculate total
+  var newTotal = checkReg.calculateTotal();
+  if (newTotal >= 0) {
+    //update html for the total
+    checkReg.els.balCheck.html("$" + newTotal.toFixed(2));
+  } else {
+    //prevent overdraft
+    checkReg.entries.pop();
+    console.log(checkReg.entries);
+  }
+  //clear the input
+  checkReg.els.entCheck.val("");
 });
 
 // var checkingBalance = document.querySelector("div#checking_balance");
