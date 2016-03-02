@@ -1,21 +1,49 @@
-var checkingBalance = document.querySelector("div#checking_balance");
-checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 
-var checkingDeposit = function(amount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+
+var checkingBalance = parseInt($('.checking').html());
+var savingsBalance = parseInt($('.savings').html());
+
+var getCheckingInput = function() {
+  var input = $('#checkInput').val();
+  $('#checkInput').val('');
+  return input;
+};
+
+// note to self: this method is very similar to above. look into passing values to combine
+var getSavingsInput = function() {
+  var input = $('#savingsInput').val();
+  $('#savingsInput').val('');
+  return input;
+};
+
+var checkingDeposit = function(){
+  checkingBalance += parseInt(getCheckingInput());
+  displayBalance();
+};
+
+function checkingWithdrawal(){
+  checkingBalance -= parseInt(getCheckingInput());
+  displayBalance();
 
 }
 
-function checkingWithdrawal(amount){
-
+function savingsDeposit(){
+  savingsBalance += parseInt(getSavingsInput());
+  displayBalance();
 }
 
-function savingsDeposit(amount){
-
+function savingsWithdrawal(){
+  savingsBalance -= parseInt(getSavingsInput());
+  displayBalance();
 }
 
-function savingsWithdrawal(amount){
-
+function displayBalance() {
+  $('.checking').html('$' + checkingBalance);
+  $('.savings').html('$' + savingsBalance);
 }
 
 // an eventListerner for each button, each one a "click"
+$('#checkDeposit').on('click', checkingDeposit);
+$('#checkWithdraw').on('click', checkingWithdrawal);
+$('#saveDeposit').on('click', savingsDeposit);
+$('#saveWithdraw').on('click', savingsWithdrawal);
