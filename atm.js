@@ -90,7 +90,7 @@ checkWBtn.click(function() {
 
     var withdraw_amnt = parseInt(savingsBox.val());
 
-    if (withdraw_amnt >= savingsAccnt.totalBal && savingsAccnt.totalBal >= 0 && checkingAccnt.totalBal >= 0) {
+    if (withdraw_amnt >= savingsAccnt.totalBal && savingsAccnt.totalBal >= 0 && checkingAccnt.totalBal > 0) {
       savingsDisplay.addClass('zero');
       var savingsLeftOver = savingsAccnt.withdrawal(withdraw_amnt);
       savingsAccnt.totalBal = 0;
