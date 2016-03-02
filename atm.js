@@ -1,38 +1,29 @@
-// var checkingBalance = document.querySelector("div#checking_balance");
-// checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-var checkingBalance = $('#checkingBalance')
-
-//talking about a deposit
-var checkingDeposit = function(amount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-
-}
-
-function checkingWithdrawal(amount){
-
-}
-
-function savingsDeposit(amount){
-
-}
-
-function savingsWithdrawal(amount){
-
-}
-
-// an eventListerner for each button, each one a "click"
-
-
+// var checkingBalance = 0;
+// var savingsBalance = 0;
+// //
+// // var checkingBalance = document.querySelector("div#checking_balance");
+// // checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+// //
+// //
+// // //talking about a deposit
+// // var checkingDeposit = function(amount){
+// //   checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 //
-
-the accounts of the atm
-load the page
-
-  var  checkingAccount = 0
-  var  savingsAccount = 0
-  var checkingBalance;
-  var savingsBalance;
-  }
+// //input value//
+// var inputValue = function
 //
-
-//press deposit or withdraw and money goes up or down
+// function checkingWithdrawal(){
+//   c
+//
+// }
+//
+// function savingsDeposit(amount){
+//
+// }
+//
+// function savingsWithdrawal(amount){
+//
+// }
+//
+// // an eventListerner for each button, each one a "click"
+//
