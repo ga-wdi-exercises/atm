@@ -1,6 +1,5 @@
 
 function MyATM(){
-  this.balance = 0;
   this.checking = {
     input: $("#newChecking"),
     total: 0
@@ -12,7 +11,8 @@ function MyATM(){
 }
 
 MyATM.prototype.balance = function(){
-  this.myBalance = this.checking.total + this.savings.total;
+  var total = this.checking.total + this.savings.total;
+  return total;
 };
 
 var pnc = new MyATM();
@@ -69,28 +69,26 @@ var checkingDeposit = function(amount){
   $("#checkingBalance").removeClass("zero");
   checkingBalance = ($("#checkingBalance").html("$" + checkingTotal));
   pnc.checking.total = checkingTotal;
-  var newBalance = checkingTotal + pnc.balance;
-  pnc.balance = newBalance;
   console.log("Total balance: " + pnc.balance);
   console.log("New checking total: " + pnc.checking.total);
 };
 
 // subtracts the user input from the checking total
 function checkingWithdraw(amount){
-  if (pnc.checking.total === 0 || pnc.checking.total < amount || pnc.balance < amount){
-    console.log("Nice try, but you're effing broke");
-  }else if(pnc.checking.total >= amount){
+  if(pnc.checking.total >= amount){
     var checkingTotal = pnc.checking.total - Math.abs(amount);
     pnc.checking.total = checkingTotal;
     console.log("New checking total: " + pnc.checking.total);
-    var newBalance = checkingTotal + pnc.balance;
-    pnc.balance = newBalance;
     console.log("Total balance: " + pnc.balance);
     checkingBalance = ($("#checkingBalance").html("$" + pnc.checking.total));
   }else if(pnc.balance >= amount){
+  }else if(pnc.checking.total < amount && pnc.balance > amount){
     console.log("Current balance: " + pnc.balance);
-    var newBalance = pnc.balance - (pnc.checking.total + amount);
-    pnc.savings.total = pnc.savings.total - pnc.balance;
+    var newAmount = pnc.checking.total - amount;
+    var overDraftP = pnc.savings.total - newAmount;
+    pnc.savings.total = overDraftP;
+  }else if (pnc.checking.total === 0 || (pnc.checking.total < amount && pnc.balance < amount)){
+    console.log("Nice try, but you're effing broke");
   }
 }
 
