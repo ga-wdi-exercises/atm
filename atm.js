@@ -1,21 +1,82 @@
-var checkingBalance = document.querySelector("div#checking_balance");
-checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+var checkingBalance1 = $(".balance").eq(0);
+var checkingBalance2 = $(".balance").eq(1);
+var total = [];
 
-var checkingDeposit = function(amount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-
+//calculates added total
+function addTotal(){
+  var addedTotal = 0;
+  for(var i=0; i<total.length; i++){
+    addedTotal = +addedTotal + +total[i];
+  }
+  console.log("Add" +addedTotal);
+  return addedTotal;
 }
 
-function checkingWithdrawal(amount){
-
+//store value in balance and then do balance.html subtract
+function subtractTotal(num){
+  var subtractedTotal = addTotal() - num;
+  console.log("sub" +subtractedTotal);
+  return subtractedTotal;
 }
 
-function savingsDeposit(amount){
+//checking deposit function
+function checkingDeposit(amount){
+  checkingBalance1.html("$" + amount);
 
-}
+  total.push($("input").eq(0).val());
+  var increaseNum = addTotal();
 
-function savingsWithdrawal(amount){
+  checkingBalance1.html("$" + increaseNum);
+  ;}
 
-}
+  //checking withdrawal function
+  function checkingWithdrawal(amount){
 
-// an eventListerner for each button, each one a "click"
+    total.push($("input").eq(0).val());
+    var decreaseNum = subtractTotal($("input").eq(0).val());
+
+    checkingBalance1.html("$" + decreaseNum);
+  }
+
+  //savings deposit function
+  function savingsDeposit(amount){
+
+    total.push($("input").eq(3).val());
+    var increaseNum = calculateTotal();
+
+    checkingBalance2.html("$" + increaseNum);
+  }
+
+  //savings withdrawal function
+  function savingsWithdrawal(amount){
+    return checkingBalance2.html("$" + amount);
+
+  }
+
+  // an eventListerner for each button, each one a "click"
+  //first deposit button
+  var checkDeposit = $("input[value='Deposit']").eq(0);
+  //console.log(checkDeposit);
+  checkDeposit.click(function(){
+    checkingDeposit($("input").eq(0).val());
+  });
+
+  //first withdraw button
+  var checkWithdraw = $("input[value='Withdraw']").eq(0);
+  checkWithdraw.click(function(){
+    checkingWithdrawal($("input").eq(0).val());
+  });
+
+  //second deposit button
+  var saveDeposit = $("input[value='Deposit']").eq(1);
+  saveDeposit.click(function(){
+    console.log($("input").eq(3).val());
+    savingsDeposit($("input").eq(3).val());
+  });
+
+
+
+  var saveWithdraw = $("input[value='Withdraw']").eq(1);
+  saveWithdraw.click(function(){
+    savingsWithdrawal($("input").eq(3).val());
+  });
