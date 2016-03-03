@@ -3,28 +3,49 @@ checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 
 var checkingDeposit = function(amount){
   checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-
 };
 
-var checking = {
-  var account: $("#account");
-  var balance: $(".balance");
-  var text: $(".text");
-}];
+  var checkingDeposit = {
+    var account: $("#account");
 
+    var form= {
+    var balance: $(".balance");
+    var input: $(".input");
+  }
+  }];
 
-
-function checkingWithdrawal(amount){
+  form.on("submit", function(event){
     event.preventDefault();
-    checkingBalance.on("click", val(amount));
+    $(".input".text().balance);
+  });
 
-}
 
-function savingsDeposit(amount){
-    event.preventDefault();
 
-}
+// checking account
+  // Withing the checking account
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
-function savingsWithdrawal(amount){
 
-}
+
+// function checkingWithdrawal(amount){
+//     event.preventDefault();
+//     checkingBalance.on("click", val(amount));
+//
+// }
+//
+// function savingsDeposit(amount){
+//     event.preventDefault();
+//
+// }
+//
+// function savingsWithdrawal(amount){
+//
+// }
