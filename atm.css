@@ -28,7 +28,17 @@ body {
   width: 300px;
 }
 
-.balance {
+.checking_balance {
+  background-color: #E3E3E3;
+  border: 1px solid #676767;
+  border-radius: 15px;
+  font-family: 'Ruluko', sans-serif;
+  font-size: 50px;
+  margin: 5px;
+  padding: 25px 0px;
+}
+
+.savings_balance {
   background-color: #E3E3E3;
   border: 1px solid #676767;
   border-radius: 15px;
