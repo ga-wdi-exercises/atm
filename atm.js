@@ -84,6 +84,69 @@ myChecking.els.checkingWithdrawal.click( function(event) {
   myChecking.els.value.html("$" + newBal);
 });
 
+function savings() {
+  this.entries = [];
+  this.els = {
+    // checking value
+    value: $("#savingsAcct"),
+    // input for deposit amount
+    input: $("#savingsAmt"),
+    // checking deposit button
+    savingsDeposit: $("#savingsDeposit"),
+    // checking withdraw button
+    savingsWithdrawal: $("#savingsWithdrawal"),
+  };
+}
+
+savings.prototype.calculateBal = function(entry) {
+  var total = 0;
+  for (var i = 0; i < this.entries.length; i++){
+    total += this.entries[i];
+  }
+  return total;
+};
+
+
+//creating a new savings function based on savings constructor function
+var mySavings = new savings();
+
+// what happens when savings deposit button is clicked
+mySavings.els.savingsDeposit.click( function(event) {
+  event.preventDefault();
+  // get user input
+  var userInput = parseInt(mySavings.els.input.val());
+  console.log(userInput);
+  // add the inputs to the array an entries
+  mySavings.entries.push(userInput);
+  // displays user input in checking box
+  mySavings.els.value.html(userInput);
+  // calculate balance
+  var newBal = mySavings.calculateBal();
+  // displays new balance
+  mySavings.els.value.html("$" + newBal);
+});
+
+// what happens when savings withdrawal button is clicked
+mySavings.els.savingsWithdrawal.click( function(event) {
+  event.preventDefault();
+  // get user input
+  var userInput = parseInt(mySavings.els.input.val());
+  console.log(userInput);
+  // turn user iput to a negative value
+  if (userInput > 0) {
+    userInput = userInput * -1;
+  }
+  // add the inputs to the array of entries
+  mySavings.entries.push(userInput);
+  // displays user input in checking box
+  mySavings.els.value.html(userInput);
+  // calculate balance
+  var newBal = mySavings.calculateBal();
+  // displays new balance
+  mySavings.els.value.html("$" + newBal);
+});
+
+
 
 
 
