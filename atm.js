@@ -3,6 +3,11 @@ function Bank(c, s) {
   this.savingsBalance = s;
   $('.checking').html('$' + this.checkingBalance);
   $('.savings').html('$' + this.savingsBalance);
+
+  $('#checkDeposit').on('click', this.checkingDeposit);
+  $('#checkWithdraw').on('click', this.checkingWithdrawal);
+  $('#saveDeposit').on('click', this.savingsDeposit);
+  $('#saveWithdraw').on('click', this.savingsWithdrawal);
 }
 
 Bank.prototype.getCheckingInput = function () {
@@ -39,7 +44,7 @@ Bank.prototype.overdrawWarning = function () {
     }
 };
 
-Bank.prototype.checkDeposit = function () {
+Bank.prototype.checkingDeposit = function () {
   var input = parseInt(this.getCheckingInput());
   if(this.savingsBalance < 0) {
     // balance out savings debt before adding to checking
@@ -95,7 +100,7 @@ Bank.prototype.savingsWithdrawal = function () {
 var atm = new Bank(0,0);
 
 // // an eventListerner for each button, each one a "click"
-$('#checkDeposit').on('click', atm.checkingDeposit);
-$('#checkWithdraw').on('click', atm.checkingWithdrawal);
-$('#saveDeposit').on('click', atm.savingsDeposit);
-$('#saveWithdraw').on('click', atm.savingsWithdrawal);
+// $('#checkDeposit').on('click', atm.checkingDeposit);
+// $('#checkWithdraw').on('click', atm.checkingWithdrawal);
+// $('#saveDeposit').on('click', atm.savingsDeposit);
+// $('#saveWithdraw').on('click', atm.savingsWithdrawal);
