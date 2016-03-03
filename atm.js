@@ -23,6 +23,7 @@
 $(document).ready(function() {
 
 function checking() {
+  $("#checkingAcct").addClass("zero");
   this.entries = [];
   this.els = {
     // checking value
@@ -56,7 +57,8 @@ myChecking.els.checkingDeposit.click( function(event) {
   console.log(userInput);
   // add the inputs to the array an entries
   myChecking.entries.push(userInput);
-  // displays user input in checking box
+  // displays user input in checking box and removes css .zero class
+  $("#checkingAcct").removeClass("zero");
   myChecking.els.value.html(userInput);
   // calculate balance
   var newBal = myChecking.calculateBal();
@@ -85,15 +87,16 @@ myChecking.els.checkingWithdrawal.click( function(event) {
 });
 
 function savings() {
+  $("#savingsAcct").addClass("zero");
   this.entries = [];
   this.els = {
-    // checking value
+    // savings value
     value: $("#savingsAcct"),
     // input for deposit amount
     input: $("#savingsAmt"),
-    // checking deposit button
+    // savings deposit button
     savingsDeposit: $("#savingsDeposit"),
-    // checking withdraw button
+    // savings withdraw button
     savingsWithdrawal: $("#savingsWithdrawal"),
   };
 }
@@ -118,7 +121,8 @@ mySavings.els.savingsDeposit.click( function(event) {
   console.log(userInput);
   // add the inputs to the array an entries
   mySavings.entries.push(userInput);
-  // displays user input in checking box
+  // displays user input in savings box and removes css .zero class
+  $("#savingsAcct").removeClass("zero");
   mySavings.els.value.html(userInput);
   // calculate balance
   var newBal = mySavings.calculateBal();
@@ -138,7 +142,7 @@ mySavings.els.savingsWithdrawal.click( function(event) {
   }
   // add the inputs to the array of entries
   mySavings.entries.push(userInput);
-  // displays user input in checking box
+  // displays user input in savings box
   mySavings.els.value.html(userInput);
   // calculate balance
   var newBal = mySavings.calculateBal();
