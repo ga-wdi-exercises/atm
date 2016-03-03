@@ -1,11 +1,16 @@
 $(document).ready(function(){
 
-  // Checking account handled here
-
   var checkingDepositBtn = $("#checkingDepositBtn");
   var checkingWithdrawalBtn = $("#checkingWithdrawalBtn");
   var checkingDisplay = $("#checkingAccount > .balance");
   var checkingBalance = parseInt(checkingDisplay.html().replace("$" , ""));
+  var savingsDepositBtn = $("#savingsDepositBtn");
+  var savingsWithdrawalBtn = $("#savingsWithdrawalBtn");
+  var savingsDisplay = $("#savingsAccount > .balance");
+  var savingsBalance = parseInt(savingsDisplay.html().replace("$" , ""));
+
+
+  // Checking account handled here
 
   checkingDepositBtn.click(depositChecking);
   checkingWithdrawalBtn.click(withdrawChecking);
@@ -18,20 +23,19 @@ $(document).ready(function(){
 
   function withdrawChecking() {
     var userInput = parseInt($("#checkingField").val());
-    if (userInput < checkingBalance) {
-      checkingBalance -= userInput;
-      checkingDisplay.html("$" + checkingBalance);
-    } else if (userInput === checkingBalance) {
-      checkingDisplay.addClass("zero");
-    }
+    var overdraft = checkingBalance + savingsBalance;
+    if ((userInput > checkingBalance) && (userInput <= overdraft)) {
+        overdraft -= userInput;
+        checkingBalance = 0;
+        checkingDisplay.html("$" + checkingBalance);
+        savingsDisplay.html("$" + overdraft);
+    } else if (userInput <= checkingBalance) {
+        checkingBalance -= userInput;
+        checkingDisplay.html("$" + checkingBalance);
+      }
   }
 
   // Savings account handled here
-
-  var savingsDepositBtn = $("#savingsDepositBtn");
-  var savingsWithdrawalBtn = $("#savingsWithdrawalBtn");
-  var savingsDisplay = $("#savingsAccount > .balance");
-  var savingsBalance = parseInt(savingsDisplay.html().replace("$" , ""));
 
   savingsDepositBtn.click(depositSavings);
   savingsWithdrawalBtn.click(withdrawSavings);
@@ -44,13 +48,16 @@ $(document).ready(function(){
 
   function withdrawSavings() {
     var userInput = parseInt($("#savingsField").val());
-    if (userInput < savingsBalance) {
+    var overdraft = checkingBalance + savingsBalance;
+    if ((userInput > savingsBalance) && (userInput <= overdraft)) {
+      overdraft -= userInput;
+      savingsBalance = 0;
+      savingsDisplay.html("$" + savingsBalance);
+      checkingDisplay.html("$" + overdraft);
+    } else if   (userInput <= savingsBalance) {
       savingsBalance -= userInput;
       savingsDisplay.html("$" + savingsBalance);
-    } else if (userInput === savingsBalance) {
-      savingsDisplay.addClass("zero");
     }
   }
-
 
 });
