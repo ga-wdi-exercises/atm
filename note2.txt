@@ -1,0 +1,60 @@
+
+});
+function CashRegister(){
+  this.entries= [];
+  this.els = {
+      form: $("#entry"),
+      entries: $("#entries"),
+      total: $("#total"),
+      input: $("#newEntry"),
+  }
+}
+CashRegister.prototype.calculateTotal = function(){
+  var total = 0;
+  for (var i = 0; i < this.entries.length; i++){
+    total += this.entries[i]; //this will add the total to the latest "this.entry"
+  }
+  return total;
+}
+CashRegister.prototype.displayEntry = function(entry){
+  var tr = $("<tr></tr>");
+  var td = $("<td></td>");
+  var td2 = $("<td>"+ entry + "</td>");
+  tr.append(td)
+  tr.append(td2)
+  this.els.entries.append(tr)
+}
+
+var register = new CashRegister();
+
+register.els.form.on("submit", function(event){
+    event.preventDefault();
+    var newNumber = parseFloat(register.els.input.val())//gets the user input and rounds it to a decimal
+    register.els.input.val("");//sets it back  to nothing - clears input feild
+    register.entries.push(newNumber)//adds the user input to the entries array at the top.
+    register.displayEntry(newNumber);//create a new table row.? really?
+    var newTotal = register.calculateTotal()
+      register.els.total.html("$"+ newTotal)
+});
+
+//
+//
+//  //you can put this "register.els.form.on("submit, function etc --- ) anyplace in your code as long as it is after your defined "register" construct. You can do this instead of $("#newEntry") because we have already "queries the DOM" when we defined "els" at the top
+//
+//
+// //.on("submit", callback)
+// //=======pseudocode=======
+// // How to start: Say this kind of thing:
+// // //When the user submits the form:
+// //   --- get the users input. // .val() is jQuery for get input
+// // clear text input  // .val("")
+//   // add that users input to an array
+// //   ---create a new table row // .append it to entries
+// //   ---add the user input to the second td of that row.
+// //calculate the total.
+// //add all the values of the array together
+// //  ---- set the total to zero
+// //  ---- loop through each element of the entries array
+// //  ----total = total + entries[i] (for loop?)
+// // - update #total's html to the total to be $ + total
+// //
