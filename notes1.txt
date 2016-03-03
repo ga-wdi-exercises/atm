@@ -6,8 +6,17 @@ Accounts:
  both cannot go into the negative. (ignore default?)
  both
 
-
-
+ function person(first, last, age, eyecolor) {
+     this.firstName = first;
+     this.lastName = last;
+     this.age = age;
+     this.eyeColor = eyecolor;
+ }
+ person.prototype.nationality = "English";
+ }
+ person.prototype.name = function() {
+     return this.firstName + " " + this.lastName;
+ };
 
 
 
