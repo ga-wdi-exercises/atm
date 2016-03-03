@@ -42,12 +42,17 @@ checking.prototype.calculateBal = function() {
   for (var i = 0; i < this.entries.length; i++) {
     total += this.entries[i];
   }
+  // changes color to red if balance hits zero
   if (total === 0) {
     $("#checkingAcct").addClass("zero");
     return total;
   } else if (total >= 0) {
     $("#checkingAcct").removeClass("zero");
     return total;
+  // if userInput > checking balance, set to 0; pull (userInput - checking balance) from savings
+  } else if (total < 0) {
+    $("#checkingAcct").addClass("zero");
+    return 0;
   }
 };
 
@@ -77,12 +82,8 @@ myChecking.els.checkingWithdrawal.click( function(event) {
   // get user input
   var userInput = parseInt(myChecking.els.input.val());
   console.log(userInput);
-  // turn user iput to a negative value
-  if (userInput > 0) {
-    userInput = userInput * -1;
-  }
-  // add the inputs to the array of entries
-  myChecking.entries.push(userInput);
+  // add the negative value of inputs to the array of entries
+  myChecking.entries.push(-(userInput));
   // displays user input in checking box
   myChecking.els.value.html(userInput);
   // calculate balance
@@ -111,6 +112,7 @@ savings.prototype.calculateBal = function() {
   for (var i = 0; i < this.entries.length; i++) {
     total += this.entries[i];
   }
+  // changes color to red if balance hits zero
   if (total === 0) {
     $("#savingsAcct").addClass("zero");
     return total;
@@ -145,12 +147,8 @@ mySavings.els.savingsWithdrawal.click( function(event) {
   // get user input
   var userInput = parseInt(mySavings.els.input.val());
   console.log(userInput);
-  // turn user iput to a negative value
-  if (userInput > 0) {
-    userInput = userInput * -1;
-  }
-  // add the inputs to the array of entries
-  mySavings.entries.push(userInput);
+  // add the negative value of inputs to the array of entries
+  mySavings.entries.push(-(userInput));
   // displays user input in savings box
   mySavings.els.value.html(userInput);
   // calculate balance
