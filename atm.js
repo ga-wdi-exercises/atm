@@ -66,6 +66,9 @@ $(document).ready(function(){
             savingsAmount -= userInput;
             //updating the display
             savingsDisplay.html("$" + savingsAmount);
+        }else if(userInput > overdraft){
+            checkingDisplay.html("$" + checkingAmount);
+            savingsDisplay.html("$" + savingsAmount);
         }else if(savingsAmount < userInput){
             checkingAmount = overdraft -userInput;
             savingsAmount = 0;
