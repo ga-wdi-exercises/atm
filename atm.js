@@ -10,48 +10,51 @@ atm = {
   accounts: {
     checking: 0,
     savings: 0
+  },
+  buttons: {
+    checkingDeposit: $("[type='button']").eq(0),
+    checkingWithdrawal: $("[type='button']").eq(1),
+    savingsDeposit: $("[type='button']").eq(2),
+    savingsWithdrawal: $("[type='button']").eq(3)
+  },
+  display: {
+    checking: $(".balance").eq(0),
+    checkingInputBox: $("[type='text']").eq(0),
+    savings: $(".balance").eq(1),
+    savingsInputBox: $("[type='text']").eq(1)
   }
 }
 
-var buttons = $("[type='button']");
-var checkingDepositButton = buttons.eq(0);
+// --> Event listeners:
+atm.buttons.checkingDeposit.on("click", checkingDeposit)
+atm.buttons.checkingWithdrawal.on("click", checkingWithdrawal)
 
-var checkingAmountInput = $("[type='text']").eq(0)
-var checkingAmountInputText =  checkingAmountInput.prop("placeholder")
-
-checkingDepositButton.on("click", checkingDeposit)
-
-checkingBalance2 = $(".balance").eq(0)
-
-checkingBalance2.html()
-
-checkingBalance2.html().replace("$", "")
+atm.buttons.savingsDeposit.on("click", savingsDeposit)
+atm.buttons.savingsWithdrawal.on("click", savingsWithdrawal)
 
 function checkingDeposit() {
-  atm.accounts.checking = +atm.accounts.checking + +checkingAmountInput.val()
+  atm.accounts.checking = +atm.accounts.checking + +atm.display.checkingInputBox.val()
 
-  checkingBalance2.html("$" + atm.accounts.checking)
+  atm.display.checking.html("$" + atm.accounts.checking)
 }
 
-
-var checkingBalance = document.querySelector("div#checking_balance");
-checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-
-// var checkingDeposit = function(amount){
-//   checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-//
-// }
-
 function checkingWithdrawal(amount){
+  atm.accounts.savings = +atm.accounts.savings - +atm.display.checkingInputBox.val()
 
+  atm.display.checking.html("$" + atm.accounts.checking)
 }
 
 function savingsDeposit(amount){
+  console.log("I got clicked")
+  atm.accounts.savings = +atm.accounts.savings + +atm.display.savingsInputBox.val()
 
+  atm.display.savings.html("$" + atm.accounts.savings)
 }
 
 function savingsWithdrawal(amount){
+  atm.accounts.savings = +atm.accounts.savings - +atm.display.savingsInputBox.val()
 
+  atm.display.savings.html("$" + atm.accounts.savings)
 }
 
 // an eventListerner for each button, each one a "click"
