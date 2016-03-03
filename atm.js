@@ -1,22 +1,47 @@
 $(document).ready(function(){
 
 
+  // Checking account handled here
 
+  var checkingDepositBtn = $("#checkingDepositBtn");
+  var checkingWithdrawalBtn = $("#checkingWithdrawalBtn");
+  var checkingDisplay = $("#checkingAccount > .balance");
+  var checkingBalance = parseInt(checkingDisplay.html().replace("$" , ""));
 
-var checkingDepositBtn = $("#checkingDepositBtn");
+  checkingDepositBtn.click(depositChecking);
+  checkingWithdrawalBtn.click(withdrawChecking);
 
-var checkingDisplay = $("#checkingAccount > .balance");
+  function depositChecking() {
+    var userInput = parseInt($("#checkingField").val());
+    checkingBalance += userInput;
+    checkingDisplay.html("$" + checkingBalance);
+  }
 
-var checkingBalance = parseInt(checkingDisplay.html().replace("$" , ""));
+  function withdrawChecking() {
+    var userInput = parseInt($("#checkingField").val());
+    checkingBalance -= userInput;
+    checkingDisplay.html("$" + checkingBalance);
+  }
 
+  // Savings account handled here
 
-checkingDepositBtn.click(depositMoney);
+  var savingsDepositBtn = $("#savingsDepositBtn");
+  var savingsWithdrawalBtn = $("#savingsWithdrawalBtn");
+  var savingsDisplay = $("#savingsAccount > .balance");
+  var savingsBalance = parseInt(savingsDisplay.html().replace("$" , ""));
 
-function depositMoney() {
-  var userInput = parseInt($("#checkingField").val());
-  checkingBalance += userInput;
-  checkingDisplay.html("$" + checkingBalance);
-}
+  savingsDepositBtn.click(depositSavings);
+  savingsWithdrawalBtn.click(withdrawSavings);
 
+  function depositSavings() {
+    var userInput = parseInt($("#savingsField").val());
+    savingsBalance += userInput;
+    savingsDisplay.html("$" + savingsBalance);
+  }
 
+  function withdrawSavings() {
+    var userInput = parseInt($("#savingsField").val());
+    savingsBalance -= userInput;
+    savingsDisplay.html("$" + savingsBalance);
+  }
 });
