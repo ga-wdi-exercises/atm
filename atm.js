@@ -62,17 +62,33 @@ myChecking.els.checkingDeposit.click( function(event) {
   var newBal = myChecking.calculateBal();
   // displays new balance
   myChecking.els.value.html("$" + newBal);
-
-  // what happens when checking withdrawal button is clicked
-  myChecking.els.checkingWithdrawal.click( function(event) {
-    event.preventDefault();
-    // get user input
-    var userInput = parseInt(myChecking.els.input.val());
-
-
-
-
 });
+
+// what happens when checking withdrawal button is clicked
+myChecking.els.checkingWithdrawal.click( function(event) {
+  event.preventDefault();
+  // get user input
+  var userInput = parseInt(myChecking.els.input.val());
+  console.log(userInput);
+  // turn user iput to a negative value
+  if (userInput > 0) {
+    userInput = userInput * -1;
+  }
+  // add the inputs to the array of entries
+  myChecking.entries.push(userInput);
+  // displays user input in checking box
+  myChecking.els.value.html(userInput);
+  // calculate balance
+  var newBal = myChecking.calculateBal();
+  // displays new balance
+  myChecking.els.value.html("$" + newBal);
+});
+
+
+
+
+
+
 
 
 
