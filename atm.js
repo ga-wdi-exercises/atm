@@ -22,6 +22,8 @@ $(document).ready(function(){
 
     var savingsAmount = parseInt(savingsDisplay.html().replace("$", ""));
 
+    var overdraft = checkingAmount + savingsAmount;
+
 
     //create function to call in click
     function checkingAddMoney(){
@@ -43,8 +45,10 @@ $(document).ready(function(){
             checkingAmount -= userInput;
             //updating the display
             checkingDisplay.html("$" + checkingAmount);
+        }else if(userInput > overdraft){
+            checkingDisplay.html("$" + checkingAmount);
+            savingsDisplay.html("$" + savingsAmount);
         }else if(checkingAmount < userInput){
-            var overdraft = checkingAmount + savingsAmount;
             savingsAmount = overdraft -userInput;
             checkingAmount = 0;
             checkingDisplay.html("$" + checkingAmount);
@@ -63,7 +67,6 @@ $(document).ready(function(){
             //updating the display
             savingsDisplay.html("$" + savingsAmount);
         }else if(savingsAmount < userInput){
-            var overdraft = savingsAmount + checkingAmount;
             checkingAmount = overdraft -userInput;
             savingsAmount = 0;
             savingsDisplay.html("$" + savingsAmount);
