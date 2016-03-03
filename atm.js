@@ -4,6 +4,10 @@ var witCheck = $("#witCheck");
 var depSave = $("#depSave");
 var witSave = $("#witSave");
 
+/////////////
+//Checkings//
+////////////
+
 //Create Checkings Constructor
 function Checkings(){
   this.entries = [];
@@ -36,7 +40,7 @@ depCheck.on("click", function(event) {
   checkReg.els.balCheck.html("$" + newTotal.toFixed(2));
   //clear the input
   checkReg.els.entCheck.val("");
-  makeRed();
+  makeCheckRed();
 });
 
 //When withdraw button is clicked, subtract value from sum of arrays
@@ -57,8 +61,22 @@ witCheck.on("click", function(event) {
   }
   //clear the input
   checkReg.els.entCheck.val("");
-  makeRed();
+  makeCheckRed();
 });
+
+//add class of zero when balance is zero
+function makeCheckRed() {
+  if (checkReg.els.balCheck.html() === "$0.00") {
+    checkReg.els.balCheck.addClass("zero");
+  } else {
+    checkReg.els.balCheck.removeClass("zero");
+  }
+}
+makeCheckRed();
+
+////////////
+//Savings//
+///////////
 
 //Create Savings Constructor
 function Savings(){
@@ -92,7 +110,7 @@ depSave.on("click", function(event) {
   saveReg.els.balSave.html("$" + newTotal.toFixed(2));
   //clear the input
   saveReg.els.entSave.val("");
-  //makeRed();
+  makeSaveRed();
 });
 
 //When withdraw button is clicked, subtract value from sum of arrays
@@ -113,15 +131,15 @@ witSave.on("click", function(event) {
   }
   //clear the input
   saveReg.els.entSave.val("");
-  //makeRed();
+  makeSaveRed();
 });
 
 //add class of zero when balance is zero
-function makeRed() {
-  if (checkReg.els.balCheck.html() === "$0.00") {
-    checkReg.els.balCheck.addClass("zero");
+function makeSaveRed() {
+  if (saveReg.els.balSave.html() === "$0.00") {
+    saveReg.els.balSave.addClass("zero");
   } else {
-    checkReg.els.balCheck.removeClass("zero");
+    saveReg.els.balSave.removeClass("zero");
   }
 }
-makeRed();
+makeSaveRed();
