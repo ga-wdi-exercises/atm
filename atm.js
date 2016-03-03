@@ -37,12 +37,18 @@ function checking() {
   };
 }
 
-checking.prototype.calculateBal = function(entry) {
+checking.prototype.calculateBal = function() {
   var total = 0;
-  for (var i = 0; i < this.entries.length; i++){
+  for (var i = 0; i < this.entries.length; i++) {
     total += this.entries[i];
   }
-  return total;
+  if (total === 0) {
+    $("#checkingAcct").addClass("zero");
+    return total;
+  } else if (total >= 0) {
+    $("#checkingAcct").removeClass("zero");
+    return total;
+  }
 };
 
 
@@ -57,8 +63,7 @@ myChecking.els.checkingDeposit.click( function(event) {
   console.log(userInput);
   // add the inputs to the array an entries
   myChecking.entries.push(userInput);
-  // displays user input in checking box and removes css .zero class
-  $("#checkingAcct").removeClass("zero");
+  // displays user input in checking box
   myChecking.els.value.html(userInput);
   // calculate balance
   var newBal = myChecking.calculateBal();
@@ -101,14 +106,19 @@ function savings() {
   };
 }
 
-savings.prototype.calculateBal = function(entry) {
+savings.prototype.calculateBal = function() {
   var total = 0;
-  for (var i = 0; i < this.entries.length; i++){
+  for (var i = 0; i < this.entries.length; i++) {
     total += this.entries[i];
   }
-  return total;
+  if (total === 0) {
+    $("#savingsAcct").addClass("zero");
+    return total;
+  } else if (total >= 0) {
+    $("#savingsAcct").removeClass("zero");
+    return total;
+  }
 };
-
 
 //creating a new savings function based on savings constructor function
 var mySavings = new savings();
@@ -121,8 +131,7 @@ mySavings.els.savingsDeposit.click( function(event) {
   console.log(userInput);
   // add the inputs to the array an entries
   mySavings.entries.push(userInput);
-  // displays user input in savings box and removes css .zero class
-  $("#savingsAcct").removeClass("zero");
+  // displays user input in savings box
   mySavings.els.value.html(userInput);
   // calculate balance
   var newBal = mySavings.calculateBal();
