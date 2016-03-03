@@ -14,7 +14,6 @@ function Checkings(){
     balCheck : $("#balCheck")
   };
 }
-
 var checkReg = new Checkings();
 
 //Calculate total of Checkings Deposits
@@ -61,6 +60,27 @@ witCheck.on("click", function(event) {
   checkReg.els.entCheck.val("");
   makeRed();
 });
+
+//Create Savings Constructor
+function Savings(){
+  this.entries = [];
+  this.els = {
+    //input text
+    entSave : $("#entSave"),
+    //total money
+    balSave : $("#balSave")
+  };
+}
+var saveReg = new Savings();
+
+//Calculate total of Savings Deposits
+Savings.prototype.calculateTotal = function(){
+  var total = 0;
+  for( var i = 0; i < this.entries.length; i++ ){
+    total += this.entries[i];
+  }
+  return total;
+};
 
 //add class of zero when balance is zero
 function makeRed() {
