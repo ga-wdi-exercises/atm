@@ -1,13 +1,23 @@
 function Bank(c, s) {
   this.checkingBalance = c;
   this.savingsBalance = s;
+
   $('.checking').html('$' + this.checkingBalance);
   $('.savings').html('$' + this.savingsBalance);
 
-  $('#checkDeposit').on('click', this.checkingDeposit);
-  $('#checkWithdraw').on('click', this.checkingWithdrawal);
-  $('#saveDeposit').on('click', this.savingsDeposit);
-  $('#saveWithdraw').on('click', this.savingsWithdrawal);
+  var bank = this; // to preserve context during event listener assignment
+  $('#checkDeposit').on('click', function() {
+    bank.checkingDeposit();
+  });
+  $('#checkWithdraw').on('click', function() {
+    bank.checkingWithdrawal();
+  });
+  $('#saveDeposit').on('click', function() {
+    bank.savingsDeposit();
+  });
+  $('#saveWithdraw').on('click', function() {
+    bank.savingsWithdrawal();
+  });
 }
 
 Bank.prototype.getCheckingInput = function () {
@@ -89,6 +99,12 @@ Bank.prototype.savingsWithdrawal = function () {
 
   if(combinedBalance < input) {
     alert('Not enough funds for this action');
+  }
+  else if(this.savingsBalance < input) {
+    // remove money from checking to cover extra amount needed
+    input -= this.savingsBalance;
+    this.savingsBalance = 0;
+    this.checkingBalance -= input;
   }
   else {
     this.savingsBalance -= input;
