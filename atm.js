@@ -6,7 +6,7 @@ var atm = {
     $(".checking-deposit").click(this.checkingDeposit);
     $(".checking-withdrawal").click(this.checkingWithdrawal);
     $(".savings-deposit").click(this.savingsDeposit);
-    //$(".savings-withdrawal").click(this.savingsWithdrawal);
+    $(".savings-withdrawal").click(this.savingsWithdrawal);
   },
   checkingInput: function() {
     var self = atm;
@@ -44,8 +44,16 @@ var atm = {
     self.savingsBalance += self.currentInput;
 
     $("#savings_balance").html("$" + self.savingsBalance);
-  }
+  },
+  savingsWithdrawal: function() {
+    var self = atm;
 
+    self.savingsInput();
+
+    self.savingsBalance -= self.currentInput;
+
+    $("#savings_balance").html("$" + self.savingsBalance);
+  }
 }
 
 atm.buttonInitialize();
