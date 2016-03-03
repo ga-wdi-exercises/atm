@@ -9,10 +9,9 @@ var checkingDeposit = function(amount){
 function bank(originalAmount){
   originalAmount = originalAmount 0;
   this.checking = originalAmount.checking;
-  this.saving = originalAmount.saving;
+  this.savings = originalAmount.savings;
   this.checking = parseInt(checking)
-  this.saving = parseInt(savings)
-
+  this.savings = parseInt(savings)
 }
 
 
@@ -22,15 +21,15 @@ function bank(originalAmount){
 
 
 function checkingWithdrawal(amount){
-  return checkingBalance - amount;
+  return (this.checking - amount);
 }
 
 function savingsDeposit(amount){
-  return checkingBalance + amount
+  return (this.checking + amount);
 }
 
 function savingsWithdrawal(amount){
-  return checkingBalance
+  return (this.savings - amount);
 }
 
 // an eventListerner for each button, each one a "click"
