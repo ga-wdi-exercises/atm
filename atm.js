@@ -36,13 +36,19 @@ function checking() {
   };
 }
 
-checking.prototype.calculateTotal = function(entry) {
-
+checking.prototype.calculateBal = function(entry) {
+  var total = 0;
+  for (var i = 0; i < this.entries.length; i++){
+    total += this.entries[i];
+  }
+  return total;
 };
 
 
 //creating a new checking function based on checking constructor function
 var myChecking = new checking();
+
+// what happens when checking deposit button is clicked
 myChecking.els.checkingDeposit.click( function(event) {
   event.preventDefault();
   // get user input
@@ -52,6 +58,18 @@ myChecking.els.checkingDeposit.click( function(event) {
   myChecking.entries.push(userInput);
   // displays user input in checking box
   myChecking.els.value.html(userInput);
+  // calculate balance
+  var newBal = myChecking.calculateBal();
+  // displays new balance
+  myChecking.els.value.html("$" + newBal);
+
+  // what happens when checking withdrawal button is clicked
+  myChecking.els.checkingWithdrawal.click( function(event) {
+    event.preventDefault();
+    // get user input
+    var userInput = parseInt(myChecking.els.input.val());
+
+
 
 
 });
