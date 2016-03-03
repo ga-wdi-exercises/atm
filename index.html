@@ -6,27 +6,28 @@
     <link rel="stylesheet" href="atm.css">
   </head>
   <body>
-    <div class="header">
-      <div><img src="ga.png" /></div>
-      <div class="title">Bank of GA</div>
+    <div id="content">
+      <div id="nav">
+        <div id="logo"><img src="ga.png" /></div>
+        <div id="title">Bank of GA</div>
+      </div>
+      <div class="account" id="account1">
+        <h2>Checking</h2>
+        <div class="balance" id="checking_balance">$0</div>
+        <input id="checking_amount" type="text" placeholder="enter an amount" />
+        <input id="checking_deposit" type="button" value="Deposit" />
+        <input id="checking_withdraw" type="button" value="Withdraw" />
+      </div>
+      <div class="account" id="account2">
+        <h2>Savings</h2>
+        <div class="balance" id="savings_balance">$0</div>
+        <input id="savings_amount" type="text" placeholder="enter an amount" />
+        <input id="savings_deposit" type="button" value="Deposit" />
+        <input id="savings_withdraw" type="button" value="Withdraw" />
+      </div>
+      <div class="clear"></div>
     </div>
-    
-    <div class="account">
-      <h2>Checking</h2>
-      <div class="balance">$0</div>
-      <input type="text" placeholder="enter an amount" />
-      <input type="button" value="Deposit" />
-      <input type="button" value="Withdraw" />
-    </div>
-
-    <div class="account">
-      <h2>Savings</h2>
-      <div class="balance">$0</div>
-      <input type="text" placeholder="enter an amount" />
-      <input type="button" value="Deposit" />
-      <input type="button" value="Withdraw" />
-    </div>
-
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script src="atm.js"></script>
   </body>
 </html>
