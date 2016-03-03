@@ -13,9 +13,9 @@ var savingDisplay = $("#savings_balance")
 var negative = $(".zero")
 
 checkingDepositButton.on("click", function (){
-checkingTotal += parseFloat(checkingUserInput.val());
-checkingDisplay.html(checkingTotal)
-console.log(checkingUserInput.val());
+  checkingTotal += parseFloat(checkingUserInput.val());
+  checkingDisplay.html(checkingTotal)
+  console.log(checkingUserInput.val());
 })
 
 checkingWithdrawlButton.on("click", function(){
@@ -25,9 +25,9 @@ checkingWithdrawlButton.on("click", function(){
 })
 
 savingDepositButton.on("click", function (){
-savingTotal += parseFloat(savingUserInput.val());
-savingDisplay.html(savingTotal)
-console.log(savingUserInput.val());
+  savingTotal += parseFloat(savingUserInput.val());
+  savingDisplay.html(savingTotal)
+  console.log(savingUserInput.val());
 })
 
 savingWithdrawlButton.on("click", function(){
@@ -35,15 +35,3 @@ savingWithdrawlButton.on("click", function(){
   savingDisplay.html(savingTotal)
   console.log(savingUserInput.val())
 })
-
-if ("checkingTotal" < 0){
-  $("body").css("background", "#F52F4F");
-}
-//
-// CashRegister.prototype.calculateTotal = function(){
-//   var total = 0;
-//   for( var i = 0; i < this.entries.length; i++ ){
-//     total += this.entries[i];
-//   }
-//   return total;
-// }
