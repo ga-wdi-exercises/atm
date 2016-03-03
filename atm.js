@@ -92,15 +92,15 @@ $(':button').eq(3).on("click", function() {
 
 //these functions check the balances and if zero sets the class to zero
 function checkColorSave(){
-if ($('.balance').eq(1).html()=="$0"){
-  $('.balance').eq(1).addClass("zero");
-}else{$('.balance').eq(1).removeClass("zero");}
+  if ($('.balance').eq(1).html()=="$0"){
+    $('.balance').eq(1).addClass("zero");
+  }else{$('.balance').eq(1).removeClass("zero");}
 }
 checkColorSave();
 
 function checkColorCheck(){
-if ($('.balance').eq(0).html()=="$0"){
-  $('.balance').eq(0).addClass("zero");
-}else{$('.balance').eq(0).removeClass("zero");}
+  if ($('.balance').eq(0).html()=="$0"){
+    $('.balance').eq(0).addClass("zero");
+  }else{$('.balance').eq(0).removeClass("zero");}
 }
 checkColorCheck();
