@@ -1,6 +1,6 @@
 var atm = {
-  currentInput: "",
-  checkingBalance: "",
+  currentInput: 0,
+  checkingBalance: 0,
   buttonInitialize: function() {
     $(".checking-deposit").click(this.checkingDeposit);
     // $(".checking-withdrawal").click(this.checkingWithdrawal);
