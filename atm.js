@@ -1,73 +1,94 @@
-//var checkingBalance = parseInt($(".balance").eq(0).html().replace("$", ""));
+//var balances.checkingBalance = parseInt($(".balance").eq(0).html().replace("$", ""));
 // This not a DOM object; it is a number.  You are only saying =0.
-var checkingBalance = 0;
-var savingsBalance = 0;
 
-//var checkingDeposit = function(amount){
-//  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-//};
+var balances = {
+  checkingBalance: 0,
+  savingsBalance: 0
+};
 
-var chkDepButton = $("input").eq(1);
-var chkWitButton = $("input").eq(2);
-var savDepButton = $("input").eq(4);
-var savWitButton = $("input").eq(5);
+var buttons = {
+  chkDepButton: $("input").eq(1),
+  chkWitButton: $("input").eq(2),
+  savDepButton: $("input").eq(4),
+  savWitButton: $("input").eq(5)
+};
 
-var chkBalLocation = $(".balance").eq(0);
-var savBalLocation = $(".balance").eq(1);
+var locations = {
+  chkBalLocation: $(".balance").eq(0),
+  savBalLocation: $(".balance").eq(1)
+};
 
-var chkInput = $("input").eq(0);
-var savInput = $("input").eq(3);
+var inputs = {
+  chkInput: $("input").eq(0),
+  savInput: $("input").eq(3)
+};
+
+var backgrounds = {
+  chkBackground: $(".balance").eq(0),
+  savBackground: $(".balance").eq(1)
+};
+
 
 function checkingDeposit() {
-  chkDepButton.on("click", function() {
-    checkingBalance += parseInt(chkInput.val());
-    chkBalLocation.html("$" + checkingBalance);
-    console.log(checkingBalance);
+  buttons.chkDepButton.on("click", function() {
+    balances.checkingBalance += parseInt(inputs.chkInput.val());
+    locations.chkBalLocation.html("$" + balances.checkingBalance);
+    console.log(balances.checkingBalance);
   });
 //user enters number into input field
 //hits deposit button
     //eventListerner "input"
 //total dollar amount updates
   //update value of div .balance
-    //create variable = 0 for sum total; then do checkingBalance += input
+    //create variable = 0 for sum total; then do balances.checkingBalance += input
 }
+
 checkingDeposit();
 
 function checkingWithdrawal(){
-  chkWitButton.on("click", function() {
-    if (chkInput.val() <= checkingBalance) {
-      checkingBalance -= parseInt(chkInput.val());
-      chkBalLocation.html("$" + checkingBalance);
-      console.log(checkingBalance);
+  buttons.chkWitButton.on("click", function() {
+    if (inputs.chkInput.val() <= balances.checkingBalance) {
+      balances.checkingBalance -= parseInt(inputs.chkInput.val());
+      locations.chkBalLocation.html("$" + balances.checkingBalance);
+      console.log(balances.checkingBalance);
     }
   });
 }
 checkingWithdrawal();
 
 function savingsDeposit(amount){
-  savDepButton.on("click", function() {
-    console.log(savingsBalance);
-    savingsBalance += parseInt(savInput.val());
-    savBalLocation.html("$" + savingsBalance);
-    console.log(savingsBalance);
+  buttons.savDepButton.on("click", function() {
+    console.log(balances.savingsBalance);
+    balances.savingsBalance += parseInt(inputs.savInput.val());
+    locations.savBalLocation.html("$" + balances.savingsBalance);
+    console.log(balances.savingsBalance);
   });
 }
 savingsDeposit();
 
 function savingsWithdrawal(amount){
-  savWitButton.on("click", function() {
-    if (savInput.val() <= savingsBalance) {
-      savingsBalance -= parseInt(savInput.val());
-      savBalLocation.html("$" + savingsBalance);
-      console.log(savingsBalance);
+  buttons.savWitButton.on("click", function() {
+    if (inputs.savInput.val() <= balances.savingsBalance) {
+      balances.savingsBalance -= parseInt(inputs.savInput.val());
+      locations.savBalLocation.html("$" + balances.savingsBalance);
+      console.log(balances.savingsBalance);
     }
   });
 }
 savingsWithdrawal();
 
-// checking/savings balance cannot go below 0
-  //if input value for deposit is greater than balance, do not add value to balance
+var overdraft = function() {
 
+};
 
-//user cannot withdraw more than the existing balance.
-  ////While input value < balance, run withdrwal function
+var accountColor = function() {
+  if (balances.checkingBalance > 0) {
+    backgrounds.chkBackground.css("background-color", "#295A33");
+    console.log("checking-green");
+  }
+  else {
+    backgrounds.chkBackground.css("background-color", "#F52F4F");
+    console.log("checking-red");
+  }
+};
+accountColor();
