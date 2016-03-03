@@ -7,9 +7,9 @@ $("body").ready(function() {
     function Account(balance, input, deposit, withdraw) {
         this.els = {
             balance: balance,
-            withdraw: withdraw,
-            deposit: deposit,
             input: input,
+            deposit: deposit,
+            withdraw: withdraw,
         };
         this.balance = 0;
     }
@@ -49,8 +49,8 @@ $("body").ready(function() {
                             remains1, "withdrawn from", alternate);
             }
         } else {
-            console.log(amount, "withdrawn from", account);
             self[account].balance -= amount;
+            console.log(amount, "withdrawn from", account);
         }
         self[account].els.balance.html("$" + self[account].balance);
     };
@@ -71,7 +71,6 @@ $("body").ready(function() {
     var savings = new Account(balances.eq(1), inputs.eq(1),
                               deposits.eq(1), withdraws.eq(1));
     var accts = new Accounts(checking, savings);
-    var acctNames = ["checking", "savings"];
     var name, i;
     accts.checking.els.deposit.on("click", function() {
         accts.checking.deposit(accts.checking);
