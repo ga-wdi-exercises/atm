@@ -39,7 +39,6 @@ depCheck.on("click", function(event) {
   makeRed();
 });
 
-
 //When withdraw button is clicked, subtract value from sum of arrays
 witCheck.on("click", function(event) {
   event.preventDefault();
@@ -82,9 +81,43 @@ Savings.prototype.calculateTotal = function(){
   return total;
 };
 
+//When deposit button is clicked, add value to an array
+depSave.on("click", function(event) {
+  event.preventDefault();
+  var userInput = parseFloat(saveReg.els.entSave.val());
+  saveReg.entries.push(userInput);
+  //calculate total
+  var newTotal = saveReg.calculateTotal();
+  //update html for the total
+  saveReg.els.balSave.html("$" + newTotal.toFixed(2));
+  //clear the input
+  saveReg.els.entSave.val("");
+  //makeRed();
+});
+
+//When withdraw button is clicked, subtract value from sum of arrays
+witSave.on("click", function(event) {
+  event.preventDefault();
+  //Make value a negative number and push to entries array
+  var userInput = -Math.abs(saveReg.els.entSave.val());
+  saveReg.entries.push(userInput);
+  //calculate total
+  var newTotal = saveReg.calculateTotal();
+  if (newTotal >= 0) {
+    //update html for the total
+    saveReg.els.balSave.html("$" + newTotal.toFixed(2));
+  } else {
+    //prevent overdraft
+    saveReg.entries.pop();
+    console.log(saveReg.entries);
+  }
+  //clear the input
+  saveReg.els.entSave.val("");
+  //makeRed();
+});
+
 //add class of zero when balance is zero
 function makeRed() {
-  console.log(checkReg.els.balCheck.html());
   if (checkReg.els.balCheck.html() === "$0.00") {
     checkReg.els.balCheck.addClass("zero");
   } else {
