@@ -71,7 +71,6 @@ $("body").ready(function() {
     var savings = new Account(balances.eq(1), inputs.eq(1),
                               deposits.eq(1), withdraws.eq(1));
     var accts = new Accounts(checking, savings);
-    var name, i;
     accts.checking.els.deposit.on("click", function() {
         accts.checking.deposit(accts.checking);
     });
