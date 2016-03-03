@@ -1,6 +1,6 @@
 #ATM application
 
-We 're going to build an application to keep track of the checking and savings balances. You can play with an example of what a working version will do in the `atm-obfuscate` folder.
+We 're going to build an application to keep track of the checking and savings balances.
 
 There is also a vanilla Javascript solution branch that was coded in class.
 
