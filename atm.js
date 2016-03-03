@@ -1,6 +1,5 @@
 $(document).ready(function(){
 
-
   // Checking account handled here
 
   var checkingDepositBtn = $("#checkingDepositBtn");
@@ -19,8 +18,12 @@ $(document).ready(function(){
 
   function withdrawChecking() {
     var userInput = parseInt($("#checkingField").val());
-    checkingBalance -= userInput;
-    checkingDisplay.html("$" + checkingBalance);
+    if (userInput < checkingBalance) {
+      checkingBalance -= userInput;
+      checkingDisplay.html("$" + checkingBalance);
+    } else if (userInput === checkingBalance) {
+      checkingDisplay.addClass("zero");
+    }
   }
 
   // Savings account handled here
@@ -41,7 +44,13 @@ $(document).ready(function(){
 
   function withdrawSavings() {
     var userInput = parseInt($("#savingsField").val());
-    savingsBalance -= userInput;
-    savingsDisplay.html("$" + savingsBalance);
+    if (userInput < savingsBalance) {
+      savingsBalance -= userInput;
+      savingsDisplay.html("$" + savingsBalance);
+    } else if (userInput === savingsBalance) {
+      savingsDisplay.addClass("zero");
+    }
   }
+
+
 });
