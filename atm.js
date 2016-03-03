@@ -1,34 +1,27 @@
-$(document).ready(function(){
-  $("input").eq(0).addClass("checking_input");
-  $("input").eq(3).addClass("savings_input");
+$("input").eq(0).addClass("checking_input");
+$("input").eq(3).addClass("savings_input");
 
-function Account(type, min){
+function Account( type, startingBal ){
   this.type = type;
-  this.min = min;
+  this.startingBal = startingBal;
+  this.deposits = [];
+  this.withdrawal = [];
 }
-console.dir(Account)
+Account.prototype.depositMoney = function(input){
+  this.deposits.push(input);
+  return this;
+}
+Account.prototype.withdrawMoney = function(input){
+  this.withdrawal.push(input);
+  return this;
+}
+console.dir(Account);
+// --Checking----------------------
+var Checking = new Account("Checking","0");
+Checking.prototype.checkingAmount = $(#)
+console.dir(Checking)
 
-var CheckingAccount = new Account("checking","0");
-console.dir(CheckingAccount)
 
-var SavingsAccount = new Account("savings","0");
-console.dir(SavingsAccount)
-// Checking.prototype.deposit =function(){
-//   return this.type;
-// };
-// Checking.prototype.balance = function(){
-//   $(".checking_input")
-// };
-// console.dir(Checking);
-// // --------savings copy --------------
-// var Savings = new Account("savings",0)
-// console.dir(Savings);
-//
-//
-//
-//
-//
-});
-//
-
-//console.dir(account (or checking etc. ))
+//--Account--------------------------
+var Savings = new Account("Savings","0");
+console.dir(Savings)
