@@ -45,39 +45,10 @@ $(document).ready(function(){
             checkingAmount -= userInput;
             //updating the display
             checkingDisplay.html("$" + checkingAmount);
-        }else if(userInput > overdraft){
-            checkingDisplay.html("$" + checkingAmount);
-            savingsDisplay.html("$" + savingsAmount);
-        }else if(checkingAmount < userInput){
-            savingsAmount = overdraft -userInput;
-            checkingAmount = 0;
-            checkingDisplay.html("$" + checkingAmount);
-            savingsDisplay.html("$" + savingsAmount);
         }
 
         //clear value in input box
         $("#checkingField").val("");
-    }
-    function savingsSubMoney(){
-        //grab userInput
-        var userInput = parseInt($("#savingsField").val());
-        if(savingsAmount >= userInput){
-            //sub input from savingsAmount
-            savingsAmount -= userInput;
-            //updating the display
-            savingsDisplay.html("$" + savingsAmount);
-        }else if(userInput > overdraft){
-            checkingDisplay.html("$" + checkingAmount);
-            savingsDisplay.html("$" + savingsAmount);
-        }else if(savingsAmount < userInput){
-            checkingAmount = overdraft -userInput;
-            savingsAmount = 0;
-            savingsDisplay.html("$" + savingsAmount);
-            checkingDisplay.html("$" + checkingAmount);
-        }
-
-        //clear value in input box
-        $("#savingsField").val("");
     }
 
     function savingsAddMoney(){
@@ -87,6 +58,22 @@ $(document).ready(function(){
         savingsAmount += userInput;
         //updating the display
         savingsDisplay.html("$" + savingsAmount);
+        //clear value in input box
+        $("#savingsField").val("");
+    }
+
+    function savingsSubMoney(){
+        //grab userInput
+        var userInput = parseInt($("#savingsField").val());
+        if(savingsAmount >= userInput){
+            //sub input from savingsAmount
+            savingsAmount -= userInput;
+            //updating the display
+            savingsDisplay.html("$" + savingsAmount);
+        }
+
+
+
         //clear value in input box
         $("#savingsField").val("");
     }
