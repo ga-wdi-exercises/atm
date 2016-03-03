@@ -28,11 +28,26 @@ var backgrounds = {
   savBackground: $(".balance").eq(1)
 };
 
+var chkAccountColor = function() {
+  if (balances.checkingBalance <= 0) {
+    backgrounds.chkBackground.css("background-color", "#F52F4F");
+    console.log("checking-red");
+  }
+};
+
+
+var savAccountColor = function() {
+  if (balances.savingsBalance <= 0) {
+    backgrounds.savBackground.css("background-color", "#F52F4F");
+    console.log("savings-red");
+  }
+};
 
 function checkingDeposit() {
   buttons.chkDepButton.on("click", function() {
     balances.checkingBalance += parseInt(inputs.chkInput.val());
     locations.chkBalLocation.html("$" + balances.checkingBalance);
+    backgrounds.chkBackground.css("background-color", "#295A33");
     console.log(balances.checkingBalance);
   });
 //user enters number into input field
@@ -52,15 +67,16 @@ function checkingWithdrawal(){
       locations.chkBalLocation.html("$" + balances.checkingBalance);
       console.log(balances.checkingBalance);
     }
+    chkAccountColor();
   });
 }
 checkingWithdrawal();
 
 function savingsDeposit(amount){
   buttons.savDepButton.on("click", function() {
-    console.log(balances.savingsBalance);
     balances.savingsBalance += parseInt(inputs.savInput.val());
     locations.savBalLocation.html("$" + balances.savingsBalance);
+    backgrounds.savBackground.css("background-color", "#295A33");
     console.log(balances.savingsBalance);
   });
 }
@@ -73,6 +89,7 @@ function savingsWithdrawal(amount){
       locations.savBalLocation.html("$" + balances.savingsBalance);
       console.log(balances.savingsBalance);
     }
+    savAccountColor();
   });
 }
 savingsWithdrawal();
@@ -80,15 +97,3 @@ savingsWithdrawal();
 var overdraft = function() {
 
 };
-
-var accountColor = function() {
-  if (balances.checkingBalance > 0) {
-    backgrounds.chkBackground.css("background-color", "#295A33");
-    console.log("checking-green");
-  }
-  else {
-    backgrounds.chkBackground.css("background-color", "#F52F4F");
-    console.log("checking-red");
-  }
-};
-accountColor();
