@@ -43,7 +43,6 @@ $("body").ready(function() {
                 return false;
             } else {
                 self[account].balance -= amount-remains1;
-                self[account].els.balance.html("$" + self[account].balance);
                 self[alternate].balance -= remains1;
                 self[alternate].els.balance.html("$" + self[alternate].balance);
                 console.log(amount-remains1, "withdrawn from", account, "\n",
@@ -52,8 +51,8 @@ $("body").ready(function() {
         } else {
             console.log(amount, "withdrawn from", account);
             self[account].balance -= amount;
-            self[account].els.balance.html("$" + self[account].balance);
         }
+        self[account].els.balance.html("$" + self[account].balance);
     };
     Accounts.prototype.withdraw = function(account, self) {
         var amount = parseFloat(self[account].els.input.val());
