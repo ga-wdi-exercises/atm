@@ -5,20 +5,26 @@ function Account( type, startingBal ){
   this.type = type;
   this.startingBal = startingBal;
   this.deposits = [];
-  this.withdrawal = [];
+  this.withdrawals = [];
+  this.depositMoney = function(input){
+    this.deposits.push(input);
+  this.withdrawMoney = function(input){
+    this.withdrawals = [];
+  }
+  }
 }
-Account.prototype.depositMoney = function(input){
-  this.deposits.push(input);
-  return this;
-}
-Account.prototype.withdrawMoney = function(input){
-  this.withdrawal.push(input);
-  return this;
-}
+// Account.prototype.depositMoney = function(input){
+//   this.deposits.push(input);
+//   return this;
+// }
+// Account.prototype.withdrawMoney = function(input){
+//   this.withdrawal.push(input);
+//   return this;
+// }
 console.dir(Account);
 // --Checking----------------------
 var Checking = new Account("Checking","0");
-Checking.prototype.checkingAmount = $(#)
+// Checking.prototype.checkingAmount =
 console.dir(Checking)
 
 
