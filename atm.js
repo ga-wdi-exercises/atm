@@ -19,3 +19,30 @@ function savingsWithdrawal(amount){
 }
 
 // an eventListerner for each button, each one a "click"
+
+var checkingBalance = $("checkingBalance");
+var checkingAmount = $("checkingAmount");
+var savingsBalance = $("savingsBalance");
+var savingsAmount = $("savingsAmount");
+
+
+
+$("checkingDeposit").on("click", function(){
+checkingBalance.text("$"+ (parseInt(checkingBalance.html().replace("$","")) +parseInt(checkingAmount.val())));
+checkingAmount.val("");
+});
+
+$("withDrawChecking").on("click", function(){
+  checkingBalance.text("$" + (parseInt(checkingBalance.html().replace(
+    replace("$", "")) - parseInt(checkingEntry.val())));
+ +checkingEntry.val("");
+
+  ))};
+
+
+)
+
+
+
+
+})
