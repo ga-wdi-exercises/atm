@@ -1,36 +1,24 @@
+$(document).ready(function(){
+//I want to deposit money into my checking account
+    //
+    //get innerhtml from balance div
 
-var checkingAccount = document.querySelector("#checking_account");
-//Get inner html of balance
-var currentBalance = $(".balance");
-//Get value of input
-var userInput = $("input:text").val();
 
-var depositButton = $("input[value='Deposit']");
-// checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-//
-function checkingDeposit(amount){
-    enteredAmount = parseInt(amount);
-    //must add old and new amount together
-    finalBalance = parseInt(currentBalance.html()) + enteredAmount;
 
-    return currentBalance.html(finalBalance);
+    var checkingDepositBtn = $("#checkingDepositBtn");
 
-}
+    var checkingDisplay = $("#checkingAccount >.balance")
 
-depositButton.on("click", function(){
-    checkingDeposit(userInput);
+    var checkingAmount = parseInt(checkingDisplay.html().replace("$", ""));
+
+    function addMoney(){
+        //grab userInput
+        var userInput = parseInt($("#checkingField").val());
+        //add checkingAmount
+        checkingAmount += userInput;
+        checkingDisplay.html("$" + checkingAmount);
+    }
+
+    checkingDepositBtn.on("click", addMoney)
+
 });
-
-// function checkingWithdrawal(amount){
-//
-// }
-//
-// function savingsDeposit(amount){
-//
-// }
-//
-// function savingsWithdrawal(amount){
-//
-// }
-
-// an eventListerner for each button, each one a "click"
