@@ -20,37 +20,49 @@ var userCheckingInput = function(){
 };
 
 var userSavingsInput= function(){
-  var sAmount = parseInt($checkingAmount.val());
-  $checkingAmount.val("");
+  var sAmount = parseInt($savingsAmount.val());
+  $savingsAmount.val("");
   console.log(sAmount);
   return sAmount;
 };
 
 var checkingDeposit = function(cAmount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );  checkingBalance += UserCheckingInput();
+  console.log($checkingBalanceDiv);
+  checkingBalance = parseInt($checkingBalanceDiv.html().replace("$", "") );
+  checkingBalance += userCheckingInput();
   $checkingBalanceDiv.html("$" + checkingBalance);
+};
 
+var checkingWithdrawal = function(cAmount){
+  console.log($checkingBalanceDiv);
+  checkingBalance = parseInt($checkingBalanceDiv.html().replace("$", "") );
+  checkingBalance -= userCheckingInput();
+  $checkingBalanceDiv.html("$" + checkingBalance);
+  // if (checkingBalance <= 0){
+  //   savingsWithdrawal
+  //   //
+  // }
+  //working on the overdraft...
+};
+
+var savingsDeposit = function(sAmount){
+  console.log($savingsBalanceDiv);
+  savingsBalance = parseInt($savingsBalanceDiv.html().replace("$", ""));
+  savingsBalance += userSavingsInput();
+  console.log(savingsBalance);
+  $savingsBalanceDiv.html("$" + savingsBalance);
 
 };
 
-function checkingWithdrawal(amount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-  checkingBalance -= UserCheckingInput();
-  $checkingBalanceDiv.html("$" + checkingBalance);
-}
-
-function savingsDeposit(amount){
-  savingsBalance = parseInt( savingsBalance.innerHTML.replace("$", "") );  savingsBalance += UserSavingsInput();
-  savingsBalance += UserSavingsInput;
+var savingsWithdrawal = function(sAmount){
+  console.log($savingsBalanceDiv);
+  savingsBalance = parseInt($savingsBalanceDiv.html().replace("$", ""));
+  savingsBalance -= userSavingsInput();
   $savingsBalanceDiv.html("$" + savingsBalance);
-
-}
-
-function savingsWithdrawal(amount){
-  savingsBalance = parseInt( savingsBalance.innerHTML.replace("$", "") );  savingsBalance += UserSavingsInput();
-  savingsBalance -= UserSavingsInput;
-  $savingsBalanceDiv.html("$" + savingsBalance);
-}
+};
 
 // an eventListerner for each button, each one a "click"
 $('#checkingDepositButton').on('click', checkingDeposit);
+$('#withdrawButton').on('click', checkingWithdrawal);
+$('#savingsDButton').on('click', savingsDeposit);
+$('#savingsWButton').on('click', savingsWithdrawal);
