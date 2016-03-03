@@ -1,26 +1,27 @@
-var checkingBalance = document.querySelector("div#checking_balance");
-checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+var atm = {
+  currentInput: "",
+  checkingBalance: "",
+  buttonInitialize: function() {
+    $(".checking-deposit").click(this.checkingDeposit);
+    // $(".checking-withdrawal").click(this.checkingWithdrawal);
+  },
+  checkingInput: function() {
+    var self = atm;
 
-var checkingDeposit = function(amount){
-  // checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-  console.log(checkingBalance);
+    self.currentInput = parseInt($(".checking").val())
+  },
+  checkingDeposit: function() {
+    var self = atm;
+
+    self.checkingInput();
+
+    self.checkingBalance += self.currentInput;
+
+    console.log(self.checkingBalance);
+
+    $("#checking_balance").html("$" + self.checkingBalance);
+  }
 
 }
 
-function checkingWithdrawal(amount){
-
-}
-
-function savingsDeposit(amount){
-
-}
-
-function savingsWithdrawal(amount){
-
-}
-
-// an eventListerner for each button, each one a "click"
-$(".checking-deposit").click(checkingDeposit);
-$(".checking-withdrawal").click(checkingWithdrawal);
-$(".savings-deposit").click(savingsDeposit);
-$(".savings-withdrawal").click(savingsWithdrawal);
+atm.buttonInitialize();
