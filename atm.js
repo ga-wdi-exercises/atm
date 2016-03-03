@@ -2,14 +2,21 @@ var checkingBalance1 = $(".balance").eq(0);
 var checkingBalance2 = $(".balance").eq(1);
 var total = [];
 
-//calculates total
-function calculateTotal(){
-  var newTotal = 0;
+//calculates added total
+function addTotal(){
+  var addedTotal = 0;
   for(var i=0; i<total.length; i++){
-    newTotal = +newTotal + +total[i];
+    addedTotal = +addedTotal + +total[i];
   }
-  console.log(newTotal);
-  return newTotal;
+  console.log("Add" +addedTotal);
+  return addedTotal;
+}
+
+//store value in balance and then do balance.html subtract
+function subtractTotal(num){
+  var subtractedTotal = addTotal() - num;
+  console.log("sub" +subtractedTotal);
+  return subtractedTotal;
 }
 
 //checking deposit function
@@ -17,14 +24,18 @@ function checkingDeposit(amount){
   checkingBalance1.html("$" + amount);
 
   total.push($("input").eq(0).val());
-  var increaseNum = calculateTotal();
+  var increaseNum = addTotal();
 
   checkingBalance1.html("$" + increaseNum);
   ;}
 
   //checking withdrawal function
   function checkingWithdrawal(amount){
-    checkingBalance1.html("$" + amount);
+
+    total.push($("input").eq(0).val());
+    var decreaseNum = subtractTotal($("input").eq(0).val());
+
+    checkingBalance1.html("$" + decreaseNum);
   }
 
   //savings deposit function
