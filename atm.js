@@ -42,7 +42,7 @@ var checkingWithdrawal = function(cAmount){
   //   savingsWithdrawal
   //   //
   // }
-  //working on the overdraft...
+  //working on the overdraft... wtf
 };
 
 var savingsDeposit = function(sAmount){
