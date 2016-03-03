@@ -1,12 +1,10 @@
 $(document).ready(function(){
 //I want to deposit money into my checking account
-    //
-    //get innerhtml from balance div
-
 
     //gets the jquery deposit button element
     var checkingDepositBtn = $("#checkingDepositBtn");
 
+    //gets the jquery withdraw button element
     var checkingWithdrawBtn = $("#checkingWithdrawBtn");
 
     //getting the jquery checking balance element.
@@ -15,8 +13,18 @@ $(document).ready(function(){
     //getting the current value of the balance
     var checkingAmount = parseInt(checkingDisplay.html().replace("$", ""));
 
+    //Same for savings
+    var savingsDepositBtn = $("#savingsDepositBtn");
+
+    var savingsWithdrawBtn = $("#savingsWithdrawBtn");
+
+    var savingsDisplay = $("#savingsAccount >.balance");
+
+    var savingsAmount = parseInt(savingsDisplay.html().replace("$", ""));
+
+
     //create function to call in click
-    function addMoney(){
+    function checkingAddMoney(){
         //grab userInput
         var userInput = parseInt($("#checkingField").val());
         //add input to checkingAmount
@@ -27,19 +35,64 @@ $(document).ready(function(){
         $("#checkingField").val("");
     }
 
-    function subtractMoney(){
+    function checkingSubMoney(){
         //grab userInput
         var userInput = parseInt($("#checkingField").val());
-        //add input to checkingAmount
-        checkingAmount -= userInput;
-        //updating the display
-        checkingDisplay.html("$" + checkingAmount);
+        if(checkingAmount >= userInput){
+            //sub input from checkingAmount
+            checkingAmount -= userInput;
+            //updating the display
+            checkingDisplay.html("$" + checkingAmount);
+        }else if(checkingAmount < userInput){
+            var overdraft = checkingAmount + savingsAmount;
+            savingsAmount = overdraft -userInput;
+            checkingAmount = 0;
+            checkingDisplay.html("$" + checkingAmount);
+            savingsDisplay.html("$" + savingsAmount);
+        }
+
         //clear value in input box
         $("#checkingField").val("");
     }
+    function savingsSubMoney(){
+        //grab userInput
+        var userInput = parseInt($("#savingsField").val());
+        if(savingsAmount >= userInput){
+            //sub input from savingsAmount
+            savingsAmount -= userInput;
+            //updating the display
+            savingsDisplay.html("$" + savingsAmount);
+        }else if(savingsAmount < userInput){
+            var overdraft = savingsAmount + checkingAmount;
+            checkingAmount = overdraft -userInput;
+            savingsAmount = 0;
+            savingsDisplay.html("$" + savingsAmount);
+            checkingDisplay.html("$" + checkingAmount);
+        }
+
+        //clear value in input box
+        $("#savingsField").val("");
+    }
+
+    function savingsAddMoney(){
+        //grab userInput
+        var userInput = parseInt($("#savingsField").val());
+        //add input to savingsAmount
+        savingsAmount += userInput;
+        //updating the display
+        savingsDisplay.html("$" + savingsAmount);
+        //clear value in input box
+        $("#savingsField").val("");
+    }
 
 
-    checkingDepositBtn.on("click", addMoney);
 
-    checkingWithdrawBtn.on("click", subtractMoney);
+
+    checkingDepositBtn.on("click", checkingAddMoney);
+
+    checkingWithdrawBtn.on("click", checkingSubMoney);
+
+    savingsDepositBtn.on("click", savingsAddMoney);
+
+    savingsWithdrawBtn.on("click", savingsSubMoney);
 });
