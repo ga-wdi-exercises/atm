@@ -37,6 +37,7 @@ depCheck.on("click", function(event) {
   checkReg.els.balCheck.html("$" + newTotal.toFixed(2));
   //clear the input
   checkReg.els.entCheck.val("");
+  makeRed();
 });
 
 
@@ -58,26 +59,16 @@ witCheck.on("click", function(event) {
   }
   //clear the input
   checkReg.els.entCheck.val("");
+  makeRed();
 });
 
-// var checkingBalance = document.querySelector("div#checking_balance");
-// checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-//
-// var checkingDeposit = function(amount){
-//   checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-//
-// };
-//
-// function checkingWithdrawal(amount){
-//
-// }
-//
-// function savingsDeposit(amount){
-//
-// }
-//
-// function savingsWithdrawal(amount){
-//
-// }
-
-// an eventListerner for each button, each one a "click"
+//add class of zero when balance is zero
+function makeRed() {
+  console.log(checkReg.els.balCheck.html());
+  if (checkReg.els.balCheck.html() === "$0.00") {
+    checkReg.els.balCheck.addClass("zero");
+  } else {
+    checkReg.els.balCheck.removeClass("zero");
+  }
+}
+makeRed();
