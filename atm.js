@@ -1,21 +1,24 @@
-var checkingBalance = document.querySelector("div#checking_balance");
-checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+$(document).ready(function(){
+  $("input").eq(0).addClass("checking_input");
+  $("input").eq(3).addClass("savings_input");
 
-var checkingDeposit = function(amount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+function Account(type,min){
+  this.type = type;
+  this.min = 0;
+  // this.input = input;
+  this.balance = balance;
+  this.deposit = function(){
+    parseInt($(".checking"))
+  };
+  this.withdrawal = function() {
+  }
+};
 
-}
 
-function checkingWithdrawal(amount){
+var Checking = new Account("checking",0)
+var Savings = new Account("savings",0)
 
-}
+});
 
-function savingsDeposit(amount){
 
-}
-
-function savingsWithdrawal(amount){
-
-}
-
-// an eventListerner for each button, each one a "click"
+//console.dir(account (or checking etc. ))
