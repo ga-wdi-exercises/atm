@@ -59,9 +59,9 @@ $(document).ready(function(){
       }
     }
 
-  checkingDepositButton.on("click", depositChecking);
+  checkingDepositButton.click(depositChecking);
 
-  checkingWithdrawButton.on("click", withdrawChecking);
+  checkingWithdrawButton.click(withdrawChecking);
 
   var savingsInput = $("#savingsInput")
   var savingsDepositButton =$("#savingsDepositButton")
@@ -100,8 +100,8 @@ $(document).ready(function(){
    }
   }
 
-savingsWithdrawalButton.on("click", withdrawSavings)
-savingsDepositButton.on("click", depositSavings)
+savingsWithdrawalButton.click(withdrawSavings);
+savingsDepositButton.click(depositSavings);
 
 
 
