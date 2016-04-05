@@ -2,30 +2,32 @@
 <html>
   <head>
     <title>ATM</title>
+    <script   src="https://code.jquery.com/jquery-2.2.2.js"   integrity="sha256-4/zUCqiq0kqxhZIyp4G0Gk+AOtCJsY1TA00k5ClsZYE="   crossorigin="anonymous"></script>
+    <script src="atm.js"></script>
     <meta charset="utf-8">
     <link rel="stylesheet" href="atm.css">
-    <script src="atm.js"></script>
-  </head>
+    <link rel="stylesheet" type="text/css" href="atm.css">
+</head>
+
   <body>
     <div class="header">
       <div><img src="ga.png" /></div>
       <div class="title">Bank of GA</div>
     </div>
-
     <div id="checking" class="account">
       <h2>Checking</h2>
-      <div class="balance">$0</div>
-      <input class="input" type="text" placeholder="enter an amount" />
-      <input class="deposit" type="button" value="Deposit" />
-      <input class="withdraw" type="button" value="Withdraw" />
+      <div id="checkingBalanceDiv" class="balance">$0</div>
+      <input id="checkingAmount" class="input" type="text" placeholder="enter an amount" />
+      <input id="checkingDepositButton" class="deposit" type="button" value="Deposit" />
+      <input id="checkingWithdrawButton" class="withdraw" type="button" value="Withdraw" />
     </div>
 
     <div id="savings" class="account">
       <h2>Savings</h2>
-      <div class="balance">$0</div>
-      <input class="input" type="text" placeholder="enter an amount" />
-      <input class="deposit" type="button" value="Deposit" />
-      <input class="withdraw" type="button" value="Withdraw" />
+      <div id="savingsBalanceDiv" class="balance">$0</div>
+      <input id="savingInput" class="input" type="text" placeholder="enter an amount" />
+      <input id="savingDepositButton" class="deposit" type="button" value="Deposit" />
+      <input id="savingWithdrawButton" class="withdraw" type="button" value="Withdraw" />
     </div>
   </body>
 </html>
