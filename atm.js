@@ -3,10 +3,10 @@ $(document).ready(function(){
 
 
       //console.log("Hello Master");
-      //$("body").css("background-color","red");
 
-      var body = $("body");
-      body.css("background-color","red");
+      //
+      // var body = $("body");
+      // body.css("background-color","beige");
 
 });
 //
@@ -33,14 +33,109 @@ $(document).ready(function(){
 
 // - Add a click listener to the **checking account's** "Deposit" button
 //   - When you click the button it should `console.log("hello")`
+
+var checkingDepositButton     = $("#button-deposit_checking");
+var checkingWithdrawalButton  = $("#button-withdrawal_checking");
+var savingsDepositButton      = $("#button-deposit_savings");
+var savingsWithdrawalButton   = $("#button-withdrawal_savings");
+
+var inputAmountChecking = $("#input-amount_checking");
+var inputAmountSavings  = $("#input-amount_savings");
+
+var checkingValueInput;
+var savingsValueInput;
+
+var checkingBalanceField = $("#balance-checking");
+var savingsBalanceField = $("#balance-savings");
+
+var updatedBalanceChecking;
+var updatedBalanceSavings;
+
+var currentBalanceChecking  = checkingBalanceField.text();
+var currentBalanceSavings   = savingsBalanceField.text();
+
+//checkingDepositButton.on("click",testMessage);
+
+function testMessage(){
+
+  console.log("Hello Master");
+
+}
+
+function currentChecking(){
+
+  currentBalanceChecking = parseInt(currentBalanceChecking);
+  console.log("$"+currentBalanceChecking);
+
+}
+
+function currentSavings(){
+
+  currentBalanceSavings = parseInt(currentBalanceSavings);
+  console.log("$"+currentBalanceSavings);
+
+}
 // - On clicking "Deposit", it should get the user input
 //   - Just `console.log` it
-//   - You can save some time by hard-coding a value into the input box: `<input value="something" />`. That way you don't need to type stuff in all the time to test it.
+//   - You can save some time by hard-coding a value into the input box:
+//`<input value="something" />`. That way you don't need to type stuff in all
+//the time to test it.
+
+//checkingDepositButton.on("click",getUserInputChecking);
+
+function getUserInputChecking(){
+
+    checkingValueInput = parseInt(inputAmountChecking.val());
+    //console.log(checkingValueInput);
+
+}
+
+
+//savingsDepositButton.on("click",getUserInputSavings);
+
+function getUserInputSavings(){
+
+    savingsValueInput = parseInt(inputAmountSavings.val());
+    //console.log(savingsValueInput);
+
+}
+
 // - On clicking "Deposit", it should update the "balance" with the user input
-//   - Just make the user input show up. Don't worry about actually keeping track of a balance yet.
+//   - Just make the user input show up. Don't worry about actually keeping
+//track of a balance yet.
+
+//checkingDepositButton.on("click",updateCheckingBalance);
+
+function updateCheckingBalance(){
+
+
+
+    checkingBalanceField    = parseInt(checkingBalanceField.val());
+    // checkingValueInput      = getUserInputChecking();
+    // updatedBalanceChecking  = checkingBalanceField + checkingValueInput;
+    // checkingBalanceField.html(updatedBalanceChecking);
+
+    console.log(checkingBalanceField);
+
+}
+
+//savingsDepositButton.on("click",updateSavingsBalance);
+
+function updateSavingsBalance(){
+
+    //console.log("Savings Balance Updated!!!");
+    updatedBalanceSavings = savingsBalanceField + savingsValueInput;
+    savingsBalanceField.html(updatedBalanceSavings);
+
+}
+
+
+
 // - On "Deposit", it should get the current "balance"
 //   - How can you get the content of the "balance" element?
-//   - The content has a `$` at the beginning of it, so Javascript will read it as text rather than as a number. How can you convert this text into a number?
+//   - The content has a `$` at the beginning of it, so Javascript will read
+//it as text rather than as a number. How can you convert this text into a number?
+
 // - On "Deposit", it updates the balance
 //   - Now add the user input to the balance, and make it show up in the "balance" element
 // - On "Withdraw", it updates the balance
