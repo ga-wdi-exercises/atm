@@ -11,9 +11,9 @@ $(document).ready(function(){
   //if click on checking account deposit button, then inserts into checking balance
   checkingDepositButton.on("click", function(){
     var checkingInputValue = $("#checking .input");
-    var numCheckingInputValue = parseInt(checkingInputValue.val());
+    checkingInputValue = parseInt(checkingInputValue.val());
     checkingAccountTotal = parseInt(checkingAccountTotal);
-    checkingAccountTotal = checkingAccountTotal + numCheckingInputValue;
+    checkingAccountTotal = checkingAccountTotal + checkingInputValue;
     checkingAccountTotal = String(checkingAccountTotal);
     $("#checking .balance").html("$" + checkingAccountTotal);
   });
@@ -65,21 +65,6 @@ $(document).ready(function(){
     savingAccountTotal = String(savingAccountTotal);
     $("#savings .balance").html("$" + savingAccountTotal);
   })
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 });
