@@ -2,6 +2,7 @@ $(document).ready(function(){
   var moneyDeposit = $(".deposit")
   moneyDeposit.on("click", function(){
     var moneyInput = $(".input").val();
-    console.log(moneyInput);
+    var balanceChange = $(".balance");
+    balanceChange.html("$"+moneyInput);
   })
 });
