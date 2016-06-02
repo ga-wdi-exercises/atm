@@ -26,15 +26,25 @@ function Account() {
   };
 
   this.deposit = function( type, amount ) {
-    this.balances[ type ] += parseInt( amount );
+    // Reject if input is invalid.
+    if ( ! this.isValidAmountFormat( amount ) ) {
+      return false;
+    }
+    this.balances[ type ] += Number( amount );
   }
 
+  /**
+   * TODO: Still buggy...
+   */
   this.withdraw = function ( type, amount ) {
 
-    // Reject if there is not enough fund.
-    if ( ! hasEnoughFund( amount ) ) { return false; }
+    // Reject if input is invalid or there is not enough fund.
+    if ( ! this.isValidAmountFormat( amount ) || ! this.hasEnoughFund( amount ) ) {
+      return false;
+    }
 
-    if ( this.balances[ type ] > amount ) {
+    // Process the withdrawal based on the state of the acccount.
+    if ( this.balances[ type ] >= amount ) {
       // Only from checking account.
       this.balances.checking -= amount;
     } else {
@@ -42,28 +52,23 @@ function Account() {
       this.balances[ type ] = 0;
       // Then from the other.
       var theOtherType = ( type === "checking" ) ? "savings" : "checking";
-      this.balances[ theOtherType ] -= ( amount - this.balances[ type ]  );
+      this.balances[ theOtherType ] -= ( amount - this.balances[ type ] );
     }
 
     return true;
   }
 
-
-  //---
-  // Private methods.
-  //---
-
-
-  function validateInput( amount ) {
+  this.isValidAmountFormat = function( amount ) {
     return /^\d+(\d+(\.\d+)?)$/.test( amount );
   }
 
-  function getTotalBalances() {
+  this.getTotalBalances = function() {
+    // debugger;
     return this.balances.checking + this.balances.savings;
   }
 
-  function hasEnoughFund( amount ) {
-    return getTotalBalances() > amount;
+  this.hasEnoughFund = function( amount ) {
+    return this.getTotalBalances() >= amount;
   }
 }
 
@@ -101,19 +106,21 @@ function initAtm( account ) {
         console.log("checkingMachine.deposit");
         var amount = getAmountInput( "checking" );
         account.deposit( "checking", amount );
-        console.log(amount);
         break;
       case checkingMachine.withdraw:
         console.log("checking.withdraw");
+        var amount = getAmountInput( "checking" );
+        account.withdraw( "checking", amount );
         break;
       case savingsMachine.deposit:
         console.log("savingsMachine.deposit");
         var amount = getAmountInput( "savings" );
         account.deposit( "savings", amount );
-        console.log(amount);
         break;
       case savingsMachine.withdraw:
         console.log("savingsMachine.withdraw");
+        var amount = getAmountInput( "savings" );
+        account.withdraw( "checking", amount );
     }
 
     updateUI();
