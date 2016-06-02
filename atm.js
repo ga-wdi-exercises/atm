@@ -54,6 +54,7 @@ function Account() {
     // Reject if input is invalid or there is not enough fund.
     if ( ! this.isValidAmountFormat( amount ) ||
          ! this.hasEnoughFundForWithdrawal( amount ) ) {
+      console.error( "Withdrawal rejected" );
       return false;
     }
 
@@ -84,7 +85,7 @@ function Account() {
    * @return true if the format is valid, else false.
    */
   this.isValidAmountFormat = function( amount ) {
-    return /^\d+(\d+(\.\d+)?)$/.test( amount );
+    return /\d+(\d+(\.\d+))?/.test( amount );
   }
 
   /**
@@ -138,26 +139,26 @@ function initAtm( account ) {
       case checkingMachine.deposit:
         var amount = getAmountInput( "checking" );
         account.deposit( "checking", amount );
+        updateUI();
         break;
       case checkingMachine.withdraw:
         var amount = getAmountInput( "checking" );
         account.withdraw( "checking", amount );
+        updateUI();
         break;
       case savingsMachine.deposit:
         var amount = getAmountInput( "savings" );
         account.deposit( "savings", amount );
+        updateUI();
         break;
       case savingsMachine.withdraw:
         var amount = getAmountInput( "savings" );
         account.withdraw( "savings", amount );
+        updateUI();
     }
-
-    // Then update the UI based on the updated balances.
-    updateUI();
   }
 
   /**
-   * [getAmountInput description]
    * @param  {[String]} type   either "checking" or "savings"
    * @return {[Number]}
    */
@@ -170,6 +171,7 @@ function initAtm( account ) {
       amount = Number( savingsMachine.input.value );
     }
 
+    console.log( "getAmountInput: ", amount );
     return amount;
   }
 
@@ -184,6 +186,8 @@ function initAtm( account ) {
     // Clear the input fields.
     checkingMachine.input.value = "";
     savingsMachine.input.value  = "";
+
+    console.log( "updateUI: ", account.balances );
   }
 }
 
