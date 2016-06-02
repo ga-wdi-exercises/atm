@@ -63,19 +63,37 @@ $(document).ready(function(){
     var savingWithdrawValue = $("#savings .input");
     savingWithdrawValue = parseInt(savingWithdrawValue.val());
     savingAccountTotal = parseInt(savingAccountTotal);
-    if (savingWithdrawValue < savingAccountTotal){
+    if (savingWithdrawValue <= savingAccountTotal){
       savingAccountTotal = savingAccountTotal - savingWithdrawValue;
       savingAccountTotal = String(savingAccountTotal);
       $("#savings .balance").html("$" + savingAccountTotal);
     }
-  })
+    else if (savingWithdrawValue > savingAccountTotal){
+      checkingAccountTotal = parseInt(checkingAccountTotal);
+      var bothAccountsTotal = 0;
+      bothAccountsTotal = checkingAccountTotal + savingAccountTotal;
+      if (savingWithdrawValue <= bothAccountsTotal){
+        savingWithdrawValue = savingWithdrawValue - savingAccountTotal;
+        checkingAccountTotal = checkingAccountTotal - savingWithdrawValue;
+        checkingAccountTotal = String(checkingAccountTotal);
+        $("#checking .balance").html("$" + checkingAccountTotal);
+        savingAccountTotal = savingAccountTotal - savingAccountTotal;
+        savingAccountTotal = String(savingAccountTotal);
+        $("#savings .balance").html("$" + savingAccountTotal);
+      }
+      else {
+        alert("Sorry, there is not enough in your accounts to withdraw this much");
+      }
+
+    }
+  });
 
   //balance reflected in boxes
   /*checkingAccountTotal = parseInt(checkingAccountTotal);
   if (checkingAccountTotal <= 0){
     $("#checking .account").css({"background-color": "#F52F4F", "color": "#FFFFFF" })
   }
-  else if */ 
+  else if */
 
 
 });
