@@ -1,133 +1,195 @@
-var checkBal = 0;
-var savBal = 0;
-var checkDepo = 0;
-var checkDraw = 0;
-var txType;
+
+var txAcct;
 var txType;
 var txAmt = 0;
-var draftCheck;
 
 $(document).on("ready", function() {
 
-// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-// THIS IS THE FUNCTIONING CODE
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+// THIS IS MY SUBMISSION CODE - 3RD ATTEMPT AT REFRACTORING
 
-// $(":button").on("click", function() {
-//     txType = $(this).val();
-//     txAcct = $(this).parent($(".class")).attr('id');
-//     if (txAcct == "checking") {
-//         txAmt = parseInt($("#checking").find(".input").val());
-//         if (txType == "Deposit") {
-//             checkBal = parseInt(checkBal + txAmt);
-//             $("#checking").find(".balance").text(checkBal);
-//         }
-//         else {
-//             checkBal = parseInt(checkBal - txAmt);
-//             $("#checking").find(".balance").text(checkBal);
-//         }
-//         $("#checking").find(".input").val("");
-//     }
-//     else {
-//         txAmt = parseInt($("#savings").find(".input").val());
-//         if (txType == "Deposit") {
-//             savBal = parseInt(savBal + txAmt);
-//             $("#savings").find(".balance").text(savBal);
-//         }
-//         else {
-//             savBal = parseInt(savBal - txAmt);
-//             $("#savings").find(".balance").text(savBal);
-//         }
-//         $("#savings").find(".input").val("");
-//     }
-// })
+// Set starting balance to 0 and apply red color.
+$(".balance").text("0");
+$(".balance").addClass("zero");
 
-// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-// THIS IS TEST CODE BELOW
+// Listen for a click on any of the four buttons.
+$(":button").on("click", function() {
+    if (parseInt($(this).parent($(".account")).find(".input").val()) != true) {
+        $(".account").find(".input").val("");
+        return;
+    }
 
+    // Immediately pull values for the transaction type (deposit/
+    // withdrawal), account (checking/savings), and amount.
+    txType = $(this).val();
+    txAcct = $(this).parent($(".class")).attr('id');
+    txAmt = parseInt($(this).parent($(".account")).find(".input").val());
+
+    // If the type is withdrawal, flip the amount to negative for
+    // consistent addition throughout.
+    if (txType == "Withdraw") {
+        txAmt = txAmt * (-1);
+    };
+
+    // Next, check for potential for overdraft, which leads to a
+    // different function.
+    if (overCheck() == true) {
+        overDraft();
+    };
+
+    // If no overdraft, risk, proceed to normal atm operation.
+    if (overCheck() != true) {
+        atm();
+    };
+
+    // After either route, this function updates the color scheme
+    // for zero balances.
+    updateBals();
+
+    // Finally, clear the text fields.
+    $(".account").find(".input").val("");
+});
+
+// Check to see if the value of the transaction puts the account at
+// risk of overdraft.
+function overCheck() {
+    if ((parseInt($("#"+txAcct).find($(".balance")).text()) + txAmt) < 0) {
+        return true;
+    }
+}
+
+// If no overdraft, simply update the balance to reflect the transaction.
 function atm () {
-    firstCat ();
-    $(".account").find(".input").val("")
-};
+    $("#"+txAcct).find($(".balance")).text(txAmt+parseInt($("#"+txAcct).find($(".balance")).text()));
+}
 
-function firstCat () {
-    if (txType == "Deposit") {
-        deposit();
-    }
-    else {
-        withdraw();
-    }
-};
+// Is there is an overdraft, first check to see if the transaction
+// is within the total of both accounts.
+function overDraft () {
+    if (0 <= parseInt(($("#"+txAcct).find($(".balance")).text())) + parseInt(($(".account").not("#"+txAcct).find($(".balance")).text())) + txAmt) {
 
-function deposit () {
-    if (txAcct == "checking") {
-        checking ();
-    }
-    else {
-        savings ();
-    }
-};
+        //If it is, calculate the overdraft amount of the origin account.
+        var difference = txAmt + parseInt(($("#"+txAcct).find($(".balance")).text()));
 
-function withdraw () {
-    txAmt = txAmt * (-1);
-    if (txAcct == "checking") {
-        draftCheck = "checkOrigin";
-        checking ();
-    }
-    else {
-        draftCheck = "savOrigin";
-        savings ();
-    }
-};
+        // Set the origin account to zero.
+        $("#"+txAcct).find($(".balance")).text("0");
 
-function checking () {
-    // txAmt = parseInt($("#checking").find(".input").val());
-    if (parseInt(checkBal + txAmt) < 0) {
-        overCheck ();
+        // And subtract the difference from the target account.
+        $(".account").not("#"+txAcct).find($(".balance")).text(parseInt(($(".account").not("#"+txAcct).find($(".balance")).text())) + difference);
     }
-    else {
-        checkBal = parseInt(checkBal + txAmt);
-        $("#checking").find(".balance").text("$"+checkBal);
-    }
-};
 
-function savings () {
-    // txAmt = parseInt($("#savings").find(".input").val());
-    if (parseInt(checkBal + txAmt) < 0) {
-        overCheck ();
-    }
+    // If the amount exceeds both accounts, you're SOL.
     else {
-        savBal = parseInt(savBal + txAmt);
-        $("#savings").find(".balance").text("$"+savBal);
-    }
-};
-
-function overCheck () {
-    if (parseInt(checkBal + savBal + txAmt) >= 0) {
-        if (draftCheck == "checkOrigin") {
-            var difference = txAmt + checkBal;
-            checkBal = 0;
-            savBal = savBal + difference;
-        }
-        else {
-            var difference = txAmt + savBal;
-            savBal = 0;
-            checkBal = checkBal + difference;
-        }
-        $("#checking").find(".balance").text("$"+checkBal);
-        $("#savings").find(".balance").text("$"+savBal);
-        $(".account").find(".input").val("");
-    }
-    else {
-        $(".account").find(".input").val("");
         alert("Insufficient funds.");
     }
 };
 
-$(":button").on("click", function() {
-    txType = $(this).val();
-    txAcct = $(this).parent($(".class")).attr('id');
-    txAmt = parseInt($(this).parent($(".account")).find(".input").val());
-    atm();
-});
+// Remove the zero class by default, then add back if needed.
+function updateBals () {
+    $(".balance").removeClass("zero");
+    if (parseInt($("#"+txAcct).find(".balance").text()) <= 0) {
+        $("#"+txAcct).find(".balance").addClass("zero");
+    }
+    if (parseInt($(".account").not("#"+txAcct).find(".balance").text()) <= 0) {
+        $(".account").not("#"+txAcct).find(".balance").addClass("zero");
+    }
+}
 
+//XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
+// THIS WAS MY FIRST ATTEMPT AT REFRACTORING. IT'S MUCH LONGER
+// BUT I FEEL MUCH EASIER TO READ AND UNDERSTAND. NOT COMMENTED
+// AND I REMOVED ALL REQUIRED DECLARED VARIABLES.
+
+// updateBals();
+//
+// $(":button").on("click", function() {
+//     txType = $(this).val();
+//     txAcct = $(this).parent($(".class")).attr('id');
+//     txAmt = parseInt($(this).parent($(".account")).find(".input").val());
+//     atm(txAcct, txType);
+//     updateBals();
+//     $(".account").find(".input").val("");
+// });
+//
+// function atm (account, type) {
+//     if (account == "checking" && type == "Deposit") {
+//         checkingDeposit();
+//     }
+//     else if (account == "savings" && type == "Deposit") {
+//         savingsDeposit();
+//     }
+//     else if (account == "checking" && type == "Withdraw") {
+//         checkingWithdrawal();
+//     }
+//     else {
+//         savingsWithdrawal();
+//     }
+// }
+//
+// function checkingDeposit() {
+//     checkBal = parseInt(checkBal + txAmt);
+// }
+//
+// function savingsDeposit() {
+//     savBal = parseInt(savBal + txAmt);
+// }
+//
+// function checkingWithdrawal() {
+//     txAmt = txAmt * (-1);
+//     if (parseInt(checkBal + txAmt) < 0) {
+//         draftCheck = "checkOrigin";
+//         overCheck ();
+//     }
+//     else {
+//         checkBal = parseInt(checkBal + txAmt);
+//     }
+// }
+//
+// function savingsWithdrawal() {
+//     txAmt = txAmt * (-1);
+//     if (parseInt(savBal + txAmt) < 0) {
+//         draftCheck = "savOrigin";
+//         overCheck ();
+//     }
+//     else {
+//         savBal = parseInt(savBal + txAmt);
+//     }
+// }
+//
+// function overCheck () {
+//     if (parseInt(checkBal + savBal + txAmt) >= 0) {
+//         if (draftCheck == "checkOrigin") {
+//             var difference = txAmt + checkBal;
+//             checkBal = 0;
+//             savBal = savBal + difference;
+//         }
+//         else {
+//             var difference = txAmt + savBal;
+//             savBal = 0;
+//             checkBal = checkBal + difference;
+//         }
+//         $("#checking").find(".balance").text("$"+checkBal);
+//         $("#savings").find(".balance").text("$"+savBal);
+//         $(".account").find(".input").val("");
+//     }
+//     else {
+//         $(".account").find(".input").val("");
+//         alert("Insufficient funds.");
+//     }
+// };
+//
+// function updateBals () {
+//     $("#checking").find(".balance").text("$"+checkBal);
+//     $("#savings").find(".balance").text("$"+savBal);
+//     $(".balance").removeClass("zero");
+//     if (checkBal <= 0) {
+//         $("#checking .balance").addClass("zero");
+//     }
+//     if (savBal <= 0) {
+//         $("#savings .balance").addClass("zero");
+//     }
+// }
+
+
+// DOC READY END TAG
 });
