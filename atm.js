@@ -9,27 +9,33 @@ $(document).on("ready", function() {
 // THIS IS MY SUBMISSION CODE - 3RD ATTEMPT AT REFRACTORING
 
 // Set starting balance to 0 and apply red color.
-$(".balance").text("0");
+$(".balance").text("$0");
 $(".balance").addClass("zero");
 
 // Listen for a click on any of the four buttons.
 $(":button").on("click", function() {
-    if (parseInt($(this).parent($(".account")).find(".input").val()) != true) {
-        $(".account").find(".input").val("");
-        return;
+
+    // Verify the entry is an integer; if not, disregard.
+    if (isNaN(parseInt($(this).siblings(".input").val()))) {
+          $(".account").find(".input").val("");
+          return;
     }
 
     // Immediately pull values for the transaction type (deposit/
     // withdrawal), account (checking/savings), and amount.
     txType = $(this).val();
-    txAcct = $(this).parent($(".class")).attr('id');
-    txAmt = parseInt($(this).parent($(".account")).find(".input").val());
+    txAcct = $(this).parent().attr('id');
+    txAmt = parseInt($(this).siblings(".input").val());
 
     // If the type is withdrawal, flip the amount to negative for
     // consistent addition throughout.
     if (txType == "Withdraw") {
         txAmt = txAmt * (-1);
     };
+
+    // Remove the dollar signs prior to calculations.
+    $("#checking").find(".balance").text($("#checking").find(".balance").text().replace("$",""));
+    $("#savings").find(".balance").text($("#savings").find(".balance").text().replace("$",""));
 
     // Next, check for potential for overdraft, which leads to a
     // different function.
@@ -93,6 +99,10 @@ function updateBals () {
     if (parseInt($(".account").not("#"+txAcct).find(".balance").text()) <= 0) {
         $(".account").not("#"+txAcct).find(".balance").addClass("zero");
     }
+
+    // Finally, add back the dollar signs.
+    $("#checking").find(".balance").text("$"+($("#checking").find(".balance").text()));
+    $("#savings").find(".balance").text("$"+($("#savings").find(".balance").text()));
 }
 
 //XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
