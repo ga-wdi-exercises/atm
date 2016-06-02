@@ -1,16 +1,16 @@
  /*
 An application to keep track of the checking and savings balances.
 
- User actions
+User actions
  - As a user, I want to deposit money into one of the bank accounts
  - As a user, I want to withdraw money from one of the bank accounts
 
- Validation / Overdraft protection
+Validation / Overdraft protection
    + If a withdrawal can be covered by the balances in both accounts, take the balance of the account withdrawn from down to $0 and take the rest of the withdrawal from the other account.
    + If the withdrawal amount is more than the combined account balance, ignore it.
 
- Presentation
- - As a user, I want the color of my back account to reflect it's balance (there's a CSS class called .zero already written for this!)
+Presentation
+ - The background of account to reflect it's balance.
   */
 
 
@@ -61,7 +61,7 @@ function Account() {
     // Process the withdrawal based on the state of the acccount.
     if ( this.balances[ type ] >= amount ) {
       // Only from checking account.
-      this.balances.checking -= amount;
+      this.balances[ type ] -= amount;
 
     } else {
       // Take all the money from the specified account first.
@@ -116,17 +116,21 @@ function initAtm( account ) {
 
   // References to the elements.
   var checkingMachine = {
+    panel:    document.querySelector( '#checking' ),
     input:    document.querySelector( '#checking .input' ),
     deposit:  document.querySelector( '#checking .deposit' ),
     withdraw: document.querySelector( '#checking .withdraw' ),
     balance:  document.querySelector( '#checking .balance' )
   };
   var savingsMachine = {
+    panel:    document.querySelector( '#savings' ),
     input:    document.querySelector( '#savings .input' ),
     deposit:  document.querySelector( '#savings .deposit' ),
     withdraw: document.querySelector( '#savings .withdraw' ),
     balance:  document.querySelector( '#savings .balance' )
   };
+
+  updateUI();
 
   // Listen for click events.
   document.querySelector( '#checking' ).addEventListener( 'click', handleClick );
@@ -171,13 +175,26 @@ function initAtm( account ) {
       amount = Number( savingsMachine.input.value );
     }
 
-    console.log( "getAmountInput: ", amount );
+    // console.log( "getAmountInput: ", amount );
     return amount;
   }
 
   function updateUI() {
+
     // Log error if the balance total gets lower than 0.
     if ( account.getTotalBalances() < 0 ) { console.error( "Error: A balance should not be negative" ); }
+
+    // Add red background-color to an input field when the amount is zero.
+    if ( account.balances.checking === 0 ) {
+      checkingMachine.panel.classList.add( 'zero' );
+    } else if ( account.balances.checking > 0 ) {
+      checkingMachine.panel.classList.remove( 'zero' );
+    }
+    if ( account.balances.savings === 0 ) {
+      savingsMachine.panel.classList.add( 'zero' );
+    } else if ( account.balances.savings > 0 ) {
+      savingsMachine.panel.classList.remove( 'zero' );
+    }
 
     // Update the balances on the UI.
     checkingMachine.balance.innerHTML = AMOUNT_PREFIX + account.balances.checking;
@@ -187,7 +204,7 @@ function initAtm( account ) {
     checkingMachine.input.value = "";
     savingsMachine.input.value  = "";
 
-    console.log( "updateUI: ", account.balances );
+    // console.log( "updateUI: ", account.balances );
   }
 }
 
