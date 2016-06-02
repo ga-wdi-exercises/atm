@@ -22,17 +22,36 @@ $(document).ready(function(){
   //this var is a link to the checking withdraw button
   var checkingWithdrawButton = $("#checking .withdraw");
 
-  //if withdraw button clicked, updates total balance
+  //if withdraw button clicked, updates total balance, with overdraft protection
   checkingWithdrawButton.on("click", function(){
     var checkingWithdrawValue = $("#checking .input");
     checkingWithdrawValue = parseInt(checkingWithdrawValue.val());
     checkingAccountTotal = parseInt(checkingAccountTotal);
-    if(checkingWithdrawValue < checkingAccountTotal){
+    if (checkingWithdrawValue <= checkingAccountTotal){
       checkingAccountTotal = checkingAccountTotal - checkingWithdrawValue;
       checkingAccountTotal = String(checkingAccountTotal);
       $("#checking .balance").html("$" + checkingAccountTotal);
     }
-  })
+    else if ( checkingWithdrawValue > checkingAccountTotal) {
+      savingAccountTotal = parseInt(savingAccountTotal);
+      var accountsTotal = 0;
+      accountsTotal = savingAccountTotal + checkingAccountTotal;
+      if ( checkingWithdrawValue <= accountsTotal){
+        checkingWithdrawValue = checkingWithdrawValue - checkingAccountTotal;
+        savingAccountTotal = savingAccountTotal - checkingWithdrawValue;
+        savingAccountTotal = String(savingAccountTotal);
+        $("#savings .balance").html("$" + savingAccountTotal);
+        checkingAccountTotal = checkingAccountTotal - checkingAccountTotal;
+        checkingAccountTotal = String(checkingAccountTotal);
+        $("#checking .balance").html("$" + checkingAccountTotal);
+      }
+      else
+      {
+        alert("Sorry, there is not enough in your accounts to withdraw this much");
+      }
+
+    }
+  });
 
 
 
