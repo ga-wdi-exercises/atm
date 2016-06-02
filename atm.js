@@ -10,30 +10,6 @@ var draftCheck;
 $(document).on("ready", function() {
 
 // XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
-// THIS IS THE ORIGINAL CODE
-
-// $("#checking").find(".deposit").on("click", function(){
-//     checkDepo = parseInt($("#checking").find(".input").val());
-//     checkBal = parseInt(checkBal + checkDepo);
-//     $("#checking").find(".balance").text(checkBal);
-//     // checkDepo = null;
-//     $("#checking").find(".input").val("");
-// });
-//
-// $("#checking").find(".withdraw").on("click", function(){
-//     checkDraw = parseInt($("#checking").find(".input").val());
-//     checkBal = parseInt(checkBal - checkDraw);
-//     $("#checking").find(".balance").text(checkBal);
-//     checkDraw = null;
-//     $("#checking").find(".input").val("");
-// });
-//
-// $(":button").on("click", function() {
-//     txType = $(this).val();
-//     txAcct = $(this).parent($(".class")).attr('id');
-// })
-//
-// XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX
 // THIS IS THE FUNCTIONING CODE
 
 // $(":button").on("click", function() {
@@ -75,11 +51,9 @@ function atm () {
 
 function firstCat () {
     if (txType == "Deposit") {
-        draftCheck = "checkOrigin";
         deposit();
     }
     else {
-        draftCheck = "savOrigin";
         withdraw();
     }
 };
@@ -96,9 +70,11 @@ function deposit () {
 function withdraw () {
     txAmt = txAmt * (-1);
     if (txAcct == "checking") {
+        draftCheck = "checkOrigin";
         checking ();
     }
     else {
+        draftCheck = "savOrigin";
         savings ();
     }
 };
@@ -110,7 +86,7 @@ function checking () {
     }
     else {
         checkBal = parseInt(checkBal + txAmt);
-        $("#checking").find(".balance").text(checkBal);
+        $("#checking").find(".balance").text("$"+checkBal);
     }
 };
 
@@ -121,7 +97,7 @@ function savings () {
     }
     else {
         savBal = parseInt(savBal + txAmt);
-        $("#savings").find(".balance").text(savBal);
+        $("#savings").find(".balance").text("$"+savBal);
     }
 };
 
@@ -137,12 +113,13 @@ function overCheck () {
             savBal = 0;
             checkBal = checkBal + difference;
         }
-        $("#checking").find(".balance").text(checkBal);
-        $("#savings").find(".balance").text(savBal);
+        $("#checking").find(".balance").text("$"+checkBal);
+        $("#savings").find(".balance").text("$"+savBal);
         $(".account").find(".input").val("");
     }
     else {
         $(".account").find(".input").val("");
+        alert("Insufficient funds.");
     }
 };
 
