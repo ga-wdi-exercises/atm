@@ -2,6 +2,15 @@
 var CcurrentBalance = 0;
 var ScurrentBalance = 0;
 
+//changing the initial display
+$('#checking div.balance').text("$" + CcurrentBalance);
+$('#savings div.balance').text("$" + ScurrentBalance);
+
+//making it red initially
+$('#savings div.balance').addClass('zero');
+$('#checking div.balance').addClass('zero');
+
+
 //saving deposit button function
 $('#savings input.deposit').on('click', function(){
         //retreiving deposit value
@@ -15,6 +24,10 @@ $('#savings input.deposit').on('click', function(){
         //adding to the current balance
         ScurrentBalance = ScurrentBalance + depositAmt;
         console.log(ScurrentBalance);
+
+        if (ScurrentBalance > 0){
+        $('#savings div.balance').removeClass('zero');
+        }
 
         //display the currentBalance
         $('#savings div.balance').html(ScurrentBalance);
@@ -31,12 +44,26 @@ $('#savings input.withdraw').on('click', function(){
         withdrawAmt = parseInt(withdrawAmt);
         console.log(withdrawAmt);
 
-        //adding to the current balance
-        ScurrentBalance = ScurrentBalance - withdrawAmt;
-        console.log(ScurrentBalance);
+        //can't go negative
+        if (withdrawAmt > ScurrentBalance){
+          alert('you are broke!')
+        } else {
+          //adding to the current balance
+          ScurrentBalance = ScurrentBalance - withdrawAmt;
+          console.log(ScurrentBalance);
 
-        //display the currentBalance
-        $('#savings div.balance').html(ScurrentBalance);
+          //add and remove class based on the balance
+          if (ScurrentBalance > 0){
+            $('#savings div.balance').removeClass('zero');
+          } else {
+            $('#savings div.balance').addClass('zero')
+          }
+
+          //display the currentBalance
+          $('#savings div.balance').html(ScurrentBalance);
+        }
+
+
 })
 
 
@@ -54,8 +81,13 @@ $('#checking input.deposit').on('click', function(){
         CcurrentBalance = CcurrentBalance + depositAmt;
         console.log(CcurrentBalance);
 
+        if (CcurrentBalance > 0){
+        $('#checking div.balance').removeClass('zero');
+        }
+
         //display the currentBalance
         $('#checking div.balance').html(CcurrentBalance);
+
 })
 
 
@@ -72,7 +104,7 @@ $('#checking input.withdraw').on('click', function(){
         var totalBalance = CcurrentBalance + ScurrentBalance;
         console.log(totalBalance);
 
-        if (CcurrentBalance > withdrawAmt) {
+        if (CcurrentBalance >= withdrawAmt) {
         //adding to the current balance
           CcurrentBalance = CcurrentBalance - withdrawAmt;
         // console.log(CcurrentBalance);
@@ -87,10 +119,16 @@ $('#checking input.withdraw').on('click', function(){
           }
         }
 
-
+        if (CcurrentBalance > 0){
+          $('#checking div.balance').removeClass('zero');
+        } else {
+          $('#checking div.balance').addClass('zero')
+        }
 
         //display the currentBalance
         $('#checking div.balance').html(CcurrentBalance);
         $('#savings div.balance').html(ScurrentBalance);
+
+
 
 })
