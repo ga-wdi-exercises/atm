@@ -18,11 +18,13 @@ $(document).ready(function(){
     var moneyInput = parseInt($("#checkInput").val());
     var totalBalance = currentBalance - moneyInput;
     var balanceChange = $("#balanceCheck");
+    if(moneyInput <= currentBalance){
     balanceChange.html("$"+totalBalance)
     checkZero($("#balanceCheck"));
     if(currentBalance == 0){
       balanceChange.html("$0");
       checkZero($("#balanceCheck"));
+      }
     };
   })
   //Savings Account Desposit
@@ -42,11 +44,13 @@ $(document).ready(function(){
     var moneyInput = parseInt($("#saveInput").val());
     var totalBalance = currentBalance - moneyInput;
     var balanceChange = $("#balanceSave");
+    if (moneyInput <= currentBalance){
     balanceChange.html("$"+totalBalance);
     checkZero($("#balanceSave"));
     if(currentBalance == 0){
       balanceChange.html("$0")
       checkZero($("#balanceSave"));
+      }
     }
   })
 });
