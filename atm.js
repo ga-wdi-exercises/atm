@@ -1,9 +1,10 @@
 $(document).ready(function(){
 // Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
+
 var savings = {
   balance: $("#savings .balance"),
   putted: $("#savings .input"),
-  draw: $("#savings .withdraw").click(function(){
+  draw: $("#savings .withdraw").click( function(){
     if ( (savings.balVal - parseInt(savings.putted.val()) ) >= 0){
       savings.balVal = savings.balVal - parseInt(savings.putted.val());
       savings.balance.html("$" + savings.balVal.toString());
@@ -11,7 +12,7 @@ var savings = {
     }else{
       alert("Not enough BREAD!");
     }
-  }),
+    }),
   depo: $("#savings .deposit").click(function(){
     savings.balVal = savings.balVal + parseInt(savings.putted.val());
     savings.balance.html("$" + savings.balVal.toString());
@@ -25,22 +26,22 @@ var checking = {
 
   putted: $("#checking .input"),
 
+
   draw: $("#checking .withdraw").click(function(){
-    if( ( checking.balVal- parseInt(checking.putted.val()) ) >= 0){
+    if( ( checking.balVal - parseInt(checking.putted.val()) ) >= 0){
       checking.balVal = checking.balVal - parseInt(checking.putted.val());
       checking.balance.html("$" +  checking.balVal.toString())
-    }else if( bank.moneyExist > parseInt(checking.putted.val()) ){
+    }else if( (checking.balVal + savings.balVal) > parseInt(checking.putted.val()) ){
        var over = parseInt(checking.putted.val()) - checking.balVal;
-       savings.balVal = savings.balVal - over ;
-       checking.balVal = bank.moneyExist - bank.moneyExist;
-       savings.balance.html("$" + savings.balVal.toString() );
+       /*savings.balVal = savings.balVal - over ;
+       checking.balVal = bank.moneyExist - bank.moneyExist;*/
+       savings.balance.html("$" + ((checking.balVal + savings.balVal) - parseInt(checking.putted.val())).toString() );
        checking.balance.html("$" + checking.balVal.toString());
     }else{
       alert("Not enough BREAD!");
     }
        checking.putted.val("");
   }),
-
   depo: $("#checking .deposit").click(function(){
     checking.balVal = checking.balVal + parseInt(checking.putted.val());
     checking.balance.html("$" + checking.balVal.toString());
@@ -48,7 +49,7 @@ var checking = {
   }),
 
   balVal : parseInt($("#checking .balance").html().replace("$",""))
-}
+};
 
 var bank = {
 
@@ -66,7 +67,6 @@ if ( checking.balVal === 0){
   savings.balance.removeClass("zero");
   checking.balance.removeClass("zero");
 }
-//alert(checking.balVal)
 
 });
 
