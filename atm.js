@@ -1,3 +1,10 @@
 $(document).ready(function(){
-// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
+ // var button = $("#checking").children().find(".deposit")
+ //
+ // function buttonClick(){
+ //   button.on("click", console.log("hello"))
+$("#checking .deposit").on("click", function(){
+  console.log("hello");
+})
+
 });
