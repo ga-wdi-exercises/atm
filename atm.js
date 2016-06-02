@@ -70,5 +70,12 @@ $(document).ready(function(){
     }
   })
 
+  //balance reflected in boxes
+  /*checkingAccountTotal = parseInt(checkingAccountTotal);
+  if (checkingAccountTotal <= 0){
+    $("#checking .account").css({"background-color": "#F52F4F", "color": "#FFFFFF" })
+  }
+  else if */ 
+
 
 });
