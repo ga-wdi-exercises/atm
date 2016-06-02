@@ -3,6 +3,7 @@ $(document).ready(function(){
   var CInput = $("#CInput");
   var CWButton = $("#CWButton");
   var CBalance = $("#CBalance");
+
   var SDButton = $("#SDButton");
   var SInput = $("#SInput");
   var SWButton = $("#SWButton");
