@@ -1,4 +1,3 @@
-$(document).ready(function(){
-// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
-
-});
+$('#checking input.deposit').on('click', function(){
+  console.log('money')
+})
