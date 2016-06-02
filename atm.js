@@ -5,6 +5,7 @@ $(document).ready(function(){
 //   Add a click listener to the checking account's "Deposit" button
 // When you click the button it should console.log("hello")
 $("#checking .deposit").on("click", function(){
-    console.log("clicked checking deposit");
+    var amtMoney = $("input").val();
+    console.log("Amount Entered is: " + amtMoney);
 });
 });
