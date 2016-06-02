@@ -1,8 +1,10 @@
 $(document).ready(function(){
-  var moneyDeposit = $(".deposit")
+  var moneyDeposit = $("#checking").find(".deposit")
   moneyDeposit.on("click", function(){
-    var moneyInput = $(".input").val();
-    var balanceChange = $(".balance");
-    balanceChange.html("$"+moneyInput);
+    var currentBalance = parseInt($("#balanceCheck").html().replace("$", ""));
+    var moneyInput = parseInt($(".input").val());
+    var totalBalance = moneyInput + currentBalance;
+    var balanceChange = $("#balanceCheck");
+    balanceChange.html("$"+totalBalance);
   })
 });
