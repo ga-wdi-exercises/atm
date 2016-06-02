@@ -111,12 +111,6 @@ $(document).ready(function() {
       $("#savings .balance").removeClass("zero");
     }
   }
-
-  // checkingAmt = parseInt(checkingAmt);
-  // savingsAmt = parseInt(savingsAmt);
-  // var allTheMonies = checkingAmt+savingsAmt;
-  // console.log(allTheMonies);
-
   function overPro() {
     console.log("overPro launched!");
     if (savingsWithdraw > allTheMonies || checkingWithdraw > allTheMonies) {
