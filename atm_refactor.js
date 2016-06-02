@@ -1,35 +1,35 @@
-var checkingAmt = 0;
-var savingsAmt = 0;
-
 $(document).ready(function() {
-  verifyBalance();
-  $("#checking .deposit").on("click", function() {
-    var checkingDeposit = $("#checking .input").val();
-    console.log("Checking Deposit Button Clicked");
-    checkingAmt = parseInt(checkingAmt);
-    checkingDeposit = parseInt(checkingDeposit);
-    checkingAmt += checkingDeposit;
-    $("#checking .balance").text("$"+checkingAmt);
-    verifyBalance();
-  });
-  
+  var savingsDep = $("#savings .deposit");
+  var savingsBal = $("#savings .balance");
+  var savingsInput = $("#savings .input");
+  var savingsAmt = 0;
+
+  var checkingDep = $("#checking .deposit");
+  var checkingBal = $("#checking .balance");
+  var checkingInput = $("#checking .input");
+  var checkingAmt = 0;
   checkSavings();
-  $("#savings .deposit").on("click", function() {
-    var savingsDeposit = $("#savings .input").val();
-    console.log("savings Deposit Button Clicked");
-    savingsAmt = parseInt(savingsAmt);
-    savingsDeposit = parseInt(savingsDeposit);
-    savingsAmt += savingsDeposit;
-    savingsAmt = String(savingsAmt);
-    $("#savings .balance").text("$"+savingsAmt);
+
+  checkingDep.on("click", checkingDeposit);
+  savingsDep.on("click", savingsDeposit);
+
+  function checkingDeposit() {
+    checkingAmt += parseInt(checkingInput.val());
+    checkingBal.text("$"+checkingAmt);
+  }
+
+  function savingsDeposit() {
+    savingsAmt += parseInt(savingsInput.val());
+    savingsBal.text("$"+savingsAmt);
     checkSavings();
-  });
+  }
 
   function checkSavings() {
     if (savingsAmt == 0) {
-      $("#savings .balance").addClass("zero");
+      savingsBal.addClass("zero");
     }
     else {
-      $("#savings .balance").removeClass("zero");
+      savingsBal.removeClass("zero");
     }
-  }});
+  }
+});
