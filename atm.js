@@ -23,7 +23,7 @@ $("#checking .deposit").on("click", function(){
     // console.log(checkingInput);
     checkingInput = parseInt(checkingInput);
     // console.log((checkingInput+10)+" is the user input plus 10")
-    checkingBalance=checkingBalance+checkingInput
+    checkingBalance+=checkingInput
     $("#checking .balance").html("$"+checkingBalance);
     console.log("the new balance is $"+checkingBalance);
     }
@@ -42,13 +42,25 @@ $("#checking .withdraw").on("click", function(){
       else {
 
       checkingInput = parseInt(checkingInput);
-      // console.log((checkingInput+10)+" is the user input plus 10")
-      checkingBalance=checkingBalance-checkingInput
-      $("#checking .balance").html("$"+checkingBalance);
-      console.log("the new balance is $"+checkingBalance);
+
+
+        //don't allow a withdraw that causes balance to go < 0
+        if (checkingInput>checkingBalance) {
+          alert("STOP! You do not have enough to withdraw this amount")
+        }
+
+        else {
+
+        checkingBalance-=checkingInput:
+        $("#checking .balance").html("$"+checkingBalance);
+        console.log("the new balance is $"+checkingBalance);
+        }
+
       }
 
     })
+
+
 
     $("#savings .deposit").on("click", function(){
 
@@ -62,7 +74,7 @@ $("#checking .withdraw").on("click", function(){
         // console.log(checkingInput);
         savingsInput = parseInt(savingsInput);
         // console.log((checkingInput+10)+" is the user input plus 10")
-        savingsBalance=savingsBalance+savingsInput
+        savingsBalance+=savingsInput
         $("#savings .balance").html("$"+savingsBalance);
         console.log("the new balance is $"+savingsBalance);
         }
@@ -80,13 +92,24 @@ $("#checking .withdraw").on("click", function(){
 
           else {
 
-          savingsInput = parseInt(savingsInput);
-          // console.log((checkingInput+10)+" is the user input plus 10")
-          savingsBalance=savingsBalance-savingsInput
-          $("#savings .balance").html("$"+savingsBalance);
-          console.log("the new balance is $"+savingsBalance);
-          }
+              savingsInput = parseInt(savingsInput);
 
-        })
+                //don't allow a withdraw that causes balance to go < 0
+                if (savingsInput>savingsBalance) {
+                  alert("STOP! You do not have enough to withdraw this amount");
+                }
 
+                else {
+
+                savingsBalance-=savingsInput
+                $("#savings .balance").html("$"+savingsBalance);
+                console.log("the new balance is $"+savingsBalance);
+
+
+                savingsBalance-=savingsInput
+                $("#savings .balance").html("$"+savingsBalance);
+                console.log("the new balance is $"+savingsBalance);
+                }
+            }
+      });
 });
