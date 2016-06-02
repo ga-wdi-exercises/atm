@@ -1,23 +1,37 @@
 $(document).ready(function(){
-   $("body").css("background-color", "yellow");
-    var checkingBalance = document.querySelector("div#checking_balance");
-      checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+//These are wrong, should probably be parseInt's
+var left = {
+  teller: $("#chkInput"),
+  balance: $("#bal1"),
+  depositButton: $("#chkDep"),
+  withdrawButton: $("#chkWithdraw"),
+};
+//Theoretically this should work, but it doesn't (probably) because the above variables aren't passing the right information.
+    left.depositButton.click(function(){
+    var transD = parseInt(left.teller.val());
+    //left.balance.text(trans);
+    var newBalanceD = parseInt(left.balance.text().replace("$", "")) + transD;
+    left.balance.text(newBalanceD);
+    });
 
-    var checkingDeposit = function(amount){
-      checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+  left.withdrawButton.click(function(){
+    var transW = parseInt(left.teller.val());
+    var newBalanceW = parseInt(left.balance.text().replace("$","")) - transW;
+    left.balance.text(newBalanceW);
 
-}
+    if (newBalanceW <= 0) {
+      $(".balance").addclass(".zero");
+    }
+  });
 
-  function checkingWithdrawal(amount){
 
-}
 
-  function savingsDeposit(amount){
 
-}
 
-  function savingsWithdrawal(amount){
 
-}
 
+
+
+});
 // an eventListerner for each button, each one a "click"
+//
