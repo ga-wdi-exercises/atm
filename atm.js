@@ -1,20 +1,22 @@
-var checkingBalance = document.querySelector("div#checking_balance");
-checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
+$(document).ready(function(){
+   $("body").css("background-color", "yellow");
+    var checkingBalance = document.querySelector("div#checking_balance");
+      checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 
-var checkingDeposit = function(amount){
-  checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
-
-}
-
-function checkingWithdrawal(amount){
+    var checkingDeposit = function(amount){
+      checkingBalance = parseInt( checkingBalance.innerHTML.replace("$", "") );
 
 }
 
-function savingsDeposit(amount){
+  function checkingWithdrawal(amount){
 
 }
 
-function savingsWithdrawal(amount){
+  function savingsDeposit(amount){
+
+}
+
+  function savingsWithdrawal(amount){
 
 }
 
