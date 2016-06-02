@@ -4,7 +4,7 @@ $(document).ready(function(){
   var savingsInput = $("#savings .input").val()
   var checkingTotal = 0
   var savingsTotal = 0
-  // var totalBalance = savingsTotal + checkingTotal
+  var newCheckingTotal = 0
 
   function checkingColor(){
     if (checkingTotal == 0){
@@ -12,7 +12,6 @@ $(document).ready(function(){
     }
     else{
       $("#checking .balance").removeClass("zero");
-      console.log("work bitch");
     }
   }
   function savingsColor(){
@@ -23,14 +22,12 @@ $(document).ready(function(){
       $("#savings .balance").removeClass("zero");
     }
   }
-  function getTotalBalance(){
-    var checkingTotal = $("#checking .balance").val()
-    var savingsTotal = $("#savings .balance").val()
-    checkingTotal = parseInt(checkingTotal);
-    savingsTotal = parseInt(savingsTotal);
-    $("div > .balance").val(checkingTotal + savingsTotal)
-  }
 
+  function newCheckingColor(){
+    if (newCheckingTotal == 0){
+      $("#checking .balance").addClass("zero");
+    }
+  }
 
   checkingColor();
   savingsColor();
@@ -65,42 +62,26 @@ $(document).ready(function(){
     var checkingWithdraw = $("#checking .input").val();
     var totalBalance = checkingTotal + savingsTotal;
     checkingWithdraw = parseInt(checkingWithdraw);
-    //
+
     if (checkingWithdraw > checkingTotal){
-      alert("Account balance is too low for withdrawl.")
-        if (checkingWithdraw > totalBalance){
-          alert("Too low.")
-          console.log("Please Work")
-        }
-        else if (checkingWithdraw > checkingTotal && checkingWithdraw < totalBalance){
-          var overage = checkingWithdraw - checkingTotal;
-          Math.abs(overage)
-        }
-        else{
-          checkingTotal -= checkingWithdraw;
-          $("#checking .balance").html('$' + checkingTotal);
-          checkingColor();
-        }
-
-}
-
-
-    // // else;
-    // var checkingWithdraw = $("#checking .input").val();
-    // var totalBalance = checkingTotal + savingsTotal;
-    // switch(checkingWithdraw){
-    //   case (checkingWithdraw < checkingTotal):
-    //   checkingTotal -= checkingWithdraw;
-    //     $("#checking .balance").html('$' + checkingTotal);
-    //     checkingColor();
-    //     break;
-    //   case (checkingWithdraw >= checkingTotal):
-    //     alert("Account balance is too low for withdrawl.");
-    //     break;
-    //   case (checkingWithdraw > totalBalance):
-    //     alert("Too low.")
-    //     console.log("Please Work")
-    // }
+      alert("Account balance is too low for withdrawl. Will remove overage from savings.")
+      if (checkingWithdraw > totalBalance){
+        alert("Too low.")
+      }
+      else if (checkingWithdraw > checkingTotal && checkingWithdraw < totalBalance){
+        var overage = checkingWithdraw - checkingTotal;
+        var newSavingsTotal = Math.abs(savingsTotal -= overage);
+        var newCheckingTotal = 0;
+        $("#savings .balance").html('$' + newSavingsTotal);
+        $("#checking .balance").html('$' + newCheckingTotal);
+        newCheckingColor();
+      }
+    }
+    else{
+      checkingTotal -= checkingWithdraw;
+      $("#checking .balance").html('$' + checkingTotal);
+      checkingColor();
+    }
   });
 
   $("#savings .withdraw").on("click", function(){
@@ -120,3 +101,21 @@ $(document).ready(function(){
   });
 
 });
+
+/////////////////////////////
+//
+// var checkingWithdraw = $("#checking .input").val();
+// var totalBalance = checkingTotal + savingsTotal;
+// switch(checkingWithdraw){
+//   case (checkingWithdraw < checkingTotal):
+//   checkingTotal -= checkingWithdraw;
+//     $("#checking .balance").html('$' + checkingTotal);
+//     checkingColor();
+//     break;
+//   case (checkingWithdraw >= checkingTotal):
+//     alert("Account balance is too low for withdrawl.");
+//     break;
+//   case (checkingWithdraw > totalBalance):
+//     alert("Too low.")
+//     console.log("Please Work")
+// }
