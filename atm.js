@@ -3,8 +3,23 @@ $(document).ready(function(){
  //
  // function buttonClick(){
  //   button.on("click", console.log("hello"))
+var checkingInput = $("#checking .input").val()
+var checkingTotal = 0
+
+
 $("#checking .deposit").on("click", function(){
-  console.log("hello");
-})
+  var checkingInput = $("#checking .input").val()
+
+  checkingInput = parseInt(checkingInput);
+
+  checkingTotal += checkingInput;
+
+  checkingTotal = String(checkingTotal);
+
+  $("#checking .balance").text("$" + checkingTotal);
+
+});
+
+
 
 });
