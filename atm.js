@@ -1,3 +1,4 @@
 $('#checking input.deposit').on('click', function(){
-  console.log('money')
+  var depositAmt = $('#checking input.input').val();
+  console.log(depositAmt);
 })
