@@ -32,19 +32,6 @@ $(document).ready(function(){
     getAccountColor();
     getAccountColorB()
 
-    // //get total balanace
-    // var totalBalance = function (){
-    //
-    //   var checkingBalance = $("#checking .balance").val();
-    //   var savingBalance = $("#savings .balance").val();
-    //
-    //   parseInt(checkingBalance);
-    //   parseInt(savingsBalance);
-    //
-    //   totalBalance = (checkingBalance + savingsBalance);
-    //
-    // }
-
     //CHECKING DEPOSIT///
 
     $("#checking .deposit").on("click", function(){
@@ -90,7 +77,7 @@ $(document).ready(function(){
 
           else if ((checkingInput>totalBalance) && (checkingInput>checkingBalance)) {
             // var checkingInput = $("#checking .input").val();
-            alert("There are not enough funds to complete this request. Pleae try again.");
+            alert("There are not enough funds to complete this request. Please try again.");
           }
 
           else if (checkingInput>checkingBalance) {
