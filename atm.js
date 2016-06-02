@@ -1,17 +1,28 @@
-// $( document ).ready(function() {
-//   console.log( "document loaded" );
-//   });
-
 $( document ).ready(function() {
   console.log( "document loaded")
 
 
   var deposit = document.getElementById('deposit')
-  deposit.addEventListener('click', ca_chang)
+  var checking_balance = document.getElementById('checking_balance')
+  var b1 = 0
 
+
+  deposit.addEventListener('click', ca_chang)
   function ca_chang (){
     console.log("hello!");
+    b1 += input.value
   }
+
+
+
+
+  // function account_update (){
+  //   b1 += 1;
+  //   console.log(b1);
+  // }
+
+
+
 
 
 });
@@ -19,20 +30,6 @@ $( document ).ready(function() {
 
 
 
-var b1 = 0
-
-depositTBD.addEventListener("click", account_update);
-
-function account_update (){
-  b1 += 1;
-  console.log(b1);
-}
-
-x.getElementById(".savings.balance", function3)
-
-function function3 () {
-  b1 + input.value;
-}
 
 
 // var check = document.getElementById(".header");
