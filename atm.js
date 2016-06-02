@@ -17,15 +17,11 @@ $(document).ready(function(){
     var checkingBalance = parseInt($("#balanceCheck").html().replace("$", ""));
     var moneyInput = parseInt($("#checkInput").val());
     var savingsBalance = parseInt($("#balanceSave").html().replace("$", ""));
-
-    // var totalBalance = currentBalance - moneyInput;
-    // var balanceCheck = $("#balanceCheck");
     if(moneyInput > checkingBalance){
       var remainder = moneyInput - checkingBalance
       if(remainder > savingsBalance){
         alert("Error! Can't withdraw that much")
       }else{
-        // Overdraft protection stuff starts happening
         checkingBalance = 0
         savingsBalance = savingsBalance - remainder
       }
