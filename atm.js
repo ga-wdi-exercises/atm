@@ -11,10 +11,24 @@ $("#checking .deposit").click(function(){
 
 $("#checking .withdraw").click(function(){
   var withdraw = parseInt($("#checking .input").val())
-  var balance = parseInt($("#checking .balance").text().replace("$", ""))
-  var updatedBalance = ("$") + (balance - withdraw)
-  $("#checking .balance").text(updatedBalance)
+  var checkingBalance = parseInt($("#checking .balance").text().replace("$", ""))
+  //var balance = parseInt($("#checking .balance").text().replace("$", ""))
+  var updatedCheckingBalance = ("$") + (checkingBalance - withdraw)
+  $("#checking .balance").text(updatedCheckingBalance)
+
+
+  //var savingsBalance = parseInt($("#savings .balance").text().replace("$", ""))
+  //var totalBalance = ("$") + (updatedCheckingBalance + savingsBalance)
+  //if (withdraw > checkingBalance)
+  //var remainder =
+
+
+  if (withdraw > checkingBalance)
+  alert("Error!! You don't have enough funds in this account!!")
+
 })
+
+
 
 //savings
 $("#savings .deposit").click(function(){
@@ -30,3 +44,19 @@ $("#savings .withdraw").click(function(){
   var updatedBalance = ("$") + (balance - withdraw)
   $("#savings .balance").text(updatedBalance)
 })
+
+//overdraft
+
+
+//....
+
+
+//if input < checkingBalance, then
+//  checkingBalance = checkingBalance - input
+//otherwise if input > checkingBalance, then
+//remainder = input - checkingBalance
+//if remainder > savingsBalance, then
+//"Error! Can't withdraw that much"
+//otherwise
+//checkingBalance = 0
+//savingsBalance = savingsBalance - remainder
