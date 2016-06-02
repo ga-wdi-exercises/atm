@@ -27,9 +27,11 @@ $(document).ready(function(){
     var checkingWithdrawValue = $("#checking .input");
     checkingWithdrawValue = parseInt(checkingWithdrawValue.val());
     checkingAccountTotal = parseInt(checkingAccountTotal);
-    checkingAccountTotal = checkingAccountTotal - checkingWithdrawValue;
-    checkingAccountTotal = String(checkingAccountTotal);
-    $("#checking .balance").html("$" + checkingAccountTotal);
+    if(checkingWithdrawValue < checkingAccountTotal){
+      checkingAccountTotal = checkingAccountTotal - checkingWithdrawValue;
+      checkingAccountTotal = String(checkingAccountTotal);
+      $("#checking .balance").html("$" + checkingAccountTotal);
+    }
   })
 
 
@@ -61,9 +63,11 @@ $(document).ready(function(){
     var savingWithdrawValue = $("#savings .input");
     savingWithdrawValue = parseInt(savingWithdrawValue.val());
     savingAccountTotal = parseInt(savingAccountTotal);
-    savingAccountTotal = savingAccountTotal - savingWithdrawValue;
-    savingAccountTotal = String(savingAccountTotal);
-    $("#savings .balance").html("$" + savingAccountTotal);
+    if (savingWithdrawValue < savingAccountTotal){
+      savingAccountTotal = savingAccountTotal - savingWithdrawValue;
+      savingAccountTotal = String(savingAccountTotal);
+      $("#savings .balance").html("$" + savingAccountTotal);
+    }
   })
 
 
