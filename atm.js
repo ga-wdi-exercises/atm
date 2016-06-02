@@ -1,3 +1,9 @@
 $(document).ready(function(){
-// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
+
+$(".deposit").on("click", function(){
+  var moneyInput = $(".input").val();
+
+  console.log(moneyInput);
+});
+
 });
