@@ -1,21 +1,33 @@
 $( document ).ready(function() {
   console.log( "document loaded")
 
-
   var deposit = document.getElementById('deposit')
-  var checking_balance = document.getElementById('checking_balance')
-  var b1 = 0
+  var depositb = document.getElementById('depositb')
+  var withdraw = document.getElementById('withdraw')
+  var withdrawb = document.getElementById('withdrawb')
+  // var checking_balance = document.getElementById('#checking_balance')
+  var checking_balance = Number(0)
+  var savings_balanace = 0
+  // var add = document.getElementById('add')
+
+
+
 
 
   deposit.addEventListener('click', ca_chang)
   function ca_chang (){
+    var add = document.getElementById('add').value;   //user input?
+    checking_balance += Number(add)
     console.log("hello!");
-    b1 += input.value
+    console.log(checking_balance)
+
   }
 
+//displaying values
 
 
 
+  // var b1 = 0
   // function account_update (){
   //   b1 += 1;
   //   console.log(b1);
@@ -26,19 +38,3 @@ $( document ).ready(function() {
 
 
 });
-
-
-
-
-
-
-// var check = document.getElementById(".header");
-// var save = document.getElementById("savings account");
-
-// check.background-color input.value = "blue";
-
-
-// form.addEventListener("submit", function(){
-//   ID="savings"".account" = input.value;
-//   box = clear
-// })
