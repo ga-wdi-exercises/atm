@@ -1,6 +1,6 @@
 $(document).ready(function(){
 // Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
-var savings = {
+/*var savings = {
   balance: $("#savings .balance"),
   input: $("#savings .input"),
   draw: $("#savings .withdraw"),
@@ -13,7 +13,7 @@ var checking = {
   draw: $("#checking .withdraw"),
   depo: $("#checking .deposit")
 }
-
+*/
 
 
 });
