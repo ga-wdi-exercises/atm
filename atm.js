@@ -1,130 +1,161 @@
 $(document).ready(function(){
 
-  var checkingInput; //#checking .input
   var savingsInput; //#savings .input
   var checkingBalance=0; //#checking .balance
   var savingsBalance=0;
-  var checkingInput = $("#checking .input").val();
+  var checkingInput;
+  var totalBalance;
 
   ///FUNCTIONS TO DETERMINE ACCOUNT COLOR///
 
   function getAccountColor() {
     if (checkingBalance==0) {
-    $("#checking .balance").addClass("zero");
+      $("#checking .balance").addClass("zero");
     }
 
     else {
-    $("#checking .balance").removeClass("zero");
-    console.log("julia u dumb");
+      $("#checking .balance").removeClass("zero");
     }
   }
 
   function getAccountColorB() {
     if (savingsBalance==0) {
-    $("#savings .balance").addClass("zero");}
+      $("#savings .balance").addClass("zero");}
 
-    else {
-      $("#savings .balance").removeClass("zero");
-      console.log("julia u dumb");
+      else {
+        $("#savings .balance").removeClass("zero");
       }
-  }
+    }
 
-  ///CALLING THE COLOR CHANGE FUNCTIONS
+    ///CALLING THE COLOR CHANGE FUNCTIONS
 
-  getAccountColor();
-  getAccountColorB()
+    getAccountColor();
+    getAccountColorB()
 
-//CHECKING DEPOSIT///
+    // //get total balanace
+    // var totalBalance = function (){
+    //
+    //   var checkingBalance = $("#checking .balance").val();
+    //   var savingBalance = $("#savings .balance").val();
+    //
+    //   parseInt(checkingBalance);
+    //   parseInt(savingsBalance);
+    //
+    //   totalBalance = (checkingBalance + savingsBalance);
+    //
+    // }
 
-  $("#checking .deposit").on("click", function(){
+    //CHECKING DEPOSIT///
+
+    $("#checking .deposit").on("click", function(){
 
       var checkingInput = $("#checking .input").val();
 
-        if (checkingInput <=0) {
-          alert("Please enter an amount greater than 0");
-        }
+      if (checkingInput <=0) {
+        alert("Please enter an amount greater than 0");
+      }
 
-        else {
-          checkingInput = parseInt(checkingInput);
-          checkingBalance+=checkingInput
-          $("#checking .balance").html("$"+checkingBalance);
-          getAccountColor();
-          console.log("the new balance is $"+checkingBalance);
-        }
+      else {
+        checkingInput = parseInt(checkingInput);
+        checkingBalance+=checkingInput
+        $("#checking .balance").html("$"+checkingBalance);
+        getAccountColor();
+        var totalBalance = checkingBalance + savingsBalance;
+        console.log("the new balance is $"+checkingBalance+" and $"+totalBalance+" is the total balance");
+      }
     })
 
-//CHECKING WITHDRAW//
+    //CHECKING WITHDRAW//
 
-  $("#checking .withdraw").on("click", function(){
-
+    $("#checking .withdraw").on("click", function(){
       var checkingInput = $("#checking .input").val();
 
-        if (checkingInput <=0) {
-          alert("Please enter an amount greater than 0");
+      if (checkingInput <=0) {
+        alert("Please enter an amount greater than 0");
+      }
+
+      else {
+        var checkingInput = $("#checking .input").val();
+        var totalBalance = checkingBalance + savingsBalance;
+
+          if (checkingInput<=checkingBalance){
+            var checkingInput = $("#checking .input").val();
+            checkingInput = parseInt(checkingInput);
+            checkingBalance=checkingBalance-checkingInput;
+            $("#checking .balance").html("$"+checkingBalance);
+            // var totalBalance = checkingBalance + savingsBalance;
+            getAccountColor();
+            // console.log("the new balance is $"+checkingBalance+" and $"+totalBalance+" is the total balance");
           }
 
-        else {
-        checkingInput = parseInt(checkingInput);
-
-          //don't allow a withdraw that causes balance to go < 0
-          if (checkingInput>checkingBalance) {
-            alert("STOP! You do not have enough to withdraw this amount")
+          else if ((checkingInput>totalBalance) && (checkingInput>checkingBalance)) {
+            // var checkingInput = $("#checking .input").val();
+            alert("There are not enough funds to complete this request. Pleae try again.");
           }
 
-          else {
-          checkingBalance-=checkingInput;
-          $("#checking .balance").html("$"+checkingBalance);
-          getAccountColor();
-          console.log("the new balance is $"+checkingBalance);
+          else if (checkingInput>checkingBalance) {
+            var checkingInput = $("#checking .input").val();
+            console.log("Time to move into B-b-b bonus round...")
+            var totalBalance = checkingBalance + savingsBalance;
+
+            var overdraft = checkingInput-checkingBalance;
+            overdraft = Math.abs(overdraft);
+            console.log("$"+overdraft+" is the overdraft.");
+
+            savingsBalance=savingsBalance-overdraft
+            checkingBalance = 0;
+
+            $("#checking .balance").html("$"+checkingBalance);
+            $("#savings .balance").html("$"+savingsBalance);
           }
         }
-      })
+    });
 
-  ///SAVINGS DEPOSIT///
+    ///SAVINGS DEPOSIT///
 
-      $("#savings .deposit").on("click", function(){
+    $("#savings .deposit").on("click", function(){
 
-          var savingsInput = $("#savings .input").val();
+      var savingsInput = $("#savings .input").val();
 
-            if (savingsInput <=0) {
-              alert("Please enter an amount greater than 0");
-              }
+      if (savingsInput <=0) {
+        alert("Please enter an amount greater than 0");
+      }
 
-            else {
-          // console.log(checkingInput);
-          savingsInput = parseInt(savingsInput);
-          // console.log((checkingInput+10)+" is the user input plus 10")
-          savingsBalance+=savingsInput
+      else {
+        savingsInput = parseInt(savingsInput);
+        savingsBalance+=savingsInput
+        $("#savings .balance").html("$"+savingsBalance);
+        getAccountColorB()
+        var totalBalance = checkingBalance + savingsBalance;
+        console.log("the new balance is $"+savingsBalance+" and $"+totalBalance+" is the total balance");
+      }
+
+    })
+
+    ///SAVINGS WITHDRAW///
+
+    $("#savings .withdraw").on("click", function(){
+      var savingsInput = $("#savings .input").val();
+
+      if (savingsInput <=0) {
+        alert("Please enter an amount greater than 0");
+      }
+
+      else {
+        savingsInput = parseInt(savingsInput);
+
+        //don't allow a withdraw that causes balance to go < 0
+        if (savingsInput>savingsBalance) {
+          alert("STOP! You do not have enough to withdraw this amount");
+        }
+
+        else {
+          savingsBalance-=savingsInput
           $("#savings .balance").html("$"+savingsBalance);
           getAccountColorB()
-          console.log("the new balance is $"+savingsBalance);
-          }
-
-        })
-
-  ///SAVINGS WITHDRAW///
-
-      $("#savings .withdraw").on("click", function(){
-          var savingsInput = $("#savings .input").val();
-
-            if (savingsInput <=0) {
-              alert("Please enter an amount greater than 0");
-              }
-
-            else {
-                savingsInput = parseInt(savingsInput);
-
-                  //don't allow a withdraw that causes balance to go < 0
-                  if (savingsInput>savingsBalance) {
-                    alert("STOP! You do not have enough to withdraw this amount");
-                  }
-
-                  else {
-                  savingsBalance-=savingsInput
-                  $("#savings .balance").html("$"+savingsBalance);
-                  getAccountColorB()
-                  console.log("the new balance is $"+savingsBalance);
-                  }
-              }
-        });
-});
+          var totalBalance = checkingBalance + savingsBalance;
+          console.log("the new balance is $"+savingsBalance+" and $"+totalBalance+" is the total balance");
+        }
+      }
+    });
+  });
