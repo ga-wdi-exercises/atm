@@ -1,115 +1,130 @@
-
 $(document).ready(function(){
-// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
 
-var checkingInput; //#checking .input
-var savingsInput; //#savings .input
-var checkingBalance=0; //#checking .balance
-var savingsBalance=0;
-var checkingInput = $("#checking .input").val();
+  var checkingInput; //#checking .input
+  var savingsInput; //#savings .input
+  var checkingBalance=0; //#checking .balance
+  var savingsBalance=0;
+  var checkingInput = $("#checking .input").val();
 
+  ///FUNCTIONS TO DETERMINE ACCOUNT COLOR///
 
-
-
-$("#checking .deposit").on("click", function(){
-
-    var checkingInput = $("#checking .input").val();
-
-      if (checkingInput <=0) {
-        alert("Please enter an amount greater than 0");
-        }
-
-      else {
-    // console.log(checkingInput);
-    checkingInput = parseInt(checkingInput);
-    // console.log((checkingInput+10)+" is the user input plus 10")
-    checkingBalance+=checkingInput
-    $("#checking .balance").html("$"+checkingBalance);
-    console.log("the new balance is $"+checkingBalance);
+  function getAccountColor() {
+    if (checkingBalance==0) {
+    $("#checking .balance").addClass("zero");
     }
 
-  })
+    else {
+    $("#checking .balance").removeClass("zero");
+    console.log("julia u dumb");
+    }
+  }
 
+  function getAccountColorB() {
+    if (savingsBalance==0) {
+    $("#savings .balance").addClass("zero");}
 
-$("#checking .withdraw").on("click", function(){
+    else {
+      $("#savings .balance").removeClass("zero");
+      console.log("julia u dumb");
+      }
+  }
 
-    var checkingInput = $("#checking .input").val();
+  ///CALLING THE COLOR CHANGE FUNCTIONS
 
-      if (checkingInput <=0) {
-        alert("Please enter an amount greater than 0");
-        }
+  getAccountColor();
+  getAccountColorB()
 
-      else {
+//CHECKING DEPOSIT///
 
-      checkingInput = parseInt(checkingInput);
+  $("#checking .deposit").on("click", function(){
 
+      var checkingInput = $("#checking .input").val();
 
-        //don't allow a withdraw that causes balance to go < 0
-        if (checkingInput>checkingBalance) {
-          alert("STOP! You do not have enough to withdraw this amount")
+        if (checkingInput <=0) {
+          alert("Please enter an amount greater than 0");
         }
 
         else {
-
-        checkingBalance-=checkingInput:
-        $("#checking .balance").html("$"+checkingBalance);
-        console.log("the new balance is $"+checkingBalance);
+          checkingInput = parseInt(checkingInput);
+          checkingBalance+=checkingInput
+          $("#checking .balance").html("$"+checkingBalance);
+          getAccountColor();
+          console.log("the new balance is $"+checkingBalance);
         }
-
-      }
-
     })
 
+//CHECKING WITHDRAW//
 
+  $("#checking .withdraw").on("click", function(){
 
-    $("#savings .deposit").on("click", function(){
+      var checkingInput = $("#checking .input").val();
 
-        var savingsInput = $("#savings .input").val();
+        if (checkingInput <=0) {
+          alert("Please enter an amount greater than 0");
+          }
 
-          if (savingsInput <=0) {
-            alert("Please enter an amount greater than 0");
-            }
+        else {
+        checkingInput = parseInt(checkingInput);
+
+          //don't allow a withdraw that causes balance to go < 0
+          if (checkingInput>checkingBalance) {
+            alert("STOP! You do not have enough to withdraw this amount")
+          }
 
           else {
-        // console.log(checkingInput);
-        savingsInput = parseInt(savingsInput);
-        // console.log((checkingInput+10)+" is the user input plus 10")
-        savingsBalance+=savingsInput
-        $("#savings .balance").html("$"+savingsBalance);
-        console.log("the new balance is $"+savingsBalance);
+          checkingBalance-=checkingInput;
+          $("#checking .balance").html("$"+checkingBalance);
+          getAccountColor();
+          console.log("the new balance is $"+checkingBalance);
+          }
         }
-
       })
 
+  ///SAVINGS DEPOSIT///
 
-    $("#savings .withdraw").on("click", function(){
+      $("#savings .deposit").on("click", function(){
 
-        var savingsInput = $("#savings .input").val();
+          var savingsInput = $("#savings .input").val();
 
-          if (savingsInput <=0) {
-            alert("Please enter an amount greater than 0");
-            }
+            if (savingsInput <=0) {
+              alert("Please enter an amount greater than 0");
+              }
 
-          else {
+            else {
+          // console.log(checkingInput);
+          savingsInput = parseInt(savingsInput);
+          // console.log((checkingInput+10)+" is the user input plus 10")
+          savingsBalance+=savingsInput
+          $("#savings .balance").html("$"+savingsBalance);
+          getAccountColorB()
+          console.log("the new balance is $"+savingsBalance);
+          }
 
-              savingsInput = parseInt(savingsInput);
+        })
 
-                //don't allow a withdraw that causes balance to go < 0
-                if (savingsInput>savingsBalance) {
-                  alert("STOP! You do not have enough to withdraw this amount");
-                }
+  ///SAVINGS WITHDRAW///
 
-                else {
+      $("#savings .withdraw").on("click", function(){
+          var savingsInput = $("#savings .input").val();
 
-                savingsBalance-=savingsInput
-                $("#savings .balance").html("$"+savingsBalance);
-                console.log("the new balance is $"+savingsBalance);
+            if (savingsInput <=0) {
+              alert("Please enter an amount greater than 0");
+              }
 
+            else {
+                savingsInput = parseInt(savingsInput);
 
-                savingsBalance-=savingsInput
-                $("#savings .balance").html("$"+savingsBalance);
-                console.log("the new balance is $"+savingsBalance);
-                }
-            }
-      });
+                  //don't allow a withdraw that causes balance to go < 0
+                  if (savingsInput>savingsBalance) {
+                    alert("STOP! You do not have enough to withdraw this amount");
+                  }
+
+                  else {
+                  savingsBalance-=savingsInput
+                  $("#savings .balance").html("$"+savingsBalance);
+                  getAccountColorB()
+                  console.log("the new balance is $"+savingsBalance);
+                  }
+              }
+        });
 });
