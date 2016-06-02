@@ -11,18 +11,23 @@ $(document).ready(function(){
 });
 
 function ckDeposit(inAmtTmp) {
-  inAmt = parseInt(inAmtTmp,10);
-  var ckBalTmp = $("#checking .balance").html();
-  var ckBal = parseInt(ckBalTmp.substring(1),10);
+  inAmt = parseFloat(inAmtTmp,10);
+  // var ckBalTmp = $("#checking .balance").html();
+  var ckBal = parseFloat($("#checking .balance").html().substring(1),10);
   ckBal += inAmt;
   $("#checking .balance").html("$" + ckBal.toString());
 };
 
 function ckWithdraw(inAmtTmp) {
-  inAmt = parseInt(inAmtTmp,10);
+  inAmt = parseFloat(inAmtTmp,10);
   // var ckBalTmp = $("#checking .balance").html();
-  // var ckBal = parseInt(ckBalTmp.substring(1),10);
-  var ckBal = parseInt($("#checking .balance").html().substring(1),10);
-  ckBal -= inAmt;
-  $("#checking .balance").html("$" + ckBal.toString());
+  // var ckBal = parseFloat(ckBalTmp.substring(1),10);
+  var ckBal = parseFloat($("#checking .balance").html().substring(1),10);
+  if (inAmt > ckBal) {
+    alert("You don't have that much in the account.  Buzz off!");
+    $("#checking .input").val("");
+  } else {
+    ckBal -= inAmt;
+    $("#checking .balance").html("$" + ckBal.toString());
+  }
 };
