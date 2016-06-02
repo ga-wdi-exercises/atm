@@ -19,18 +19,29 @@ $(document).ready(function(){
   var moneyWithdraw = $("#checking").find(".withdraw")
   moneyWithdraw.on("click", function(){
     var moneyInput = parseInt($("#checkingInput").val());
-    var balanceWithdraw = parseInt($("#balanceChecking").html().replace("$", ""));
-    var balanceChange = $("#balanceChecking");
-    var totalBalance = balanceWithdraw - moneyInput;
-     if (moneyInput <= balanceWithdraw){
-    balanceChange.html("$" + totalBalance);
-    checkBalanceZero($("#balanceChecking"));
-    if (balanceWithdraw == 0){
-      balanceChange.html("$0");
-      checkBalanceZero($("#balanceChecking"));
-    }
-  }
-  });
+    var balanceCurrent = parseInt($("#balanceChecking").html().replace("$", ""));
+    var balanceCurrentSavings = parseInt($("#balanceSavings").html().replace("$", ""));
+    var totalBalance = balanceCurrent - moneyInput;
+
+     if(moneyInput > balanceCurrent){
+          var remainder = moneyInput - balanceCurrent;
+
+        if (remainder > balanceCurrentSavings){
+          alert("Error! Can't withdraw that much");
+        } else {
+          balanceCurrent = 0
+          balanceCurrentSavings = balanceCurrentSavings - remainder;
+          }
+        } else {
+          balanceCurrent = balanceCurrent - moneyInput;
+        }
+            $("#balanceChecking").html("$" + balanceCurrent);
+            $("#balanceSavings").html("$" + balanceCurrentSavings);
+            checkBalanceZero($("#balanceChecking"));
+        })
+
+
+
 
   //deposit savings
   var moneyDeposit = $("#savings").find(".deposit")
@@ -47,13 +58,13 @@ $(document).ready(function(){
   var moneyWithdraw = $("#savings").find(".withdraw")
   moneyWithdraw.on("click", function(){
     var moneyInput = parseInt($("#savingsInput").val());
-    var balanceWithdraw = parseInt($("#balanceSavings").html().replace("$", ""));
+    var balanceCurrentSavings = parseInt($("#balanceSavings").html().replace("$", ""));
     var balanceChange = $("#balanceSavings");
-    var totalBalance = balanceWithdraw - moneyInput;
-     if (moneyInput <= balanceWithdraw){
+    var totalBalance = balanceCurrentSavings  - moneyInput;
+     if (moneyInput <= balanceCurrentSavings ){
     balanceChange.html("$" + totalBalance);
     checkBalanceZero($("#balanceSavings"));
-    if (balanceWithdraw == 0){
+    if (balanceCurrentSavings == 0){
       balanceChange.html("$0");
       checkBalanceZero($("#balanceSavings"));
     }
