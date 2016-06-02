@@ -1,10 +1,10 @@
 $(document).ready(function(){
   var checkingAmt = 0;
   checkBalance();
-  console.log(4+"5");
-  console.log(5+2);
-  console.log("1"+9+"3");
-  console.log("1"+"3");
+  // console.log(4+"5");
+  // console.log(5+2);
+  // console.log("1"+9+"3");
+  // console.log("1"+"3");
 
   $("#checking .deposit").on("click", function() {
     //checkingAmt += amount from input field
@@ -16,7 +16,7 @@ $(document).ready(function(){
     checkingAmt += checkingDeposit;
     checkingAmt = String(checkingAmt);
     $("#checking .balance").text("$"+checkingAmt);
-    console.log(checkingAmt);
+    // console.log(checkingAmt);
     checkBalance();
   });
 
@@ -26,7 +26,12 @@ $(document).ready(function(){
     checkingAmt = parseInt(checkingAmt);
     checkingWithdraw = parseInt(checkingWithdraw);
     if (checkingWithdraw > checkingAmt) {
-      console.log("Sorry you have do have not enough in your checking account to withdraw that much.");
+      if (overPro() !== false) {
+        overPro();
+      }
+      else {
+        console.log("Sorry you have do have not enough in your checking account to withdraw that much.");
+      }
     }
     else {
       checkingAmt = parseInt(checkingAmt);
@@ -35,7 +40,7 @@ $(document).ready(function(){
       checkingAmt = String(checkingAmt);
       $("#checking .balance").text("$"+checkingAmt);
     }
-    console.log(checkingAmt);
+    // console.log(checkingAmt);
     checkBalance();
   });
   function checkBalance() {
@@ -59,7 +64,7 @@ $(document).ready(function(){
     savingsAmt += savingsDeposit;
     savingsAmt = String(savingsAmt);
     $("#savings .balance").text("$"+savingsAmt);
-    console.log(savingsAmt);
+    // console.log(savingsAmt);
     checkSavings();
   });
 
@@ -78,7 +83,7 @@ $(document).ready(function(){
       savingsAmt = String(savingsAmt);
       $("#savings .balance").text("$"+savingsAmt);
     }
-    console.log(savingsAmt);
+    // console.log(savingsAmt);
     checkSavings();
   });
   function checkSavings() {
@@ -88,6 +93,27 @@ $(document).ready(function(){
     }
     else {
       $("#savings .balance").removeClass("zero");
+    }
+  }
+
+  checkingAmt = parseInt(checkingAmt);
+  savingsAmt = parseInt(savingsAmt);
+  var allTheMonies = checkingAmt+savingsAmt;
+  console.log(allTheMonies);
+
+  function overPro() {
+    console.log("overPro launched!");
+    if (savingsWithdraw > allTheMonies || checkingWithdraw > allTheMonies) {
+      console.log("You're withdrawing more money than is in both of your accounts");
+      return false;
+    }
+    else if (checkingWithdraw > checkingAmt && checkingWithdraw < allTheMonies) {
+      var overAmt = checkingAmt-checkingWithdraw;
+      console.log(overAmt);
+      overAmt = Math.abs(overAmt);
+      console.log(overAmt);
+      savingsAmt -= overAmt;
+      console.log(savingsAmt);
     }
   }
 });
