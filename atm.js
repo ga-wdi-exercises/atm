@@ -9,6 +9,7 @@ $( document ).ready(function() {
   var withdrawb = document.getElementById('withdrawb')
   var checking_balance = Number(0)
   var savings_balance = Number(0)
+  // var savings_balance = Number(getElementById('checking_balance')
 
 
   deposit.addEventListener('click', ca_chang)
@@ -22,12 +23,25 @@ $( document ).ready(function() {
   withdraw.addEventListener('click', take)
   function take (){
     var add = document.getElementById('add').value;
+    console.log(add,savings_balance,checking_balance)
     if (checking_balance - Number(add) >= 0) {
       checking_balance -= Number(add)
       console.log("checking:" + checking_balance);
       $("#checking_balance").text("$" + checking_balance);
     }
-    else $("#checking_balance").css(".zero");
+    else if ((checking_balance + savings_balance - Number(add)) >= 0) {
+      var savings_diff = Number(add) - checking_balance
+      savings_balance = savings_balance - savings_diff
+
+      checking_balance = Number(0)
+      console.log("checking:" + checking_balance);
+      console.log("savings:" + savings_balance);
+      $("#checking_balance").text("$" + checking_balance);
+      $("#savings_balance").text("$" + savings_balance);
+    }
+    else {$("#checking_balance").css(".zero");
+      console.log("works")
+    }
   }
 
   depositb.addEventListener('click', ca_changb)
