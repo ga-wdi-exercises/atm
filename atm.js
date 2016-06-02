@@ -25,21 +25,35 @@ function Account() {
     savings: 0
   };
 
+  /**
+   * Processes the deposit for the specified account type and amount.
+   * @param  {[String]} type   either "checking" or "savings"
+   * @param  {[String]} amount a numerical string
+   * @return true if the transaction was successful, else false.
+   */
   this.deposit = function( type, amount ) {
+
     // Reject if input is invalid.
     if ( ! this.isValidAmountFormat( amount ) ) {
       return false;
     }
+
     this.balances[ type ] += Number( amount );
+
+    return true;
   }
 
   /**
-   * TODO: Still buggy...
+   * Processes the withdrawal for the specified account type and amount.
+   * @param  {[String]} type   either "checking" or "savings"
+   * @param  {[String]} amount a numerical string
+   * @return true if the transaction was successful, else false.
    */
   this.withdraw = function ( type, amount ) {
 
     // Reject if input is invalid or there is not enough fund.
-    if ( ! this.isValidAmountFormat( amount ) || ! this.hasEnoughFund( amount ) ) {
+    if ( ! this.isValidAmountFormat( amount ) ||
+         ! this.hasEnoughFundForWithdrawal( amount ) ) {
       return false;
     }
 
@@ -47,34 +61,52 @@ function Account() {
     if ( this.balances[ type ] >= amount ) {
       // Only from checking account.
       this.balances.checking -= amount;
+
     } else {
-      // From the specified first.
-      this.balances[ type ] = 0;
+      // Take all the money from the specified account first.
+      amount -= this.balances[ type ];  // Update the desired amount.
+      this.balances[ type ] = 0;        // Empty this account's balance.
+
       // Then from the other.
-      var theOtherType = ( type === "checking" ) ? "savings" : "checking";
-      this.balances[ theOtherType ] -= ( amount - this.balances[ type ] );
+      var theOtherType = ( type === "checking" )
+                       ? "savings"
+                       : "checking"
+                       ;
+      this.balances[ theOtherType ] -= amount;
     }
 
     return true;
   }
 
+  /**
+   * Validates the amount's format.
+   * @param  {[String]} amount a numerical string
+   * @return true if the format is valid, else false.
+   */
   this.isValidAmountFormat = function( amount ) {
     return /^\d+(\d+(\.\d+)?)$/.test( amount );
   }
 
+  /**
+   * Calculates the total balances of this account.
+   * @return {[Number]}
+   */
   this.getTotalBalances = function() {
-    // debugger;
     return this.balances.checking + this.balances.savings;
   }
 
-  this.hasEnoughFund = function( amount ) {
+  /**
+   * @param  {[Number]} amount the desired amount to withdraw
+   * @return true if the total amount is greater than or equal to the specified amount.
+   */
+  this.hasEnoughFundForWithdrawal = function( amount ) {
     return this.getTotalBalances() >= amount;
   }
 }
 
 
 /**
- * A controller of this application.
+ * Initializes the controller of this application.
  */
 function initAtm( account ) {
 
@@ -101,46 +133,55 @@ function initAtm( account ) {
 
   function handleClick( evt ) {
 
+    // If the event occurs on one of the buttons, handle it appropriately.
     switch ( evt.target ) {
       case checkingMachine.deposit:
-        console.log("checkingMachine.deposit");
         var amount = getAmountInput( "checking" );
         account.deposit( "checking", amount );
         break;
       case checkingMachine.withdraw:
-        console.log("checking.withdraw");
         var amount = getAmountInput( "checking" );
         account.withdraw( "checking", amount );
         break;
       case savingsMachine.deposit:
-        console.log("savingsMachine.deposit");
         var amount = getAmountInput( "savings" );
         account.deposit( "savings", amount );
         break;
       case savingsMachine.withdraw:
-        console.log("savingsMachine.withdraw");
         var amount = getAmountInput( "savings" );
-        account.withdraw( "checking", amount );
+        account.withdraw( "savings", amount );
     }
 
+    // Then update the UI based on the updated balances.
     updateUI();
   }
 
+  /**
+   * [getAmountInput description]
+   * @param  {[String]} type   either "checking" or "savings"
+   * @return {[Number]}
+   */
   function getAmountInput( type ) {
     var amount;
 
     if ( type === "checking" ) {
-      amount = parseInt(checkingMachine.input.value);
+      amount = Number( checkingMachine.input.value );
     } else if ( type === "savings" ) {
-      amount = parseInt(savingsMachine.input.value);
+      amount = Number( savingsMachine.input.value );
     }
 
     return amount;
   }
 
   function updateUI() {
+    // Log error if the balance total gets lower than 0.
+    if ( account.getTotalBalances() < 0 ) { console.error( "Error: A balance should not be negative" ); }
+
+    // Update the balances on the UI.
     checkingMachine.balance.innerHTML = AMOUNT_PREFIX + account.balances.checking;
     savingsMachine.balance.innerHTML  = AMOUNT_PREFIX + account.balances.savings;
+
+    // Clear the input fields.
     checkingMachine.input.value = "";
     savingsMachine.input.value  = "";
   }
