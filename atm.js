@@ -15,9 +15,9 @@ An application to keep track of the checking and savings balances.
 
 
 /**
- * A class that represents an ATM transaction service.
+ * A class that represents user account.
  */
-function Atm() {
+function Account() {
 
   // State
   this.balances = {
@@ -68,18 +68,23 @@ function Atm() {
 }
 
 
-document.addEventListener( "DOMContentLoaded", function() {
+/**
+ * A controller of this application.
+ */
+function initAtm( account ) {
 
-  // Start a session.
-  var atm = new Atm();
+  // Constants
+  var AMOUNT_PREFIX = "$";
 
   // References to the elements.
   var checkingMachine = {
+    input:    document.querySelector( '#checking .input' ),
     deposit:  document.querySelector( '#checking .deposit' ),
     withdraw: document.querySelector( '#checking .withdraw' ),
     balance:  document.querySelector( '#checking .balance' )
   };
   var savingsMachine = {
+    input:    document.querySelector( '#savings .input' ),
     deposit:  document.querySelector( '#savings .deposit' ),
     withdraw: document.querySelector( '#savings .withdraw' ),
     balance:  document.querySelector( '#savings .balance' )
@@ -94,16 +99,52 @@ document.addEventListener( "DOMContentLoaded", function() {
     switch ( evt.target ) {
       case checkingMachine.deposit:
         console.log("checkingMachine.deposit");
+        var amount = getAmountInput( "checking" );
+        account.deposit( "checking", amount );
+        console.log(amount);
         break;
       case checkingMachine.withdraw:
         console.log("checking.withdraw");
         break;
       case savingsMachine.deposit:
         console.log("savingsMachine.deposit");
+        var amount = getAmountInput( "savings" );
+        account.deposit( "savings", amount );
+        console.log(amount);
         break;
       case savingsMachine.withdraw:
         console.log("savingsMachine.withdraw");
     }
+
+    updateUI();
   }
+
+  function getAmountInput( type ) {
+    var amount;
+
+    if ( type === "checking" ) {
+      amount = parseInt(checkingMachine.input.value);
+    } else if ( type === "savings" ) {
+      amount = parseInt(savingsMachine.input.value);
+    }
+
+    return amount;
+  }
+
+  function updateUI() {
+    checkingMachine.balance.innerHTML = AMOUNT_PREFIX + account.balances.checking;
+    savingsMachine.balance.innerHTML  = AMOUNT_PREFIX + account.balances.savings;
+    checkingMachine.input.value = "";
+    savingsMachine.input.value  = "";
+  }
+}
+
+
+/**
+ * Start the application when document is loaded.
+ */
+document.addEventListener( "DOMContentLoaded", function() {
+
+  initAtm( new Account() );
 
 });
