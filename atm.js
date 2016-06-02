@@ -1,5 +1,4 @@
 $(document).ready(function(){
-
   // checking account
   //Deposit Button
   //this var is a link to the checking deposit button
@@ -7,6 +6,11 @@ $(document).ready(function(){
 
   // the value of total checking balance
   var checkingAccountTotal = 0;
+  // the value of total saving balance
+  var savingAccountTotal = 0;
+
+  changeBoxColorChecking();
+  changeBoxColorSaving();
 
   //if click on checking account deposit button, then inserts into checking balance
   checkingDepositButton.on("click", function(){
@@ -16,7 +20,11 @@ $(document).ready(function(){
     checkingAccountTotal = checkingAccountTotal + checkingInputValue;
     checkingAccountTotal = String(checkingAccountTotal);
     $("#checking .balance").html("$" + checkingAccountTotal);
+    changeBoxColorChecking();
+    changeBoxColorSaving();
   });
+
+
 
   //withdraw button
   //this var is a link to the checking withdraw button
@@ -51,17 +59,16 @@ $(document).ready(function(){
       }
 
     }
+    changeBoxColorChecking();
+    changeBoxColorSaving();
   });
 
 
 
   //SAVINGS ACCOUNT
   //Deposit Button
-  //this var is a link to the checking deposit button
   var savingDepositButton = $("#savings .deposit");
 
-  // the value of total checking balance
-  var savingAccountTotal = 0;
 
   //if click on checking account deposit button, then inserts into checking balance
   savingDepositButton.on("click", function(){
@@ -71,10 +78,11 @@ $(document).ready(function(){
     savingAccountTotal = savingAccountTotal + savingInputValue;
     savingAccountTotal = String(savingAccountTotal);
     $("#savings .balance").html("$" + savingAccountTotal);
+    changeBoxColorChecking();
+    changeBoxColorSaving();
   });
 
   //withdraw button
-  //this var is a link to the checking withdraw button
   var savingWithdrawButton = $("#savings .withdraw");
 
   //if withdraw button clicked, updates total balance
@@ -105,9 +113,30 @@ $(document).ready(function(){
       }
 
     }
+    changeBoxColorChecking();
+    changeBoxColorSaving();
   });
 
   //balance reflected in boxes
+  function changeBoxColorChecking() {
+    if (checkingAccountTotal <= 0){
+      $("#checking.account").addClass("zero");
+    }
+    else if (checkingAccountTotal > 0){
+      $("#checking.account").removeClass("zero");
+    }
+  }
+
+  function changeBoxColorSaving(){
+    if (savingAccountTotal <= 0){
+      $("#savings.account").addClass("zero");
+    }
+    else if (savingAccountTotal > 0){
+      $("#savings.account").removeClass("zero");
+    }
+
+  }
+
   /*checkingAccountTotal = parseInt(checkingAccountTotal);
   if (checkingAccountTotal <= 0){
     $("#checking .account").css({"background-color": "#F52F4F", "color": "#FFFFFF" })
