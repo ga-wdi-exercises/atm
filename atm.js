@@ -14,18 +14,27 @@ $(document).ready(function(){
   //Checking Account Withdraw
   var moneyWithdraw = $("#checking").find(".withdraw")
   moneyWithdraw.on("click", function(){
-    var currentBalance = parseInt($("#balanceCheck").html().replace("$", ""));
+    var checkingBalance = parseInt($("#balanceCheck").html().replace("$", ""));
     var moneyInput = parseInt($("#checkInput").val());
-    var totalBalance = currentBalance - moneyInput;
-    var balanceChange = $("#balanceCheck");
-    if(moneyInput <= currentBalance){
-    balanceChange.html("$"+totalBalance)
-    checkZero($("#balanceCheck"));
-    if(currentBalance == 0){
-      balanceChange.html("$0");
-      checkZero($("#balanceCheck"));
+    var savingsBalance = parseInt($("#balanceSave").html().replace("$", ""));
+
+    // var totalBalance = currentBalance - moneyInput;
+    // var balanceCheck = $("#balanceCheck");
+    if(moneyInput > checkingBalance){
+      var remainder = moneyInput - checkingBalance
+      if(remainder > savingsBalance){
+        alert("Error! Can't withdraw that much")
+      }else{
+        // Overdraft protection stuff starts happening
+        checkingBalance = 0
+        savingsBalance = savingsBalance - remainder
       }
-    };
+    }else{
+      checkingBalance = checkingBalance - moneyInput;
+    }
+    $("#balanceCheck").html("$" + checkingBalance);
+    $("#balanceSave").html("$" + savingsBalance);
+      checkZero($("#balanceCheck"));
   })
   //Savings Account Desposit
   var moneydepositSave = $("#savings").find(".deposit")
