@@ -1,15 +1,12 @@
 $(document).ready(function(){
 
   // checking account
-
+  //Deposit Button
   //this var is a link to the checking deposit button
   var checkingDepositButton = $("#checking .deposit");
 
   // the value of total checking balance
   var checkingAccountTotal = 0;
-
-
-  //this var links to the input value from user under checking account
 
   //if click on checking account deposit button, then inserts into checking balance
   checkingDepositButton.on("click", function(){
@@ -20,6 +17,54 @@ $(document).ready(function(){
     checkingAccountTotal = String(checkingAccountTotal);
     $("#checking .balance").html("$" + checkingAccountTotal);
   });
+
+  //withdraw button
+  //this var is a link to the checking withdraw button
+  var checkingWithdrawButton = $("#checking .withdraw");
+
+  //if withdraw button clicked, updates total balance
+  checkingWithdrawButton.on("click", function(){
+    var checkingWithdrawValue = $("#checking .input");
+    checkingWithdrawValue = parseInt(checkingWithdrawValue.val());
+    checkingAccountTotal = parseInt(checkingAccountTotal);
+    checkingAccountTotal = checkingAccountTotal - checkingWithdrawValue;
+    checkingAccountTotal = String(checkingAccountTotal);
+    $("#checking .balance").html("$" + checkingAccountTotal);
+  })
+
+
+
+  //SAVINGS ACCOUNT
+  //Deposit Button
+  //this var is a link to the checking deposit button
+  var savingDepositButton = $("#savings .deposit");
+
+  // the value of total checking balance
+  var savingAccountTotal = 0;
+
+  //if click on checking account deposit button, then inserts into checking balance
+  savingDepositButton.on("click", function(){
+    var savingInputValue = $("#savings .input");
+    savingInputValue = parseInt(savingInputValue.val());
+    savingAccountTotal = parseInt(savingAccountTotal);
+    savingAccountTotal = savingAccountTotal + savingInputValue;
+    savingAccountTotal = String(savingAccountTotal);
+    $("#savings .balance").html("$" + savingAccountTotal);
+  });
+
+  //withdraw button
+  //this var is a link to the checking withdraw button
+  var savingWithdrawButton = $("#savings .withdraw");
+
+  //if withdraw button clicked, updates total balance
+  savingWithdrawButton.on("click", function(){
+    var savingWithdrawValue = $("#savings .input");
+    savingWithdrawValue = parseInt(savingWithdrawValue.val());
+    savingAccountTotal = parseInt(savingAccountTotal);
+    savingAccountTotal = savingAccountTotal - savingWithdrawValue;
+    savingAccountTotal = String(savingAccountTotal);
+    $("#savings .balance").html("$" + savingAccountTotal);
+  })
 
 
 
