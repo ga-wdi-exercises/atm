@@ -16,27 +16,42 @@ var checkingInput = $("#checking .input").val();
 
 $("#checking .deposit").on("click", function(){
 
-  console.log(checkingInput);
+  var checkingInput = $("#checking .input").val();
 
+    if (checkingInput <=0) {
+      alert("Please enter an amount greater than 0");
+      }
+
+    else {
+  // console.log(checkingInput);
   checkingInput = parseInt(checkingInput);
-
-  console.log((checkingInput+10)+" is the user input plus 10")
-
-
-  $("#checking .balance").html("$"+checkingInput);
-// 
-
-  //separate the string of $ and value .val()
-
-  //
-  //
-  // var checkingBalance = $("#checking .balance");
-  //
-  // var checkingBalance = parseInt(checkingBalance);
-
-
+  // console.log((checkingInput+10)+" is the user input plus 10")
+  checkingBalance=checkingBalance+checkingInput
+  $("#checking .balance").html("$"+checkingBalance);
+  console.log("the new balance is $"+checkingBalance);
+  }
 
   })
+
+
+$("#checking .withdraw").on("click", function(){
+
+  var checkingInput = $("#checking .input").val();
+
+    if (checkingInput <=0) {
+      alert("Please enter an amount greater than 0");
+      }
+
+    else {
+  
+    checkingInput = parseInt(checkingInput);
+    // console.log((checkingInput+10)+" is the user input plus 10")
+    checkingBalance=checkingBalance-checkingInput
+    $("#checking .balance").html("$"+checkingBalance);
+    console.log("the new balance is $"+checkingBalance);
+    }
+
+    })
 
 
 
