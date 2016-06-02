@@ -8,10 +8,11 @@ $(document).ready(function(){
     //deposit
     $("#checking .deposit").on("click", function(){
         //amount in box, click deposit-adds val
-        console.log(checkingBal);
         var checkingInput = $("#checking .input").val(); // assigning value of the input class inside of checking to variable checkingInput
         checkingBal = parseInt(checkingInput) + checkingBal; //adding the value to the balance after parsing the string in checkingInput to a var
         $("#checking .balance").text(checkingBal); //changing the text of balance class in checking div to checkingBal
+        console.log(checkingBal);
+        $("#checking").removeClass("zero");
     });
 
     //withdraw
@@ -27,8 +28,13 @@ $(document).ready(function(){
             checkingBal = checkingBal - parseInt(checkingInput); //subtracting the value from checkingBal
             $("#checking .balance").text(checkingBal);
             if (checkingBal === 0){ //if withdraw is 0, turn background red. this if goes inside the above if because it only works when there is a proper withdraw
-                    $("#checking").css("background", "red");
+                    $("#checking").addClass("zero");
+                    console.log("DONT GOT MONEY IN THE BANK")
                 }
+            else if (checkingBal > 0){
+                    $("#checking").removeClass("zero");
+                    console.log("removing zero class");
+            }
         }
     });
 
@@ -37,17 +43,16 @@ $(document).ready(function(){
     //deposit
     $("#savings .deposit").on("click", function(){
         //amount in box, click deposit-adds val
-        console.log(savingsBal);
         var savingsInput = $("#savings .input").val();
         savingsBal = parseInt(savingsInput) + savingsBal; //adding the value to the balance after parsing the string in savingsInput to a var
         $("#savings .balance").text(savingsBal);
+        console.log(savingsBal);
+        $("#savings").removeClass("zero");
     });
 
     //withdraw
     $("#savings .withdraw").on("click", function(){
         //amount in box withdraw-subtract val
-        console.log(savingsBal);
-
         var savingsInput = $("#savings .input").val();
         if (savingsInput > savingsBal){
             console.log("not enough money in savings balance")
@@ -55,8 +60,13 @@ $(document).ready(function(){
         else{
             savingsBal = savingsBal - parseInt(savingsInput); //subtracting the value from savingsBal
             $("#savings .balance").text(savingsBal);
+            console.log(savingsBal);
             if (savingsBal === 0){ //if withdraw is 0, turn background red. this if goes inside the above if because it only works when there is a proper withdraw
-                    $("#savings").css("background", "red");
+                    $("#savings").addClass("zero");
+                }
+                else if (checkingBal > 0){
+                        $("#savings").removeClass("zero");
+                        console.log("removing zero class");
                 }
         }
 
