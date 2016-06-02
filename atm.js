@@ -1,11 +1,15 @@
 $(document).ready(function(){
-// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
-  // $("body").css("background-color", "red");
+//   On "Deposit", it should get the current "balance"
+// How can you get the content of the "balance" element?
+// The content has a $ at the beginning of it, so Javascript will read it as text
+// rather than as a number. How can you convert this text into a number?
 
-//   Add a click listener to the checking account's "Deposit" button
-// When you click the button it should console.log("hello")
 $("#checking .deposit").on("click", function(){
-    var amtMoney = $("input").val();
-    console.log("Amount Entered is: " + amtMoney);
+    var amtInput = $("input").val();
+    // $("#checking .balance").html("$" + amtInput);
+    var ckBalTmp = $("#checking .balance").html();
+    var ckBal = parseInt(ckBalTmp.substring(1));
+    console.log("Balance is: " + ckBal);
+    // console.log("Balance type is:" + ckBalType);
 });
 });
