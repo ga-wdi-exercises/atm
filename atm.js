@@ -1,11 +1,25 @@
 $(document).ready(function(){
   var moneyDeposit = $("#checking").find(".deposit")
-$(".deposit").on("click", function(){
+moneyDeposit.on("click", function(){
   var moneyInput = parseInt($(".input").val());
-  var balanceInput = parseInt($("#balanceChecking").html().replace("$", ""));
+  var balanceDeposit = parseInt($("#balanceChecking").html().replace("$", ""));
   var balanceChange = $("#balanceChecking");
-  var totalBalance = moneyInput + balanceInput;
+  var totalBalance = moneyInput + balanceDeposit;
   balanceChange.html("$" + totalBalance);
 });
+
+
+  var moneyWithdraw = $("#checking").find(".withdraw")
+moneyWithdraw.on("click", function(){
+  var moneyInput = parseInt($(".input").val());
+  var balanceWithdraw = parseInt($("#balanceChecking").html().replace("$", ""));
+  var balanceChange = $("#balanceChecking");
+  var totalBalance = balanceWithdraw - moneyInput;
+  balanceChange.html("$" + totalBalance);
+
+
+});
+
+
 
 });
