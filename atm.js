@@ -20,7 +20,7 @@ var left = {
     left.balance.text(newBalanceW);
 
     if (newBalanceW <= 0) {
-      $(".balance").addclass(".zero");
+      left.balance.addClass("zero");
     }
   });
 
