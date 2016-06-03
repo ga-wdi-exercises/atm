@@ -20,7 +20,7 @@ function overdraftWithdrawal(currentBalance, withdrawalAmount, backupBalance) {
 
   // Attempt to perform a normal withdrawal.
   var newBalance = withdrawal(currentBalance, withdrawalAmount);
-  console.log(currentBalance, withdrawalAmount, backupBalance);
+
   // If the normal withdrawal was successful, we don't need to worry about
   // overdraft protection. Just return the result of a normal withdrawal and the
   // unchanged backup account balance.
@@ -66,8 +66,8 @@ $(document).ready(function(){
   })
 
   // savings withdraw with overdraft protection
-  $("#savingsWithdraw").on("click", function(){
-    var withdraw = parseInt($("#savingsInput").val());
+  $("#savingswithdrawal").on("click", function(){
+    var withdraw = parseInt($("#savingsinput").val());
     var checkingBalance = parseInt($("#checkingbalance").text().replace("$", ""));
     var savingsBalance = parseInt($("#savingsbalance").text().replace("$", ""));
     [savingsBalance,checkingBalance] =
