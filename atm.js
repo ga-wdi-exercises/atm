@@ -20,7 +20,6 @@ $(document).ready(function(){
         return "$" + total;
       });
     }
-
     var balanceSum;
     function getSumBalances() {
       var balanceChecking = $("#balanceChecking").text();
@@ -39,5 +38,4 @@ $(document).ready(function(){
     }
     $(prevBalance).text(function(){
       var total = currentBalance - newWithdrawl;
-
     }
