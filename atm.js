@@ -28,8 +28,6 @@ $(document).ready(function(){
     $("#CBalance").html(Total);
   }
 
-
-
   SDButton.click(savingDeposit);
   function savingDeposit() {
     var SBalance = $("#SBalance").html().replace("$","");
