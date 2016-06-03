@@ -11,6 +11,7 @@ $(document).ready(function(){
 
 
 
+
   CDButton.click(checkingDeposit);
   function checkingDeposit() {
     var CBalance = $("#CBalance").html().replace("$","");
@@ -28,6 +29,7 @@ $(document).ready(function(){
   }
 
 
+
   SDButton.click(savingDeposit);
   function savingDeposit() {
     var SBalance = $("#SBalance").html().replace("$","");
@@ -37,13 +39,10 @@ $(document).ready(function(){
   }
 
   SWButton.click(savingWithdrawal);
-  function savingWithdrawal() {
+  function savingWithdrawal(){
     var SBalance = $("#SBalance").html().replace("$","");
     var Total = (parseInt(SBalance)) - parseInt(SInput.val());
     console.log(Total);
     $("#SBalance").html(Total);
   }
-
-
-
 });
