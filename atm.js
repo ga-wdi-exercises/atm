@@ -40,7 +40,7 @@ $( document ).ready(function() {
       $("#savings_balance").text("$" + savings_balance);
     }
     else {$("#checking_balance").css(".zero");
-      console.log("works")
+      console.log("else statement called")
     }
   }
 
