@@ -19,7 +19,7 @@ body {
 }
 
 .account {
-  background-color: #6C9A74;
+  background-color: #99A5DA;
   border: 1px solid #295A33;
   border-radius: 15px;
   display: inline-block;
@@ -41,4 +41,10 @@ body {
 .zero {
   background-color: #F52F4F;
   color: #FFFFFF;
+}
+body{
+  background-color: #385A97;
+}
+#checkingDiv, #savingsDiv, #newRPNDiv {
+background-color: #F0E4D4;
 }
