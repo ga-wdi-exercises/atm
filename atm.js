@@ -16,12 +16,10 @@ $("#checking .withdraw").click(function(){
   var updatedCheckingBalance = ("$") + (checkingBalance - withdraw)
   $("#checking .balance").text(updatedCheckingBalance)
 
-
   //var savingsBalance = parseInt($("#savings .balance").text().replace("$", ""))
   //var totalBalance = ("$") + (updatedCheckingBalance + savingsBalance)
   //if (withdraw > checkingBalance)
   //var remainder =
-
 
   if (withdraw > checkingBalance)
   alert("Error!! You don't have enough funds in this account!!")
