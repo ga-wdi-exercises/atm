@@ -44,6 +44,86 @@ function updateCheckingBalance(){
 
 }
 
+function updateCheckingBalanceWith(){
+
+// The checking balance will be updated by taking the CURRENT balance and
+//adding it to the CHECKING INPUT VALUE
+//
+// *** UPDATED BALANCE = CURRENT CHECKING BALANCE + CHECKING INPUT VALUE ***
+//
+//
+
+
+        currentBalanceChecking = getCurrentCheckingBalance();
+        checkingInput = getUserInputChecking();
+        updatedBalanceCheckingWith = parseInt(currentBalanceChecking - checkingInput);
+
+        return updatedBalanceCheckingWith;
+
+
+
+}
+
+
+
+function getUserInputSavings(){
+
+    savingsInput = parseInt(savingsInputValue.val());
+    return savingsInput;
+
+}
+
+function getCurrentSavingsBalance(){
+
+
+  currentBalanceSavings = parseInt(savingsBalanceField.text());
+  return currentBalanceSavings;
+
+
+}
+
+function updateSavingsBalance(){
+
+// The checking balance will be updated by taking the CURRENT balance and
+//adding it to the CHECKING INPUT VALUE
+//
+// *** UPDATED BALANCE = CURRENT CHECKING BALANCE + CHECKING INPUT VALUE ***
+//
+//
+
+
+        currentBalanceSavings = getCurrentSavingsBalance();
+        savingsInput = getUserInputSavings();
+        updatedBalanceSavings = currentBalanceSavings + savingsInput;
+
+        return updatedBalanceSavings;
+
+
+
+}
+
+
+function updateSavingsBalanceWith(){
+
+// The checking balance will be updated by taking the CURRENT balance and
+//adding it to the CHECKING INPUT VALUE
+//
+// *** UPDATED BALANCE = CURRENT CHECKING BALANCE + CHECKING INPUT VALUE ***
+//
+//
+
+
+        currentBalanceSavings = getCurrentSavingsBalance();
+        savingsInput = getUserInputSavings();
+        updatedBalanceSavingsWith = currentBalanceSavings - savingsInput;
+
+        return updatedBalanceSavingsWith;
+
+
+
+}
+
+
 
 
 //********** Variables **********
@@ -52,6 +132,8 @@ var body = $("body");
 
 var checkingInputValue = $("#input-amount_checking");
 var checkingDepositButton = $("#button-deposit_checking");
+var checkingWithdrawalButton = $("#button-withdrawal_checking");
+
 
 var checkingInput;
 var currentBalanceChecking;
@@ -60,6 +142,23 @@ var checkingBalance;
 var checkingBalanceField = $("#balance-checking");
 
 var updatedBalanceChecking;
+var updatedBalanceCheckingWith;
+
+
+
+var savingsInputValue = $("#input-amount_savings");
+var savingsDepositButton = $("#button-deposit_savings");
+var savingsWithdrawalButton = $("#button-withdrawal_savings");
+
+var savingsInput;
+var currentBalanceSavings;
+
+var savingsBalance;
+var savingsBalanceField = $("#balance-savings");
+
+var updatedBalanceSavings;
+var updatedBalanceSavingsWith;
+
 //*********** SOURCE CODE ***********
 
 $(document).ready(function(){
@@ -68,9 +167,42 @@ $(document).ready(function(){
         checkingDepositButton.on("click", function(){
 
                 updatedBalanceChecking = updateCheckingBalance();
-                checkingBalanceField.text(updatedBalanceChecking);
+                if(isNaN(updatedBalanceChecking)){}else{checkingBalanceField.text(updatedBalanceChecking);}
+
 
         });
+
+
+        checkingWithdrawalButton.on("click", function(){
+
+                updatedBalanceCheckingWith = updateCheckingBalanceWith();
+                if(isNaN(updatedBalanceCheckingWith)){}else{checkingBalanceField.text(updatedBalanceCheckingWith);}
+
+
+
+        });
+
+
+
+        savingsDepositButton.on("click", function(){
+
+                updatedBalanceSavings = updateSavingsBalance();
+                if(isNaN(updatedBalanceSavings)){}else{savingsBalanceField.text(updatedBalanceSavings);}
+
+
+        });
+
+
+        savingsWithdrawalButton.on("click", function(){
+
+                updatedBalanceSavingsWith = updateSavingsBalanceWith();
+                if(isNaN(updatedBalanceSavingsWith)){}else{savingsBalanceField.text(updatedBalanceSavingsWith);}
+
+
+
+        });
+
+
 });
 
 // ## Commits to Make (Suggested)
