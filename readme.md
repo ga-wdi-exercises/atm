@@ -17,7 +17,7 @@ By no means do you have to follow this. It's just here to help you get started i
 
 Note that these commits are all for the checking account only. Take this one account at a time.
 
-1. Test jQuery is working
+1. Test jQuery is working   (check)
   - Make the `<body>`'s background color turn red
 - Add a click listener to the **checking account's** "Deposit" button
   - When you click the button it should `console.log("hello")`
@@ -40,6 +40,6 @@ Note that these commits are all for the checking account only. Take this one acc
 
 ## Bonus: Overdraft Protection
 
-- What happens when the user wants to withdraw more money from the checking account than is in the account? 
+- What happens when the user wants to withdraw more money from the checking account than is in the account?
   - If a withdrawal can be covered by the balances in both accounts, bring the withdrawn-from account down to $0 and take the remainder from the other account.
   - If the withdrawn amount is more than the combined account balance, display an error.
