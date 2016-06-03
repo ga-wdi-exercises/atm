@@ -1,21 +1,21 @@
 $(document).ready(function() {
   //come these vars with a selector?
-  var savingsDep = $("#savings .deposit");
-  var savingsBal = $("#savings .balance");
-  var savingsWith = $("#savings .withdraw");
-  var savingsAmt = 0;
-
-  var checkingDep = $("#checking .deposit");
-  var checkingBal = $("#checking .balance");
-  var checkingWith = $("#checking .withdraw");
-  var checkingAmt = 0;
+  // var savingsDep = $("#savings .deposit");
+  // var savingsBal = $("#savings .balance");
+  // var savingsWith = $("#savings .withdraw");
+  // var savingsAmt = 0;
+  //
+  // var checkingDep = $("#checking .deposit");
+  // var checkingBal = $("#checking .balance");
+  // var checkingWith = $("#checking .withdraw");
+  // var checkingAmt = 0;
   //
   // checkSavings();
   // verifyChecking();
   var totalChecking = 0;
   var totalSavings = 0;
 
-$(":button").on("click", function() {
+$(":button").on("click", function depositAndWithdraw() {
   var depOrWith = $(this).val();
   console.log(depOrWith);
   //Deposit or Withdraw
@@ -27,10 +27,39 @@ $(":button").on("click", function() {
   //selected the div which shows current balance
   var amount = parseInt($(this).parent().find(".input").val());
   //Value of Action (amount)
-  (whichAccount === "checking")? totalChecking+=amount : totalSavings+=amount;
-  (whichAccount === "checking")? account.text(totalChecking) : account.text(totalSavings);
+  var allMoney = totalSavings+totalChecking;
+  // // is there a way to string two things together like this here?
+  // (depOrWith === "Deposit")? ((whichAccount === "checking")? totalChecking+=amount : totalSavings+=amount
+  // (whichAccount === "checking")? account.text(totalChecking) : account.text(totalSavings);
+  // :
+  // (whichAccount === "checking")? totalChecking-=amount : totalSavings-=amount;
+  // (whichAccount === "checking")? account.text(totalChecking) : account.text(totalSavings);)
+
+  if (depOrWith === "Deposit") {
+    (whichAccount === "checking")? totalChecking+=amount : totalSavings+=amount;
+    (whichAccount === "checking")? account.text(totalChecking) : account.text(totalSavings);
+  }
+  else {
+    (whichAccount === "checking")? totalChecking-=amount : totalSavings-=amount;
+    (whichAccount === "checking")? account.text(totalChecking) : account.text(totalSavings);
+  }
 });
 
+// if (checkingInput() > checkingAmt && allTheMoney() > checkingInput()) {
+//       var overAmt = Math.abs(checkingAmt-checkingInput());
+//       checkingAmt = 0;
+//       savingsAmt -= overAmt;
+//       savingsBal.text(savingsAmt);
+//       checkingBal.text(checkingAmt);
+//     }
+//     else if (checkingInput() <= checkingAmt) {
+//       checkingAmt -= checkingInput();
+//       checkingBal.text(checkingAmt);
+//     }
+//     else {
+//       console.log("Nope");
+//     }
+//   }
 
 
 
