@@ -9,7 +9,7 @@ You may edit the HTML file (but might not need to).
 - Users can deposit money into one of the bank accounts
 - Users can withdraw money from one of the bank accounts
   - Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
-- The color of a back account should reflect its balance. (There's a CSS class called `.zero` already written for this.)
+- The color of a bank account should reflect its balance. (There's a CSS class called `.zero` already written for this.)
 
 ## Commits to Make (Suggested)
 
@@ -40,6 +40,6 @@ Note that these commits are all for the checking account only. Take this one acc
 
 ## Bonus: Overdraft Protection
 
-- What happens when the user wants to withdraw more money from the checking account than is in the account? 
+- What happens when the user wants to withdraw more money from the checking account than is in the account?
   - If a withdrawal can be covered by the balances in both accounts, bring the withdrawn-from account down to $0 and take the remainder from the other account.
   - If the withdrawn amount is more than the combined account balance, display an error.
