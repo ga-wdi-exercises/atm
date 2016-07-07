@@ -44,6 +44,8 @@ Note that these commits are all for the checking account only. Take this one acc
 - On "Withdraw", it updates the balance
   - Follow the same steps as before, except you're subtracting instead of adding
 - Refactor the existing code
+
+
   - Challenge: Try to have no `function()` that's longer than 5 lines. ([Sandi Metz's Rule 2](https://robots.thoughtbot.com/sandi-metz-rules-for-developers#the-rules))
 
 ...then follow the same series of commits, but for the **savings account**.
