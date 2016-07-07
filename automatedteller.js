@@ -18,13 +18,6 @@ $(document).ready(function(){
 //     console.log("Hello.");
 //   }
 //
-// $("#savings .deposit").on("click", function()  {
-//
-//     var deposit = $("#savings .input").val();
-//      var floatDeposit = parseFloat(deposit);
-//
-//     console.log(deposit);
-//
 // });
 
 $("#checking .deposit").on("click", function(e)  {
@@ -37,7 +30,7 @@ $("#checking .deposit").on("click", function(e)  {
     console.log(nUserDeposit);
     console.log(nBalanceAmount);
 
-    $("#checking .balance").html('$'+ (nUserDeposit + nBalanceAmount).toFixed(2));
+    $("#checking .balance").html("$" + (nUserDeposit + nBalanceAmount).toFixed(2));
 
 });
 
@@ -71,6 +64,7 @@ $("#savings .deposit").on("click", function(e)  {
 
 });
 
+
 $("#savings .withdraw").on("click", function(e)  {
   e.preventDefault();
   var userWithdraw = $("#savings .input").val();
@@ -84,20 +78,6 @@ $("#savings .withdraw").on("click", function(e)  {
   $("#savings .balance").html("$" + (nBalanceAmount - nUserWithdraw).toFixed(2));
 
 });
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 });
