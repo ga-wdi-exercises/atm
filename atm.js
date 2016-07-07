@@ -29,7 +29,7 @@ $(document).ready(function(){
   //   $(".checking").css("background-color", "#6C9A74");
   // }
 
-//*********************************************************CHECKING DEPOSIT
+  //*********************************************************CHECKING DEPOSIT
   //listen for DEPOSIT submit event (on click)
   //prevent default of event (reload)
   $("#checking > .deposit").on("click", function(e){
@@ -65,55 +65,61 @@ $(document).ready(function(){
   })
 
   //*********************************************************SAVING DEPOSIT
-    $("#savings > .deposit").on("click", function(e){
-      e.preventDefault();
-      var newInput = $("#savings > .input").val();
-      var floatNewInput = parseFloat(newInput).toFixed(2);
-      floatNewInput = parseFloat(floatNewInput);
-      var total = $("#savings > .balance").html();
-      var numericalTotal = parseFloat(total.split("$")[1]);
-      var actualTotal = floatNewInput + numericalTotal;
-      if (actualTotal >0){
-        $("#savings > .balance").css("background-color", "#E3E3E3");
-      }
-      actualTotal = actualTotal.toFixed(2);
-      $("#savings > .balance").html("$" + actualTotal);
-      $("#savings > .input").val("");
-    })
+  $("#savings > .deposit").on("click", function(e){
+    e.preventDefault();
+    var newInput = $("#savings > .input").val();
+    var floatNewInput = parseFloat(newInput).toFixed(2);
+    floatNewInput = parseFloat(floatNewInput);
+    var total = $("#savings > .balance").html();
+    var numericalTotal = parseFloat(total.split("$")[1]);
+    var actualTotal = floatNewInput + numericalTotal;
+    if (actualTotal >0){
+      $("#savings > .balance").css("background-color", "#E3E3E3");
+    }
+    actualTotal = actualTotal.toFixed(2);
+    $("#savings > .balance").html("$" + actualTotal);
+    $("#savings > .input").val("");
+  })
 
-//*********************************************************CHECKING WITHDRAW
-$("#checking > .withdraw").on("click", function(e){
-  e.preventDefault();
-  var newInput = $("#checking > .input").val();
-  var floatNewInput = parseFloat(newInput).toFixed(2);
-  floatNewInput = parseFloat(floatNewInput);
-  var total = $("#checking > .balance").html();
-  var numericalTotal = parseFloat(total.split("$")[1]);
-  var actualTotal = numericalTotal - floatNewInput;
-  if (actualTotal <=0){
-    $("#checking > .balance").css("background-color", "red");
-  }
-  actualTotal = actualTotal.toFixed(2);
-  $("#checking > .balance").html("$" + actualTotal);
-  $("#checking > .input").val("");
-})
+  //*********************************************************CHECKING WITHDRAW
+  $("#checking > .withdraw").on("click", function(e){
+    e.preventDefault();
+    var newInput = $("#checking > .input").val();
+    var floatNewInput = parseFloat(newInput).toFixed(2);
+    floatNewInput = parseFloat(floatNewInput);
+    var total = $("#checking > .balance").html();
+    var numericalTotal = parseFloat(total.split("$")[1]);
+    var actualTotal = numericalTotal - floatNewInput;
+    if (actualTotal == 0){
+      $("#checking > .balance").css("background-color", "red");
+    }
+    if (actualTotal < 0){
+      throw(new Error(alert("Insufficient Funds")));
+    }
+    actualTotal = actualTotal.toFixed(2);
+    $("#checking > .balance").html("$" + actualTotal);
+    $("#checking > .input").val("");
+  })
 
-//*********************************************************SAVINGS WITHDRAW
-$("#savings > .withdraw").on("click", function(e){
-  e.preventDefault();
-  var newInput = $("#savings > .input").val();
-  var floatNewInput = parseFloat(newInput).toFixed(2);
-  floatNewInput = parseFloat(floatNewInput);
-  var total = $("#savings > .balance").html();
-  var numericalTotal = parseFloat(total.split("$")[1]);
-  var actualTotal = numericalTotal - floatNewInput;
-  if (actualTotal <=0){
-    $("#savings > .balance").css("background-color", "red");
-  }
-  actualTotal = actualTotal.toFixed(2);
-  $("#savings > .balance").html("$" + actualTotal);
-  $("#savings > .input").val("");
-})
+  //*********************************************************SAVINGS WITHDRAW
+  $("#savings > .withdraw").on("click", function(e){
+    e.preventDefault();
+    var newInput = $("#savings > .input").val();
+    var floatNewInput = parseFloat(newInput).toFixed(2);
+    floatNewInput = parseFloat(floatNewInput);
+    var total = $("#savings > .balance").html();
+    var numericalTotal = parseFloat(total.split("$")[1]);
+    var actualTotal = numericalTotal - floatNewInput;
+    if (actualTotal == 0){
+      $("#savings > .balance").css("background-color", "red");
+    }
+    if (actualTotal < 0){
+      throw(new Error(alert("Insufficient Funds")));
+    }
+    actualTotal = actualTotal.toFixed(2);
+    $("#savings > .balance").html("$" + actualTotal);
+    $("#savings > .input").val("");
+  })
 
 
 
