@@ -28,6 +28,7 @@ $(document).ready(function(){
     evt.preventDefault();
     var amount = $("#checking .input").val();
     console.log(amount)
+    $("#checking .balance").html("$" + amount);
 
   })
 
