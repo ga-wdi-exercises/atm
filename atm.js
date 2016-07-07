@@ -1,26 +1,3 @@
-/*
-select user input
-convert input to float with 2 decimal places
-if (withdraw button pressed){
-subtract input from current balance
-}
-if (deposit button pressed){
-add input to current balance
-}
-if (balance < 0){
-do not update balance on dom
-reset balance to previous value
-display error message within input field
-}
-else if (balance == 0){
-use css to change box background to red
-}
-else{
-update account balance on DOM
-bank color should be green
-}
-clear specific input field
-*/
 $(document).ready(function(){
   $("#checking .deposit").on("click", function(evt){
     evt.preventDefault();
@@ -29,12 +6,10 @@ $(document).ready(function(){
     $("#checking .input").select();
     var displayedBalance = $("#checking .balance").html();
     var totalBalance = parseFloat(displayedBalance.split("$")[1]);
-    console.log(totalBalance);
     var amount = $("#checking .input").val();
     var floatAmount = parseFloat(amount).toFixed(2);
     var balance = parseFloat(floatAmount) + totalBalance;
     $("#checking .balance").html("$" + balance);
-
   })
 
   $("#checking .withdraw").on("click", function(evt){
@@ -43,7 +18,6 @@ $(document).ready(function(){
     $("#checking .input").select();
     var displayedBalance = $("#checking .balance").html();
     var totalBalance = parseFloat(displayedBalance.split("$")[1]);
-    console.log(totalBalance);
     var amount = $("#checking .input").val();
     var floatAmount = parseFloat(amount).toFixed(2);
     var balance = totalBalance - parseFloat(floatAmount);
@@ -67,7 +41,6 @@ $(document).ready(function(){
     $("#savings .input").select();
     var displayedBalance = $("#savings .balance").html();
     var totalBalance = parseFloat(displayedBalance.split("$")[1]);
-    console.log(totalBalance);
     var amount = $("#savings .input").val();
     var floatAmount = parseFloat(amount).toFixed(2);
     var balance = parseFloat(floatAmount) + totalBalance;
@@ -80,7 +53,6 @@ $(document).ready(function(){
     $("#savings .input").select();
     var displayedBalance = $("#savings .balance").html();
     var totalBalance = parseFloat(displayedBalance.split("$")[1]);
-    console.log(totalBalance);
     var amount = $("#savings .input").val();
     var floatAmount = parseFloat(amount).toFixed(2);
     var balance = totalBalance - parseFloat(floatAmount);
@@ -102,4 +74,29 @@ $(document).ready(function(){
     $(location).val("INSUFFICIENT FUNDS!");
     $(location).select();
   }
+  // var withdraw = function (location, balance, amount,);
 });
+
+/*
+select user input
+convert input to float with 2 decimal places
+if (withdraw button pressed){
+subtract input from current balance
+}
+if (deposit button pressed){
+add input to current balance
+}
+if (balance < 0){
+do not update balance on dom
+reset balance to previous value
+display error message within input field
+}
+else if (balance == 0){
+use css to change box background to red
+}
+else{
+update account balance on DOM
+bank color should be green
+}
+clear specific input field
+*/
