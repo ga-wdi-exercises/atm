@@ -49,6 +49,10 @@ $(document).ready(function(){
     var numericalTotal = parseFloat(total.split("$")[1]);
     // take the new entry that we formatted, add it to the numericaltotal which is the running total
     var actualTotal = floatNewInput + numericalTotal;
+    //check color
+    if (actualTotal >0){
+      $("#checking > .balance").css("background-color", "#E3E3E3");
+    }
     //console.log(typeof(actualTotal));
     //take what we just added, convert to string
     actualTotal = actualTotal.toFixed(2);
@@ -57,6 +61,7 @@ $(document).ready(function(){
     $("#checking > .balance").html("$" + actualTotal);
     //clear field
     $("#checking > .input").val("")
+
   })
 
   //*********************************************************SAVING DEPOSIT
@@ -82,6 +87,9 @@ $("#checking > .withdraw").on("click", function(e){
   var total = $("#checking > .balance").html();
   var numericalTotal = parseFloat(total.split("$")[1]);
   var actualTotal = numericalTotal - floatNewInput;
+  if (actualTotal <=0){
+    $("#checking > .balance").css("background-color", "red");
+  }
   actualTotal = actualTotal.toFixed(2);
   $("#checking > .balance").html("$" + actualTotal);
   $("#checking > .input").val("");
