@@ -16,48 +16,27 @@ $(document).ready(function(){
   //Create variables to call on checkingAccount, account balance, user input, checking add, and checking subtract)
   console.log("--- Initial Information ---");
 
+  var savingBalance = $("#savings .balance").html();
+  var savingInput = $("#savings .input");
+  var savingAdd = $("#savings .deposit");
+  var savingSubtract = $("#savings .withdraw");
+
+
   var checkingBalance = $("#checking .balance").html();
-  console.log("checkingBalance " + checkingBalance);
   var checkingInput = $("#checking .input");
-  console.log("checkingInput" + checkingInput);
   var checkingAdd = $("#checking .deposit");
-  console.log("checkingAdd " + checkingAdd);
   var checkingSubtract =  $("#checking .withdraw");
-  console.log(checkingSubtract);
+
+
 
   checkingAdd.on("click", checkingDeposit)
   checkingSubtract.on("click", checkingWithdraw)
 
-  function checkingWithdraw () {
-    var balance = getBalance();
-    
+  savingAdd.on("click", savingDeposit)
+  savingSubtract.on("click", savingWithdraw)
 
 
-
-  }
-
-
-
-
-  function checkingDeposit () {
-    var balance = getBalance();
-    console.log("BALANCE: " +balance);
-    var depositInput = getCheckingInput();
-    console.log("DEPOSITINPUT" + depositInput);
-    var total = balance + depositInput;
-    console.log(total);
-    displayCheckingTotal(total)
-    $("#checking .input").val("")
-  }
-
-
-  function displayCheckingTotal (total) {
-    var stringTotal = "$" + total.toFixed(2);
-    $("#checking .balance").html(stringTotal);
-    console.log(stringTotal);
-  }
-
-  function getBalance () {
+  function getCheckingBalance () {
     // checkingBalance refers to displayed value of checking account
     // e.g., '$0', as a string
     var checkingBalance = $("#checking .balance").html();
@@ -71,6 +50,76 @@ $(document).ready(function(){
     return checkingBalance;
   }
 
+
+  function getSavingBalance () {
+    // savingBalance refers to displayed value of checking account
+    // e.g., '$0', as a string
+    var savingBalance = $("#savings .balance").html();
+
+    // savingBalance is just the numerical portion as a string
+    // e.g., '0'
+    savingBalance = savingBalance.split("$")[1];
+
+    console.log(savingBalance);
+    savingBalance = parseFloat(savingBalance);
+    return savingBalance;
+  }
+
+  function checkingWithdraw () {
+    var balance = getCheckingBalance();
+    var withdrawInput = getCheckingInput();
+    var total = balance - withdrawInput;
+    displayCheckingTotal(total);
+    $("#checking .input").val("")
+  }
+
+  function savingWithdraw () {
+    var balance = getSavingBalance();
+    var withdrawInput = getSavingInput();
+    var total = balance - withdrawInput;
+    displaySavingTotal(total);
+    $("#savings .input").val("")
+  }
+
+
+
+  function checkingDeposit () {
+    var balance = getCheckingBalance();
+    var depositInput = getCheckingInput();
+    var total = balance + depositInput;
+
+    if (total == 0) {
+      $("#checking").addClass("zero")
+    } else {
+      $("#checking").removeClass("zero")
+    }
+
+
+    displayCheckingTotal(total)
+    $("#checking .input").val("")
+  }
+
+  function savingDeposit () {
+    var balance = getSavingBalance();
+    var depositInput = getSavingInput();
+    var total = balance + depositInput;
+    displaySavingTotal(total)
+    $("#savings .input").val("")
+  }
+
+
+  function displayCheckingTotal (total) {
+    var stringTotal = "$" + total.toFixed(2);
+    $("#checking .balance").html(stringTotal);
+    console.log(stringTotal);
+  }
+
+  function displaySavingTotal (total) {
+    var stringTotal = "$" + total.toFixed(2);
+    $("#savings .balance").html(stringTotal);
+    console.log(stringTotal);
+  }
+
   function getCheckingInput () {
     var checkingInput = $("#checking .input").val();
     checkingInput = parseFloat(checkingInput);
@@ -78,46 +127,14 @@ $(document).ready(function(){
     return checkingInput;
   }
 
-  function getWithdrawInput() {
-
-
+  function getSavingInput () {
+    var savingInput = $("#savings .input").val();
+    savingInput = parseFloat(savingInput);
+    console.log(savingInput);
+    return savingInput;
   }
 
-
-
-
-
-
-
-  //
-  //   var checkingInput = $("#checking .input").val()
-  //
-  // checkingAdd.on("click", function() {
-  //
-  // var newTotal = checkingBalance + checkingAdd;
-  //  console.log(checkingBalance);
-
-  // })
-
-
 });
-
-
-
-
-
-
-
-//
-// checkingAdd.on("click", function() {
-//   var checkingBalance = checkingBalance.split("$")[1];
-//
-//   console.log(checkingBalance);
-//
-//
-//
-//
-// }
 
 
 
