@@ -1,9 +1,13 @@
+var checkingInput;
 $(document).ready(function(){
   console.log("hello");
   // $("body").css("background", "red");
+  checkingInput = $("#checking > .input");
   $("#checking > .deposit").on("click", function(evt){
-    console.log("yoooo");
     evt.preventDefault();
+    console.log( checkingInput.val() );
+    console.log("yoooo");
+
   });
 
 });
