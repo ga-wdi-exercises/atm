@@ -9,21 +9,24 @@
 
 //Checking deposit
 $(document).ready(function(){
-console.log("I'm So Ready!");
+  console.log("I'm So Ready!");
 
-$(".deposit").on("click", updatedBalance);
+  $(".deposit").on("click", updatedBalance);
 
-var depositChecking = parseInt($("#checking .input").val());
-//var floatNum = parseFloat(depositChecking).toFixed(2);
-var balanceTest = parseInt($("#checking .balance").text().split("$")[1]);
-//var test = parseFloat(balanceTest.split("$")[1]);
-var checkingBalance = ("$") + (depositChecking + balanceTest);
+  function updatedBalance (){
+    $(".checking .balance").text(checkingBalance);
+    var depositChecking = parseInt($("#checking .input").val());
+    //var floatNum = parseFloat(depositChecking).toFixed(2);
+    var balanceTest = parseInt($("#checking .balance").text().split("$")[1]);
+    //var test = parseFloat(balanceTest.split("$")[1]);
+    var checkingBalance = ("$") + (depositChecking + balanceTest);
 
-function updatedBalance (){
-$(".checking .balance").text(checkingBalance);
-}
+    console.log(updatedBalance);
 
-console.log(updatedBalance);
+  }
+
+
+
 
 
 })
