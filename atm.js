@@ -8,6 +8,9 @@ $(document).ready(function(){
     var checkingField = $("#checking>input.input")
     moneyValue = checkingField.val();
     console.log(moneyValue);
+    //Get checking balance
+    checkingBalance = $("#checking>div.balance").html().split("$")[1];
+    console.log(checkingBalance);
     //Add user input to balance
     //If checking has a class of zero and balance != 0 remove class zero
     //clear field
