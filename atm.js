@@ -66,16 +66,21 @@ $(document).ready(function(){
         }
     }
 
+    function getAccountBalance(acctClass) {
+
+        var rawBalance = $(acctClass + ' .balance').html();
+        var balance = parseFloat(rawBalance.split('$')[1]);
+        console.log(balance);
+        return balance;
+    }
+
     function adjustBalance(acctClass, amount) {
         // acctClass specifies the class of the account to be modified. It will already have
         //   a . or # prepended
         // amount will be a float, positive or negative depending on transaction type
 
         // Get current account balance
-        var rawBalance = $(acctClass + ' .balance').html();
-        var balance = parseFloat(rawBalance.split('$')[1]);
-        console.log(balance);
-
+        var balance = getAccountBalance(acctClass);
         // Get the new balance
         balance += amount;
 
