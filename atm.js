@@ -1,14 +1,18 @@
 var checkingInput;
+var checkingBalance;
 $(document).ready(function(){
+  checkingInput = $("#checking > .input");
+  checkingBalance = $("#checking > .balance");
   console.log("hello");
   // $("body").css("background", "red");
-  checkingInput = $("#checking > .input");
   $("#checking > .deposit").on("click", function(evt){
     evt.preventDefault();
     console.log( checkingInput.val() );
-    console.log("yoooo");
-
+  $(".balance:first").html("$" + checkingInput.val());
+    // $(checkingInput).on("click", function(){
   });
+
+
 
 });
 
