@@ -1,4 +1,14 @@
 $(document).ready(function(){
+  function getFieldInput(accountType){
+    var field = $("#" + accountType + ">input.input");
+    var money = field.val();
+    return parseFloat(money);
+
+  }
+
+  function clearField(accountType){
+    $("#" + accountType + ">input.input").val("")
+  }
 
   $(".balance").addClass("zero");
   //listen for click event on checking account deposit button
@@ -7,9 +17,8 @@ $(document).ready(function(){
   function addToChecking(){
 
     //get user input from field
-    var checkingField = $("#checking>input.input")
-    var moneyValue = checkingField.val();
-    moneyValue = parseFloat(moneyValue);
+    var moneyValue = getFieldInput("checking");
+
     if (moneyValue >= 0) { //If user entered a non-negative value
       //Get checking balance
       var checkingBalance = $("#checking>div.balance").html().split("$")[1];
@@ -24,8 +33,7 @@ $(document).ready(function(){
         $("#checking>div.balance").removeClass("zero");
       }
     }
-    //clear field
-    checkingField.val("");
+    clearField("checking");
   }
 
     //listen for click even on cheking account withdrawl button
