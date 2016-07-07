@@ -1,3 +1,4 @@
+//adds zero class
 function addThis(selector){
     $(selector).addClass(
         function(index,currentClass){
@@ -9,7 +10,7 @@ function addThis(selector){
         }
     )
 }
-
+//removes zero class
 function removeThis(selector){
     $(selector).removeClass(
         function(index,currentClass){
@@ -21,11 +22,11 @@ function removeThis(selector){
         }
     )
 }
+//Doc is loaded and primed
 $(document).ready(function() {
     //implements the zero class on start
     addThis(".balance");
-
-    //prevent enter from reloading page
+    //prevent enter from reloading page with form wrapper
     $('form').submit(function(e) {
         e.preventDefault();
     });
@@ -92,6 +93,8 @@ $(document).ready(function() {
         if(!isNaN(withdrawAmount) && difference >= 0){
             $('.balance:eq(1)').html('$' + (currentBalance - parseFloat(withdrawAmount)).toFixed(2));
             $('.entry:eq(1)')[0].reset();
+        } else {
+            alert('No Funds In Savings!')
         }
     });
 });
