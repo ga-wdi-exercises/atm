@@ -16,9 +16,14 @@ CHECKINGS
   $("#checking .deposit").on("click", function (evt) {
     evt.preventDefault();
     var depositAmount = $("#checking .input").val()
-    $("#checking .balance").css("background", "#E3E3E3");
-    depositFunction(depositAmount);
-    $(".input").val("");
+    if (isNaN(depositAmount)) {
+      $("#checking .balance").html("<p class='smallText'>Please enter an amount</p>");
+      $("#checking .balance").css("background", "rgb(232, 63, 63)");
+    } else {
+      $("#checking .balance").css("background", "#E3E3E3");
+      depositFunction(depositAmount);
+      $(".input").val("");
+    }
   });
 
   $("#checking .withdraw").on("click", function (evt) {
@@ -84,9 +89,14 @@ if (savingsTotal === 0) {
 $("#savings .deposit").on("click", function (evt) {
   evt.preventDefault();
   var depositAmount = $("#savings .input").val()
-  $("#savings .balance").css("background", "#E3E3E3");
-  savingsDepositFunction(depositAmount);
-  $(".input").val("");
+  if (isNaN(depositAmount)) {
+    $("#savings .balance").html("<p class='smallText'>Please enter an amount</p>");
+    $("#savings .balance").css("background", "rgb(232, 63, 63)");
+  } else {
+    $("#savings .balance").css("background", "#E3E3E3");
+    savingsDepositFunction(depositAmount);
+    $(".input").val("");
+  }
 });
 
 $("#savings .withdraw").on("click", function (evt) {
