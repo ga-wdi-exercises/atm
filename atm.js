@@ -1,11 +1,11 @@
 $("document").ready(function(){
-console.log("hello");
+  console.log("hello");
 
-//*******Checking Deposit START*********
+  //*******Checking Deposit START*********
 
 
 
-$("#checking > .deposit").on("click", function(evt){
+  $("#checking > .deposit").on("click", function(evt){
     // prevent default action
     evt.preventDefault();
     // get user input && convert to float with 2 decimal placess
@@ -14,7 +14,7 @@ $("#checking > .deposit").on("click", function(evt){
     console.log(floatnewInput);
 
     // update total
-      //  get current total
+    //  get current total
     var total = $("#checking > .balance").html()
     var numerictotal = parseFloat(total.split("$")[1])
     var actualtotal = parseFloat(floatnewInput) + numerictotal
@@ -27,12 +27,12 @@ $("#checking > .deposit").on("click", function(evt){
 
 
 
-    })
+  })
 
-//*********Checking Deposit END************
+  //*********Checking Deposit END************
 
-//*********Savings Deposit START***********(change Variables)
-$("#savings > .deposit").on("click", function(evt){
+  //*********Savings Deposit START***********(change Variables)
+  $("#savings > .deposit").on("click", function(evt){
     // prevent default action
     evt.preventDefault();
     // get user input && convert to float with 2 decimal placess
@@ -41,7 +41,7 @@ $("#savings > .deposit").on("click", function(evt){
     console.log(floatnewInput);
 
     // update total
-      //  get current total
+    //  get current total
     var total = $("#savings > .balance").html()
     var numerictotal = parseFloat(total.split("$")[1])
     var actualtotal = parseFloat(floatnewInput) + numerictotal
@@ -52,12 +52,12 @@ $("#savings > .deposit").on("click", function(evt){
     $("#savings > .balance").html("$ " + actualtotal.toFixed(2));
     console.log()
     $("#savings > .input").val("")
-    })
+  })
 
-//*********Savings Deposit END************
+  //*********Savings Deposit END************
 
-//********** Checking Withdrawl BEGIN***********
-$("#checking > .withdraw").on("click", function(evt){
+  //********** Checking Withdrawl BEGIN***********
+  $("#checking > .withdraw").on("click", function(evt){
     // prevent default action
     evt.preventDefault();
     // get user input && convert to float with 2 decimal placess
@@ -66,21 +66,24 @@ $("#checking > .withdraw").on("click", function(evt){
     console.log(floatnewInput);
 
     // update total
-      //  get current total
+    //  get current total
     var total = $("#checking > .balance").html()
     var numerictotal = parseFloat(total.split("$")[1])
     var actualtotal = numerictotal - parseFloat(floatnewInput)
+    if (actualtotal <= 0) {
+      $("#checking > .balance").css("background-color", "red");
+    }
     if (actualtotal < 0) {
-      $("#checking > .balance").css("background-color", "red")
+      throw(new Error(alert("Insufficient Funds")));
     }
     $("#checking > .balance").html("$ " + actualtotal.toFixed(2));
     console.log()
     $("#checking > .input").val("")
-    })
-//**********Checking Withdrawl END*************
+  })
+  //**********Checking Withdrawl END*************
 
-//**********Savings Withdrawl BEGIN*************
-$("#savings > .withdraw").on("click", function(evt){
+  //**********Savings Withdrawl BEGIN*************
+  $("#savings > .withdraw").on("click", function(evt){
     // prevent default action
     evt.preventDefault();
     // get user input && convert to float with 2 decimal placess
@@ -89,17 +92,20 @@ $("#savings > .withdraw").on("click", function(evt){
     console.log(floatnewInput);
 
     // update total
-      //  get current total
+    //  get current total
     var total = $("#savings > .balance").html()
     var numerictotal = parseFloat(total.split("$")[1])
     var actualtotal = numerictotal - parseFloat(floatnewInput)
+    if (actualtotal <= 0) {
+      $("#savings > .balance").css("background-color", "red");
+    }
     if (actualtotal < 0) {
-      $("#savings > .balance").css("background-color", "red")
+      throw(new Error(alert("Insufficient Funds")));
     }
     $("#savings > .balance").html("$ " + actualtotal.toFixed(2));
     console.log()
     $("#savings > .input").val("")
-    })
-//**********Savings Withdrawl END****************
+  })
+  //**********Savings Withdrawl END****************
 
 });
