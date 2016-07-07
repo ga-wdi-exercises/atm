@@ -42,8 +42,14 @@ $("#checking > .withdraw").on("click", function(evt){
     $("#checking > .balance").html("$ " + actualtotal.toFixed(2));
     console.log()
     $("#checking > .input").val("")
-    })
 
+    if (actualtotal == 0) {
+      $("#checking").css("background", "#F52F4F");
+    }
+    // } else {
+    //   $("#checking").css("background", "blue");
+    // }
+  })
 // SAVINGS DEPOSIT
 
 $("#savings > .deposit").on("click", function(evt){
@@ -85,6 +91,7 @@ $("#savings > .deposit").on("click", function(evt){
         console.log()
         $("#savings > .input").val("")
         })
+
 
 
 
