@@ -3,8 +3,11 @@ $(document).ready(function(){
   var checkingDepButton = $("#checking>input.deposit");
   checkingDepButton.on("click", addToChecking);
   function addToChecking(){
-    console.log("hello");
+
     //get user input from field
+    var checkingField = $("#checking>input.input")
+    moneyValue = checkingField.val();
+    console.log(moneyValue);
     //Add user input to balance
     //If checking has a class of zero and balance != 0 remove class zero
     //clear field
