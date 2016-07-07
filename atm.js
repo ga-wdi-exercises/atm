@@ -16,19 +16,30 @@ $(document).ready(function(){
   }
 
   function changeBalance(balance, money, accountType, depOrWith){
-    console.log(balance, money, accountType, depOrWith);
     if (depOrWith == "D"){
-      console.log("Hello");
       var newBalance = (balance + money).toFixed(2);
+      $("#" + accountType + ">div.balance").html("$" + newBalance);
     }
     else if (depOrWith == "W") {
-      console.log("Goodbye");
       if (money <= balance){
-        var newBalance = (balance - moneyValue).toFixed(2)
+        var newBalance = (balance - money).toFixed(2)
+        $("#" + accountType + ">div.balance").html("$" + newBalance);
     }
     }
-    $("#" + accountType + ">div.balance").html("$" + newBalance);
     return newBalance;
+  }
+
+  function isBalanceZero(accountType, depOrWith, myBalance){
+    if(depOrWith == "D"){
+      if ($("#"+accountType+">div.balance").attr("class").indexOf("zero") > -1 && parseFloat(myBalance) > 0) {
+        $("#"+accountType+">div.balance").removeClass("zero");
+      }
+    }
+    else if(depOrWith == "W"){
+      if($("#"+accountType+">div.balance").attr("class").indexOf("zero") == -1 && parseFloat(myBalance) == 0) {
+        $("#"+accountType+">div.balance").addClass("zero");
+      }
+    }
   }
 
 
@@ -45,14 +56,13 @@ $(document).ready(function(){
       //Get checking balance
       var checkingBalance = getBalance("checking");
       //Add user input to balance
-      // checkingBalance = (checkingBalance + moneyValue).toFixed(2);
-      // $("#checking>div.balance").html("$" + checkingBalance);
       checkingBalance = changeBalance(checkingBalance, moneyValue, "checking", "D");
 
       //If checking has a class of zero and balance != 0 remove class zero
-      if($("#checking>div.balance").attr("class").indexOf("zero") > -1 && parseFloat(checkingBalance) > 0) {
-        $("#checking>div.balance").removeClass("zero");
-      }
+      // if($("#checking>div.balance").attr("class").indexOf("zero") > -1 && parseFloat(checkingBalance) > 0) {
+      //   $("#checking>div.balance").removeClass("zero");
+      // }
+      isBalanceZero("checking", "D", checkingBalance);
     }
     clearField("checking");
   }
@@ -70,14 +80,14 @@ $(document).ready(function(){
         var checkingBalance = getBalance("checking");
 
         //if user input is not greater than balance, subtract user input from balance
-        if (moneyValue <= checkingBalance){
-          checkingBalance = (checkingBalance - moneyValue).toFixed(2)
-          $("#checking>div.balance").html("$" + checkingBalance);
+        checkingBalance = changeBalance(checkingBalance, moneyValue, "checking", "W");
+
         //If checking does not have a class of 0 and balance == 0 add class zero
-          if($("#checking>div.balance").attr("class").indexOf("zero") == -1 && parseFloat(checkingBalance) == 0) {
-            $("#checking>div.balance").addClass("zero");
-          }
-        }
+          // if($("#checking>div.balance").attr("class").indexOf("zero") == -1 && parseFloat(checkingBalance) == 0) {
+          //   $("#checking>div.balance").addClass("zero");
+          // }
+          isBalanceZero("checking", "W", checkingBalance);
+        //}
       }
       clearField("checking");
     }
@@ -95,13 +105,15 @@ $(document).ready(function(){
         //Get savings balance
         var savingsBalance = getBalance("savings");
         //Add user input to balance
-        savingsBalance = (savingsBalance + moneyValue).toFixed(2);
-        $("#savings>div.balance").html("$" + savingsBalance);
+        // savingsBalance = (savingsBalance + moneyValue).toFixed(2);
+        // $("#savings>div.balance").html("$" + savingsBalance);
+        savingsBalance = changeBalance(savingsBalance, moneyValue, "savings", "D");
 
         //If savings has a class of zero and balance != 0 remove class zero
-        if($("#savings>div.balance").attr("class").indexOf("zero") > -1 && parseFloat(savingsBalance) > 0) {
-          $("#savings>div.balance").removeClass("zero");
-        }
+        // if($("#savings>div.balance").attr("class").indexOf("zero") > -1 && parseFloat(savingsBalance) > 0) {
+        //   $("#savings>div.balance").removeClass("zero");
+        // }
+        isBalanceZero("savings", "D", savingsBalance);
       }
       clearField("savings");
     }
@@ -119,14 +131,16 @@ $(document).ready(function(){
         var savingsBalance = getBalance("savings");
 
         //if user input is not greater than balance, subtract user input from balance
-        if (moneyValue <= savingsBalance){
-          savingsBalance = (savingsBalance - moneyValue).toFixed(2)
-          $("#savings>div.balance").html("$" + savingsBalance);
+        // if (moneyValue <= savingsBalance){
+        //   savingsBalance = (savingsBalance - moneyValue).toFixed(2)
+        //   $("#savings>div.balance").html("$" + savingsBalance);
+        savingsBalance = changeBalance(savingsBalance, moneyValue, "savings", "W");
           //If checking does not have a class of 0 and balance == 0 add class zero
-          if($("#savings>div.balance").attr("class").indexOf("zero") == -1 && parseFloat(savingsBalance) == 0) {
-            $("#savings>div.balance").addClass("zero");
-          }
-        }
+          // if($("#savings>div.balance").attr("class").indexOf("zero") == -1 && parseFloat(savingsBalance) == 0) {
+          //   $("#savings>div.balance").addClass("zero");
+          // }
+          isBalanceZero("savings", "W", savingsBalance);
+        //}
       }
       clearField("savings");
     }
