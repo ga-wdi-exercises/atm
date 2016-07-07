@@ -120,6 +120,6 @@ $(document).ready(function(){
     deposit('savings');
   });
   $('#savings').children('.withdraw').click(function() {
-    deposit('savings');
+    withdraw('savings');
   });
 });
