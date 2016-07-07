@@ -103,9 +103,22 @@ $(document).ready(function(){
         // If the new balance is non-negative, allow it to post;
         if ( balance >= 0) {
             $(acctClass + ' .balance').html("$" + balance.toFixed(2));
+
+        // Else, if the negative balance has a lower or equal magnitude to the savings account balance
+        } else if (acctClass == '#checking' && (balance * -1) <= getAccountBalance('#savings') ) {
+            console.log("Using overdraft protection.");
+            var savingsBalance = getAccountBalance('#savings') + balance // balance must be negative to get here
+            console.log(savingsBalance);
+            // Update the checking acct balance
+            $(acctClass + ' .balance').html("$0.00");
+            // Update the savings account balance
+            $('#savings .balance').html("$" + savingsBalance.toFixed(2));
+        } else {
+            alert("Insufficient balances to process this transaction!");
         }
 
         checkZeroBalance(acctClass);
+        checkZeroBalance('#savings');
     }
 });
 
