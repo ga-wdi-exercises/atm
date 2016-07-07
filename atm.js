@@ -14,7 +14,8 @@ $(document).ready(function() {
         var withdrawAmount = parseFloat($('.input:first').val()).toFixed(2)
         var currentBalance = parseFloat($('.balance:first').html().split('$')[1])
         if(!isNaN(withdrawAmount) && currentBalance > 0){
-
+            $('.balance:first').html('$' + (currentBalance - parseFloat(withdrawAmount)).toFixed(2));
+            $('#entry')[0].reset();
         }
     });
 });
