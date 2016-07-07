@@ -1,21 +1,77 @@
+function addThis(selector){
+    $(selector).addClass(
+        function(index,currentClass){
+            var addedClass;
+            if(parseFloat($('.balance:first').html().split('$')[1])==0){
+                addedClass = "zero";
+            }
+            return addedClass;
+        }
+    )
+}
+function removeThis(selector){
+    $(selector).removeClass(
+        function(index,currentClass){
+            var removedClass;
+            if(parseFloat($('.balance:first').html().split('$')[1])!==0){
+                removedClass = "zero";
+            }
+            return removedClass;
+        }
+    )
+}
 $(document).ready(function() {
+    addThis(".balance");
+    //prevent enter from reloading page
+    $('form').submit(function(e) {
+        e.preventDefault();
+    });
+    //deposit function checking
     $(".deposit:first").on('click', function(event) {
         event.preventDefault();
         var depositAmount = parseFloat($('.input:first').val()).toFixed(2)
         if(!isNaN(depositAmount)){
             var currentBalance = parseFloat($('.balance:first').html().split('$')[1])
             $('.balance:first').html('$' + (parseFloat(depositAmount)+currentBalance).toFixed(2));
-            $('#entry')[0].reset();
+            addThis(".balance:first");
+            removeThis(".balance:first");
+            $('.entry:first')[0].reset();
         }
     });
-
+    //withdraw function checking
     $(".withdraw:first").on('click', function(event) {
         event.preventDefault();
         var withdrawAmount = parseFloat($('.input:first').val()).toFixed(2)
         var currentBalance = parseFloat($('.balance:first').html().split('$')[1])
-        if(!isNaN(withdrawAmount) && currentBalance > 0){
+        if(!isNaN(withdrawAmount) && currentBalance != 0){
             $('.balance:first').html('$' + (currentBalance - parseFloat(withdrawAmount)).toFixed(2));
-            $('#entry')[0].reset();
+            addThis(".balance:first");
+            removeThis(".balance:first");
+            $('.entry:first')[0].reset();
+        }
+    });
+    //deposit savings function
+    $(".deposit:eq(1)").on('click', function(event) {
+        event.preventDefault();
+        var depositAmount = parseFloat($('.input:eq(1)').val()).toFixed(2)
+        if(!isNaN(depositAmount)){
+            var currentBalance = parseFloat($('.balance:eq(1)').html().split('$')[1])
+            $('.balance:eq(1)').html('$' + (parseFloat(depositAmount)+currentBalance).toFixed(2));
+            addThis('.balance:eq(1)');
+            removeThis('.balance:eq(1)');
+            $('.entry:eq(1)')[0].reset();
+        }
+    });
+    //withdraw savings function
+    $(".withdraw:eq(1)").on('click', function(event) {
+        event.preventDefault();
+        var withdrawAmount = parseFloat($('.input:eq(1)').val()).toFixed(2)
+        var currentBalance = parseFloat($('.balance:eq(1)').html().split('$')[1])
+        if(!isNaN(withdrawAmount) && currentBalance != 0){
+            $('.balance:eq(1)').html('$' + (currentBalance - parseFloat(withdrawAmount)).toFixed(2));
+            addThis('.balance:eq(1)');
+            removeThis('.balance:eq(1)');
+            $('.entry:eq(1)')[0].reset();
         }
     });
 });
