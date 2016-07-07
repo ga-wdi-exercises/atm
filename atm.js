@@ -1,13 +1,15 @@
 $(document).ready(function(){
 
 // define savings/checking account
-var $savingsBalance = $("#savings.balance");
-var $checkingBalance = $("#checking.balance");
+var $savingsBalance = $("#savings .balance");
+var $checkingBalance = $("#checking .balance");
 var $accountBalance;
+var $otherAccountBalance;
 
 // other variables
 var $accountInput;
 var updatedBalance;
+var otherUpdatedBalance;
 var $balance = $(".balance");
 var $depositBtn = $(".deposit");
 var $withdrawBtn = $(".withdraw");
@@ -28,27 +30,25 @@ function depositSomething(e) {
     // define value of user input
     if ($accountId == "checking") {
       $accountInput = parseInt($("#checking .input").val());
-      $accountBalance = parseInt($("#checking .balance").text().replace("$", ""));
+      $accountBalance = parseInt($checkingBalance.text().replace("$", ""));
       // define balance
       updatedBalance = $accountBalance + $accountInput;
-      $("#checking .balance").text("$" + updatedBalance);
+      $checkingBalance.text("$" + updatedBalance);
       // clear input field after amount is added
       $(".input").val("");
-         // if amount is > 0, remove zero class
         if (updatedBalance > 0) {
-          $("#checking .balance").removeClass("zero");
+          $checkingBalance.removeClass("zero");
         }
     } else if ($accountId == "savings") {
       $accountInput = parseInt($("#savings .input").val());
-      $accountBalance = parseInt($("#savings .balance").text().replace("$", ""));
+      $accountBalance = parseInt($savingsBalance.text().replace("$", ""));
       // define balance
       updatedBalance = $accountBalance + $accountInput;
-      $("#savings .balance").text("$" + updatedBalance);
+      $savingsBalance.text("$" + updatedBalance);
       // clear input field after amount is added
       $(".input").val("");
-         // if amount is > 0, remove zero class
         if (updatedBalance > 0) {
-          $("#savings .balance").removeClass("zero");
+          $savingsBalance.removeClass("zero");
         }
     }
 }
@@ -61,38 +61,55 @@ function withdrawSomething(e) {
     // define value of user input
     if ($accountId == "checking") {
       $accountInput = parseInt($("#checking .input").val());
-      $accountBalance = parseInt($("#checking .balance").text().replace("$", ""));
+      $accountBalance = parseInt($checkingBalance.text().replace("$", ""));
+      otherAccountBalance = parseInt($savingsBalance.text().replace("$", ""));
         if ($accountInput <= $accountBalance) {
           updatedBalance = $accountBalance - $accountInput;
-          $("#checking .balance").text("$" + updatedBalance);
+          $checkingBalance.text("$" + updatedBalance);
           // clear input field after amount is added
           $(".input").val("");
+          // if amount is > 0, remove zero class
+          if (updatedBalance == 0) {
+              $checkingBalance.addClass("zero");
+            }
+        } else if (($accountInput > $accountBalance) && ($accountInput < otherAccountBalance)) {
+          // if total to withdraw is equal to total in both accounts
+          // have current account total = 0
+          // subtract remaining amount from other account
+          $accountInput = parseInt($("#checking .input").val());
+          var remainderBalance = $accountBalance - $accountInput;
+          var otherBalanceCalc = otherAccountBalance + remainderBalance;
+          $checkingBalance.text("$" + 0);
+          $checkingBalance.addClass("zero");
+          $savingsBalance.text("$" + otherBalanceCalc);
+          $(".input").val("");
+        } else {
+          console.log("Sorry, not 'nuff funds!'")
         }
-        // if amount is > 0, remove zero class
-        if (updatedBalance == 0) {
-            $("#checking .balance").addClass("zero");
-          }
     } else if ($accountId == "savings") {
       $accountInput = parseInt($("#savings .input").val());
-      $accountBalance = parseInt($("#savings .balance").text().replace("$", ""));
+      $accountBalance = parseInt($savingsBalance.text().replace("$", ""));
+      otherAccountBalance = parseInt($checkingBalance.text().replace("$", ""));
         if ($accountInput <= $accountBalance) {
           updatedBalance = $accountBalance - $accountInput;
-          $("#savings .balance").text("$" + updatedBalance);
+          $savingsBalance.text("$" + updatedBalance);
           $(".input").val("");
+          // if amount is > 0, remove zero class
+          if (updatedBalance == 0) {
+              $checkingBalance.addClass("zero");
+            }
+        } else if (($accountInput > $accountBalance) && ($accountInput < otherAccountBalance)) {
+          $accountInput = parseInt($("#savings .input").val());
+          var remainderBalance = $accountBalance - $accountInput;
+          var otherBalanceCalc = otherAccountBalance + remainderBalance;
+          $savingsBalance.text("$" + 0);
+          $savingsBalance.addClass("zero");
+          $checkingBalance.text("$" + otherBalanceCalc);
+          $(".input").val("");
+        } else {
+          console.log("Sorry, not 'nuff funds!'")
         }
-        // if amount is > 0, remove zero class
-        if (updatedBalance == 0) {
-            $("#savings .balance").addClass("zero");
-          }
-    }
+      }
 }
-
-//Bonus
-
-// if total to withdraw is equal to total in both accounts
-// have current account total = 0
-// subtract remaining amount from other account
-
-// if total to withdraw > than amounts in both accounts, display error
 
 });
