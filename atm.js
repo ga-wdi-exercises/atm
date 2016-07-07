@@ -1,9 +1,14 @@
 $(document).ready(function(){
   //listen for click event on checking account deposit button
+  var checkingDepButton = $("#checking>input.deposit");
+  checkingDepButton.on("click", addToChecking);
+  function addToChecking(){
+    console.log("hello");
     //get user input from field
     //Add user input to balance
     //If checking has a class of zero and balance != 0 remove class zero
     //clear field
+  }
 
     //listen for click even on cheking account withdrawl button
       //get user input from field
@@ -12,5 +17,5 @@ $(document).ready(function(){
 
 
 
-  console.log("hi");
+
 });
