@@ -23,6 +23,7 @@ $(document).ready(function(){
       $("#checking>div.balance").removeClass("zero");
     }
     //clear field
+    checkingField.val("");
   }
 
     //listen for click even on cheking account withdrawl button
