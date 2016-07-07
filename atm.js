@@ -6,9 +6,10 @@ $(document).ready(function(){
   $("#checking .deposit").on("click", function (evt) {
     evt.preventDefault();
     var depositAmount = $("#checking .input").val()
-    $("#checking .balance").css("background", "rgb(204, 204, 204)");
+    $("#checking .balance").css("background", "#E3E3E3");
     depositFunction(depositAmount);
-  })
+    $(".input").val("");
+  });
 
   $("#checking .withdraw").on("click", function (evt) {
     evt.preventDefault();
@@ -18,8 +19,9 @@ $(document).ready(function(){
       $("#checking .balance").css("background", "rgb(232, 63, 63)");
     } else {
     withdrawFunction(withdrawAmount);
+    $(".input").val("");
   }
-  })
+});
 
   function depositFunction(depositAmount) {
     var toNumber = parseFloat(depositAmount);
@@ -37,6 +39,7 @@ $(document).ready(function(){
     if (backToNumber > checkingTotal) {
       $("#checking .balance").html("<p class='smallText'>Not Enough Funds</p>");
       $("#checking .balance").css("background", "rgb(232, 63, 63)");
+      setTimeout(reset, 2000);
     } else if (backToNumber === checkingTotal) {
       checkingTotal = 0;
       $("#checking .balance").html(checkingTotal);
@@ -46,28 +49,16 @@ $(document).ready(function(){
       var finalNumber = "$" + parseFloat(checkingTotal.toFixed(2));
       $("#checking .balance").html(finalNumber);
     }
+
+    function reset() {
+      $("#checking .balance").css("background", "#E3E3E3");
+      $("#checking .balance").html(checkingTotal);
+    };
   }
-
-
-
-
 
 /*********
 Pseudo Code
 **********/
-
-//ON CLICK, take amount user entered and pass this through to deposit function
-
-// named function
-
-// takes number and parses it as an integer
-// turns it to a number two decimal places with a dollar sign in front of it
-
-
-
-
-
-
 
 // DEPOSITS //
 
