@@ -49,13 +49,14 @@ $(document).ready(function() {
         var withdrawAmount = parseFloat($('.input:first').val()).toFixed(2)
         var currentBalance = parseFloat($('.balance:first').html().split('$')[1])
         var difference = currentBalance - parseFloat(withdrawAmount)
+        var saveBalance = parseFloat($('.balance:eq(1)').html().split('$')[1])
         if(!isNaN(withdrawAmount) && difference >= 0){
             $('.balance:first').html('$' + (currentBalance - parseFloat(withdrawAmount)).toFixed(2));
             addThis(".balance:first");
             removeThis(".balance:first");
             $('.entry:first')[0].reset();
             //overdraft protection logic
-        } else if (!isNaN(withdrawAmount) && difference < 0) {
+        } else if (!isNaN(withdrawAmount) && difference < 0 && saveBalance > (difference*-1)) {
             if(parseFloat($('.balance:eq(1)').html().split('$')[1])>0){
                 var protectionAmount = ((currentBalance - withdrawAmount) * -1).toFixed(2)
                 var savingsAmount = parseFloat($('.balance:eq(1)').html().split('$')[1])
@@ -64,6 +65,8 @@ $(document).ready(function() {
                 addThis(".balance:first");
                 addThis(".balance:eq(1)");
             }
+        } else {
+            alert("You're Poor")
         }
     });
 
