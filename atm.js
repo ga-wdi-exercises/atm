@@ -10,17 +10,19 @@ $(document).ready(function(){
     var checkingField = $("#checking>input.input")
     var moneyValue = checkingField.val();
     moneyValue = parseFloat(moneyValue);
-    //Get checking balance
-    checkingBalance = $("#checking>div.balance").html().split("$")[1];
-    checkingBalance = parseFloat(checkingBalance);
-    //Add user input to balance
-    checkingBalance = (checkingBalance + moneyValue).toFixed(2);
-    console.log(checkingBalance, typeof(checkingBalance));
-    $("#checking>div.balance").html("$" + checkingBalance);
+    if (moneyValue >= 0) { //If user entered a non-negative value
+      //Get checking balance
+      checkingBalance = $("#checking>div.balance").html().split("$")[1];
+      checkingBalance = parseFloat(checkingBalance);
+      //Add user input to balance
+      checkingBalance = (checkingBalance + moneyValue).toFixed(2);
+      console.log(checkingBalance, typeof(checkingBalance));
+      $("#checking>div.balance").html("$" + checkingBalance);
 
-    //If checking has a class of zero and balance != 0 remove class zero
-    if($("#checking>div.balance").attr("class").indexOf("zero") > -1 && parseFloat(checkingBalance) > 0) {
-      $("#checking>div.balance").removeClass("zero");
+      //If checking has a class of zero and balance != 0 remove class zero
+      if($("#checking>div.balance").attr("class").indexOf("zero") > -1 && parseFloat(checkingBalance) > 0) {
+        $("#checking>div.balance").removeClass("zero");
+      }
     }
     //clear field
     checkingField.val("");
