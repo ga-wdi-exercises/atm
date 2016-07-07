@@ -29,6 +29,12 @@ $(document).ready(function(){
   }
 
     //listen for click even on cheking account withdrawl button
+    var checkingWDButton = $("#checking>input.withdraw");
+    checkingWDButton.on("click", takeFromChecking);
+    function takeFromChecking(){
+      console.log("Withdrawl gon happen");
+    }
+
       //get user input from field
       //if user input is not greater than balance, subtract user input from balance
       //If checking does not have a class of 0 and balance == 0 add class zero
