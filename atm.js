@@ -10,18 +10,22 @@
 //Checking deposit
 $(document).ready(function(){
   console.log("I'm So Ready!");
-//
+//click listener for function to add user input
   $(".deposit").on("click", updatedBalance);
-
+//function for checking deposit
   function updatedBalance (){
-    var depositChecking = parseInt($("#checking input").val());
+//gets user numeric input from checking account deposit
+    var depositChecking = Number.parseFloat($("#checking input").val());
     console.log(depositChecking);
-    var floatNum = parseFloat(depositChecking).toFixed(2);
-    console.log(floatNum);
-    var balanceTest = parseInt($("#checking .balance").text().split("$")[1]);
-    console.log(balanceTest);
+    //var floatNum = Number.parseFloat(depositChecking);
+    //console.log(floatNum);
+    var balanceTest1 = Number.parseFloat($("#checking .balance").text().split("$")[1]);
+    console.log(balanceTest1);
+    var balanceTest2 = Number.parseFloat(depositChecking) + balanceTest1;
+    console.log(balanceTest2);
     //var test = parseFloat(balanceTest.split("$")[1]);
-    var checkingBalance = ("$") + (balanceTest + depositChecking);
+    var checkingBalance = ("$") + (balanceTest2).toFixed(2);
+
     $("#checking .balance").html(checkingBalance);
     console.log(checkingBalance);
   }
