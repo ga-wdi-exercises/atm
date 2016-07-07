@@ -4,11 +4,9 @@ $(document).ready(function(){
     $("#checking .balance.zero").removeClass("zero");
     $("#checking .input").css("color", "black");
     $("#checking .input").select();
-    var displayedBalance = $("#checking .balance").html();
-    var totalBalance = parseFloat(displayedBalance.split("$")[1]);
-    var amount = $("#checking .input").val();
-    var floatAmount = parseFloat(amount).toFixed(2);
-    var balance = parseFloat(floatAmount) + totalBalance;
+    var totalBalance = currentBalance("#checking .balance");
+    var userInput = currentInput("#checking .input");
+    var balance = userInput + totalBalance;
     $("#checking .balance").html("$" + balance);
   })
 
@@ -16,11 +14,9 @@ $(document).ready(function(){
     evt.preventDefault();
     $("#checking .balance.zero").removeClass("zero");
     $("#checking .input").select();
-    var displayedBalance = $("#checking .balance").html();
-    var totalBalance = parseFloat(displayedBalance.split("$")[1]);
-    var amount = $("#checking .input").val();
-    var floatAmount = parseFloat(amount).toFixed(2);
-    var balance = totalBalance - parseFloat(floatAmount);
+    var totalBalance = currentBalance("#checking .balance");
+    var userInput = currentInput("#checking .input");
+    var balance = totalBalance - userInput;
     if (balance < 0){
       balance = totalBalance;
       redTextWarning("#checking .input");
@@ -39,11 +35,9 @@ $(document).ready(function(){
     $("#savings .balance.zero").removeClass("zero");
     $("#savings .input").css("color", "black");
     $("#savings .input").select();
-    var displayedBalance = $("#savings .balance").html();
-    var totalBalance = parseFloat(displayedBalance.split("$")[1]);
-    var amount = $("#savings .input").val();
-    var floatAmount = parseFloat(amount).toFixed(2);
-    var balance = parseFloat(floatAmount) + totalBalance;
+    var totalBalance = currentBalance("#savings .balance");
+    var userInput = currentInput("#savings .input");
+    var balance = userInput + totalBalance;
     $("#savings .balance").html("$" + balance);
 
   })
@@ -51,11 +45,9 @@ $(document).ready(function(){
   $("#savings .withdraw").on("click", function(evt){
     evt.preventDefault();
     $("#savings .input").select();
-    var displayedBalance = $("#savings .balance").html();
-    var totalBalance = parseFloat(displayedBalance.split("$")[1]);
-    var amount = $("#savings .input").val();
-    var floatAmount = parseFloat(amount).toFixed(2);
-    var balance = totalBalance - parseFloat(floatAmount);
+    var totalBalance = currentBalance("#savings .balance");
+    var userInput = currentInput("#savings .input");
+    var balance = totalBalance - userInput;
     if (balance < 0){
       balance = totalBalance;
       redTextWarning("#savings .input");
@@ -73,6 +65,22 @@ $(document).ready(function(){
     $(location).css("color", "red");
     $(location).val("INSUFFICIENT FUNDS!");
     $(location).select();
+  }
+
+  var currentBalance = function (location){
+
+    var displayedBalance = $(location).html();
+    var totalBalance = parseFloat(displayedBalance.split("$")[1]);
+    console.log("totalBalance: " + totalBalance)
+    return totalBalance;
+  }
+
+  var currentInput = function (location){
+    var amount = $(location).val();
+    var floatAmount = parseFloat(amount).toFixed(2);
+    var userInput = parseFloat(floatAmount);
+    console.log("userInput: " + userInput);
+    return userInput;
   }
   // var withdraw = function (location, balance, amount,);
 });
