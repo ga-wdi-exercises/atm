@@ -35,38 +35,25 @@
 
 $(document).ready(function(){
 
-  var transactionAccount;
-  var requestAmount = 10;
+  var accountType;
+  var requestAmount = 0;
 
   var checkingBalance = 0;
   var savingsBalance = 0;
 
-  var checkingAccount = $('#checking .balance').parents().get(0);
-  var savingsAccount = $('#savings .balance').parents().get(0);
+  $(':button').on("click", getAccount);
 
-  $('#checking .balanceVal').html(checkingBalance);
-  $('#savings .balanceVal').html(savingsBalance);
-
-  $(':button').on("click", getValue);
-
-  function getValue(){
-    console.log( $(this) );
+  function getAccount(){
     var holdThis = $(this);
-    checkWhichAccount(holdThis);
-  }
-
-  function checkWhichAccount(holdThis) {
-    var accountType = holdThis.parents().eq(0).attr("id");
-    console.log(accountType);
-    if (accountType == checkingAccount) {
-      transactionAccount = 'checking';
-
-    } if (accountType == savingsAccount) {
-      transactionAccount = 'savings';
+    accountType = holdThis.parents().eq(0).attr("id");
+    if (accountType == 'checking') {
+      requestAmount = $('#checking .input').val();
+    }
+    if (accountType == 'savings') {
+      requestAmount = $('#savings .input').val();
     }
     checkTransactionType(this);
   }
-
 
   function checkTransactionType(button) {
     if ($(button).attr('value') == 'Deposit') {
@@ -79,15 +66,15 @@ $(document).ready(function(){
   }
 
   function clearTransaction() {
-    if (transactionAccount == 'checking') {
+    if (accountType == 'checking') {
       checkingBalance += requestAmount;
       $ ('#checking .balanceVal').html(checkingBalance);
-    } if (transactionAccount == 'savings') {
+    } if (accountType == 'savings') {
       savingsBalance += requestAmount;
       $ ('#savings .balanceVal').html(savingsBalance);
     }
-    requestAmount = 10;
-
+    requestAmount = 0;
+    // $('.balance').each().html("");
   }
 
 });
