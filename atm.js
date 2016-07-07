@@ -35,6 +35,16 @@
 
 $(document).ready(function(){
 
+  var transactionAccount;
+  var requestAmount = 10;
+
+  var checkingBalance = 0;
+  var savingsBalance = 0;
+
+  var checkingAccount = $('#checking .balance').parents().get(0);
+  var savingsAccount = $('#savings .balance').parents().get(0);
+  // console.log(checkingAccount);
+
   // var checkingAccount = $('#checking');
   // console.log(checkingAccount);
 
@@ -50,32 +60,54 @@ $(document).ready(function(){
   // console.log(typeof(savingsBalance));
   $('#savings .balanceVal').html(savingsBalance);
 
-  // will hold the user input
-  var requestAmount = 15;
-
   $(':button').on("click", checkWhichAccount);
 
+  // function getValue(){
+  //   requestAmount = $('input').val();
+  // }
 
-
-  function checkWhichAccount(clicked) {
-    // var temp = this;
-    // account = $(temp).parents()
+  function checkWhichAccount() {
+    var temp = this;
+    var account = $(temp).parents().get(0);
     // console.log(account);
-    if (clicked == $('.deposit:first')) {
-      console.log('hey broh');
-    }
+    // console.log(checkingAccount);
+    // console.log(savingsAccount);
+    // console.log(account == checkingAccount);
+    // console.log(temp);
+    if (account == checkingAccount) {
+      console.log('Checking');
+      transactionAccount = 'checking';
 
+    } if (account == savingsAccount) {
+      console.log('Savings');
+      transactionAccount = 'savings';
+    }
     checkTransactionType(this);
   }
 
   function checkTransactionType(button) {
-    if ($(button).attr('value') == 'Deposit' ) {
+    if ($(button).attr('value') == 'Deposit') {
       requestAmount *= 1;
-      console.log(requestAmount);
-    } if ($(button).attr('value') == 'Withdraw' ) {
-      requestAmount *= -1
-      console.log(requestAmount);
+      // console.log(requestAmount);
     }
+     if ($(button).attr('value') == 'Withdraw' ) {
+      requestAmount *= -1
+      // console.log(requestAmount);
+    }
+    clearTransaction();
+  }
+
+  function clearTransaction() {
+    if (transactionAccount == 'checking') {
+      checkingBalance += requestAmount;
+      // console.log(checkingBalance)
+      $ ('#checking .balanceVal').html(checkingBalance);
+    } if (transactionAccount == 'savings') {
+      savingsBalance += requestAmount;
+      // console.log(savingsBalance)
+      $ ('#savings .balanceVal').html(savingsBalance);
+    }
+    requestAmount = 10;
   }
 
 });
