@@ -73,6 +73,9 @@ $(document).ready(function(){
       var total = $("#savings > .balance").html();
       var numericalTotal = parseFloat(total.split("$")[1]);
       var actualTotal = floatNewInput + numericalTotal;
+      if (actualTotal >0){
+        $("#savings > .balance").css("background-color", "#E3E3E3");
+      }
       actualTotal = actualTotal.toFixed(2);
       $("#savings > .balance").html("$" + actualTotal);
       $("#savings > .input").val("");
@@ -104,6 +107,9 @@ $("#savings > .withdraw").on("click", function(e){
   var total = $("#savings > .balance").html();
   var numericalTotal = parseFloat(total.split("$")[1]);
   var actualTotal = numericalTotal - floatNewInput;
+  if (actualTotal <=0){
+    $("#savings > .balance").css("background-color", "red");
+  }
   actualTotal = actualTotal.toFixed(2);
   $("#savings > .balance").html("$" + actualTotal);
   $("#savings > .input").val("");
