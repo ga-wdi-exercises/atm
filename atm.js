@@ -22,7 +22,13 @@ else{
 clear specific input field
 */
 $(document).ready(function(){
-  $("body").css("background", "red");
+  // $("body").css("background", "red");
+
+  $("#checking .deposit").on("click", function(evt){
+    console.log("deposit button woooooooo")
+
+
+  })
 
 // Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
 });
