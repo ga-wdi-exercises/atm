@@ -24,7 +24,6 @@ clear specific input field
 $(document).ready(function(){
   $("#checking .deposit").on("click", function(evt){
     evt.preventDefault();
-
     $("#checking .balance.zero").removeClass("zero");
     $("#checking .input").css("color", "black");
     $("#checking .input").select();
@@ -40,7 +39,6 @@ $(document).ready(function(){
 
   $("#checking .withdraw").on("click", function(evt){
     evt.preventDefault();
-
     $("#checking .balance.zero").removeClass("zero");
     $("#checking .input").select();
     var displayedBalance = $("#checking .balance").html();
@@ -51,24 +49,19 @@ $(document).ready(function(){
     var balance = totalBalance - parseFloat(floatAmount);
     if (balance < 0){
       balance = totalBalance;
-      $("#checking .input").css("color", "red");
-      $("#checking .input").val("DONT DO IT");
-      $("#checking .input").select();
+      redTextWarning("#checking .input");
     }
-
     else{
       $("#checking .balance").html("$" + balance);
       $("#checking .input").css("color", "black");
       if (balance == 0){
         $("#checking .balance").addClass("zero");
       }
-
     }
   })
 
   $("#savings .deposit").on("click", function(evt){
     evt.preventDefault();
-
     $("#savings .balance.zero").removeClass("zero");
     $("#savings .input").css("color", "black");
     $("#savings .input").select();
@@ -93,9 +86,7 @@ $(document).ready(function(){
     var balance = totalBalance - parseFloat(floatAmount);
     if (balance < 0){
       balance = totalBalance;
-      $("#savings .input").css("color", "red");
-      $("#savings .input").val("DONT DO IT");
-      $("#savings .input").select();
+      redTextWarning("#savings .input");
     }
 
     else{
@@ -105,5 +96,10 @@ $(document).ready(function(){
         $("#savings .balance").addClass("zero");
       }
     }
-  });
+  })
+  var redTextWarning = function (location){
+    $(location).css("color", "red");
+    $(location).val("INSUFFICIENT FUNDS!");
+    $(location).select();
+  }
 });
