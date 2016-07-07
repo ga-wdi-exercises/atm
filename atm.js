@@ -1,7 +1,7 @@
 //   make sure document is ready
 //   make sure inputs are ready
-        // checking: input, deposit, withdraw
-        // savings: input, deposit, withdraw
+// checking: input, deposit, withdraw
+// savings: input, deposit, withdraw
 //   get/display checking balance
 //   get/display savings balance
 //
@@ -34,5 +34,48 @@
 
 
 $(document).ready(function(){
-// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
+
+  // var checkingAccount = $('#checking');
+  // console.log(checkingAccount);
+
+  // $ ('#checking .balanceVal').html(15)
+  var checkingBalance = Math.round( parseFloat($ ('#checking .balanceVal').html() ) * 100 ) / 100;
+  // console.log(checkingBalance);
+  // console.log(typeof(checkingBalance));
+  $('#checking .balanceVal').html(checkingBalance);
+
+  // $ ('#savings .balanceVal').html(19.2323523)
+  var savingsBalance = Math.round( parseFloat($ ('#savings .balanceVal').html() ) * 100 ) / 100;
+  // console.log(savingsBalance);
+  // console.log(typeof(savingsBalance));
+  $('#savings .balanceVal').html(savingsBalance);
+
+  // will hold the user input
+  var requestAmount = 15;
+
+  $(':button').on("click", checkWhichAccount);
+
+
+
+  function checkWhichAccount(clicked) {
+    // var temp = this;
+    // account = $(temp).parents()
+    // console.log(account);
+    if (clicked == $('.deposit:first')) {
+      console.log('hey broh');
+    }
+
+    checkTransactionType(this);
+  }
+
+  function checkTransactionType(button) {
+    if ($(button).attr('value') == 'Deposit' ) {
+      requestAmount *= 1;
+      console.log(requestAmount);
+    } if ($(button).attr('value') == 'Withdraw' ) {
+      requestAmount *= -1
+      console.log(requestAmount);
+    }
+  }
+
 });
