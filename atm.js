@@ -43,56 +43,37 @@ $(document).ready(function(){
 
   var checkingAccount = $('#checking .balance').parents().get(0);
   var savingsAccount = $('#savings .balance').parents().get(0);
-  // console.log(checkingAccount);
 
-  // var checkingAccount = $('#checking');
-  // console.log(checkingAccount);
-
-  // $ ('#checking .balanceVal').html(15)
-  var checkingBalance = Math.round( parseFloat($ ('#checking .balanceVal').html() ) * 100 ) / 100;
-  // console.log(checkingBalance);
-  // console.log(typeof(checkingBalance));
   $('#checking .balanceVal').html(checkingBalance);
-
-  // $ ('#savings .balanceVal').html(19.2323523)
-  var savingsBalance = Math.round( parseFloat($ ('#savings .balanceVal').html() ) * 100 ) / 100;
-  // console.log(savingsBalance);
-  // console.log(typeof(savingsBalance));
   $('#savings .balanceVal').html(savingsBalance);
 
-  $(':button').on("click", checkWhichAccount);
+  $(':button').on("click", getValue);
 
-  // function getValue(){
-  //   requestAmount = $('input').val();
-  // }
+  function getValue(){
+    console.log( $(this) );
+    var holdThis = $(this);
+    checkWhichAccount(holdThis);
+  }
 
-  function checkWhichAccount() {
-    var temp = this;
-    var account = $(temp).parents().get(0);
-    // console.log(account);
-    // console.log(checkingAccount);
-    // console.log(savingsAccount);
-    // console.log(account == checkingAccount);
-    // console.log(temp);
-    if (account == checkingAccount) {
-      console.log('Checking');
+  function checkWhichAccount(holdThis) {
+    var accountType = holdThis.parents().eq(0).attr("id");
+    console.log(accountType);
+    if (accountType == checkingAccount) {
       transactionAccount = 'checking';
 
-    } if (account == savingsAccount) {
-      console.log('Savings');
+    } if (accountType == savingsAccount) {
       transactionAccount = 'savings';
     }
     checkTransactionType(this);
   }
 
+
   function checkTransactionType(button) {
     if ($(button).attr('value') == 'Deposit') {
       requestAmount *= 1;
-      // console.log(requestAmount);
     }
      if ($(button).attr('value') == 'Withdraw' ) {
-      requestAmount *= -1
-      // console.log(requestAmount);
+      requestAmount *= -1;
     }
     clearTransaction();
   }
@@ -100,14 +81,13 @@ $(document).ready(function(){
   function clearTransaction() {
     if (transactionAccount == 'checking') {
       checkingBalance += requestAmount;
-      // console.log(checkingBalance)
       $ ('#checking .balanceVal').html(checkingBalance);
     } if (transactionAccount == 'savings') {
       savingsBalance += requestAmount;
-      // console.log(savingsBalance)
       $ ('#savings .balanceVal').html(savingsBalance);
     }
     requestAmount = 10;
+
   }
 
 });
