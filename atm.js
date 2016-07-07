@@ -5,6 +5,9 @@ var totalBalance;
 var userAmount;
 var nBalance;
 var userAmountN;
+var overDrawAmount;
+var checkingNewTotal;
+var savingsNewTotal;
 
   $("#checking .deposit").on("click", function(e){
       e.preventDefault();
@@ -80,6 +83,8 @@ var userAmountN;
     makeSavingsRed();
     ifSWithdrawAtStart();
     overDrawSavings();
+
+
     $("#savings .input").val("");
   })
 
@@ -95,9 +100,9 @@ function makeSavingsRed () {
 
 function overDrawSavings () {
   if (totalBalance < 0) {
-    totalBalance = nBalance;
-    alert("You can't overdraw, mofo.");
-    $("#savings .balance").html("$" + totalBalance.toFixed(2));
+    overDrawAmount = userAmountN - nBalance;
+    addToChecking();
+    $("#savings .balance").html("$" + "0");
   }
 }
 
@@ -133,11 +138,11 @@ function makeCheckingRed () {
 }
 
 function overDrawChecking () {
-  if (totalBalance < 0) {
-    totalBalance = nBalance;
-    alert("You can't overdraw, mofo.");
-    $("#checking .balance").html("$" + totalBalance.toFixed(2));
-  }
+   if (totalBalance < 0) {
+    overDrawAmount = userAmountN - nBalance;
+    addToSavings();
+    $("#checking .balance").html("$" + "0");
+}
 }
 
 function ifCWithdrawAtStart() {
@@ -161,6 +166,20 @@ function withdrawChecking() {
 function depositChecking() {
   totalBalance = nBalance + userAmountN;
   $("#checking .balance").html("$" + totalBalance.toFixed(2));
+}
+
+function addToChecking() {
+    var checkingTotal = $("#checking .balance").html();
+    var checkingTotalNumber = parseFloat(checkingTotal.split("$")[1]);
+    var newCheckingTotal = checkingTotalNumber - overDrawAmount;
+    checkingNewTotal = $("#checking .balance").html("$" + newCheckingTotal.toFixed(2));
+  }
+
+function addToSavings() {
+  var savingsTotal = $("#savings .balance").html();
+  var savingsTotalNumber = parseFloat(savingsTotal.split("$")[1]);
+  var newSavingsTotal = savingsTotalNumber - overDrawAmount;
+  savingsNewTotal = $("#savings .balance").html("$" + newSavingsTotal.toFixed(2));
 }
 
 });
