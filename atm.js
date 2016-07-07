@@ -67,11 +67,27 @@ $(document).ready(function(){
     }
 
     function getAccountBalance(acctClass) {
+        // acctClass specifies the class of the account to be modified. It will already have
+        //   a . or # prepended
 
         var rawBalance = $(acctClass + ' .balance').html();
         var balance = parseFloat(rawBalance.split('$')[1]);
         console.log(balance);
         return balance;
+    }
+
+    function checkZeroBalance(acctClass) {
+        // acctClass specifies the class of the account to be modified. It will already have
+        //   a . or # prepended
+        var balance = getAccountBalance(acctClass);
+
+        // If the balance is zero, give the div the .zero class
+        if (balance > 0) {
+            $(acctClass).attr('class', 'account');
+        } else {
+            $(acctClass).attr('class', 'account zero');
+        }
+
     }
 
     function adjustBalance(acctClass, amount) {
@@ -89,12 +105,7 @@ $(document).ready(function(){
             $(acctClass + ' .balance').html("$" + balance.toFixed(2));
         }
 
-        // If the new balance is zero, give the div the .zero class
-        if (balance > 0) {
-            $(acctClass).attr('class', 'account');
-        } else {
-            $(acctClass).attr('class', 'account zero');
-        }
+        checkZeroBalance(acctClass);
     }
 });
 
