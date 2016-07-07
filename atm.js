@@ -1,4 +1,6 @@
 $(document).ready(function(){
+
+  $(".balance").addClass("zero");
   //listen for click event on checking account deposit button
   var checkingDepButton = $("#checking>input.deposit");
   checkingDepButton.on("click", addToChecking);
@@ -17,6 +19,9 @@ $(document).ready(function(){
     $("#checking>div.balance").html("$" + checkingBalance);
 
     //If checking has a class of zero and balance != 0 remove class zero
+    if($("#checking>div.balance").attr("class").indexOf("zero") > -1 && parseFloat(checkingBalance) > 0) {
+      $("#checking>div.balance").removeClass("zero");
+    }
     //clear field
   }
 
