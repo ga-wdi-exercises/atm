@@ -31,14 +31,9 @@ $(document).ready(function(){
     console.log(totalBalance);
     var amount = $("#checking .input").val();
     var floatAmount = parseFloat(amount).toFixed(2);
-    // var balance = parseFloat(floatAmount)
-
-    // var balance = balance + parseFloat(floatAmount);
-    $("#checking .balance").html("$" + floatAmount);
-
-
+    var balance = parseFloat(floatAmount) + totalBalance;
+    $("#checking .balance").html("$" + balance);
 
   })
 
-// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
 });
