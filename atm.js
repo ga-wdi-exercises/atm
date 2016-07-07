@@ -5,9 +5,10 @@
 // - The user can not withdraw more than the balance of each account ((wishlist: possible //overdraft protection, where if funds are available on either account to cover the full //withdrawal of a potential 'overdraft')).
 //When either account balance reaches 0, red color will show in background of text/balance //display.
 
-
 $(document).ready(function(){
 
-console.log("Ready!")
+console.log("Ready!");
+
+
 
 })
