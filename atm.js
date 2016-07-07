@@ -72,7 +72,7 @@ function withdrawSomething(e) {
           if (updatedBalance == 0) {
               $checkingBalance.addClass("zero");
             }
-        } else if (($accountInput > $accountBalance) && ($accountInput < otherAccountBalance)) {
+        } else if (($accountInput > $accountBalance) && ($accountInput == ($accountBalance + otherAccountBalance))) {
           // if total to withdraw is equal to total in both accounts
           // have current account total = 0
           // subtract remaining amount from other account
@@ -82,6 +82,9 @@ function withdrawSomething(e) {
           $checkingBalance.text("$" + 0);
           $checkingBalance.addClass("zero");
           $savingsBalance.text("$" + otherBalanceCalc);
+          if (otherBalanceCalc == 0) {
+            $savingsBalance.addClass("zero");
+          }
           $(".input").val("");
         } else {
           console.log("Sorry, not 'nuff funds!'")
@@ -98,18 +101,21 @@ function withdrawSomething(e) {
           if (updatedBalance == 0) {
               $checkingBalance.addClass("zero");
             }
-        } else if (($accountInput > $accountBalance) && ($accountInput < otherAccountBalance)) {
+        } else if (($accountInput > $accountBalance) && ($accountInput == ($accountBalance + otherAccountBalance))) {
           $accountInput = parseInt($("#savings .input").val());
           var remainderBalance = $accountBalance - $accountInput;
           var otherBalanceCalc = otherAccountBalance + remainderBalance;
           $savingsBalance.text("$" + 0);
           $savingsBalance.addClass("zero");
           $checkingBalance.text("$" + otherBalanceCalc);
+          if (otherBalanceCalc == 0) {
+            $checkingBalance.addClass("zero");
+          }
           $(".input").val("");
         } else {
           console.log("Sorry, not 'nuff funds!'")
         }
       }
-}
+    }
 
 });
