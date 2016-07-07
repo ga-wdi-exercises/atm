@@ -15,9 +15,6 @@ Take some time to review a peer's pseudo and add suggestions to improve your par
 ## Specifications
 
 
-  - Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
-
-
   - Challenge: Try to have no `function()` that's longer than 5 lines. ([Sandi Metz's Rule 2](https://robots.thoughtbot.com/sandi-metz-rules-for-developers#the-rules))
 
 
