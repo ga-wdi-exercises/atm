@@ -1,9 +1,5 @@
 $(document).ready(function(){
 
-  // basic jquery testing
-  // console.log("JQuery!");
-  // $('body').css('background', 'red');
-
   //create balance variables to hold the balances of checking and savings
   var checkingBalance = parseFloat($('#checking').children('.balance').html().split('$')[1]);
   var savingsBalance = parseFloat($('#checking').children('.balance').html().split('$')[1]);
@@ -26,6 +22,7 @@ $(document).ready(function(){
       $('#savings').removeClass('zero');
     }
   }
+
   checkIfZero();
 
   //Updates the balances of both accounts with the latest values, then checks if either one is at a value of 0 and clears the input field
