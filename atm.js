@@ -16,12 +16,16 @@ $(document).ready(function(){
   function updatedBalance (){
 
     var depositChecking = parseInt($("#checking input").val());
+    console.log(depositChecking);
     //var floatNum = parseFloat(depositChecking).toFixed(2);
     var balanceTest = parseInt($("#checking .balance").text().split("$")[1]);
+    console.log(balanceTest);
     //var test = parseFloat(balanceTest.split("$")[1]);
     var checkingBalance = ("$") + (depositChecking + balanceTest);
     $(".checking .balance").text(checkingBalance);
-     console.log(updatedBalance);
+    console.log(checkingBalance);
+
+
 
   }
 
