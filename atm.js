@@ -2,6 +2,9 @@ $("document").ready(function(){
 console.log("hello");
 
 //*******Checking Deposit START*********
+
+
+
 $("#checking > .deposit").on("click", function(evt){
     // prevent default action
     evt.preventDefault();
@@ -15,10 +18,17 @@ $("#checking > .deposit").on("click", function(evt){
     var total = $("#checking > .balance").html()
     var numerictotal = parseFloat(total.split("$")[1])
     var actualtotal = parseFloat(floatnewInput) + numerictotal
+    if (actualtotal > 0) {
+      $("#checking > .balance").css("background-color", "#E3E3E3");
+    }
     $("#checking > .balance").html("$ " + actualtotal.toFixed(2));
-    console.log()
+    //clear field
     $("#checking > .input").val("")
+
+
+
     })
+
 //*********Checking Deposit END************
 
 //*********Savings Deposit START***********(change Variables)
@@ -35,6 +45,7 @@ $("#savings > .deposit").on("click", function(evt){
     var total = $("#savings > .balance").html()
     var numerictotal = parseFloat(total.split("$")[1])
     var actualtotal = parseFloat(floatnewInput) + numerictotal
+
     $("#savings > .balance").html("$ " + actualtotal.toFixed(2));
     console.log()
     $("#savings > .input").val("")
@@ -56,6 +67,9 @@ $("#checking > .withdraw").on("click", function(evt){
     var total = $("#checking > .balance").html()
     var numerictotal = parseFloat(total.split("$")[1])
     var actualtotal = numerictotal - parseFloat(floatnewInput)
+    if (actualtotal < 0) {
+      $("#checking > .balance").css("background-color", "red")
+    }
     $("#checking > .balance").html("$ " + actualtotal.toFixed(2));
     console.log()
     $("#checking > .input").val("")
