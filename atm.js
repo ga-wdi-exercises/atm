@@ -25,7 +25,7 @@ $(document).ready(function(){
       $("#checking .balance").html("$" + balance);
       $("#checking .input").css("color", "black");
       if (balance == 0){
-        $("#checking .balance").addClass("zero");
+        zeroDollars("#checking .balance");
       }
     }
   })
@@ -57,10 +57,11 @@ $(document).ready(function(){
       $("#savings .balance").html("$" + balance);
       $("#savings .input").css("color", "black");
       if (balance == 0){
-        $("#savings .balance").addClass("zero");
+        zeroDollars("#savings .balance");
       }
     }
   })
+
   var redTextWarning = function (location){
     $(location).css("color", "red");
     $(location).val("INSUFFICIENT FUNDS!");
@@ -68,7 +69,6 @@ $(document).ready(function(){
   }
 
   var currentBalance = function (location){
-
     var displayedBalance = $(location).html();
     var totalBalance = parseFloat(displayedBalance.split("$")[1]);
     console.log("totalBalance: " + totalBalance)
@@ -82,7 +82,17 @@ $(document).ready(function(){
     console.log("userInput: " + userInput);
     return userInput;
   }
-  // var withdraw = function (location, balance, amount,);
+
+  var zeroDollars = function(location){
+    $(location).addClass("zero");
+  }
+
+  // var withdraw = function (balance withdrawAmount){
+  //   balance = balance - withdrawAmount;
+  //   if (balance) == 0{
+  //     zeroDollars();
+  //   }
+  // }
 });
 
 /*
