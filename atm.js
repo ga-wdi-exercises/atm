@@ -72,7 +72,7 @@ function withdrawSomething(e) {
           if (updatedBalance == 0) {
               $checkingBalance.addClass("zero");
             }
-        } else if (($accountInput > $accountBalance) && ($accountInput == ($accountBalance + otherAccountBalance))) {
+        } else if (($accountInput > $accountBalance) && ($accountInput <= $accountBalance + otherAccountBalance)) {
           // if total to withdraw is equal to total in both accounts
           // have current account total = 0
           // subtract remaining amount from other account
@@ -101,7 +101,7 @@ function withdrawSomething(e) {
           if (updatedBalance == 0) {
               $checkingBalance.addClass("zero");
             }
-        } else if (($accountInput > $accountBalance) && ($accountInput == ($accountBalance + otherAccountBalance))) {
+        } else if (($accountInput > $accountBalance) && ($accountInput <= $accountBalance + otherAccountBalance)) {
           $accountInput = parseInt($("#savings .input").val());
           var remainderBalance = $accountBalance - $accountInput;
           var otherBalanceCalc = otherAccountBalance + remainderBalance;
