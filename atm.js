@@ -26,9 +26,17 @@ $(document).ready(function(){
 
   $("#checking .deposit").on("click", function(evt){
     evt.preventDefault();
+    var displayedBalance = $("#checking .balance").html();
+    var totalBalance = parseFloat(displayedBalance.split("$")[1]);
+    console.log(totalBalance);
     var amount = $("#checking .input").val();
-    console.log(amount)
-    $("#checking .balance").html("$" + amount);
+    var floatAmount = parseFloat(amount).toFixed(2);
+    // var balance = parseFloat(floatAmount)
+
+    // var balance = balance + parseFloat(floatAmount);
+    $("#checking .balance").html("$" + floatAmount);
+
+
 
   })
 
