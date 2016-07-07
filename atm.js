@@ -25,8 +25,9 @@ $(document).ready(function(){
   // $("body").css("background", "red");
 
   $("#checking .deposit").on("click", function(evt){
-    console.log("deposit button woooooooo")
-
+    evt.preventDefault();
+    var amount = $("#checking .input").val();
+    console.log(amount)
 
   })
 
