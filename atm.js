@@ -6,10 +6,19 @@
 // - The user cannot withdraw more than the balance of each account ((wishlist: possible //overdraft protection, where if funds are available on either account to cover the full withdrawal of a potential 'overdraft', the needed amount is withdrawn)).
 // - When either account balance reaches 0, red warning color will show in background of text/balance display.
 
-$(document).ready(function(){
 
+//Checking deposit
+$(document).ready(function(){
 console.log("I'm So Ready!");
 
+var deposit = $(".deposit");
+
+deposit.on("click", depositChecking);
+
+function depositChecking() {
+$("input").val();
+console.log(depositChecking);
+}
 
 
 })
