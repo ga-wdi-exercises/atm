@@ -11,14 +11,19 @@
 $(document).ready(function(){
 console.log("I'm So Ready!");
 
-var deposit = $(".deposit");
+$(".deposit").on("click", updatedBalance);
 
-deposit.on("click", depositChecking);
+var depositChecking = parseInt($("#checking .input").val());
+//var floatNum = parseFloat(depositChecking).toFixed(2);
+var balanceTest = parseInt($("#checking .balance").text().split("$")[1]);
+//var test = parseFloat(balanceTest.split("$")[1]);
+var checkingBalance = ("$") + (depositChecking + balanceTest);
 
-function depositChecking() {
-$("input").val();
-console.log(depositChecking);
+function updatedBalance (){
+$(".checking .balance").text(checkingBalance);
 }
+
+console.log(updatedBalance);
 
 
 })
