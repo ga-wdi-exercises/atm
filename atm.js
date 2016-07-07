@@ -12,11 +12,11 @@ $(document).ready(function(){
     moneyValue = parseFloat(moneyValue);
     if (moneyValue >= 0) { //If user entered a non-negative value
       //Get checking balance
-      checkingBalance = $("#checking>div.balance").html().split("$")[1];
+      var checkingBalance = $("#checking>div.balance").html().split("$")[1];
       checkingBalance = parseFloat(checkingBalance);
       //Add user input to balance
       checkingBalance = (checkingBalance + moneyValue).toFixed(2);
-      console.log(checkingBalance, typeof(checkingBalance));
+      //console.log(checkingBalance, typeof(checkingBalance));
       $("#checking>div.balance").html("$" + checkingBalance);
 
       //If checking has a class of zero and balance != 0 remove class zero
@@ -32,12 +32,30 @@ $(document).ready(function(){
     var checkingWDButton = $("#checking>input.withdraw");
     checkingWDButton.on("click", takeFromChecking);
     function takeFromChecking(){
-      console.log("Withdrawl gon happen");
+      //get user input from field
+      var checkingField = $("#checking>input.input")
+      var moneyValue = checkingField.val();
+      moneyValue = parseFloat(moneyValue);
+
+      if (moneyValue >= 0) {
+        //get checking balance
+        var checkingBalance = $("#checking>div.balance").html().split("$")[1];
+        checkingBalance = parseFloat(checkingBalance);
+
+        //if user input is not greater than balance, subtract user input from balance
+        if (moneyValue <= checkingBalance){
+          checkingBalance = (checkingBalance - moneyValue).toFixed(2)
+          $("#checking>div.balance").html("$" + checkingBalance);
+        //If checking does not have a class of 0 and balance == 0 add class zero
+          if($("#checking>div.balance").attr("class").indexOf("zero") == -1 && parseFloat(checkingBalance) == 0) {
+            $("#checking>div.balance").addClass("zero");
+          }
+        }
+      }
+      // clear field
+      checkingField.val("");
     }
 
-      //get user input from field
-      //if user input is not greater than balance, subtract user input from balance
-      //If checking does not have a class of 0 and balance == 0 add class zero
 
 
 
