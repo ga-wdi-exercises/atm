@@ -37,10 +37,25 @@ $("#checking .deposit").on("click", function(e)  {
     console.log(nUserDeposit);
     console.log(nBalanceAmount);
 
-    var totalBalance = nUserDeposit + nBalanceAmount;
-    console.log(totalBalance);
-    $("#checking .balance").html(totalBalance.toFixed(2));
+    $("#checking .balance").html('$'+ (nUserDeposit + nBalanceAmount).toFixed(2));
+
 });
+
+
+$("#checking .withdraw").on("click", function(e)  {
+  e.preventDefault();
+  var userWithdraw = $("#checking .input").val();
+  var balanceAmount = $("#checking .balance").html();
+  var nUserWithdraw = parseFloat(userWithdraw);
+  var nBalanceAmount = parseFloat(balanceAmount.split("$")[1]);
+
+  console.log(nUserWithdraw);
+  console.log(nBalanceAmount);
+
+  $("#checking .balance").html("$" + (nBalanceAmount - nUserWithdraw).toFixed(2));
+
+});
+
 
 $("#savings .deposit").on("click", function(e)  {
   e.preventDefault();
@@ -52,23 +67,23 @@ $("#savings .deposit").on("click", function(e)  {
   console.log(nUserDeposit);
   console.log(nBalanceAmount);
 
-  var totalBalance = nUserDeposit + nBalanceAmount;
-  console.log(totalBalance);
-  $("#savings .balance").html(totalBalance.toFixed(2));
+  $("#savings .balance").html("$" + (nUserDeposit + nBalanceAmount).toFixed(2));
 
 });
 
-$("#checking .withdraw")
+$("#savings .withdraw").on("click", function(e)  {
+  e.preventDefault();
+  var userWithdraw = $("#savings .input").val();
+  var balanceAmount = $("#savings .balance").html();
+  var nUserWithdraw = parseFloat(userWithdraw);
+  var nBalanceAmount = parseFloat(balanceAmount.split("$")[1]);
 
+  console.log(nUserWithdraw);
+  console.log(nBalanceAmount);
 
+  $("#savings .balance").html("$" + (nBalanceAmount - nUserWithdraw).toFixed(2));
 
-  // $('someElement').on('click', function(e){
-  //     // stop the event from bubbling.
-  //     e.stopPropagation();
-  // });
-
-
-
+});
 
 
 
