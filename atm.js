@@ -6,12 +6,16 @@ $(document).ready(function(){
 
     //get user input from field
     var checkingField = $("#checking>input.input")
-    moneyValue = checkingField.val();
-    console.log(moneyValue);
+    var moneyValue = checkingField.val();
+    moneyValue = parseFloat(moneyValue);
     //Get checking balance
     checkingBalance = $("#checking>div.balance").html().split("$")[1];
-    console.log(checkingBalance);
+    checkingBalance = parseFloat(checkingBalance);
     //Add user input to balance
+    checkingBalance = (checkingBalance + moneyValue).toFixed(2);
+    console.log(checkingBalance, typeof(checkingBalance));
+    $("#checking>div.balance").html("$" + checkingBalance);
+
     //If checking has a class of zero and balance != 0 remove class zero
     //clear field
   }
