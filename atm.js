@@ -45,6 +45,9 @@ $("#savings > .deposit").on("click", function(evt){
     var total = $("#savings > .balance").html()
     var numerictotal = parseFloat(total.split("$")[1])
     var actualtotal = parseFloat(floatnewInput) + numerictotal
+    if (actualtotal > 0) {
+      $("#savings > .balance").css("background-color", "#E3E3E3");
+    }
 
     $("#savings > .balance").html("$ " + actualtotal.toFixed(2));
     console.log()
@@ -90,6 +93,9 @@ $("#savings > .withdraw").on("click", function(evt){
     var total = $("#savings > .balance").html()
     var numerictotal = parseFloat(total.split("$")[1])
     var actualtotal = numerictotal - parseFloat(floatnewInput)
+    if (actualtotal < 0) {
+      $("#savings > .balance").css("background-color", "red")
+    }
     $("#savings > .balance").html("$ " + actualtotal.toFixed(2));
     console.log()
     $("#savings > .input").val("")
