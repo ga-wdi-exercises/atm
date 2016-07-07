@@ -113,16 +113,3 @@ $(document).ready(function(){
     }
 });
 
-
-
-// Get user input: text field, button press
-
-// Check for validity: number, non-negative.
-
-// Get current account balances
-
-// Convert balances into number
-
-// Add or subtract transaction from relevant account
-
-// Present new balances
