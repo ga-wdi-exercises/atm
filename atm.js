@@ -19,18 +19,6 @@ $(document).ready(function(){
     });
 
 
-
-
-
-
-
-    // Check for validity: number, non-negative.
-
-    // Convert balances into number
-
-    // Add or subtract transaction from relevant account
-
-    // Present new balances
     function transact (acctClass, signMultiplier) {
         // acctClass specifies the class of the account to be modified. It will already have
         //   a . or # prepended
@@ -56,6 +44,9 @@ $(document).ready(function(){
         // Get the string representing balance and coerce it to float
         var rawAmount = $(acctClass + " .input").val();
         var amount = parseFloat(rawAmount);
+
+        // Clear the fields
+        $(".input").val("");
 
         // Return the amount if we have a number, else return false
         console.log("Within fn getTransactionAmount: amount = "+ amount);
