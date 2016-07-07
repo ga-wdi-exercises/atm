@@ -22,10 +22,10 @@ bank color should be green
 clear specific input field
 */
 $(document).ready(function(){
-  // $("body").css("background", "red");
-
   $("#checking .deposit").on("click", function(evt){
     evt.preventDefault();
+
+    $("#checking .balance.zero").removeClass("zero");
     $("#checking .input").css("color", "black");
     $("#checking .input").select();
     var displayedBalance = $("#checking .balance").html();
@@ -40,6 +40,8 @@ $(document).ready(function(){
 
   $("#checking .withdraw").on("click", function(evt){
     evt.preventDefault();
+
+    $("#checking .balance.zero").removeClass("zero");
     $("#checking .input").select();
     var displayedBalance = $("#checking .balance").html();
     var totalBalance = parseFloat(displayedBalance.split("$")[1]);
@@ -52,19 +54,22 @@ $(document).ready(function(){
       $("#checking .input").css("color", "red");
       $("#checking .input").val("DONT DO IT");
       $("#checking .input").select();
-      // $("checking .input").on("keyup", function(evt){
-      //   evt.preventDefault();
-      //   console.log("key")
-      // })
     }
+
     else{
       $("#checking .balance").html("$" + balance);
       $("#checking .input").css("color", "black");
+      if (balance == 0){
+        $("#checking .balance").addClass("zero");
+      }
+
     }
   })
 
   $("#savings .deposit").on("click", function(evt){
     evt.preventDefault();
+
+    $("#savings .balance.zero").removeClass("zero");
     $("#savings .input").css("color", "black");
     $("#savings .input").select();
     var displayedBalance = $("#savings .balance").html();
@@ -91,14 +96,14 @@ $(document).ready(function(){
       $("#savings .input").css("color", "red");
       $("#savings .input").val("DONT DO IT");
       $("#savings .input").select();
-      // $("checking .input").on("keyup", function(evt){
-      //   evt.preventDefault();
-      //   console.log("key")
-      // })
     }
+
     else{
       $("#savings .balance").html("$" + balance);
       $("#savings .input").css("color", "black");
+      if (balance == 0){
+        $("#savings .balance").addClass("zero");
+      }
     }
   });
 });
