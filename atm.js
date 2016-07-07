@@ -16,7 +16,7 @@ $(document).ready(function(){
       checkingBalance = parseFloat(checkingBalance);
       //Add user input to balance
       checkingBalance = (checkingBalance + moneyValue).toFixed(2);
-      //console.log(checkingBalance, typeof(checkingBalance));
+
       $("#checking>div.balance").html("$" + checkingBalance);
 
       //If checking has a class of zero and balance != 0 remove class zero
@@ -56,8 +56,58 @@ $(document).ready(function(){
       checkingField.val("");
     }
 
+    //listen for click event on savings account deposit button
+    var savingsDepButton = $("#savings>input.deposit");
+    savingsDepButton.on("click", addToSavings);
+    function addToSavings(){
+
+      //get user input from field
+      var savingsField = $("#savings>input.input")
+      var moneyValue = savingsField.val();
+      moneyValue = parseFloat(moneyValue);
+
+      if (moneyValue >= 0) { //If user entered a non-negative value
+        //Get savings balance
+        var savingsBalance = $("#savings>div.balance").html().split("$")[1];
+        savingsBalance = parseFloat(savingsBalance);
+        //Add user input to balance
+        savingsBalance = (savingsBalance + moneyValue).toFixed(2);
+        $("#savings>div.balance").html("$" + savingsBalance);
+
+        //If savings has a class of zero and balance != 0 remove class zero
+        if($("#savings>div.balance").attr("class").indexOf("zero") > -1 && parseFloat(savingsBalance) > 0) {
+          $("#savings>div.balance").removeClass("zero");
+        }
+      }
+      //clear field
+      savingsField.val("");
+    }
 
 
+    //listen for click even on savings account withdrawl button
+    var savingsWDButton = $("#savings>input.withdraw");
+    savingsWDButton.on("click", takeFromSavings);
+    function takeFromSavings(){
+      //get user input from field
+      var savingsField = $("#savings>input.input")
+      var moneyValue = savingsField.val();
+      moneyValue = parseFloat(moneyValue);
+      if (moneyValue >= 0) { //If user entered a non-negative value
+        //get savings balance
+        var savingsBalance = $("#savings>div.balance").html().split("$")[1];
+        savingsBalance = parseFloat(savingsBalance);
 
-
+        //if user input is not greater than balance, subtract user input from balance
+        if (moneyValue <= savingsBalance){
+          savingsBalance = (savingsBalance - moneyValue).toFixed(2)
+          $("#savings>div.balance").html("$" + savingsBalance);
+          //If checking does not have a class of 0 and balance == 0 add class zero
+          if($("#savings>div.balance").attr("class").indexOf("zero") == -1 && parseFloat(savingsBalance) == 0) {
+            $("#savings>div.balance").addClass("zero");
+          }
+        }
+      }
+      //clear field
+      savingsField.val("");
+    }
 });
