@@ -8,6 +8,10 @@ body {
   width: 700px;
 }
 
+.smallText {
+  font-size: 18.5px;
+}
+
 .header {
   margin: 50px 0px;
 }
