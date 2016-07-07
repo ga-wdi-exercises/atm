@@ -37,7 +37,7 @@ $(document).ready(function(){
       $("#checking").removeClass("zero")
     };
   });
-  console.log("hekeleele")
+  
 
   var savingsInput = $("#savings > .input");
   var savingsBalance = $("#savings > .balance");
