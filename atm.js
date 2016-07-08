@@ -22,7 +22,7 @@ $(document).ready(function(){
 
   //Test jQuery is working
   //Make the <body>'s background color turn red
-  $("body").css("background", "red");
+//  $("body").css("background", "red");
 
   //Add a click listener to the checking account's "Deposit" button
   $(".deposit:first").on("click", function(evt) {
@@ -66,47 +66,84 @@ $(document).ready(function(){
     var actualWithdrawTotal = (checkingBalance - parseFloat(inputAmount)).toFixed(2)
     console.log(actualWithdrawTotal)
 
-    if(parseFloat(actualWithdrawTotal) > 0){
+    // If new balance is nonnegative, then display balance
+    if(parseFloat(actualWithdrawTotal) >= 0){
       $("#checking > .balance").html("$" + actualWithdrawTotal);
-
-      //don't update the total if negative balance
+    // else don't update the total; the balance is negative
     }else {
       alert("insufficient funds")
     }
-    //going in to html and changing the first balance field
-    // we're taking the two values and updating the balance value
-    //and changing it to a number
-    console.log(checkingBalance)
+
+    console.log("Checking balance " + checkingBalance)
     console.log(inputAmount)
-    $(".balance:first").html("$" + (parseFloat(checkingBalance) - parseFloat(inputAmount)).toFixed(2));
+    // Update balance with checking balance - input amt
+    //$(".balance:first").html("$" + (parseFloat(checkingBalance) - parseFloat(inputAmount)).toFixed(2));
 
     console.log("I'm working");
+    // Clears the input box
+    $("#checking >.input").val("")
 
   });
 
 
   /////////SAVINGS DEPOSIT
-  //Add a click listener to the checking account's "Deposit" button
+  //Add a click listener to the saving account's "Deposit" button
   $("#savings .deposit").on("click", function(evt) {
     evt.preventDefault();
     //get input amount and giving it 2 decimal places
 
-    var inputAmount = $(".input:first").val();
+    var inputAmountSavings = $("#savings .input").val();
     //this is a string
-    var inputAmount = parseFloat(inputAmount).toFixed(2)
+    var inputAmountSavings = parseFloat(inputAmountSavings).toFixed(2)
     //this is a number
     //going into the html to grab a value and changing it to number
-    var checkingBalance = parseFloat($("#checking .balance").html().split('$')[1]);
+    var savingsBalance = parseFloat($("#savings .balance").html().split('$')[1]);
     //going in to html and changing the first balance field
     // we're taking the two values and updating the balance value
     //and changing it to a number
-    $(".balance:first").html("$" + (parseFloat(checkingBalance) + parseFloat(inputAmount)).toFixed(2));
+    $("#savings .balance").html("$" + (parseFloat(savingsBalance) + parseFloat(inputAmountSavings)).toFixed(2));
 
     console.log("savings I'm working");
 
-    $("#checking >.input").val("")
+    $("#checkin >.input").val("")
   });
   ///////////
+//SAVINGS WITHDRAW
+//Add a click listener to the checking account's "Withdraw" button
+$("#savings .withdraw").on("click", function(evt) {
+  evt.preventDefault();
+  //get input amount and giving it 2 decimal places
+
+  var inputAmount = $(".input:first").val();
+  //this is a string
+  //var inputAmount = parseFloat(inputAmount)
+  //this is a number
+  //going into the html to grab a value and changing it to number
+  var checkingBalance = parseFloat($("#checking .balance").html().split('$')[1]);
+  var actualWithdrawTotal = (checkingBalance - parseFloat(inputAmount)).toFixed(2)
+  console.log(actualWithdrawTotal)
+
+  if(parseFloat(actualWithdrawTotal) > 0){
+    $("#checking > .balance").html("$" + actualWithdrawTotal);
+
+    //don't update the total if negative balance
+  }else {
+    alert("insufficient funds")
+  }
+  //going in to html and changing the first balance field
+  // we're taking the two values and updating the balance value
+  //and changing it to a number
+  console.log(checkingBalance)
+  console.log(inputAmount)
+  $(".balance:first").html("$" + (parseFloat(checkingBalance) - parseFloat(inputAmount)).toFixed(2));
+
+  console.log("I'm working");
+
+});
+
+
+
+
   //When you click the button it should console.log("hello")
   // On clicking "Deposit", it should get the user input
   //Just console.log it
