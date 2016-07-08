@@ -1,3 +1,115 @@
 $(document).ready(function(){
-// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
+    console.log("JS Connected");
+    // Get user input: text field, button press
+    $('#checking .deposit').click( function () {
+        transact('#checking', 1);
+
+    });
+
+    $('#checking .withdraw').click( function () {
+        transact('#checking', -1);
+    });
+
+    $('#savings .deposit').click( function () {
+        transact('#savings', 1);
+    });
+
+    $('#savings .withdraw').click( function () {
+        transact('#savings', -1);
+    });
+
+
+    function transact (acctClass, signMultiplier) {
+        // acctClass specifies the class of the account to be modified. It will already have
+        //   a . or # prepended
+        // signMultiplier shall be 1 or -1, to adjust for deposit and withdrawal
+
+        // Get the amount of the transaction
+        var amount = getTransactionAmount(acctClass);
+        if (amount == false) {
+            // Input is not valid
+            return 0;
+        }
+
+        // If the input is valid, adjust the balance
+        amount *= signMultiplier;
+        console.log("Within fn transact: amount = "+ amount);
+        adjustBalance(acctClass, amount);
+    }
+    
+    function getTransactionAmount(acctClass) {
+        // acctClass specifies the class of the account to be modified. It will already have
+        //   a . or # prepended
+
+        // Get the string representing balance and coerce it to float
+        var rawAmount = $(acctClass + " .input").val();
+        var amount = parseFloat(rawAmount);
+
+        // Clear the fields
+        $(".input").val("");
+
+        // Return the amount if we have a number, else return false
+        console.log("Within fn getTransactionAmount: amount = "+ amount);
+        if (isNaN(amount) == false) {
+            return amount;
+        } else {
+            return false;
+        }
+    }
+
+    function getAccountBalance(acctClass) {
+        // acctClass specifies the class of the account to be modified. It will already have
+        //   a . or # prepended
+
+        var rawBalance = $(acctClass + ' .balance').html();
+        var balance = parseFloat(rawBalance.split('$')[1]);
+        console.log(balance);
+        return balance;
+    }
+
+    function checkZeroBalance(acctClass) {
+        // acctClass specifies the class of the account to be modified. It will already have
+        //   a . or # prepended
+        var balance = getAccountBalance(acctClass);
+
+        // If the balance is zero, give the div the .zero class
+        if (balance > 0) {
+            $(acctClass).attr('class', 'account');
+        } else {
+            $(acctClass).attr('class', 'account zero');
+        }
+
+    }
+
+    function adjustBalance(acctClass, amount) {
+        // acctClass specifies the class of the account to be modified. It will already have
+        //   a . or # prepended
+        // amount will be a float, positive or negative depending on transaction type
+
+        // Get current account balance
+        var balance = getAccountBalance(acctClass);
+        // Get the new balance
+        balance += amount;
+
+        // If the new balance is non-negative, allow it to post;
+        if ( balance >= 0) {
+            $(acctClass + ' .balance').html("$" + balance.toFixed(2));
+
+        // Else, if the negative balance has a lower or equal magnitude to the savings account balance
+        } else if (acctClass == '#checking' && (balance * -1) <= getAccountBalance('#savings') ) {
+            console.log("Using overdraft protection.");
+            var savingsBalance = getAccountBalance('#savings') + balance // balance must be negative to get here
+            console.log(savingsBalance);
+            // Update the checking acct balance
+            $(acctClass + ' .balance').html("$0.00");
+            // Update the savings account balance
+            $('#savings .balance').html("$" + savingsBalance.toFixed(2));
+        } else {
+            alert("Insufficient balances to process this transaction!");
+        }
+
+        checkZeroBalance(acctClass);
+        checkZeroBalance('#savings');
+    }
 });
+
