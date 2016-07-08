@@ -47,6 +47,8 @@ console.log('test');
 		event.preventDefault();
 		var checkBalance = parseFloat($('#checking > .balance').html().split('$')[1]);
 		var withdrawAmount = parseFloat($('#checking > .input').val());
+// if you try and take out more than you have let them know and then
+// find the difference 
 		if (checkBalance >= withdrawAmount) {
 			checkBalance -= withdrawAmount;
 		 $('#checking > .balance').html('$' + checkBalance); 
@@ -68,6 +70,7 @@ console.log('test');
 				
 		 $('#checking > .input').val('');
 		 };
+// change background color for empty or not empty amount of money
 		if (checkBalance === 0) {
 			$('#checking > .balance').css('background', 'red');
 			} else {
@@ -75,7 +78,10 @@ console.log('test');
 			};
 		 });
 // SAVINGS 
+// make balance background red when amount is zero
 	$('.balance').css('background', 'red');
+// When depostie button is clicked in savings put the amount into
+// savings
 	$('#savings > .deposit').on('click', function() {
 		event.preventDefault();
 		var checkBalance = parseFloat($('#savings > .balance').html().split('$')[1]);
@@ -83,16 +89,22 @@ console.log('test');
 		var newCheckBalance = parseFloat(checkBalance) + parseFloat(depostieBlance);
 		 $('#savings > .balance').html('$' + newCheckBalance); 
 		$('#savings > .input').val('');
+// setting background color to green if you have money or back to red if
+// you run out
 		if (newCheckBalance === 0) {
 			$('#savings > .balance').css('background', 'red');
 			} else {
 			$('#savings > .balance').css('background', 'green');
 			};
 		});
+// when the withdraw button is clicked take the money of of the savings
+// account
 	$('#savings > .withdraw').on('click', function() {
+	  someCalled(argument)
 		event.preventDefault();
 		var checkBalance = parseFloat($('#savings > .balance').html().split('$')[1]);
 		var withdrawAmount = parseFloat($('#savings > .input').val());
+// if you try and take out more then you have alert them and don't do it
 		if (checkBalance >= withdrawAmount) {
 			checkBalance -= withdrawAmount;
 		 $('#savings > .balance').html('$' + checkBalance); 
