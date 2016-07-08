@@ -114,17 +114,19 @@ $("#savings .withdraw").on("click", function(evt) {
   evt.preventDefault();
   //get input amount and giving it 2 decimal places
 
-  var inputAmount = $(".input:first").val();
+  var inputAmountSavings = $("#savings .input").val();
   //this is a string
   //var inputAmount = parseFloat(inputAmount)
   //this is a number
   //going into the html to grab a value and changing it to number
-  var checkingBalance = parseFloat($("#checking .balance").html().split('$')[1]);
-  var actualWithdrawTotal = (checkingBalance - parseFloat(inputAmount)).toFixed(2)
-  console.log(actualWithdrawTotal)
+  var savingsBalance = parseFloat($("#savings .balance").html().split('$')[1]);
+  console.log("Savings Balance type " + typeof(savingsBalance));
+  var actualWithdrawTotal = (parseFloat(savingsBalance) - parseFloat(inputAmountSavings));
 
-  if(parseFloat(actualWithdrawTotal) > 0){
-    $("#checking > .balance").html("$" + actualWithdrawTotal);
+  console.log("Final actualWithdrawTotal" + actualWithdrawTotal)
+
+  if(parseFloat(actualWithdrawTotal) >= 0){
+    $("#savings > .balance").html("$" + actualWithdrawTotal);
 
     //don't update the total if negative balance
   }else {
@@ -133,12 +135,8 @@ $("#savings .withdraw").on("click", function(evt) {
   //going in to html and changing the first balance field
   // we're taking the two values and updating the balance value
   //and changing it to a number
-  console.log(checkingBalance)
-  console.log(inputAmount)
-  $(".balance:first").html("$" + (parseFloat(checkingBalance) - parseFloat(inputAmount)).toFixed(2));
 
-  console.log("I'm working");
-
+    $("#checkin >.input").val("")
 });
 
 
