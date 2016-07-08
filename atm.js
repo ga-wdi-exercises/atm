@@ -3,22 +3,23 @@ $(document).ready(function(){
 
   console.log("Working");
 
-  //Create deposit functionalitiy for id= "checking"
 
 
   //Turn inputs into integers
-  //listen to click and then add to balance, eventListeners)
-  //add inputs total balance
+  //listen to click and then add to balance
+  //add inputs to total balance
   //Make sure that the inputs are added to eachother under the hood
   //if positive change background color to green( focus on negative)
   //clear input field
 
-  //Create variables to call on checkingAccount, account balance, user input, checking add, and checking subtract)
+  //Create variables to call on savingsAccount, account balance, user input, checking add, and checking subtract)
 
   var savingBalance = $("#savings .balance").html();
   var savingInput = $("#savings .input");
   var savingAdd = $("#savings .deposit");
   var savingSubtract = $("#savings .withdraw");
+
+  //Create variables to call on checkingAccount, account balance, user input, checking add, and checking subtract)
 
 
   var checkingBalance = $("#checking .balance").html();
@@ -26,14 +27,14 @@ $(document).ready(function(){
   var checkingAdd = $("#checking .deposit");
   var checkingSubtract =  $("#checking .withdraw");
 
-
+//on click button events for checkingAccount
   checkingAdd.on("click", checkingDeposit)
   checkingSubtract.on("click", checkingWithdraw)
-
+//on click button events for savingsAccount
   savingAdd.on("click", savingDeposit)
   savingSubtract.on("click", savingWithdraw)
 
-
+//function to get current checking balance
     function getCheckingBalance () {
       // checkingBalance refers to displayed value of checking account
       // e.g., '$0', as a string
@@ -46,7 +47,7 @@ $(document).ready(function(){
       checkingBalance = parseFloat(checkingBalance);
       return checkingBalance;
     }
-
+//function to get current savings balance
     function getSavingBalance () {
       // savingBalance refers to displayed value of checking account
       // e.g., '$0', as a string
@@ -59,7 +60,7 @@ $(document).ready(function(){
       savingBalance = parseFloat(savingBalance);
       return savingBalance;
     }
-
+//function to create checking withdraw
     function checkingWithdraw () {
       var balance = getCheckingBalance();
       var withdrawInput = getCheckingInput();
@@ -74,63 +75,70 @@ $(document).ready(function(){
       }
 
     }
-
+//function to create saving withdraw
     function savingWithdraw () {
       var balance = getSavingBalance();
       var withdrawInput = getSavingInput();
       var total = balance - withdrawInput;
       displaySavingTotal(total);
       $("#savings .input").val("")
+    //color functionality
       if (parseInt(total) < 1) {
         $("#savings").addClass("zero")
       } else {
         $("#savings").removeClass("zero")
       }
     }
-
+//function to create checking deposits
     function checkingDeposit () {
       var balance = getCheckingBalance();
       var depositInput = getCheckingInput();
       var ctotal = balance + depositInput;
       displayCheckingTotal(ctotal)
       $("#checking .input").val("")
+      //color functionality
       if (parseInt(ctotal) < 1) {
         $("#checking").addClass("zero")
       } else {
         $("#checking").removeClass("zero")
       }
     }
-
+//function to create saving deposits
     function savingDeposit () {
       var balance = getSavingBalance();
       var depositInput = getSavingInput();
       var total = balance + depositInput;
       displaySavingTotal(total)
       $("#savings .input").val("")
+      //color functionality
       if (parseInt(total) < 1) {
         $("#savings").addClass("zero")
       } else {
         $("#savings").removeClass("zero")
       }
     }
-
+//function to display the checking total
     function displayCheckingTotal (ctotal) {
+      //adds $ plus the new ctotal - $0.00
       var stringTotal = "$" + ctotal.toFixed(2);
       $("#checking .balance").html(stringTotal);
     }
-
+//function to display the savings total
     function displaySavingTotal (total) {
+      //adds $ plus the new total - $0.00
       var stringTotal = "$" + total.toFixed(2);
       $("#savings .balance").html(stringTotal);
     }
-
+//function to get checking input
     function getCheckingInput () {
+      //variable calls on input box and listens for user value
       var checkingInput = $("#checking .input").val();
       checkingInput = parseFloat(checkingInput);
       return checkingInput;
     }
-
+//function to get saving input
     function getSavingInput () {
+      //variable calls on input box and listens for the user value
       var savingInput = $("#savings .input").val();
       savingInput = parseFloat(savingInput);
       return savingInput;
