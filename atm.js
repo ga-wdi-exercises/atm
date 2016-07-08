@@ -27,7 +27,6 @@ $(document).ready(function(){
   var checkingSubtract =  $("#checking .withdraw");
 
 
-
   checkingAdd.on("click", checkingDeposit)
   checkingSubtract.on("click", checkingWithdraw)
 
@@ -48,7 +47,6 @@ $(document).ready(function(){
       return checkingBalance;
     }
 
-
     function getSavingBalance () {
       // savingBalance refers to displayed value of checking account
       // e.g., '$0', as a string
@@ -65,11 +63,11 @@ $(document).ready(function(){
     function checkingWithdraw () {
       var balance = getCheckingBalance();
       var withdrawInput = getCheckingInput();
-      var total = balance - withdrawInput;
-      displayCheckingTotal(total);
+      var ctotal = balance - withdrawInput;
+      displayCheckingTotal(ctotal);
       $("#checking .input").val("")
-      console.log(parseInt(total));
-      if (parseInt(total) < 1) {
+      console.log(parseInt(ctotal));
+      if (parseInt(ctotal) < 1) {
         $("#checking").addClass("zero")
       } else {
         $("#checking").removeClass("zero")
@@ -84,20 +82,23 @@ $(document).ready(function(){
       displaySavingTotal(total);
       $("#savings .input").val("")
       if (parseInt(total) < 1) {
-        $("#checking").addClass("zero")
+        $("#savings").addClass("zero")
       } else {
-        $("#checking").removeClass("zero")
+        $("#savings").removeClass("zero")
       }
     }
-
-
 
     function checkingDeposit () {
       var balance = getCheckingBalance();
       var depositInput = getCheckingInput();
-      var total = balance + depositInput;
-      displayCheckingTotal(total)
+      var ctotal = balance + depositInput;
+      displayCheckingTotal(ctotal)
       $("#checking .input").val("")
+      if (parseInt(ctotal) < 1) {
+        $("#checking").addClass("zero")
+      } else {
+        $("#checking").removeClass("zero")
+      }
     }
 
     function savingDeposit () {
@@ -106,11 +107,15 @@ $(document).ready(function(){
       var total = balance + depositInput;
       displaySavingTotal(total)
       $("#savings .input").val("")
+      if (parseInt(total) < 1) {
+        $("#savings").addClass("zero")
+      } else {
+        $("#savings").removeClass("zero")
+      }
     }
 
-
-    function displayCheckingTotal (total) {
-      var stringTotal = "$" + total.toFixed(2);
+    function displayCheckingTotal (ctotal) {
+      var stringTotal = "$" + ctotal.toFixed(2);
       $("#checking .balance").html(stringTotal);
     }
 
