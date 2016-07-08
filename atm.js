@@ -10,6 +10,7 @@
 
 $(document).ready(function(){
   console.log("I'm So Ready!");
+  $(".balance").addClass("zero");
   //Checking
   //click listener for function to add user input>
   $("#checking .deposit").on("click", updatedCheckingDeposit);
@@ -29,6 +30,9 @@ $(document).ready(function(){
     $("#checking .balance").html(checkingBalance);
     console.log(checkingBalance);
     $("#checking .input").val("");
+    if (balanceTest2 > 0) {
+      $("#checking .balance").removeClass("zero");
+    }
   }
   //click listener for function to add user input>
   $("#checking .withdraw").on("click", updatedWithdrawal);
@@ -54,8 +58,8 @@ $(document).ready(function(){
     else {
       $("account .balance").html(("$") + (balanceTest2).toFixed(2))
     }
-//savings
   }
+  //savings
   //click listener for function to add user input>
   $("#savings .deposit").on("click", updatedSavingsDeposit);
   //function for savings deposit
@@ -74,8 +78,10 @@ $(document).ready(function(){
     $("#savings .balance").html(savingsBalance);
     console.log(savingsBalance);
     $("#savings .input").val("");
+    if (balanceTest2 > 0) {
+      $("#savings .balance").removeClass("zero");
+    }
   }
-
   //click listener for function to add user input>
   $("#savings .withdraw").on("click", updatedWithdrawal);
   //function for savings withdrawal
@@ -94,7 +100,7 @@ $(document).ready(function(){
     //$("#savings .balance").html(savingsBalance);
     //console.log(savingsBalance);
     $("#savings .input").val("");
-
+    //doesn't allow withdrawal of more than balance
     if (balanceTest2 < 0) {
       alert ("whoa");
     }
@@ -102,5 +108,4 @@ $(document).ready(function(){
       $("account .balance").html(("$") + (balanceTest2).toFixed(2))
     }
   }
-
 })
