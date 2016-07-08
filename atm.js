@@ -119,3 +119,17 @@ $(document).ready(function(){
     }
   });
 });
+
+//*******************CORRECTIONS THAT NEED TO BE MADE*******************//
+//1. if then statement for the change in color needs to be fixed on positive accounts
+//2. place entire work flow into 1 function to call on variables in both checking and savings
+//3. use named variables in both functions to refactor code
+//4. create overfraft function() if then
+//5. if withdrawFromChecking.UserInput > current balance.checking:
+//6. then {
+//          Alert ("How much would you like to come out of checking?");
+//          var takefromchecking = UserInputNumber;
+//          var difference = UserInput - UserInputNumber;
+//          savings = savings.currentTotal - difference;
+//          checking = checking.currentTotal - UserInputNumber
+//        }
