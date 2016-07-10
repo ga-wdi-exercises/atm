@@ -47,10 +47,10 @@ $(document).ready(function(){
     var holdThis = $(this);
     accountType = holdThis.parents().eq(0).attr("id");
     if (accountType == 'checking') {
-      requestAmount = $('#checking .input').val();
+      requestAmount = Math.round(parseFloat($('#checking .input').val()) * 100) / 100;
     }
     if (accountType == 'savings') {
-      requestAmount = $('#savings .input').val();
+      requestAmount = Math.round(parseFloat($('#savings .input').val()) * 100) / 100;
     }
     checkTransactionType(this);
   }
