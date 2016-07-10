@@ -1,10 +1,8 @@
-<!doctype html>
 <html>
   <head>
     <title>ATM</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="atm.css">
-    <script src="atm.js"></script>
   </head>
   <body>
     <div class="header">
@@ -12,20 +10,24 @@
       <div class="title">Bank of GA</div>
     </div>
 
-    <div id="checking" class="account">
+    <div class="account">
       <h2>Checking</h2>
-      <div class="balance">$0</div>
-      <input class="input" type="text" placeholder="enter an amount" />
-      <input class="deposit" type="button" value="Deposit" />
-      <input class="withdraw" type="button" value="Withdraw" />
+      <div id="checkingBalance" class="balance">$0</div>
+      <input class="transactionAmount" type="text" placeholder="enter an amount" />
+      <input id="checkingDepositButton" class="depositButton" type="button" value="Deposit" />
+      <input id="checkingWithdrawButton" class="withdrawButton" type="button" value="Withdraw" />
+      <input id="checkingWithdrawLastAmount" class="withdrawLastButton" type="button" value="Withdraw Last Dollar Amount" />
     </div>
 
-    <div id="savings" class="account">
+    <div class="account">
       <h2>Savings</h2>
-      <div class="balance">$0</div>
-      <input class="input" type="text" placeholder="enter an amount" />
-      <input class="deposit" type="button" value="Deposit" />
-      <input class="withdraw" type="button" value="Withdraw" />
+      <div id="savingsBalance" class="balance">$0</div>
+      <input class="transactionAmount" type="text" placeholder="enter an amount" />
+      <input id="savingsDepositButton" class="depositButton" type="button" value="Deposit" />
+      <input id="savingsWithdrawButton" class="withdrawButton" type="button" value="Withdraw"/>
+      <input class="withdrawLastButton" type="button" value="Withdraw Last Dollar Amount" />
     </div>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+    <script src="atm2.js"></script>
   </body>
 </html>
