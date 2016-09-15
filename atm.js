@@ -1,16 +1,31 @@
-//withdrawing money
-  // get user amount
-  var $depChecking = $('#checking > .deposit');
-  var $inputChecking = $('#checking > .input');
+// setting up some global variables
+var checkingBalance = 0;
+var $checkingBalance = $('#checking .balance');
+var savingsBalance = 0;
+var $savingsBalance = $('#savings .balance');
 
-  $depChecking.on('click', function(){
-    var deposit = parseInt($inputChecking.val());
-    console.log("Deposit clicked. Value = " + deposit);
-  })
-  // if amount > amount in bank,
-    // throw error
-  // else subtract amount from account
+var $depChecking = $('#checking > .deposit');
+var $inputChecking = $('#checking > .input');
 
-//adding money
-  // get user amount
-  // account balance += amount
+
+$depChecking.on('click', function(){
+  var deposit = parseInt($inputChecking.val());
+  checkingBalance += "deposit";
+
+  console.log("Deposit clicked. Value = " + deposit);
+})
+
+
+function deposit(account, amount) {
+  if (account == "checking") {
+    checkingBalance += amount;
+    $checkingBalance.html('$' + checkingBalance);
+    return checkingBalance;
+  } else if (account == "savings") {
+    savingsBalance += amount;
+    $savingsBalance.html('$' + savingsBalance);
+    return savingsBalance;
+  } else {
+    throw("Something went wrong with the deposit function. Arguments: " + account + ' ' + amount);
+  }
+}
