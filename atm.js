@@ -1,4 +1,9 @@
-// setting up some global variables
+//To Do:
+  // refactor deposit/withdraw functions so I don't need both if statements
+  // combine deposit and withdraw functions? 
+  // add a validator
+  // overdraft protection
+
 var checkingBalance = 0;
 var $checkingBalance = $('#checking .balance');
 var savingsBalance = 0;
