@@ -1,7 +1,7 @@
 //TODO:
-  // combine deposit and withdraw functions?
-  // add a validator
-  // overdraft protection
+  // [ ] combine event listeners
+  // [ ] add a validator
+  // [ ] overdraft protection
 
 var bank = {
   checkingBalance: 0,
@@ -11,40 +11,28 @@ var bank = {
 var $checkingBalance = $('#checking .balance');
 var $savingsBalance = $('#savings .balance');
 
-var $checkingInput = $('#checking > .input');
-var $checkingDeposit = $('#checking > .deposit');
-var $checkingWithdraw = $('#checking > .withdraw');
+var $depositButtons = $('.deposit');
+var $withdrawButtons = $('.withdraw');
 
-var $savingsInput = $('#savings .input');
-var $savingsDeposit = $('#savings > .deposit');
-var $savingsWithdraw = $('#savings > .withdraw');
-
-
-
-$checkingDeposit.on('click', function(){
-  var amount = parseInt($checkingInput.val());
-  deposit("checkingBalance", $checkingBalance, amount);
-  $checkingInput.val('');
+$depositButtons.on('click', function(){
+  var amount = parseInt($(this).siblings('.input').val());
+  if ($(this).parent().is("#checking")) {
+    deposit("checkingBalance", $checkingBalance, amount);
+  } else {
+    deposit("savingsBalance", $savingsBalance, amount);
+  }
 })
 
-$savingsDeposit.on('click', function(){
-  var amount = parseInt($savingsInput.val());
-  deposit("savingsBalance", $savingsBalance, amount);
-  $savingsInput.val('');
+$withdrawButtons.on('click', function(){
+  var amount = parseInt($(this).siblings('.input').val());
+  if ($(this).parent().is("#checking")) {
+    withdraw("checkingBalance", $checkingBalance, amount);
+  } else {
+    withdraw("savingsBalance", $savingsBalance, amount);
+  }
 })
 
-$checkingWithdraw.on('click', function(){
-  var amount = parseInt($checkingInput.val());
-  withdraw("checkingBalance", $checkingBalance, amount);
-  $checkingInput.val('');
-})
-
-$savingsWithdraw.on('click', function(){
-  var amount = parseInt($savingsInput.val());
-  withdraw("savingsBalance", $savingsBalance, amount);
-  $savingsInput.val('');
-})
-
+//DEPOSIT and WITHDRAW functions
 function deposit(account, display, amount) {
   bank[account] += amount;
   display.html('$' + bank[account]);
