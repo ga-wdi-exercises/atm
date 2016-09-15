@@ -1,0 +1,46 @@
+Define variables in order to differentiate between checking and saving
+
+DEPOSIT
+Presented with total Amount
+var totalAmount_Dep = 0
+**color is red update in the CSS for now. Maybe check for js method later
+
+Deposit money
+button click on .deposit adds to total field
+totalAmount = depValue + totalAmount
+
+parseInt()
+
+send alert (adding depValue to existing balance of toalAmount for a new total of totalAmount)
+
+withdraw money
+**if withdrawValue > totalAmount_Dep then throw alert and ignore trnssaction
+
+else
+
+button click on .withdraw adds to total field
+totalAmount = withddrawValue + totalAmount
+
+alert (withdrawing withdrawValue from existing balance of toalAmount for a new total of totalAmount)
+
+
+
+Enter the amount you would like to deposit/withdraw
+Amount is pulled from the box.
+Function also updates totalAmounts
+
+Confirm transaction
+Amounts updated and presented
+
+
+OTHER FEATURES
+accounts change color when hit zero
+
+@media screen and (max-width: 620px){
+  main{
+    flex-direction: column;
+    order: 3;
+  }
+
+
+account cannot be less than zero
