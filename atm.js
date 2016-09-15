@@ -1,27 +1,38 @@
-var checkingBalance = $('#checking').children().eq(1)
-var checkingInput = $('#checking').children().eq(2)
-var checkingDepositButton = $('#checking').children().eq(3)
-var checkingWithdrawButton = $('#checking').children().eq(4)
+var checking = {
+  Balance: $('#checking').children().eq(1),
+  Input: $('#checking').children().eq(2),
+  DepositButton: $('#checking').children().eq(3),
+  WithdrawButton: $('#checking').children().eq(4)
+}
 
-var savingBalance = $('#savings').children().eq(1)
-var savingInput = $('#savings').children().eq(2)
-var savingDepositButton = $('#savings').children().eq(3)
-var savingWithdrawButton = $('#savings').children().eq(4)
+var saving = {
+  Balance: $('#savings').children().eq(1),
+  Input: $('#savings').children().eq(2),
+  DepositButton: $('#savings').children().eq(3),
+  WithdrawButton: $('#savings').children().eq(4)
+}
 
-var convertedNumber = checkingBalance.text().replace("$", "");
+var convertedNumber = checking.Balance.text().replace("$", "");
 var totalCheckingValue = parseInt(convertedNumber);
 
 
-function depositChecking() {
-  var userDepositChecking = parseInt(checkingInput.val())
+function depositChecking() {  //Deposit Button
+  var userDepositChecking = parseInt(checking.Input.val())
   totalCheckingValue = totalCheckingValue + userDepositChecking
-  checkingBalance.text("$" + totalCheckingValue)
-  // $('.balance').text(userDepositChecking)
+  checking.Balance.text("$" + totalCheckingValue)
 }
+checking.DepositButton.on("click",depositChecking);
 
-$('.deposit').on("click",depositChecking);
+function withdrawChecking() {  //Deposit Button
+  var userWithdrawChecking = parseInt(checking.Input.val())
+  totalCheckingValue = totalCheckingValue - userWithdrawChecking
+  checking.Balance.text("$" + totalCheckingValue)
+}
+checking.WithdrawButton.on("click",withdrawChecking);
 
-//change
+
+
+
 
 
 
