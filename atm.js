@@ -18,5 +18,10 @@ var balance = 0;
       console.log(balance);
       $("#checking .balance").text(balance);
   })
-  
+  //On "Withdraw", it updates the balance
+  $(".withdraw").on("click", function() {
+    balance = balance - eval($('input.input').val());
+    console.log(balance);
+    $("#checking .balance").text(balance);
+  })
 // });
