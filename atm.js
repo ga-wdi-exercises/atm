@@ -4,16 +4,28 @@ var $checkingBalance = $('#checking .balance');
 var savingsBalance = 0;
 var $savingsBalance = $('#savings .balance');
 
-var $depChecking = $('#checking > .deposit');
-var $inputChecking = $('#checking > .input');
+var $checkingDeposit = $('#checking > .deposit');
+var $checkingInput = $('#checking > .input');
+
+var $savingsDeposit = $('#savings > .deposit');
+var $savingsInput = $('#savings .input');
 
 
-$depChecking.on('click', function(){
-  var deposit = parseInt($inputChecking.val());
-  checkingBalance += "deposit";
-
-  console.log("Deposit clicked. Value = " + deposit);
+$checkingDeposit.on('click', function(){
+  var amount = parseInt($checkingInput.val());
+  deposit('checking', amount);
+  $checkingInput.val('');
 })
+
+$savingsDeposit.on('click', function(){
+  var amount = parseInt($savingsInput.val());
+  deposit('savings', amount);
+  $savingsInput.val('');
+})
+
+
+
+
 
 
 function deposit(account, amount) {
@@ -24,6 +36,7 @@ function deposit(account, amount) {
   } else if (account == "savings") {
     savingsBalance += amount;
     $savingsBalance.html('$' + savingsBalance);
+    $
     return savingsBalance;
   } else {
     throw("Something went wrong with the deposit function. Arguments: " + account + ' ' + amount);
