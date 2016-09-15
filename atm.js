@@ -15,22 +15,38 @@ var saving = {
 var convertedNumber = checking.Balance.text().replace("$", "");
 var totalCheckingValue = parseInt(convertedNumber);
 
+checkingBalanceCheck()
 
-function depositChecking() {  //Deposit Button
+function checkingBalanceCheck() { //Changes the checking module if $0
+  if (totalCheckingValue === 0) {
+    $('#checking').removeClass("account")
+    $('#checking').addClass("zero")
+  }else {
+    $('#checking').removeClass("zero")
+    $('#checking').addClass("account")
+  }
+}
+
+function depositChecking() {  //Deposit Button for Checking
   var userDepositChecking = parseInt(checking.Input.val())
   totalCheckingValue = totalCheckingValue + userDepositChecking
   checking.Balance.text("$" + totalCheckingValue)
+  checkingBalanceCheck()
 }
 checking.DepositButton.on("click",depositChecking);
 
-function withdrawChecking() {  //Deposit Button
+function withdrawChecking() {  //Withdraw Button for Checking
   var userWithdrawChecking = parseInt(checking.Input.val())
   totalCheckingValue = totalCheckingValue - userWithdrawChecking
   checking.Balance.text("$" + totalCheckingValue)
+  checkingBalanceCheck()
+
 }
 checking.WithdrawButton.on("click",withdrawChecking);
 
 
+
+//Prevent blank number
 
 
 
