@@ -10,5 +10,24 @@
 
 
 $(document).ready(function(){
-// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
+    // console.log("working")
+
+    var previousBalance = 0
+
+    var deposit = function addMoney(userMoney, userBalance) {
+        return userMoney + userBalance
+    }
+
+    var withdraw = function withdrawMoney(userMoney, userBalance) {
+        return userMoney + userBalance
+    }
+
+    // we don't want the balance to ever go negative cuz we a kind bank and all
+
+    $(input[type=button]).val("Deposit").on("click", function(){
+        return $(".balance").addMoney(userMoney, userBalance)
+    }
+    $(input[type=button].val("Withdraw").on("click", {
+        return $(".balance").withdrawMoney(userMoney, userBalance)
+    }
 });
