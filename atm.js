@@ -2,8 +2,9 @@
  * - user chooses to deposit into Checking or Savings by clicking into input
  * field. Event is triggered!!!
  * - user can now set the dollar amount by typing in a number value.
- * - user can deposit or withdraw
- * - the balance number window reflects the new value resulting in the user's action
+ * - user chooses to deposit or withdraw
+ * - balance is stored
+ * - balance number window reflects the new value resulting in the user's action
  * - addition operator
  */
 
