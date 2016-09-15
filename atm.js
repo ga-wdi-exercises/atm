@@ -1,5 +1,4 @@
-//To Do:
-  // refactor deposit/withdraw functions so I don't need both if statements
+//TODO:
   // combine deposit and withdraw functions?
   // add a validator
   // overdraft protection
