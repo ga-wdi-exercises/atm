@@ -4,9 +4,12 @@
   // add a validator
   // overdraft protection
 
-var checkingBalance = 0;
+var bank = {
+  checkingBalance: 0,
+  savingsBalance: 0,
+}
+
 var $checkingBalance = $('#checking .balance');
-var savingsBalance = 0;
 var $savingsBalance = $('#savings .balance');
 
 var $checkingInput = $('#checking > .input');
@@ -21,36 +24,34 @@ var $savingsWithdraw = $('#savings > .withdraw');
 
 $checkingDeposit.on('click', function(){
   var amount = parseInt($checkingInput.val());
-  deposit(checkingBalance, $checkingBalance, amount);
+  deposit("checkingBalance", $checkingBalance, amount);
   $checkingInput.val('');
 })
 
 $savingsDeposit.on('click', function(){
   var amount = parseInt($savingsInput.val());
-  deposit(savingsBalance, $savingsBalance, amount);
+  deposit("savingsBalance", $savingsBalance, amount);
   $savingsInput.val('');
 })
 
 $checkingWithdraw.on('click', function(){
   var amount = parseInt($checkingInput.val());
-  withdraw(checkingBalance, $checkingBalance, amount);
+  withdraw("checkingBalance", $checkingBalance, amount);
   $checkingInput.val('');
 })
 
 $savingsWithdraw.on('click', function(){
   var amount = parseInt($savingsInput.val());
-  withdraw(savingsBalance, $savingsBalance, amount);
+  withdraw("savingsBalance", $savingsBalance, amount);
   $savingsInput.val('');
 })
 
 function deposit(account, display, amount) {
-  account += amount;
-  display.html('$' + account);
-  return account;
+  bank[account] += amount;
+  display.html('$' + bank[account]);
 }
 
 function withdraw(account, display, amount) {
-  account -= amount;
-  display.html('$' + account);
-  return account;
+  bank[account] -= amount;
+  display.html('$' + bank[account]);
 }
