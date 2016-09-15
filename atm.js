@@ -1,6 +1,6 @@
 //To Do:
   // refactor deposit/withdraw functions so I don't need both if statements
-  // combine deposit and withdraw functions? 
+  // combine deposit and withdraw functions?
   // add a validator
   // overdraft protection
 
@@ -21,54 +21,36 @@ var $savingsWithdraw = $('#savings > .withdraw');
 
 $checkingDeposit.on('click', function(){
   var amount = parseInt($checkingInput.val());
-  deposit('checking', amount);
+  deposit(checkingBalance, $checkingBalance, amount);
   $checkingInput.val('');
 })
 
 $savingsDeposit.on('click', function(){
   var amount = parseInt($savingsInput.val());
-  deposit('savings', amount);
+  deposit(savingsBalance, $savingsBalance, amount);
   $savingsInput.val('');
 })
 
 $checkingWithdraw.on('click', function(){
   var amount = parseInt($checkingInput.val());
-  withdraw('checking', amount);
+  withdraw(checkingBalance, $checkingBalance, amount);
   $checkingInput.val('');
 })
 
 $savingsWithdraw.on('click', function(){
   var amount = parseInt($savingsInput.val());
-  withdraw('savings', amount);
+  withdraw(savingsBalance, $savingsBalance, amount);
   $savingsInput.val('');
 })
 
-function deposit(account, amount) {
-  if (account == "checking") {
-    checkingBalance += amount;
-    $checkingBalance.html('$' + checkingBalance);
-    return checkingBalance;
-  } else if (account == "savings") {
-    savingsBalance += amount;
-    $savingsBalance.html('$' + savingsBalance);
-    $
-    return savingsBalance;
-  } else {
-    throw("Something went wrong with the deposit function. Arguments: " + account + ' ' + amount);
-  }
+function deposit(account, display, amount) {
+  account += amount;
+  display.html('$' + account);
+  return account;
 }
 
-function withdraw(account, amount) {
-  if (account == "checking") {
-    checkingBalance -= amount;
-    $checkingBalance.html('$' + checkingBalance);
-    return checkingBalance;
-  } else if (account == "savings") {
-    savingsBalance -= amount;
-    $savingsBalance.html('$' + savingsBalance);
-    $
-    return savingsBalance;
-  } else {
-    throw("Something went wrong with the withdrawal function. Arguments: " + account + ' ' + amount);
-  }
+function withdraw(account, display, amount) {
+  account -= amount;
+  display.html('$' + account);
+  return account;
 }
