@@ -21,7 +21,7 @@ var totalSavingsValue = parseInt(convertedNumberSavings);
 checkingBalanceCheck()
 savingsBalanceCheck()
 
-function checkingBalanceCheck() { //Changes the checking module if total amount is $0
+function checkingBalanceCheck() { //Changes the checking module if total amount is $0 Toggle Class
   if (totalCheckingValue === 0) {
     $('#checking').removeClass("account")
     $('#checking').addClass("zero")
@@ -41,35 +41,14 @@ function savingsBalanceCheck() { //Changes the checking module if total amount i
   }
 }
 
-function depositSavings() {  //Deposit Button for SAvings
-  var userDepositSavings = parseInt(savings.Input.val())
-  totalSavingsValue = totalSavingsValue + userDepositSavings
-  savings.Balance.text("$" + totalSavingsValue)
-  savingsBalanceCheck()
-}
-savings.DepositButton.on("click",depositSavings);
-
-
-function withdrawSavings() {  //Withdraw Button for Savings
-  var userWithdrawSavings = parseInt(savings.Input.val())
-    if (userWithdrawSavings > totalSavingsValue) {
-      alert(" Insufficent funds in savings account")
-    }else{
-      totalSavingsValue = totalSavingsValue - userWithdrawSavings
-      savings.Balance.text("$" + totalSavingsValue)
-      savingsBalanceCheck()
-    }
-}
-savings.WithdrawButton.on("click",withdrawSavings);
-
-
 function depositChecking() {  //Deposit Button for Checking
   var userDepositChecking = parseInt(checking.Input.val())
   totalCheckingValue = totalCheckingValue + userDepositChecking
   checking.Balance.text("$" + totalCheckingValue)
   checkingBalanceCheck()
 }
-checking.DepositButton.on("click",depositChecking);
+
+  checking.DepositButton.on("click",depositChecking);
 
 function withdrawChecking() {  //Withdraw Button for Checking
   var userWithdrawChecking = parseInt(checking.Input.val())
@@ -81,15 +60,46 @@ function withdrawChecking() {  //Withdraw Button for Checking
       checkingBalanceCheck()
     }
 }
-checking.WithdrawButton.on("click",withdrawChecking);
+      checking.WithdrawButton.on("click",withdrawChecking);
+
+
+  function depositSavings() {  //Deposit Button for SAvings
+        var userDepositSavings = parseInt(savings.Input.val())
+        totalSavingsValue = totalSavingsValue + userDepositSavings
+        savings.Balance.text("$" + totalSavingsValue)
+        savingsBalanceCheck()
+      }
+      savings.DepositButton.on("click",depositSavings);
+
+
+  function withdrawSavings() {  //Withdraw Button for Savings
+        var userWithdrawSavings = parseInt(savings.Input.val())
+          if (userWithdrawSavings > totalSavingsValue) {
+            alert(" Insufficent funds in savings account")
+          }else{
+            totalSavingsValue = totalSavingsValue - userWithdrawSavings
+            savings.Balance.text("$" + totalSavingsValue)
+            savingsBalanceCheck()
+          }
+      }
+          savings.WithdrawButton.on("click",withdrawSavings);
 
 
 
-//Prevent blank number
 
 
+//Prevent blank number NaN
+//Install bonus
+//Clean up converted number
+//Clean up color check
 
 
+// var userDepositChecking = checking.Input.val()
+// if (userDepositChecking === "") {
+// alert("Cannot enter an empty amount")
+// } else{
+
+//PSEUDO
 
 // $(document).ready(function(){
 // // Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
