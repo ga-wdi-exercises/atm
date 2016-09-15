@@ -7,42 +7,80 @@ $(document).ready(function(){
 /* CHECKING */
 
 // TODO create account js object
+/*
+function Account(accountName) {
+	this.accountName = accountName;
+	this.domElement = $();
+	this.balance = 0;
+	this.deposit: function()
 
-var account = {
-	balance: 0,
-	deposit: function(amt) {
-		console.log(amt);
-		// check for negative number
-		//get input amount
-		//add amount to curent balance
-		// TODO log transaction
-	},
-	withdraw: function(amt) {
-		// get input amount
-		// check for negative number
-		// subtract amount from current balance
-		// TODO log transaction
-	},
+}*/
+
+
+function account() {
+	return {
+		domElement: $,
+		balance: 0,
+		deposit: function(amt) {
+			if (amt < 0) {
+				// TODO Display error on screen
+				throw "Error: Cannot deposit a negative amount";
+			}
+			this.balance += amt;
+			console.log(this);
+			console.log(this.domElement);
+			this.refreshBalance();
+			// TODO log transaction
+		},
+		withdraw: function(amt) {
+			if (amt < 0) {
+				// TODO Display error on screen
+				throw "Error: Cannot deposit a negative amount";
+			}
+			this.balance -= amt;
+			this.refreshBalance();
+			// TODO log transaction
+		},
+		refreshBalance: function() {
+			var roundedBalance = parseFloat(Math.round(this.balance * 100) / 100).toFixed(2);
+			this.domElement.find('.balance').html('$' + roundedBalance);
+
+			console.log(this.balance);
+		}
+	}
 }
 
-var checking = account;
+var checkingAccount = account();
+checkingAccount.domElement = $(checking);
+
+var savingsAccount = account();
+savingsAccount.domElement = $(savings);
 
 
 
-// TODO Add click listener for the Deposit button
+// Button click listeners
+// TODO refactor listeners
 $('#checking .deposit').on('click', function() {
-	checking.deposit(formatInput($('#checking .input').val()));
+	checkingAccount.deposit(formatInput($('#checking .input').val()));
 })
-// TODO Add click listener for the Withdraw button
 
-// TODO function update balance div
+$('#savings .deposit').on('click', function() {
+	savingsAccount.deposit(formatInput($('#savings .input').val()));
+})
+
+$('#checking .withdraw').on('click', function() {
+	checkingAccount.withdraw(formatInput($('#checking .input').val()));
+})
+
+$('#savings .withdraw').on('click', function() {
+	savingsAccount.withdraw(formatInput($('#savings .input').val()));
+})
+
 
 // TODO Read $___ as a number
 function formatInput(input) {
-	while(input.charAt(0) === '$') {
-    	input = input.substr(1);
-	}
-	var value = parseInt(input)
+	input = input.replace(/[^\d\.]/g, ''); // Remove non-numbers except '.'
+	var value = parseFloat(input);
 	return value;
 }
 
