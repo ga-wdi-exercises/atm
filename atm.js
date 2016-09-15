@@ -31,13 +31,20 @@ var checking = account;
 
 // TODO Add click listener for the Deposit button
 $('#checking .deposit').on('click', function() {
-	checking.deposit($('#checking .input').val());
+	checking.deposit(formatInput($('#checking .input').val()));
 })
 // TODO Add click listener for the Withdraw button
 
 // TODO function update balance div
 
-// TODO
+// TODO Read $___ as a number
+function formatInput(input) {
+	while(input.charAt(0) === '$') {
+    	input = input.substr(1);
+	}
+	var value = parseInt(input)
+	return value;
+}
 
 
 /*
@@ -56,7 +63,7 @@ On "Deposit", it should get the current "balance"
 How can you get the content of the "balance" element?
 
 The content has a $ at the beginning of it, so Javascript will read it as text rather than as a number. How can you convert this text into a number?
-// TODO Read $___ as a number
+
 
 On "Deposit", it updates the balance
 Now add the user input to the balance, and make it show up in the "balance" element
