@@ -19,6 +19,22 @@ savingsWithdraw.on('click', atm.withdrawFromSavings);
 
 //Object containing ATM functionality
 var atm = {
+  depositToChecking : function() {
 
+  },
+  depositToSavings : function() {
+
+  },
+  withdrawFromChecking : function() {
+
+  },
+  withdrawFromSavings : function() {
+
+  },
+  overdraftProtection : function() {
+
+  }
 };
+
+
 });
