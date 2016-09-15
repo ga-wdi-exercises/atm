@@ -37,10 +37,13 @@ checking.DepositButton.on("click",depositChecking);
 
 function withdrawChecking() {  //Withdraw Button for Checking
   var userWithdrawChecking = parseInt(checking.Input.val())
-  totalCheckingValue = totalCheckingValue - userWithdrawChecking
-  checking.Balance.text("$" + totalCheckingValue)
-  checkingBalanceCheck()
-
+    if (userWithdrawChecking > totalCheckingValue) {
+      alert(" Insufficent funds")
+    }else{
+      totalCheckingValue = totalCheckingValue - userWithdrawChecking
+      checking.Balance.text("$" + totalCheckingValue)
+      checkingBalanceCheck()
+    }
 }
 checking.WithdrawButton.on("click",withdrawChecking);
 
