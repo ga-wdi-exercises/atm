@@ -1,3 +1,7 @@
-$(document).ready(function(){
-// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
-});
+//withdrawing money
+  // get user amount
+  // if amount > amount in bank,
+    // throw error
+  // else subtract amount from account 
+
+//adding money
