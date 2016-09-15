@@ -1,3 +1,13 @@
 $(document).ready(function(){
-// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
+//Declare all global variables
+var checkingBalance = 0,
+    checkingDisplay = $('#checking div.balance'),
+    checkingInput = $('#checking input.input'),
+    checkingDeposit = $('#checking input.deposit'),
+    checkingWithdraw = $('#checking input.withdraw'),
+    savingsBalance = 0,
+    savingsDisplay = $('#checking div.balance'),
+    savingsInput = $('#checking input.input'),
+    savingsDeposit = $('#checking input.deposit'),
+    savingsWithdraw = $('#checking input.withdraw');
 });
