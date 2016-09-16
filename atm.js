@@ -22,9 +22,12 @@ function depositCheck(){
 checkWithdraw.on("click", withdrawCheck);
 function withdrawCheck(){
   var input = parseInt(checkAmt.val());
-  balance = balance - input;
-  checkBalance.text("$" + (balance));
-  checkIsZero()
+  //Prevent checking balance from being negative
+  if (balance >= input){
+    balance = balance - input;
+    checkBalance.text("$" + (balance));
+};
+  checkIsZero();
 };
 
 //Checking Account turns red if balance is less than 0
@@ -32,9 +35,11 @@ function checkIsZero(){
   if (balance === 0) {
     $("#checking.account").attr("class","zero");
   } else if(balance > 0){
-    $("#checking.zero").attr("class","account");
+    $("checking.zero").removeAttr("class","zero");
+    $("#checking").attr("class","account");
   };
 }
+
 
 
 var sbalance = 0;
@@ -50,10 +55,14 @@ function depositSave(){
 saveWithdraw.on("click", withdrawSave);
 function withdrawSave(){
   var sinput = parseInt(saveAmt.val());
+  //Prevent savings balance from being negative
+  if (sbalance >= sinput){
   sbalance = sbalance - sinput;
   saveBalance.text("$" + (sbalance));
+};
   saveIsZero();
 };
+
 
 //Savings Account turns red if balance is less than 0
 function saveIsZero(){
