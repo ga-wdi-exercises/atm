@@ -16,7 +16,6 @@ var inputSave = $("input.inputS")
 $ ("input.depositC").click(function(){
   console.log("HELLO");
 
-
   $("div.balanceC").text("$"+(parseInt(inputCheck.val() + balanceCheck.val())));
 
 });
@@ -25,7 +24,6 @@ $ ("input.depositC").click(function(){
 
 $ ("input.withdrawC").click(function(){
   console.log("GOODMORNING");
-
 
   $("div.balanceC").text("$"+(parseInt(balanceCheck.val() - inputCheck.val())));
 
@@ -39,7 +37,6 @@ $ ("input.withdrawC").click(function(){
 $ ("input.depositS").click(function(){
   console.log("HELLO");
 
-
 $("div.balanceS").text("$"+(parseInt(inputSave.val() + balanceSave.val())));
 
 });
@@ -49,7 +46,6 @@ $("div.balanceS").text("$"+(parseInt(inputSave.val() + balanceSave.val())));
 $ ("input.withdrawS").click(function(){
   console.log("GOODMORNING");
 
-
   $("div.balanceS").text("$"+(parseInt(balanceSave.val() - inputSave.val())));
 
 });
@@ -57,12 +53,14 @@ $ ("input.withdrawS").click(function(){
 
 
 
-// var overDraft = function(){
+// var overDraft = function(input){
 //   var balanceCheck = $("div.balanceC")
 //
-// 	if(balanceCheck < 0){
-// 		console.log("Incorrect Withdrawal Amount");
-// 		$("div.balancesC").text(toString("wrong amount"));
+// 	if(input < 0){
+// 		alert("Wrong Amount");
+//    }
+//    else {
+//      return;
 //    }
 //
 // }
