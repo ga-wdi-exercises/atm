@@ -1,6 +1,4 @@
 //TODO:
-  // [x] separate dom stuff from update function
-  // [x] start putting into object
   // [ ] handle zero balance (add red style)
   // [ ] overdraft protection
 var $buttons = $('input:button');
@@ -17,7 +15,7 @@ var bank = {
   domBalance: {},
   amount: 0,
   beginTransaction: function(button) {
-    this.amount = this.getInput(button);
+    this.amount = this.getInput(button); //amount is set
     this.domLegWork(button);
     this.transact(this.account, this.amount)
   },
