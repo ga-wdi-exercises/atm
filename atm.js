@@ -13,12 +13,12 @@ var savings = { //Savings account fields
 }
 
 var convertedNumberChecking = checking.Balance.text().replace("$", ""); //Converts text input to integer for checking acct
-var totalCheckingValue = parseInt(convertedNumberChecking); //Initiates total value of checking account
+var totalCheckingValue = parseFloat(convertedNumberChecking); //Initiates total value of checking account
 
 var convertedNumberSavings = savings.Balance.text().replace("$", ""); //Converts text input to integer for savings acct
-var totalSavingsValue = parseInt(convertedNumberSavings); //Initiates total value of savings account
+var totalSavingsValue = parseFloat(convertedNumberSavings); //Initiates total value of savings account
 
-checkingBalanceCheck() //checks if balance is zero, if so then the display will be red
+checkingBalanceCheck() //checks if balance is zero, if (true) {} so then the display will be red
 savingsBalanceCheck()
 
 function checkingBalanceCheck() { //Changes the color of the account interface if total amount is $0
@@ -42,11 +42,11 @@ function savingsBalanceCheck() { //Changes the color of the account interface if
 }
 
 function depositChecking() {  //Deposit Button for Checking
-  var userDepositChecking = parseInt(checking.Input.val())
+  var userDepositChecking = parseFloat(checking.Input.val())
     if (isNaN(userDepositChecking)) { //prevents input of NaN
       alert("Deposit amount not accepted, please insert a number without special characters i.e (1000)");
     }else{
-  totalCheckingValue = totalCheckingValue + userDepositChecking
+  totalCheckingValue = (totalCheckingValue + userDepositChecking)
   checking.Balance.text("$" + totalCheckingValue)
   checkingBalanceCheck()
 }
@@ -54,7 +54,7 @@ function depositChecking() {  //Deposit Button for Checking
 checking.DepositButton.on("click",depositChecking);
 
 function withdrawChecking() {  //Withdraw Button for Checking
-  var userWithdrawChecking = parseInt(checking.Input.val())
+  var userWithdrawChecking = parseFloat(checking.Input.val())
   if (isNaN(userWithdrawChecking)) { //prevents input of NaN
     alert("Withdraw amount not accepted, please insert a number without special characters i.e (1000)");
     }else{
@@ -67,15 +67,15 @@ function withdrawChecking() {  //Withdraw Button for Checking
           }else {
             alert("Overdraft warning: You are withdrawing $" + userWithdrawChecking + " However, there is only $" + totalCheckingValue +
             " available in Checking Account. Drafting $" + overDraw + " from Savings to Checking")
-        totalSavingsValue = totalSavingsValue - overDraw             //overdraft from savings if sufficient funds available
-        totalCheckingValue = totalCheckingValue + overDraw
+        totalSavingsValue = (totalSavingsValue - overDraw)            //overdraft from savings if sufficient funds available
+        totalCheckingValue = (totalCheckingValue + overDraw)
          savings.Balance.text("$" + totalSavingsValue)
          savingsBalanceCheck()
          checking.Balance.text("$" + totalCheckingValue)
          checkingBalanceCheck()
        }
      }else {
-        totalCheckingValue = totalCheckingValue - userWithdrawChecking //Procedure if there are sufficient funds and no need for overdraft
+        totalCheckingValue = (totalCheckingValue - userWithdrawChecking) //Procedure if there are sufficient funds and no need for overdraft
         checking.Balance.text("$" + totalCheckingValue)
         checkingBalanceCheck()
     }
@@ -85,11 +85,11 @@ function withdrawChecking() {  //Withdraw Button for Checking
 
 
   function depositSavings() {  //Deposit Button for Savings
-        var userDepositSavings = parseInt(savings.Input.val())
+        var userDepositSavings = parseFloat(savings.Input.val())
         if (isNaN(userDepositSavings)) { //prevents input of NaN
           alert("Deposit amount not accepted, please insert a number without special characters i.e (1000)");
         }else{
-          totalSavingsValue = totalSavingsValue + userDepositSavings
+          totalSavingsValue = (totalSavingsValue + userDepositSavings)
           savings.Balance.text("$" + totalSavingsValue)
           savingsBalanceCheck()
       }
@@ -98,14 +98,14 @@ function withdrawChecking() {  //Withdraw Button for Checking
 
 
   function withdrawSavings() {  //Withdraw Button for Savings
-        var userWithdrawSavings = parseInt(savings.Input.val())
+        var userWithdrawSavings = parseFloat(savings.Input.val())
         if (isNaN(userWithdrawSavings)) { //prevents input of NaN
           alert("Deposit amount not accepted, please insert a number without special characters i.e (1000)");
         }else{
           if (userWithdrawSavings > totalSavingsValue) { //prevents savings account from going negative
             alert(" Insufficent funds in savings account.")
           }else{
-            totalSavingsValue = totalSavingsValue - userWithdrawSavings
+            totalSavingsValue = (totalSavingsValue - userWithdrawSavings)
             savings.Balance.text("$" + totalSavingsValue)
             savingsBalanceCheck()
           }

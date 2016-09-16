@@ -1,3 +1,11 @@
+**in order to convert text type, jesse advice
+
+var balance
+var Input
+
+$("checking.balance").text("$" + (input + balance))
+
+
 Define variables in order to differentiate between checking and saving
 
 DEPOSIT
