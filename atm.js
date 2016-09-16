@@ -23,7 +23,7 @@ $(document).ready(function(){
     $("#checking .balance").text(balance);
   });
   //On "Withdraw", it updates the balance
-  $(".withdraw").on("click", function() {
+  $("#checking .withdraw").on("click", function() {
     balance = balance - eval($('input.input').val());
     console.log(balance);
     $("#checking .balance").text(balance);
@@ -36,8 +36,13 @@ $(document).ready(function(){
     savings = savings + deposit;
     console.log(savings);
     $('#savings .balance').text(savings);
+  });
+  //On "Withdraw", it updates the balance (savings account);
+  $("#savings .withdraw").on("click",function() {
+    savings = savings - eval($('#savings input.input').val());
+    console.log(savings);
+    $("#savings .balance").text(savings);
   })
-
 
 
   });
