@@ -56,20 +56,19 @@ function totalInAccountS() {
   else  { alert("No withdrawal can be made")
 }
 }
-//$("#checking .balance").val());
-//checkIn.click(parseInt($(".input").val()))
-//amountEntered()
-//totalInAccount()
-/*function totalInAccount () {
-  return $("#checking .balance").text("$" + (amountEntered + balance))
-}*/
 
-//balance.replace('$', '')
-//$("#checking .balance").text("$" + (input + balance))
-// when i click on deposit
-  // calculate how much
-    // get value of balance html
-    // convert that to a number
-    // get value of input
-    // add them together
-    // update balance html to total
+/*withdrawbuttonS.on("click", function () {
+  var userInput = parseInt($("#savings .input").val())
+  totalInAccountS()
+});
+
+function totalInAccountS() {
+  var userInput = parseInt($("#savings .input").val())
+  var savingsBalance = parseInt(userInput)
+  console.log(savingsBalance)
+  if (userInput > 0) {
+   $("#savings .balance").text("$", savingsBalance - userInput)
+  }
+  else  { alert("No withdrawal can be made")
+}
+}*/
