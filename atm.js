@@ -12,16 +12,14 @@ $buttons.on('click', function(){
 var bank = {
   checking: 0,
   savings: 0,
-  transaction: {
-    account: '',
-    action: '',
-    domBalance: {},
-    amount: 0,
-  },
+  account: '',
+  action: '',
+  domBalance: {},
+  amount: 0,
   beginTransaction: function(button) {
-    this.transaction.amount = this.getInput(button);
+    this.amount = this.getInput(button);
     this.domLegWork(button);
-    this.transact(this.transaction.account, this.transaction.amount)
+    this.transact(this.account, this.amount)
   },
   getInput: function(form) {
     var input = form.siblings('.input').val();
@@ -30,15 +28,15 @@ var bank = {
     return amount ? amount : false;
   },
   domLegWork: function(button) {
-    this.transaction.account = button.parent().attr('id');
-    this.transaction.action = button.attr('class');
-    this.transaction.domBalance = button.siblings('.balance');
+    this.account = button.parent().attr('id');
+    this.action = button.attr('class');
+    this.domBalance = button.siblings('.balance');
   },
   transact: function(account, amount) {
     // if the action is withdraw, set amount to be negative
-    amount = (this.transaction.action == 'withdraw') ? -Math.abs(amount) : amount;
+    amount = (this.action == 'withdraw') ? -Math.abs(amount) : amount;
     this[account] += amount;
-    this.transaction.domBalance.html(this.toUSD(this[account]));
+    this.domBalance.html(this.toUSD(this[account]));
   },
   toUSD: function(number) {
       //found this function at the following link. It gives a nice walkthrough of what's going on as well:
