@@ -23,9 +23,13 @@ function addAmount(){
   checkSub.on("click",subtractAmount);
   function subtractAmount(){
     var value = parseInt(checkInput.val());
+    if (balance < value){
+      alert("Insufficient Funds");
+    }else{
     balance = balance - value
     checkBal.text(balance);
   }
+}
 
   var savingBalance = 0
   savAdd.on("click",savAddAmount);
@@ -37,7 +41,11 @@ function addAmount(){
     savSub.on("click",savSubtractAmount);
     function savSubtractAmount(){
       var value = parseInt(savInput.val());
+      if (savingBalance < value){
+        alert("Insufficient Funds")
+      }else{
       savingBalance = savingBalance - value;
+      }
       savBal.text(savingBalance);
     }
 
