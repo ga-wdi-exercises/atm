@@ -1,12 +1,13 @@
 //TODO:
   // [x] combine event listeners
   // [x] add a validator
+  // [x] combine withdraw and deposit
   // [ ] handle zero balance (add red style)
   // [ ] overdraft protection
 
 var bank = {
-  checkingBalance: 0,
-  savingsBalance: 0,
+  checking: 0,
+  savings: 0,
 }
 
 var $checkingBalance = $('#checking .balance');
@@ -15,47 +16,23 @@ var $savingsBalance = $('#savings .balance');
 var $depositButtons = $('.deposit');
 var $withdrawButtons = $('.withdraw');
 
+var $buttons = $('input:button');
 
-// event listeners
-$depositButtons.on('click', function(){
+$buttons.on('click', function(){
   var self = $(this);
   var amount = getInput(self);
-  if (amount) {
-    if (self.parent().is("#checking")) {
-      deposit("checkingBalance", $checkingBalance, amount);
-    } else {
-      deposit("savingsBalance", $savingsBalance, amount);
-    }
-  } else {
-    alert("That's not a number!");
-    self.siblings('.input').val('');
-  }
+  update(self, amount);
 })
 
-$withdrawButtons.on('click', function(){
-  var self = $(this);
-  var amount = getInput(self);
-  if (amount) {
-    if (self.parent().is("#checking")) {
-      withdraw("checkingBalance", $checkingBalance, amount);
-    } else {
-      withdraw("savingsBalance", $savingsBalance, amount);
-    }
-  } else {
-    alert("That's not a number!");
-    self.siblings('.input').val('');
-  }
-})
 
-//DEPOSIT and WITHDRAW functions
-function deposit(account, display, amount) {
+function update(button, amount) {
+  var account = button.parent().attr('id');
+  var action = button.attr('class');
+  var domBalance = button.siblings('.balance');
+  // if the action is withdraw, set amount to be negative
+  amount = (action == 'withdraw') ? -Math.abs(amount) : amount;
   bank[account] += amount;
-  display.html(toUSD(bank[account]));
-}
-
-function withdraw(account, display, amount) {
-  bank[account] -= amount;
-  display.html(toUSD(bank[account]));
+  domBalance.html(toUSD(bank[account]));
 }
 
 function getInput(form) {
