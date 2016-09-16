@@ -131,6 +131,7 @@ if (actBal.odProtect) {
 
 function handleWithdraw(event,account) {
   /* Choose Account ( Checking or Savings) */
+  /* we need to reset account based on event or recursive call */
   var account =account||$(this).parent().attr("id");
   var amtToWithdraw=getAmts(account);
   if( fundsAvail(account) ) {  /* check if we have enough to widthdraw */
