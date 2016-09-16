@@ -22,8 +22,12 @@ function deposit(e) {
 function withdraw(e) {
   var checkValW = checkIn.val()
   var balance = parseInt(checkValW)
+  if (balance > actCheckBal) {
+    alert("Transaction not possible.")
+  } else {
   actCheckBal = actCheckBal - balance
   checkBal.text("$" + actCheckBal)
+  }
   e.preventDefault()
 }
 var actSaveBal = 0
@@ -40,7 +44,11 @@ function depositSave(e) {
 function withdrawSave(e) {
   var saveValW = saveIn.val()
   var balance = parseInt(saveValW)
+  if (balance > actSaveBal) {
+    alert("Transaction not possible.")
+  } else {
   actSaveBal = actSaveBal - balance
   saveBal.text("$" + actSaveBal)
+  }
   e.preventDefault()
 }
