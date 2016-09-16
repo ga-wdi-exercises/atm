@@ -12,24 +12,26 @@
     </div>
     <div id="container">
       <div id="active">
-
+        <div class="account">
+          <ul>
+            <li></li>
+            <li></li>
+            <li></li>
+          </ul>
+        </div>
       </div>
-      <div id="options" class="flexList hidden">
-        <div class="listItem option" onclick="atm.selectDeposit()">Deposit</div>
-        <div class="listItem option" onclick="atm.selectWithdraw()">Withdraw</div>
-        <div class="listItem option hidden" onclick="atm.selectTransfer()">Transfer</div>
+      <div id="options" class="flexList">
+        <div id="deposit" class="option">Deposit</div>
+        <div id="withdraw" class="option">Withdraw</div>
+        <div id="transfer" class="option hidden">Transfer</div>
       </div>
       <div id="input" class="flexList hidden">
-        <input id="input-field" type="text" value="$100.00"></input>
+        <input id="input-field" type="number" value="100.00"></input>
         <div id="button" class="option"></div>
+        <div id="cancel" class="option">Cancel</div>
       </div>
-      <div id="accounts" onclick="atm.selectAccount()"></div>
+      <div id="accounts"></div>
     </div>
-
-
-
-
-
 
     <!-- <div id="checking" class="account">
       <h2>Checking</h2>
