@@ -13,22 +13,52 @@
 */
 
 
-
-var input = $("#checking .input")
-var balance = 0
-var displayBalance = $("#checking .balance") // event listener
-var deposit = $("#checking .deposit") 
-
-deposit.on("click", add)
-
-function add() {
-   // var newBalance = userMoney + previousBalance
-  // $("#checking div.balance").text(displayBalance)
-
-var checkInput = input.val()
-var newBalance = parseInt(checkInput)
-
-balance = newBalance + balance
-
-displayBalance.text("$" + balance)
+// variables for Checking
+var accounts = {
+    checking: {
+        input: $("#checking .input"),
+        balance: 0,
+        screenBalance: $("#checking .balance"),
+        deposit: $("#checking .deposit") ,
+        withdraw: $("#checking .withdraw")
+    }
+    savings: {
+        input: $("#savings .input"),
+        balance: 0,    
+        screenBalance: $("#savings .balance")
+        deposit: $("#savings .deposit")
+        withdraw: $("#savings .withdraw")
+    }
 }
+
+
+// variables for Savings (seems like duplicate code)
+
+
+checking.on("click", function(){
+    add("checking")
+})
+
+
+/* 
+function add(account) {
+    var checkInput = accounts[account].input.val()
+    var newBalance = parseInt(checkInput)
+
+    balance = newBalance + balance
+
+    accounts[account].checkingDisplayBalance.text("$" + balance)
+}
+
+checkingWithdraw.on("click", subtract)
+
+function subtract() {
+    var checkInput = input.val()
+    var newBalance = parseInt(checkInput)
+
+    balance = balance - newBalance
+    
+    checkingDisplayBalance.text("$" + balance)
+}
+*/
+
