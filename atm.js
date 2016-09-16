@@ -30,10 +30,8 @@ function Account() {
 			toAccount.balance += amt;
 			this.refreshBalance();
 			toAccount.refreshBalance();
-			// TODO log transaction, for both!
 			if (this.accountName === "checking") {
 				logTransaction(this.accountName, "transfer", amt, this.balance);
-				//TODO move to recursive logTransaction call?
 				logTransaction(savingsAccount.accountName, "transfer", amt, savingsAccount.balance);
 			} else if (this.accountName === "savings") {
 				logTransaction(this.accountName, "transfer", amt, this.balance);
@@ -47,6 +45,21 @@ function Account() {
 	}
 }
 
+// Transaction object constructor
+function Transaction() {
+	return {
+		date: "",
+		account: "",
+		type: "", // deposit, withdraw, overdraw
+		amount: 0,
+		newBalance: 0,
+	}
+}
+
+
+
+
+// Add transactions to DOM
 function logTransaction(account, type, amt, balance) {
 	// Begin html table row
 	var logEntry = '<tr>';
@@ -82,12 +95,21 @@ function logTransaction(account, type, amt, balance) {
 	// End html table row
 	logEntry += '</tr>';
 
+	// Add to DOM
 	$('#log .labels').after(logEntry);
-	console.log(account);
-	console.log(type);
-	console.log(amt);
-	console.log(balance);
+
+	// Create transaction object
+	var transaction = new Transaction();
+	transaction.date = date;
+	transaction.account = account;
+	transaction.type = type;
+	transaction.amount = amt;
+	transaction.newBalance = balance;
+
+	// Log transaction
+	transactionLog.push(transaction);
 }
+
 
 
 // GLOBAL OBJECTS
@@ -102,18 +124,7 @@ savingsAccount.accountName = "savings";
 savingsAccount.domElement = $(savings);
 
 // Log, to hold transactions
-var log = [];
-
-// Transaction object
-var transaction = {
-	date: 0,
-	time: 0,
-	account: "",
-	type: "", // deposit, withdraw, overdraw
-	amount: 0,
-	oldBalance: 0,
-	newBalance: 0,
-}
+var transactionLog = [];
 
 
 
