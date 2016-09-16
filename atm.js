@@ -30,69 +30,40 @@ function red () {
 }
 red()
 
-
-checkAdd.on("click", deposit)
-checkMin.on("click", withdraw)
-
-function deposit (e) {
-  var checkVal = checkIn.val()
-  var balance = parseInt(checkVal)
+checkAdd.on("click", transact)
+checkMin.on("click", transact)
+function transact(event){
+  event.preventDefault()
+  var balance = parseInt(checkIn.val())
   if (isNaN(balance)) {
-    alert("Please enter only numbers.")
-  } else {
-    actCheckBal = actCheckBal + balance
-    checkBal.text("$" + actCheckBal)
-    red()
-    e.preventDefault()
+    return alert("Please enter only numbers.")
   }
-}
-function withdraw(e) {
-  var checkValW = checkIn.val()
-  var balance = parseInt(checkValW)
-  if (isNaN(balance)) {
-    alert("Please enter only numbers.")
-  } else {
-      if (balance > actCheckBal) {
-        checkOverdraft()
-      } else {
-      actCheckBal = actCheckBal - balance
-      checkBal.text("$" + actCheckBal)
-      }
-      red()
-      e.preventDefault()
+  if($(this).val() == "Withdraw"){
+    if (balance > actCheckBal) {
+      return checkOverdraft()
     }
-}
-
-saveAdd.on("click", depositSave)
-saveMin.on("click", withdrawSave)
-
-function depositSave(e) {
-  var saveValD = saveIn.val()
-  var balance = parseInt(saveValD)
-  if (isNaN(balance)) {
-    alert("Please enter only numbers.")
-  } else {
-  actSaveBal = actSaveBal + balance
-  saveBal.text("$" + actSaveBal)
+    balance = balance*-1
+  }
+  checkBal.text("$" + (actCheckBal += balance))
   red()
-  e.preventDefault()
 }
-}
-function withdrawSave(e) {
-  var saveValW = saveIn.val()
-  var balance = parseInt(saveValW)
+
+saveAdd.on("click", transactSave)
+saveMin.on("click", transactSave)
+function transactSave(event){
+  event.preventDefault()
+  var balance = parseInt(saveIn.val())
   if (isNaN(balance)) {
-    alert("Please enter only numbers.")
-  } else {
-      if (balance > actSaveBal) {
-        saveOverdraft()
-      } else {
-      actSaveBal = actSaveBal - balance
-      saveBal.text("$" + actSaveBal)
-      }
-      red()
-      e.preventDefault()
+    return alert("Please enter only numbers.")
+  }
+  if($(this).val() == "Withdraw"){
+    if (balance > actSaveBal) {
+      return checkOverdraft()
     }
+    balance = balance*-1
+  }
+  saveBal.text("$" + (actSaveBal += balance))
+  red()
 }
 
 checkTranB.on("click", checkTransfer)
