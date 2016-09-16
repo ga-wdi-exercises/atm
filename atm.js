@@ -20,14 +20,12 @@ function handleChecking() {
 }
 
 function handleCheckingWithdraw() {
-  checkingInput = parseInt($("#checking input.input").val());
-  //  checkingInput = parseInt($("#checking").children("input.input").val());
-   newBalance = checkingInput;
-   checking = (checking - newBalance); // make sure this only happens when enough $$
-    if (checking < 0) {
-      alert("Sorry. You don't have enough money.");
-    } else {
+  var checkingInput = parseInt($("#checking input.input").val());
+    if (checking >= checkingInput) {
+      checking = (checking - checkingInput);
       checkingBalance.text("$" + checking);
+    } else {
+    alert("Sorry. You don't have enough money. Select a lower amount.");
   }
 }
 
@@ -40,12 +38,11 @@ function handleSavings() {
 
 function handleSavingsWithdraw() {
    savingsInput = parseInt($("#savings input.input").val());
-   newBalance = savingsInput;
-   savings = (savings - newBalance); // make sure this only happens when enough $$
-    if (savings < 0) {
-      alert("Sorry. You don't have enough money.");
-    } else {
+    if (savings >= savingsInput) {
+      savings = (savings - savingsInput);
       savingsBalance.text("$" + savings);
+    } else {
+        alert("Sorry. You don't have enough money.");
   }
 }
 
