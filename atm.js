@@ -1,7 +1,3 @@
-var checkAdd = $("#checking").children("input.deposit");
-var checkSub = $("#checking").children("input.withdraw");
-var savingsAdd = $("#savings").children("input.deposit");
-var savingsSub = $("#savings").children("input.withdraw");
 var checkBal = $("#checking").children(".balance");
 var savingsBal = $("#savings").children(".balance");
 
@@ -51,14 +47,14 @@ var makeSavingsBalGreen = function(){
    }
 }
 
-//Event listeners
+//Event listeners for all ATM transactions
 $("#checking .deposit").on("click", checkingAmtDep);
 function checkingAmtDep() {
   var checkInput = $("#checking").children("input.input").val();
   var newBal = parseInt(checkInput);
   BegBalChk = BegBalChk + newBal;
   checkBal.text(BegBalChk)
-  makeCheckBalGreen();
+  makeCheckBalGreen();  //function call to check sign of balance
 }
 
 $("#checking .withdraw").on("click", checkingAmtWithdrawn);
@@ -68,7 +64,7 @@ function checkingAmtWithdrawn() {
   console.log(newBal)
   BegBalChk = BegBalChk - newBal;
   checkBal.text(BegBalChk)
-  makeCheckBalRed();
+  makeCheckBalRed();     //function call to check sign of balance
 }
 
 $("#savings .deposit").on("click", savingsAmtDep);
@@ -77,7 +73,7 @@ function savingsAmtDep() {
   var newBal = parseInt(savingsInput);
   BegBalSav = BegBalSav + newBal;
   savingsBal.text(BegBalSav)
-  makeSavingsBalGreen();
+  makeSavingsBalGreen();   //function call to check sign of balance
 }
 
 $("#savings .withdraw").on("click", savingsAmtWithdrawn);
@@ -86,5 +82,5 @@ function savingsAmtWithdrawn() {
   var newBal = parseInt(savingsWithdr);
   BegBalSav = BegBalSav - newBal;
   savingsBal.text(BegBalSav)
-  makeSavingsBalRed();
+  makeSavingsBalRed();   //function call to check sign of balance
 }
