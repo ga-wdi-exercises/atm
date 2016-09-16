@@ -17,7 +17,7 @@
 var accounts = {
     checking: {
         input: $("#checking .input"),
-        balance: 0,
+        balance: 1,
         screenBalance: $("#checking .balance"),
         deposit: $("#checking .deposit"),
         withdraw: $("#checking .withdraw")
@@ -32,32 +32,35 @@ var accounts = {
 }
 
 
-// event listener
+// event listeners (still seems like a lot of duplicate code)
 accounts.checking.deposit.on("click", function(){
     var checkingInput = accounts.checking.input.val()
     var change = parseInt(checkingInput)
     accounts.checking.balance = accounts.checking.balance + change
     accounts.checking.screenBalance.text("$" + accounts.checking.balance)
 })
+accounts.checking.withdraw.on("click", function(){
+    var checkingInput = accounts.checking.input.val()
+    var change = parseInt(checkingInput)
+    accounts.checking.balance = accounts.checking.balance - change
+    accounts.checking.screenBalance.text("$" + accounts.checking.balance)
+})
 
+accounts.savings.deposit.on("click", function(){
+    var savingsInput = accounts.savings.input.val()
+    var change = parseInt(savingsInput)
+    accounts.savings.balance = accounts.savings.balance + change
+    accounts.savings.screenBalance.text("$" + accounts.savings.balance)
+})
+accounts.savings.withdraw.on("click", function(){
+    var savingsInput = accounts.savings.input.val()
+    var change = parseInt(savingsInput)
+    accounts.savings.balance = accounts.savings.balance - change
+    accounts.savings.screenBalance.text("$" + accounts.savings.balance)
+})
 
-// hoisted functions
-function add() {
-
-    balance = screenBalance + balance
-
+// Bonus
+if (accounts.savings.screenBalance || accounts.checking.screenBalance < 0){
+    console.log("hey")
+    $("#checking account").css("background-color","tomato")
 }
-
-/*
-checkingWithdraw.on("click", subtract)
-
-function subtract() {
-    var checkInput = input.val()
-    var newBalance = parseInt(checkInput)
-
-    balance = balance - newBalance
-    
-    checkingDisplayBalance.text("$" + balance)
-}
-*/
-
