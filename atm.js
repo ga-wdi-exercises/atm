@@ -1,5 +1,5 @@
 //TODO:
-  // [ ] handle zero balance (add red style)
+  // [ ] handle zero balance (add red style) use throw()
   // [ ] overdraft protection
 var $buttons = $('input:button');
 
