@@ -1,11 +1,14 @@
 
+
 /* Constant Definitions */
 const
 CHK = "checking";
 SAV = "savings";
 POSCLR ="#6C9A74";
 ZROCLR ="#F52F4F";
-GOODFLOATCHARS={"0":0,"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,".":0};
+GOODFLOATCHARS={"0":null,"1":null,"2":null,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,".":null};
+ACCOUNTS=[CHK,SAV];
+
 
 /* Global Variables */
 
@@ -17,8 +20,8 @@ balChecking =200.0;
 
 
 // $("body").css("background-color","red");
-$("#savings .input").attr("placeholder","200.00");
-$("#checking .input").attr("placeholder","200.00");
+// $("#savings .input").attr("placeholder","200.00");
+// $("#checking .input").attr("placeholder","200.00");
 $("#checking .input").val("$200.00");
 $("#savings .input").val("$200.00");
 setAmts(CHK,balChecking);
@@ -27,15 +30,17 @@ setBkgActBox(CHK,balSavings,balChecking);
 setBkgActBox(SAV,balSavings,balChecking);
 
 
+function getActBal (account) {  /* return the current account balace of indicated account */
+  return (account==CHK?bal=balChecking:bal=balSavings) ;
+}
 
 function setBkgActBox(account,balSavings,balChecking) {
-   var clr;
-   var bal;
 
-  account==CHK?bal=balChecking:bal=balSavings;
-  bal>0?clr=POSCLR:clr=ZROCLR;
-  $("#"+ account +".account").css("background-color",clr);
-  return;
+   var clr; /* color to set background to */
+
+    getActBal(account)>0?clr=POSCLR:clr=ZROCLR;
+    $("#"+ account +".account").css("background-color",clr);
+    return;
 }
 
 function validateNumStr(str){
@@ -63,8 +68,7 @@ $("#" + account+" .balance").text("$ "+ parseFloat(amt).toFixed(2));
 
 function handleDeposit() {
 
-  /* Choose Account ( Checking or Savings) */
-  var account =$(this).parent().attr("id");
+  var account =$(this).parent().attr("id");  /* Choose Account ( Checking or Savings) */
   account==CHK?setAmts(account,balChecking+=getAmts(account)):setAmts(account,balSavings+=getAmts(account));
   setBkgActBox(account,balSavings,balChecking);
 }
@@ -74,20 +78,28 @@ function handleWithdraw() {
   console.log("In handleWithdraw")
   /* Choose Account ( Checking or Savings) */
   var account =$(this).parent().attr("id");
-  account==CHK?setAmts(account,balChecking-=getAmts(account)):setAmts(account,balSavings-=getAmts(account));
-  setBkgActBox(account,balSavings,balChecking);
-}
+  if(getActBal(account)-getAmts(account) >=0 ) {  /* check if we have enought to widthdrawl */
+    account==CHK?setAmts(account,balChecking-=getAmts(account)):setAmts(account,balSavings-=getAmts(account));
+    setBkgActBox(account,balSavings,balChecking); }
+} /* function handleWithdraw */
 
 /* Add a click listener to the checking account's "Deposit" button */
-var depositButChecking=$("#checking .deposit");
-depositButChecking.on( "click", handleDeposit );
-var depositButSavings=$("#savings .deposit");
-depositButSavings.on( "click", handleDeposit );
+ACCOUNTS.forEach( function ( act )  {
 
-var withdrawButChecking=$("#checking .withdraw");
-withdrawButChecking.on( "click", handleWithdraw );
-var withdrawButSavings=$("#savings .withdraw");
-withdrawButSavings.on( "click", handleWithdraw );
+  console.log(act)
+  $("#" + act +" .deposit").on( "click", handleDeposit );
+  $("#" + act +" .withdraw").on( "click", handleWithdraw );
+});
+
+// var depositButChecking=$("#checking .deposit");
+// depositButChecking.on( "click", handleDeposit );
+// var depositButSavings=$("#savings .deposit");
+// depositButSavings.on( "click", handleDeposit );
+//
+// var withdrawButChecking=$("#checking .withdraw");
+// withdrawButChecking.on( "click", handleWithdraw );
+// var withdrawButSavings=$("#savings .withdraw");
+// withdrawButSavings.on( "click", handleWithdraw );
 
 
 /*
