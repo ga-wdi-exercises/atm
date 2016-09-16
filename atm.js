@@ -19,7 +19,11 @@ function Account() {
 		withdraw: function(amt, type) {
 			this.balance -= amt;
 			this.refreshBalance();
-			logTransaction(this.accountName, "withdraw", amt, this.balance);
+			if (type ==='overdraw') {
+				logTransaction(this.accountName, "overdraw", amt, this.balance);
+			} else {
+				logTransaction(this.accountName, "withdraw", amt, this.balance);
+			}
 		},
 		transfer: function(amt, toAccount) {
 			this.balance -= amt;
@@ -57,19 +61,19 @@ function logTransaction(account, type, amt, balance) {
 	// Add type w coloring
 	if (type === 'deposit') {
 		logEntry += '<td class="green capitalize">' + type + '</td>';
-	} else if (type === 'withdraw') {
+	} else if (type === 'withdraw' || type === 'overdraw') {
 		logEntry += '<td class="red capitalize">' + type + '</td>';
 	} else {
-		logEntry += '<td class="capitalize">' + type + '</td>';
+		logEntry += '<td class="blue capitalize">' + type + '</td>';
 	}
 
 	// Add amount w coloring
 	if (type === 'deposit') {
 		logEntry += '<td class="green">$' + amt + '</td>';
-	} else if (type === 'withdraw') {
+	} else if (type === 'withdraw' || type === 'overdraw') {
 		logEntry += '<td class="red">$' + amt + '</td>';
 	} else {
-		logEntry += '<td>$' + amt + '</td>';
+		logEntry += '<td class="blue">$' + amt + '</td>';
 	}
 
 	// Add balance
@@ -182,12 +186,12 @@ function formatInput(input) {
 function overdrawChecking(amt) {
 	// If withdrawing more than balance, withdraw from savings
 	var overdraw = amt - checkingAccount.balance;
-	checkingAccount.withdraw(checkingAccount.balance);
+	checkingAccount.withdraw(checkingAccount.balance, 'overdraw');
 	// If overdraw more than savings, return error
 	if (overdraw > savingsAccount.balance) {
 		throw "Error: Cannot withdraw amount greater than total balance."
 	} else {
-		savingsAccount.withdraw(overdraw);
+		savingsAccount.withdraw(overdraw, 'overdraw');
 	}
 }
 
@@ -198,8 +202,8 @@ function getDate() {
 	var day = d.getDate();
 	var time = d.getHours() + ":" + d.getMinutes();
 	var output = (month < 10 ? '0' : '') + month + '/' +
-		(day < 10 ? '0' : '') + day + ', ' +
-		d.getFullYear() + '/' +
+		(day < 10 ? '0' : '') + day + '/' +
+		d.getFullYear() + ', ' +
 		time;
 	return output;
 }
