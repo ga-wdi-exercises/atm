@@ -3,77 +3,81 @@
 const
 CHK = "checking";
 SAV = "savings";
+POSCLR ="#6C9A74";
+ZROCLR ="#F52F4F";
+GOODFLOATCHARS={"0":0,"1":1,"2":2,"3":3,"4":4,"5":5,"6":6,"7":7,"8":8,"9":9,".":0};
+
+/* Global Variables */
+
+balSavings = 200.0;
+balChecking =200.0;
 
 /* 1.0  Test jQuery is working */
 /*Make the <body>'s background color turn red */
 
 
-$("body").css("background-color","red");
+// $("body").css("background-color","red");
 $("#savings .input").attr("placeholder","200.00");
 $("#checking .input").attr("placeholder","200.00");
 $("#checking .input").val("$200.00");
 $("#savings .input").val("$200.00");
+setAmts(CHK,balChecking);
+setAmts(SAV,balSavings);
+setBkgActBox(CHK,balSavings,balChecking);
+setBkgActBox(SAV,balSavings,balChecking);
 
+
+
+function setBkgActBox(account,balSavings,balChecking) {
+   var clr;
+   var bal;
+
+  account==CHK?bal=balChecking:bal=balSavings;
+  bal>0?clr=POSCLR:clr=ZROCLR;
+  $("#"+ account +".account").css("background-color",clr);
+  return;
+}
+
+function validateNumStr(str){
+  /*Return only numeric portion of string removing spaces and other illigal chars */
+  var newStr="";
+   for (var i=0;i < str.length;i++) {
+  if (str[i] in GOODFLOATCHARS) {newStr+=str[i];}
+  } /* for i */
+ return newStr;
+}
 
 function getAmts( account ) {
   /* retrieve current values in account input field */
-  switch (account) {
-    case SAV:
-     console.log("Adding amount to checking account");
-     return( parseFloat($("#savings .input").val()));
-      break;
-    case CHK:
-     console.log("Adding amount to savings account");
-      return( parseFloat($("#checking .input").val()));
-       break;
-    default:
-     console.log("unknown account issues")
-  }
-}
+return parseFloat(validateNumStr($("#" + account+" .input").val()));
+
+} /* function getAmts */
+
+function setAmts( account,amt ) {
+  /* retrieve current values in account input field */
+$("#" + account+" .balance").text("$ "+ parseFloat(amt).toFixed(2));
+
+} /* function getAmts */
+
+
 
 function handleDeposit() {
-  console.log("In handleDeposit")
+
   /* Choose Account ( Checking or Savings) */
   var account =$(this).parent().attr("id");
-
-switch (account) {
-  case CHK:
-   console.log("Adding amount to checking account");
-   console.log(getAmts(CHK));
-    break;
-  case SAV:
-   console.log("Adding amount to savings account");
-   console.log(getAmts(CHK));
-     break;
-  default:
-   console.log("unknown account issues")
-}
-/*Ask for amount
-Cash or Check Deposit
-
-Ask for Receipt
-	Paper
-	Email
-	Paper or Email */
-
+  account==CHK?setAmts(account,balChecking+=getAmts(account)):setAmts(account,balSavings+=getAmts(account));
+  setBkgActBox(account,balSavings,balChecking);
 }
 
 
 function handleWithdraw() {
   console.log("In handleWithdraw")
   /* Choose Account ( Checking or Savings) */
-  var checking =$(this).parent().attr("id")==CHK;
-  var savings=!checking;
-
-/*Ask for amount
-Cash or Check Deposit
-
-Ask for Receipt
-	Paper
-	Email
-	Paper or Email */
-
+  var account =$(this).parent().attr("id");
+  account==CHK?setAmts(account,balChecking-=getAmts(account)):setAmts(account,balSavings-=getAmts(account));
+  setBkgActBox(account,balSavings,balChecking);
 }
+
 /* Add a click listener to the checking account's "Deposit" button */
 var depositButChecking=$("#checking .deposit");
 depositButChecking.on( "click", handleDeposit );

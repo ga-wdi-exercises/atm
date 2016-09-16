@@ -19,7 +19,8 @@ body {
 }
 
 .account {
-  background-color: #6C9A74;
+  /*background-color: #6C9A74;*/
+  background-color: #F52F4F;
   border: 1px solid #295A33;
   border-radius: 15px;
   display: inline-block;
