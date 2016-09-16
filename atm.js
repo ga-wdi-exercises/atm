@@ -1,7 +1,7 @@
 //TODO:
   // [x] combine event listeners
   // [ ] add a validator
-  // [ ] handle zero balance
+  // [ ] handle zero balance (add red style)
   // [ ] overdraft protection
 
 var bank = {
@@ -14,6 +14,9 @@ var $savingsBalance = $('#savings .balance');
 
 var $depositButtons = $('.deposit');
 var $withdrawButtons = $('.withdraw');
+
+
+// event listeners
 
 $depositButtons.on('click', function(){
   var amount = parseFloat($(this).siblings('.input').val());
@@ -44,6 +47,8 @@ function withdraw(account, display, amount) {
   display.html(toUSD(bank[account]));
 }
 
+
+// validation and formatting
 function validate(input) {
   input.replace()
   if (isNaN(input)) {
