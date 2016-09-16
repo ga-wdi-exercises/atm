@@ -24,7 +24,18 @@ function withdrawCheck(){
   var input = parseInt(checkAmt.val());
   balance = balance - input;
   checkBalance.text("$" + (balance));
+  checkIsZero()
 };
+
+//Checking Account turns red if balance is less than 0
+function checkIsZero(){
+  if (balance === 0) {
+    $("#checking.account").attr("class","zero");
+  } else if(balance > 0){
+    $("#checking.zero").attr("class","account");
+  };
+}
+
 
 var sbalance = 0;
 // //Savings Account Flow//
@@ -41,4 +52,14 @@ function withdrawSave(){
   var sinput = parseInt(saveAmt.val());
   sbalance = sbalance - sinput;
   saveBalance.text("$" + (sbalance));
+  saveIsZero();
 };
+
+//Savings Account turns red if balance is less than 0
+function saveIsZero(){
+  if (sbalance === 0) {
+    $("#savings.account").attr("class","zero");
+  } else if(sbalance > 0){
+    $("#savings.zero").attr("class","account");
+  };
+}
