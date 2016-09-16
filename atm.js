@@ -103,13 +103,15 @@ function withdrawChecking() {  //Withdraw Button for Checking
           alert("Deposit amount not accepted, please insert a number without special characters i.e (1000)");
         }else{
           if (userWithdrawSavings > totalSavingsValue) { //prevents savings account from going negative
-            alert(" Insufficent funds in savings account. Overdraft from checking to savings is not permitted as per 12 CFR 205.17")
+            alert(" Insufficent funds in savings account.")
           }else{
             totalSavingsValue = totalSavingsValue - userWithdrawSavings
             savings.Balance.text("$" + totalSavingsValue)
             savingsBalanceCheck()
           }
       }
+    }
+
           savings.WithdrawButton.on("click",withdrawSavings);
 
 
