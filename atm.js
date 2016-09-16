@@ -18,15 +18,23 @@ var savingsInput = $("#savings").children("input.input").val();
 
 // Function Time
 
-var oldBalance = 0;
+var Balance = 0;
 
 $("#checking .deposit").on("click", handleChecking);
+$("#checking .savings").on("click", handleCheckingWithdraw);
 
 function handleChecking() {
   var checkingInput = parseInt($("#checking").children("input.input").val());
+  var newBalance = checkingInput;
+  Balance = Balance + newBalance;
+  checkingBalance.text("$" + Balance);
+}
+
+function handleCheckingWithdraw() {
+  var checkingInput = parseInt($("#checking").children("input.input").val());
   var newBalance = parseInt(checkingInput);
-  oldBalance = oldBalance + newBalance;
-  checkingBalance.text(oldBalance);
+  oldBalance = oldBalance - newBalance;
+  checkingBalance.text("$" + oldBalance);
 }
 
 // console.log(CheckingInput);
