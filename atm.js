@@ -21,7 +21,7 @@ var savingsInput = $("#savings").children("input.input").val();
 var Balance = 0;
 
 $("#checking .deposit").on("click", handleChecking);
-$("#checking .savings").on("click", handleCheckingWithdraw);
+$("#checking .withdraw").on("click", handleCheckingWithdraw);
 
 function handleChecking() {
   var checkingInput = parseInt($("#checking").children("input.input").val());
@@ -33,8 +33,8 @@ function handleChecking() {
 function handleCheckingWithdraw() {
   var checkingInput = parseInt($("#checking").children("input.input").val());
   var newBalance = parseInt(checkingInput);
-  oldBalance = oldBalance - newBalance;
-  checkingBalance.text("$" + oldBalance);
+  Balance = Balance - newBalance;
+  checkingBalance.text("$" + Balance);
 }
 
 // console.log(CheckingInput);
