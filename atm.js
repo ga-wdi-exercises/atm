@@ -1,9 +1,8 @@
 $(document).ready(function(){
-  var balance = 0;
+
   var savings = 0;
   var checking = 0;
-  var balance1 = 0;
-  var deposit = 0;
+
 
 
   //Add a click listener to the checking account's "Deposit" button
@@ -18,15 +17,21 @@ $(document).ready(function(){
 
   //On clicking "Deposit", it should update the "balance" with the user input
   $("#checking .deposit").on("click", function() {
-    balance = balance + eval($('input.input').val());
-    console.log(balance);
-    $("#checking .balance").text(balance);
+    checking = checking + eval($('input.input').val());
+    console.log(checking);
+    $("#checking .balance").text(checking);
   });
   //On "Withdraw", it updates the balance
   $("#checking .withdraw").on("click", function() {
-    balance = balance - eval($('input.input').val());
-    console.log(balance);
-    $("#checking .balance").text(balance);
+    var amount = eval($('input.input').val());
+    if (checking - amount > 0) {
+
+      checking = checking - amount;
+      console.log(checking);
+    } else {
+      console.log('This account only has '+checking+' dollars in it. Your withdrawal request exceeds this balance by '+(amount - checking) + " " +'dollars.');
+    }
+    $("#checking .balance").text(checking);
   });
   //On clicking 'savings account' "Deposit", it should get the user input
 
@@ -39,8 +44,13 @@ $(document).ready(function(){
   });
   //On "Withdraw", it updates the balance (savings account);
   $("#savings .withdraw").on("click",function() {
-    savings = savings - eval($('#savings input.input').val());
-    console.log(savings);
+    var amount = eval($('#savings input.input').val());
+    if (savings - amount > 0) {
+      savings = savings - amount;
+      console.log(savings);
+    } else {
+      console.log('This account only has '+savings+' dollars in it. Your withdrawal request exceeds this balance by '+(amount - savings) + " " +'dollars.');
+    }
     $("#savings .balance").text(savings);
   })
 
