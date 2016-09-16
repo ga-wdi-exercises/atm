@@ -66,49 +66,39 @@ function transactSave(event){
   red()
 }
 
-checkTranB.on("click", checkTransfer)
-saveTranB.on("click", saveTransfer)
+checkTranB.on("click", Transfer)
+saveTranB.on("click", Transfer)
 
-function checkTransfer(e) {
-  var tranVal = checkTran.val()
-  var balance = parseInt(tranVal)
-  if (isNaN(balance)) {
-    alert("Please enter only numbers.")
-  } else {
-        if(actCheckBal >= balance) {
-        actSaveBal = actSaveBal + balance
-        actCheckBal = actCheckBal - balance
-        saveBal.text("$" + actSaveBal)
-        checkBal.text("$" + actCheckBal)
-      } else {
-        alert("Transaction not possible.")
-      }
-        red()
-        e.preventDefault()
+function Transfer(event) {
+  event.preventDefault()
+
+  // if(actCheckBal >= balance) {
+  if($(this).parent().attr("id") == "savings"){
+    var balance = parseInt(saveTran.val())
+
+    if (isNaN(balance)) {
+      return alert("Please enter only numbers.")}
+    actCheckBal = actCheckBal + balance
+    actSaveBal = actSaveBal - balance
   }
-}
-function saveTransfer(e) {
-  var tranVal = saveTran.val()
-  var balance = parseInt(tranVal)
-  if (isNaN(balance)) {
-    alert("Please enter only numbers.")
-  } else {
-        if(actSaveBal >= balance) {
-        actCheckBal = actCheckBal + balance
-        actSaveBal = actSaveBal - balance
-        saveBal.text("$" + actSaveBal)
-        checkBal.text("$" + actCheckBal)
-      } else {
-        alert("Transaction not possible.")
-      }
-        red()
-        e.preventDefault()
-    }
+  else{
+    var balance = parseInt(checkTran.val())
+
+    if (isNaN(balance)) {
+      return alert("Please enter only numbers.")}
+    actSaveBal = actSaveBal + balance
+    actCheckBal = actCheckBal - balance
+  }
+    saveBal.text("$" + actSaveBal)
+    checkBal.text("$" + actCheckBal)
+  // } else {
+  //   alert("Transaction not possible.")
+  // }
+    red()
 }
 
 function checkOverdraft() {
-  var checkValW = checkIn.val()
-  var balance = parseInt(checkValW)
+  var balance = parseInt(checkIn.val())
   if ((actCheckBal + actSaveBal) >= balance) {
     var remainder = actCheckBal - balance
     actCheckBal = 0
@@ -120,8 +110,7 @@ function checkOverdraft() {
   }
 }
 function saveOverdraft() {
-  var saveValW = saveIn.val()
-  var balance = parseInt(saveValW)
+  var balance = parseInt(saveIn.val())
   if ((actCheckBal + actSaveBal) >= balance) {
     var remainder = actSaveBal - balance
     actSaveBal = 0
