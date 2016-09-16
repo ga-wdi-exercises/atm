@@ -43,37 +43,52 @@ function savingsBalanceCheck() { //Changes the checking module if total amount i
 
 function depositChecking() {  //Deposit Button for Checking
   var userDepositChecking = parseInt(checking.Input.val())
+    if (isNaN(userDepositChecking)) {
+      alert("Deposit amount not accepted, please insert a number without special characters i.e (1000)");
+    }else{
   totalCheckingValue = totalCheckingValue + userDepositChecking
   checking.Balance.text("$" + totalCheckingValue)
   checkingBalanceCheck()
+}
 }
 
   checking.DepositButton.on("click",depositChecking);
 
 function withdrawChecking() {  //Withdraw Button for Checking
   var userWithdrawChecking = parseInt(checking.Input.val())
-    if (userWithdrawChecking > totalCheckingValue) {
-      alert(" Insufficent funds in checking account")
+  if (isNaN(userWithdrawChecking)) {
+    alert("Withdraw amount not accepted, please insert a number without special characters i.e (1000)");
     }else{
-      totalCheckingValue = totalCheckingValue - userWithdrawChecking
-      checking.Balance.text("$" + totalCheckingValue)
-      checkingBalanceCheck()
+      if (userWithdrawChecking > totalCheckingValue) {
+        alert(" Insufficent funds in checking account")
+      }else{
+        totalCheckingValue = totalCheckingValue - userWithdrawChecking
+        checking.Balance.text("$" + totalCheckingValue)
+        checkingBalanceCheck()
     }
+}
 }
       checking.WithdrawButton.on("click",withdrawChecking);
 
 
   function depositSavings() {  //Deposit Button for SAvings
         var userDepositSavings = parseInt(savings.Input.val())
-        totalSavingsValue = totalSavingsValue + userDepositSavings
-        savings.Balance.text("$" + totalSavingsValue)
-        savingsBalanceCheck()
+        if (isNaN(userDepositSavings)) {
+          alert("Deposit amount not accepted, please insert a number without special characters i.e (1000)");
+        }else{
+          totalSavingsValue = totalSavingsValue + userDepositSavings
+          savings.Balance.text("$" + totalSavingsValue)
+          savingsBalanceCheck()
       }
+    }
       savings.DepositButton.on("click",depositSavings);
 
 
   function withdrawSavings() {  //Withdraw Button for Savings
         var userWithdrawSavings = parseInt(savings.Input.val())
+        if (isNaN(userWithdrawSavings)) {
+          alert("Deposit amount not accepted, please insert a number without special characters i.e (1000)");
+        }else{
           if (userWithdrawSavings > totalSavingsValue) {
             alert(" Insufficent funds in savings account")
           }else{
@@ -82,6 +97,7 @@ function withdrawChecking() {  //Withdraw Button for Checking
             savingsBalanceCheck()
           }
       }
+    }
           savings.WithdrawButton.on("click",withdrawSavings);
 
 
