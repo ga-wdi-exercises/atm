@@ -73,45 +73,6 @@ function Transaction() {
 	}
 }
 
-// Add transactions to DOM
-function printTransaction(transaction) {
-	// Begin html table row
-	var logEntry = '<tr>';
-
-	// Add date
-	logEntry += '<td>' + transaction.date + '</td>'; // TODO fix date
-
-	// Add account
-	logEntry += '<td class="capitalize">' + transaction.account + '</td>';
-
-	// Add type w coloring
-	if (transaction.type === 'deposit') {
-		logEntry += '<td class="green capitalize">' + transaction.type + '</td>';
-	} else if (transaction.type === 'withdraw' || transaction.type === 'overdraw') {
-		logEntry += '<td class="red capitalize">' + transaction.type + '</td>';
-	} else {
-		logEntry += '<td class="blue capitalize">' + transaction.type + '</td>';
-	}
-
-	// Add amount w coloring
-	if (transaction.type === 'deposit') {
-		logEntry += '<td class="green">$' + transaction.amount + '</td>';
-	} else if (transaction.type === 'withdraw' || transaction.type === 'overdraw') {
-		logEntry += '<td class="red">$' + transaction.amount + '</td>';
-	} else {
-		logEntry += '<td class="blue">$' + transaction.amount + '</td>';
-	}
-
-	// Add balance
-	logEntry += '<td>$' + transaction.newBalance + '</td>';
-
-	// End html table row
-	logEntry += '</tr>';
-
-	// Add to DOM
-	$('#log .labels').after(logEntry);
-}
-
 
 
 // GLOBAL OBJECTS
@@ -186,15 +147,7 @@ $('.transfer').on('click', function() {
 
 
 
-// MISC FUNCTIONS
-// Format input from string to number, clean input
-// TODO if input is all string, input = 0
-function formatInput(input) {
-	input = input.replace(/[^\d\.]/g, ''); // Remove non-numbers except '.'
-	var value = parseFloat(input);
-	return value;
-}
-
+// MAIN FUNCTIONS
 // Check for overdraw
 function overdrawChecking(amt) {
 	// If withdrawing more than balance, withdraw from savings
@@ -206,6 +159,56 @@ function overdrawChecking(amt) {
 	} else {
 		savingsAccount.withdraw(overdraw, 'overdraw');
 	}
+}
+
+// Add transactions to DOM
+function printTransaction(transaction) {
+	// Begin html table row
+	var logEntry = '<tr>';
+
+	// Add date
+	logEntry += '<td>' + transaction.date + '</td>'; // TODO fix date
+
+	// Add account
+	logEntry += '<td class="capitalize">' + transaction.account + '</td>';
+
+	// Add type w coloring
+	if (transaction.type === 'deposit') {
+		logEntry += '<td class="green capitalize">' + transaction.type + '</td>';
+	} else if (transaction.type === 'withdraw' || transaction.type === 'overdraw') {
+		logEntry += '<td class="red capitalize">' + transaction.type + '</td>';
+	} else {
+		logEntry += '<td class="blue capitalize">' + transaction.type + '</td>';
+	}
+
+	// Add amount w coloring
+	if (transaction.type === 'deposit') {
+		logEntry += '<td class="green">$' + transaction.amount + '</td>';
+	} else if (transaction.type === 'withdraw' || transaction.type === 'overdraw') {
+		logEntry += '<td class="red">$' + transaction.amount + '</td>';
+	} else {
+		logEntry += '<td class="blue">$' + transaction.amount + '</td>';
+	}
+
+	// Add balance
+	logEntry += '<td>$' + transaction.newBalance + '</td>';
+
+	// End html table row
+	logEntry += '</tr>';
+
+	// Add to DOM
+	$('#log .labels').after(logEntry);
+}
+
+
+
+// MISC FUNCTIONS
+// Format input from string to number, clean input
+// TODO if input is all string, input = 0
+function formatInput(input) {
+	input = input.replace(/[^\d\.]/g, ''); // Remove non-numbers except '.'
+	var value = parseFloat(input);
+	return value;
 }
 
 // Format date
