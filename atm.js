@@ -17,7 +17,7 @@
 var accounts = {
     checking: {
         input: $("#checking .input"),
-        balance: 1,
+        balance: 0,
         screenBalance: $("#checking .balance"),
         deposit: $("#checking .deposit"),
         withdraw: $("#checking .withdraw")
@@ -44,6 +44,7 @@ accounts.checking.withdraw.on("click", function(){
     var change = parseInt(checkingInput)
     accounts.checking.balance = accounts.checking.balance - change
     accounts.checking.screenBalance.text("$" + accounts.checking.balance)
+    checkingOverdrawn()
 })
 
 accounts.savings.deposit.on("click", function(){
@@ -57,10 +58,17 @@ accounts.savings.withdraw.on("click", function(){
     var change = parseInt(savingsInput)
     accounts.savings.balance = accounts.savings.balance - change
     accounts.savings.screenBalance.text("$" + accounts.savings.balance)
+    savingsOverdrawn()
 })
 
-// Bonus
-if (accounts.savings.screenBalance || accounts.checking.screenBalance < 0){
-    console.log("hey")
-    $("#checking account").css("background-color","tomato")
+
+function savingsOverdrawn(){
+    if (accounts.savings.balance < 0){
+        $("#savings.account").addClass("zero")
+    }
+} 
+function checkingOverdrawn(){   
+    if (accounts.checking.balance < 0){
+        $("#checking.account").addClass("zero")
+    }
 }
