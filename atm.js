@@ -12,14 +12,12 @@ function Account() {
 		balance: 0,
 		deposit: function(amt) {
 			this.balance += amt;
-			console.log(this);
-			console.log(this.domElement);
 			this.refreshBalance();
 			// TODO log transaction
 		},
 		withdraw: function(amt) {
 			this.balance -= amt;
-			// TODO if balance is negative
+			// TODO if balance is negative, overdraw solution
 			this.refreshBalance();
 			// TODO log transaction
 		},
@@ -47,7 +45,7 @@ var log = [];
 var transaction = {
 	date: 0,
 	time: 0,
-	type: "",
+	type: "", // deposit, withdraw, overdraw
 	amount: 0,
 	oldBalance: 0,
 	newBalance: 0,
@@ -58,18 +56,27 @@ var transaction = {
 // TODO refactor listeners
 
 $('.deposit').on('click', function() {
+	// Deposit checking
 	if ($(this).parent().attr('id') === "checking") {
 		checkingAccount.deposit(formatInput($('#checking .input').val()));
 	}
+	// Deposit savings
 	if ($(this).parent().attr('id') === "savings") {
 		savingsAccount.deposit(formatInput($('#savings .input').val()));
 	}
 })
 
 $('.withdraw').on('click', function() {
+	// Withdraw checking
 	if ($(this).parent().attr('id') === "checking") {
-		checkingAccount.withdraw(formatInput($('#checking .input').val()));
+		var amt = formatInput($('#checking .input').val());
+		if (amt > checkingAccount.balance) {
+			overdrawChecking(amt);
+		} else {
+			checkingAccount.withdraw(amt);
+		}
 	}
+	// Withdraw savings
 	if ($(this).parent().attr('id') === "savings") {
 		savingsAccount.withdraw(formatInput($('#savings .input').val()));
 	}
@@ -84,6 +91,18 @@ function formatInput(input) {
 	input = input.replace(/[^\d\.]/g, ''); // Remove non-numbers except '.'
 	var value = parseFloat(input);
 	return value;
+}
+
+function overdrawChecking(amt) {
+	// If withdrawing more than balance, withdraw from savings
+	var overdraw = amt - checkingAccount.balance;
+	checkingAccount.withdraw(checkingAccount.balance);
+	// If overdraw more than savings, return error
+	if (overdraw > savingsAccount.balance) {
+		throw "Error: Cannot withdraw amount greater than total balance."
+	} else {
+		savingsAccount.withdraw(overdraw);
+	}
 }
 
 
