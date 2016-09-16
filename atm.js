@@ -5,7 +5,7 @@
 var actBal = {
   "checking":200,
   "savings":200,
-  "odProtect":false
+  "odProtect":true  /* true for overdraft protection false for no protection */
 }
 
 /* Constant Definitions */
@@ -37,7 +37,7 @@ function getActBal (account) {  /* return the current account balace of indicate
   return(actBal[account]);
 }
 
-function setBkgActBox(account) {
+function setBkgActBox(account) { /* set account box to correct color for zero balance */
 
    var clr; /* color to set background to */
 
@@ -84,17 +84,43 @@ function fundsAvail(act) {
   return(getActBal(act)-getAmts(act) >=0 );
 }
 
+function moveMoneyToCover(act,amt){
+ /* find out how short we are in the current account
+    move over that amount of money from alternate account to cover */
+
+  var shortFall = amt-getActBal(act);
+  var altAct= act=="checking"? altAct="savings":altAct="checking";
+
+  /* add shortFall to alternate account */
+    setActBal(altAct,getActBal(altAct)-shortFall);  /* take shortfall from alternate account */
+    setActBal(act,getActBal(act)+shortFall);  /* add sortfall to account */
+
+    setBal(act);     /* set balance display on both accounts */
+    setBal(altAct);
+  return;
+}
+
+
 function handleOverDraft(act,amt) {
   /* is there enough money in all accounts to cover */
   /*  yes -> remove money from alternate account and add to account  return True*/
-
+   if (actBal.checking +actBal.savings >= amt)
+     {
+       moveMoneyToCover(act,amt);
+       return  true;
+     }
+     return false;
 }
 
 function chkForOverDraft( act, amt) {
   /* check for overdraft mode */
 if (actBal.odProtect) {
    /* over draft Protection enabled */
-     handleOverDraft(act,amt);
+     if (handleOverDraft(act,amt))
+        {
+          /* if we can handle the overdraft do withdrawl again (recursive) */
+          handleWithdraw(null,act);
+        };
   } else {
       /*  no -> return false */
     return false;
@@ -103,9 +129,9 @@ if (actBal.odProtect) {
 
 
 
-function handleWithdraw() {
+function handleWithdraw(event,account) {
   /* Choose Account ( Checking or Savings) */
-  var account =$(this).parent().attr("id");
+  var account =account||$(this).parent().attr("id");
   var amtToWithdraw=getAmts(account);
   if( fundsAvail(account) ) {  /* check if we have enough to widthdraw */
     setAmts(account,setActBal(account,getActBal(account)-amtToWithdraw ));
