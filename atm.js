@@ -15,7 +15,7 @@ var savInput = $("#savings").children("input.input");
 
 var balance = 0
 var savingBalance = 0
-var total = savingBalance + balance;
+// var total = savingBalance + balance;
 
 checkAdd.on("click",addAmount);
 function addAmount(){
@@ -25,10 +25,9 @@ function addAmount(){
 }
   checkSub.on("click",subtractAmount);
   function subtractAmount(){
-    var total = balance + savingBalance;
     var value = parseInt(checkInput.val());
     if (balance < value){
-      alert("we will transfer money from your savings account")
+      alert("We will transfer money from your savings account")
       balance = savingBalance;
       checkBal.text(balance)
       savingBalance = 0;
@@ -36,14 +35,7 @@ function addAmount(){
     if (balance<value){
       alert("Insufficient Funds")
     }
-    // checkBal.text(balance)
   }
-    // else if (savingBalance < total) {
-    //   alert("Insufficient Funds")
-    // }
-    // savingBalance =  savingBalance - balance;
-      // console.log("it works")
-      // alert("Insufficient Funds");
     else{
     balance = balance- value
     checkBal.text(balance);
@@ -57,22 +49,27 @@ function addAmount(){
     savingBalance = value + savingBalance
     savBal.text(savingBalance);
   }
+
   savSub.on("click",savSubtractAmount);
   function savSubtractAmount(){
     var value = parseInt(savInput.val());
     if (savingBalance< value){
-      alert("we will transfer money from your savings account")
-      balance = savingBalance;
-      checkBal.text(balance)
-      savingBalance = 0;
-    savBal.text(savingBalance);
-    if (balance<value){
+      alert("We will transfer money from your savings account.")
+      savingBalance = balance;
+      savBal.text(savingBalance)
+      balance = 0;
+    checkBal.text(balance);
+    if (savingBalance<value){
       alert("Insufficient Funds")
-    }else{
+    }
+  }else{
     savingBalance = savingBalance - value;
     }
       savBal.text(savingBalance);
     }
+    // var total = balance + savingBalance;
+    // checkBal.text(balance)
+
 
   // checkBal.text(value) + parseInt((checkInput.val()));
   // console.log(value)
@@ -100,3 +97,10 @@ function addAmount(){
 // $(".withdraw").on("click", subtractAmount);
 // function subtractAmount(){
 // 8. show remaining balance
+
+// else if (savingBalance < total) {
+//   alert("Insufficient Funds")
+// }
+// savingBalance =  savingBalance - balance;
+// console.log("it works")
+// alert("Insufficient Funds");
