@@ -9,14 +9,33 @@ var checkBal = $("#checking").children(".balance")
 var saveBal = $("#savings").children(".balance")
 
 var actCheckBal = 0
+var actSaveBal = 0
+
+function red () {
+  if (actCheckBal == 0) {
+    $("#checking").addClass("zero")
+  } else {
+    $("#checking").removeClass("zero")
+  };
+  if (actSaveBal == 0) {
+    $("#savings").addClass("zero")
+  } else {
+    $("#savings").removeClass("zero")
+  };
+}
+red()
+
 checkAdd.on("click", deposit)
 checkMin.on("click", withdraw)
+
+
 
 function deposit(e) {
   var checkValD = checkIn.val()
   var balance = parseInt(checkValD)
   actCheckBal = actCheckBal + balance
   checkBal.text("$" + actCheckBal)
+  red()
   e.preventDefault()
 }
 function withdraw(e) {
@@ -28,9 +47,10 @@ function withdraw(e) {
   actCheckBal = actCheckBal - balance
   checkBal.text("$" + actCheckBal)
   }
+  red()
   e.preventDefault()
 }
-var actSaveBal = 0
+
 saveAdd.on("click", depositSave)
 saveMin.on("click", withdrawSave)
 
@@ -39,6 +59,7 @@ function depositSave(e) {
   var balance = parseInt(saveValD)
   actSaveBal = actSaveBal + balance
   saveBal.text("$" + actSaveBal)
+  red()
   e.preventDefault()
 }
 function withdrawSave(e) {
@@ -50,5 +71,6 @@ function withdrawSave(e) {
   actSaveBal = actSaveBal - balance
   saveBal.text("$" + actSaveBal)
   }
+  red()
   e.preventDefault()
 }
