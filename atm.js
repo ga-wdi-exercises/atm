@@ -2,7 +2,7 @@ var depositC = $("#checking")
 var withdrawC = $("#checking")
 var depositS = $("#savings")
 var withdrawS = $("#savings")
-var balance = 0
+//var balance = 0
 var total = 0
 var checking = $(".account")
 var savings = $(".account")
@@ -12,10 +12,11 @@ var depositbuttonC = $("#checking").children("input.deposit")
 var withdrawbuttonC = $("#checking").children("input.withdraw")
 var depositbuttonS = $("#savings").children("input.deposit")
 var withdrawbuttonS = $("#savings").children("input.withdraw")
-var balance = parseInt($("#checking.balance").val());
+var checkingBalance = parseInt($("#checking .balance").val());
+var savingsBalance = parseInt($("#savings" .balance). val());
 
 //var checkIn = $("checking").children("input.input")
-var saveIn  = $("savings").children("input.input")
+//var saveIn  = $("savings").children("input.input")
 
 /*function amountEntered() {
   var checkIn = parseInt($(".input").val())
@@ -29,15 +30,33 @@ depositbuttonC.on("click", function () {
 
 function totalInAccount() {
   var userInput = parseInt($("#checking .input").val())
-  var balance = parseInt($("#checking.balance").val());
-  console.log(userInput)
-  console.log(balance)
+  var checkingBalance = parseInt(userInput)
+  console.log(checkingBalance)
   if (userInput > 0) {
-   $("#checking .balance").text("$" + (userInput + balance))
+   $("#checking .balance").text("$" + checkingBalance)
   }
   else  { alert("No withdrawal can be made")
 }
 }
+
+console.log(depositbuttonS)
+depositbuttonS.on("click", function () {
+  var userInput = parseInt($("#savings .input").val())
+  console.log(userInput)
+  totalInAccountS()
+});
+
+function totalInAccountS() {
+  var userInput = parseInt($("#savings .input").val())
+  var savingsBalance = parseInt(userInput)
+  console.log(savingsBalance)
+  if (userInput > 0) {
+   $("#savings .balance").text("$" + savingsBalance)
+  }
+  else  { alert("No withdrawal can be made")
+}
+}
+//$("#checking .balance").val());
 //checkIn.click(parseInt($(".input").val()))
 //amountEntered()
 //totalInAccount()
