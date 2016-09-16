@@ -10,12 +10,6 @@ var bank = {
   savings: 0,
 }
 
-var $checkingBalance = $('#checking .balance');
-var $savingsBalance = $('#savings .balance');
-
-var $depositButtons = $('.deposit');
-var $withdrawButtons = $('.withdraw');
-
 var $buttons = $('input:button');
 
 $buttons.on('click', function(){
@@ -23,7 +17,6 @@ $buttons.on('click', function(){
   var amount = getInput(self);
   update(self, amount);
 })
-
 
 function update(button, amount) {
   var account = button.parent().attr('id');
