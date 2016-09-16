@@ -19,11 +19,16 @@ var $withdrawButtons = $('.withdraw');
 // event listeners
 $depositButtons.on('click', function(){
   var self = $(this);
-  var amount = parseFloat(self.siblings('.input').val());
-  if (self.parent().is("#checking")) {
-    deposit("checkingBalance", $checkingBalance, amount);
+  var amount = getInput(self);
+  if (amount) {
+    if (self.parent().is("#checking")) {
+      deposit("checkingBalance", $checkingBalance, amount);
+    } else {
+      deposit("savingsBalance", $savingsBalance, amount);
+    }
   } else {
-    deposit("savingsBalance", $savingsBalance, amount);
+    alert("That's not a number!");
+    self.siblings('.input').val('');
   }
 })
 
@@ -48,23 +53,13 @@ function withdraw(account, display, amount) {
   display.html(toUSD(bank[account]));
 }
 
-function getInput() {
-  var input = self.siblings('.input').val();
-  var amount = paresFloat(input.replace(/\$|,/g, ""));
+function getInput(form) {
+  var input = form.siblings('.input').val();
+  var amount = parseFloat(input.replace(/\$|,/g, ""));
   if (amount) {
     return amount;
   } else {
     return false;
-  }
-}
-
-
-// validation and formatting
-function validate(input) {
-  if (isNaN(input)) {
-    alert("Please, numbers only. Don't bother with dollar signs or anything else.")
-  } else {
-    return input;
   }
 }
 
