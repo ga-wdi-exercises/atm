@@ -1,6 +1,6 @@
 //TODO:
   // [x] combine event listeners
-  // [ ] add a validator
+  // [x] add a validator
   // [ ] handle zero balance (add red style)
   // [ ] overdraft protection
 
@@ -34,11 +34,16 @@ $depositButtons.on('click', function(){
 
 $withdrawButtons.on('click', function(){
   var self = $(this);
-  var amount = parseFloat(self.siblings('.input').val());
-  if (self.parent().is("#checking")) {
-    withdraw("checkingBalance", $checkingBalance, amount);
+  var amount = getInput(self);
+  if (amount) {
+    if (self.parent().is("#checking")) {
+      withdraw("checkingBalance", $checkingBalance, amount);
+    } else {
+      withdraw("savingsBalance", $savingsBalance, amount);
+    }
   } else {
-    withdraw("savingsBalance", $savingsBalance, amount);
+    alert("That's not a number!");
+    self.siblings('.input').val('');
   }
 })
 
@@ -56,11 +61,8 @@ function withdraw(account, display, amount) {
 function getInput(form) {
   var input = form.siblings('.input').val();
   var amount = parseFloat(input.replace(/\$|,/g, ""));
-  if (amount) {
-    return amount;
-  } else {
-    return false;
-  }
+  // double check that the amount is actually a number. If not, return false
+  return amount ? amount : false;
 }
 
 function toUSD(number) {
