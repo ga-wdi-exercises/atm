@@ -16,13 +16,31 @@ function deposit(e) {
   var checkValD = checkIn.val()
   var balance = parseInt(checkValD)
   actCheckBal = actCheckBal + balance
-  checkBal.text(actCheckBal)
+  checkBal.text("$" + actCheckBal)
   e.preventDefault()
 }
 function withdraw(e) {
   var checkValW = checkIn.val()
   var balance = parseInt(checkValW)
   actCheckBal = actCheckBal - balance
-  checkBal.text(actCheckBal)
+  checkBal.text("$" + actCheckBal)
+  e.preventDefault()
+}
+var actSaveBal = 0
+saveAdd.on("click", depositSave)
+saveMin.on("click", withdrawSave)
+
+function depositSave(e) {
+  var saveValD = saveIn.val()
+  var balance = parseInt(saveValD)
+  actSaveBal = actSaveBal + balance
+  saveBal.text("$" + actSaveBal)
+  e.preventDefault()
+}
+function withdrawSave(e) {
+  var saveValW = saveIn.val()
+  var balance = parseInt(saveValW)
+  actSaveBal = actSaveBal - balance
+  saveBal.text("$" + actSaveBal)
   e.preventDefault()
 }
