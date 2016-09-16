@@ -15,10 +15,16 @@ function Account() {
 			this.refreshBalance();
 			// TODO log transaction
 		},
-		withdraw: function(amt) {
+		withdraw: function(amt, type) {
 			this.balance -= amt;
-			// TODO if balance is negative, overdraw solution
 			this.refreshBalance();
+			// TODO log transaction
+		},
+		transfer: function(amt, toAccount) {
+			this.balance -= amt;
+			toAccount.balance += amt;
+			this.refreshBalance();
+			toAccount.refreshBalance();
 			// TODO log transaction
 		},
 		refreshBalance: function() {
@@ -78,7 +84,33 @@ $('.withdraw').on('click', function() {
 	}
 	// Withdraw savings
 	if ($(this).parent().attr('id') === "savings") {
-		savingsAccount.withdraw(formatInput($('#savings .input').val()));
+		var amt = formatInput($('#savings .input').val());
+		if (amt > savingsAccount.balance) {
+			throw "Error: Cannot withdraw amount greater than account balance.";
+		} else {
+			savingsAccount.withdraw(amt);
+		}
+	}
+})
+
+$('.transfer').on('click', function() {
+	// Transfer checking
+	if ($(this).parent().attr('id') === "checking") {
+		var amt = formatInput($('#checking .input').val());
+		if (amt > checkingAccount.balance) {
+			throw "Error: Cannot transfer amount greater than account balance.";
+		} else {
+			checkingAccount.transfer(amt, savingsAccount);
+		}
+	}
+	// Transfer savings
+	if ($(this).parent().attr('id') === "savings") {
+		var amt = formatInput($('#savings .input').val());
+		if (amt > savingsAccount.balance) {
+			throw "Error: Cannot transfer amount greater than account balance.";
+		} else {
+			savingsAccount.transfer(amt, checkingAccount);
+		}
 	}
 })
 
@@ -104,6 +136,8 @@ function overdrawChecking(amt) {
 		savingsAccount.withdraw(overdraw);
 	}
 }
+
+// TODO transfer function
 
 
 
