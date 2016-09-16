@@ -6,8 +6,6 @@ var checkBal = $("#checking").children(".balance")
 var saveBal = $("#savings").children(".balance")
 var checkIn = $("#checking").children("input.input")
 var saveIn = $("#savings").children("input.input")
-var checkTrans = $("#checking").children("input.transfer")
-var saveTrans = $("#savings").chidren("input.transfer")
 
 var actCheckBal = 0
 checkAdd.on("click", checkDeposit)
@@ -18,6 +16,8 @@ function checkDeposit(e){
   e.preventDefault()
   actCheckBal = balance + actCheckBal
   checkBal.text("$" + actCheckBal)
+  if (actCheckBal > 0)
+    checkBal.css("background", "#E3E3E3")
 }
 
 checkMin.on("click", checkWithdraw)
@@ -28,9 +28,9 @@ checkMin.on("click", checkWithdraw)
     e.preventDefault()
     actCheckBal = actCheckBal - balance
     checkBal.text("$" + actCheckBal)
-    for(val i = 0; i > 0; i++){
-      //for every loop that returns less than zero, cancel the function.//
-      // if (i > 0 == null)
+      if (actCheckBal < 0)
+        checkBal.css("background", "red")
+
   }
 var actSaveBal = 0
 saveAdd.on("click", saveDeposit)
@@ -41,6 +41,8 @@ function saveDeposit(e){
   e.preventDefault()
   actSaveBal = balance + actSaveBal
   saveBal.text("$" + actSaveBal)
+    if (actSaveBal > 0)
+      saveBal.css("background", "#E3E3E3")
 }
 
 saveMin.on("click", saveWithdraw)
@@ -51,4 +53,6 @@ function saveWithdraw(e){
   e.preventDefault()
   actSaveBal = actSaveBal - balance
   saveBal.text("$" + actSaveBal)
+  if (actSaveBal < 0)
+    saveBal.css("background", "red")
 }

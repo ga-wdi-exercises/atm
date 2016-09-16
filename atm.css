@@ -18,6 +18,14 @@ body {
   font-size: 50px;
 }
 
+#checking{
+  background-color: rgba(255, 0, 0, 0.5);
+}
+
+#savings{
+  background-color: rgba(0, 0, 255, 0.5);
+}
+
 .account {
   background-color: #6C9A74;
   border: 1px solid #295A33;
