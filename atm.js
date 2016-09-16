@@ -14,8 +14,8 @@ var savSub = $("#savings").children("input.withdraw");
 var savInput = $("#savings").children("input.input");
 
 var balance = 0
-var total = function total(){
-  total = balance + savingBalance };
+var savingBalance = 0
+var total = savingBalance + balance;
 
 checkAdd.on("click",addAmount);
 function addAmount(){
@@ -24,22 +24,33 @@ function addAmount(){
   checkBal.text(balance);
 }
   checkSub.on("click",subtractAmount);
-
   function subtractAmount(){
+    var total = balance + savingBalance;
     var value = parseInt(checkInput.val());
     if (balance < value){
-      alert("we will take money from the savings account")
-    balance = balance + savingBalance;
-    savingBalance =  savingBalance - balance;
-      console.log("it works")
+      alert("we will transfer money from your savings account")
+      balance = savingBalance;
+      checkBal.text(balance)
+      savingBalance = 0;
+    savBal.text(savingBalance);
+    if (balance<value){
+      alert("Insufficient Funds")
+    }
+    // checkBal.text(balance)
+  }
+    // else if (savingBalance < total) {
+    //   alert("Insufficient Funds")
+    // }
+    // savingBalance =  savingBalance - balance;
+      // console.log("it works")
       // alert("Insufficient Funds");
-    }else{
+    else{
     balance = balance- value
     checkBal.text(balance);
   }
 }
 
-  var savingBalance = 0
+
   savAdd.on("click",savAddAmount);
   function savAddAmount(){
     var value = parseInt(savInput.val());
@@ -49,8 +60,14 @@ function addAmount(){
   savSub.on("click",savSubtractAmount);
   function savSubtractAmount(){
     var value = parseInt(savInput.val());
-    if (savingBalance < value){
-        alert("Insufficient Funds")
+    if (savingBalance< value){
+      alert("we will transfer money from your savings account")
+      balance = savingBalance;
+      checkBal.text(balance)
+      savingBalance = 0;
+    savBal.text(savingBalance);
+    if (balance<value){
+      alert("Insufficient Funds")
     }else{
     savingBalance = savingBalance - value;
     }
