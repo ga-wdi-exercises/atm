@@ -63,9 +63,9 @@ function withdrawSavings(){
 //
 //
 
-function checkZero(){
-$("#checking").toggleClass("zero",function("#checking", "account")
-  }
+// function checkZero(){
+// $("#checking").toggleClass("zero",function("#checking", "account")
+//   }
 
 
 
