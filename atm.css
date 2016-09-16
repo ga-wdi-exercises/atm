@@ -66,3 +66,15 @@ body {
 	padding: 15px;
 	text-align: left;
 }
+
+.capitalize {
+    text-transform:capitalize;
+}
+
+.green {
+	color: #a0d468;
+}
+
+.red {
+	color: #ed5565;
+}
