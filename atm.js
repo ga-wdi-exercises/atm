@@ -13,43 +13,42 @@
 */
 
 
-// variables for Checking
+// my Objects
 var accounts = {
     checking: {
         input: $("#checking .input"),
         balance: 0,
         screenBalance: $("#checking .balance"),
-        deposit: $("#checking .deposit") ,
+        deposit: $("#checking .deposit"),
         withdraw: $("#checking .withdraw")
-    }
+    },
     savings: {
         input: $("#savings .input"),
         balance: 0,    
-        screenBalance: $("#savings .balance")
-        deposit: $("#savings .deposit")
+        screenBalance: $("#savings .balance"),
+        deposit: $("#savings .deposit"),
         withdraw: $("#savings .withdraw")
     }
 }
 
 
-// variables for Savings (seems like duplicate code)
-
-
-checking.on("click", function(){
-    add("checking")
+// event listener
+accounts.checking.deposit.on("click", function(){
+    var checkingInput = accounts.checking.input.val()
+    var change = parseInt(checkingInput)
+    accounts.checking.balance = accounts.checking.balance + change
+    accounts.checking.screenBalance.text("$" + accounts.checking.balance)
 })
 
 
-/* 
-function add(account) {
-    var checkInput = accounts[account].input.val()
-    var newBalance = parseInt(checkInput)
+// hoisted functions
+function add() {
 
-    balance = newBalance + balance
+    balance = screenBalance + balance
 
-    accounts[account].checkingDisplayBalance.text("$" + balance)
 }
 
+/*
 checkingWithdraw.on("click", subtract)
 
 function subtract() {
