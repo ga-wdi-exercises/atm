@@ -63,11 +63,11 @@ function withdrawChecking() {  //Withdraw Button for Checking
         var overDraw = (userWithdrawChecking - totalCheckingValue)
 
           if (overDraw > totalSavingsValue) {
-            alert("Cannot draw from savings account due to insufficient funds, you are broke")
+            alert("Cannot draw from savings account due to insufficient funds, you are broke") //error if overdraft greater than both accounts
           }else {
             alert("Overdraft warning: You are withdrawing $" + userWithdrawChecking + " However, there is only $" + totalCheckingValue +
             " available in Checking Account. Drafting $" + overDraw + " from Savings to Checking")
-        totalSavingsValue = totalSavingsValue - overDraw
+        totalSavingsValue = totalSavingsValue - overDraw             //overdraft from savings if sufficient funds available
         totalCheckingValue = totalCheckingValue + overDraw
          savings.Balance.text("$" + totalSavingsValue)
          savingsBalanceCheck()
@@ -75,7 +75,7 @@ function withdrawChecking() {  //Withdraw Button for Checking
          checkingBalanceCheck()
        }
      }else {
-        totalCheckingValue = totalCheckingValue - userWithdrawChecking //Procedure if there are sufficient funds
+        totalCheckingValue = totalCheckingValue - userWithdrawChecking //Procedure if there are sufficient funds and no need for overdraft
         checking.Balance.text("$" + totalCheckingValue)
         checkingBalanceCheck()
     }
@@ -110,16 +110,11 @@ function withdrawChecking() {  //Withdraw Button for Checking
             savingsBalanceCheck()
           }
       }
-    }
           savings.WithdrawButton.on("click",withdrawSavings);
 
 
 //Fix issue with comma inputs
 
-// var userDepositChecking = checking.Input.val()
-// if (userDepositChecking === "") {
-// alert("Cannot enter an empty amount")
-// } else{
 
 //PSEUDO
 
