@@ -51,6 +51,7 @@ var log = [];
 var transaction = {
 	date: 0,
 	time: 0,
+	account: "",
 	type: "", // deposit, withdraw, overdraw
 	amount: 0,
 	oldBalance: 0,
