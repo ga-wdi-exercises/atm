@@ -1,40 +1,43 @@
 
 
+
+/* Global Variables */
+var actBal = {
+  "checking":200,
+  "savings":200,
+  "odProtect":false
+}
+
 /* Constant Definitions */
 const
-CHK = "checking";
-SAV = "savings";
 POSCLR ="#6C9A74";
 ZROCLR ="#F52F4F";
 GOODFLOATCHARS={"0":null,"1":null,"2":null,"3":null,"4":null,"5":null,"6":null,"7":null,"8":null,"9":null,".":null};
-ACCOUNTS=[CHK,SAV];
+ACCOUNTS=[Object.keys(actBal)[0],Object.keys(actBal)[1]];
 
+/* Initialize values on display fields and input fields */
 
-/* Global Variables */
+ACCOUNTS.forEach( function ( act )  {
+  $("#" + act +" .deposit").on( "click", handleDeposit ); /* Add a click listener to the checking account's "Deposit" button */
+  $("#" + act +" .withdraw").on( "click", handleWithdraw );
+  setBal(act);           /* set initial balance on display */
+  updInpFld(act,getActBal(act));  /* set inital value on input field to make it easy for input */
+});
 
-balSavings = 200.0;
-balChecking =200.0;
-
-/* 1.0  Test jQuery is working */
-/*Make the <body>'s background color turn red */
-
-
-// $("body").css("background-color","red");
-// $("#savings .input").attr("placeholder","200.00");
-// $("#checking .input").attr("placeholder","200.00");
-$("#checking .input").val("$200.00");
-$("#savings .input").val("$200.00");
-setAmts(CHK,balChecking);
-setAmts(SAV,balSavings);
-setBkgActBox(CHK,balSavings,balChecking);
-setBkgActBox(SAV,balSavings,balChecking);
-
-
-function getActBal (account) {  /* return the current account balace of indicated account */
-  return (account==CHK?bal=balChecking:bal=balSavings) ;
+function setBal(account) {  /* Set Balances on Display and Input fields */
+  setAmts(account,getActBal(account));
+  setBkgActBox(account);
 }
 
-function setBkgActBox(account,balSavings,balChecking) {
+function setActBal (account,val) { /* set balance global var based on account return value set*/
+return (actBal[account]=val);
+}
+
+function getActBal (account) {  /* return the current account balace of indicated account */
+  return(actBal[account]);
+}
+
+function setBkgActBox(account) {
 
    var clr; /* color to set background to */
 
@@ -44,7 +47,7 @@ function setBkgActBox(account,balSavings,balChecking) {
 }
 
 function validateNumStr(str){
-  /*Return only numeric portion of string removing spaces and other illigal chars */
+  /*Return only numeric portion of string removing spaces and other illigal chars Strips all alphs out of mddle and only accepts pos numbers */
   var newStr="";
    for (var i=0;i < str.length;i++) {
   if (str[i] in GOODFLOATCHARS) {newStr+=str[i];}
@@ -52,70 +55,63 @@ function validateNumStr(str){
  return newStr;
 }
 
+function updInpFld(act,val) {
+/* update input field with valid formatted number */
+  $("#"+act+" .input").val("$ " + val);
+}
+
 function getAmts( account ) {
-  /* retrieve current values in account input field */
-return parseFloat(validateNumStr($("#" + account+" .input").val()));
+  /* retrieve current values in account input field - update field with validated number*/
+  valNum=parseFloat(validateNumStr($("#" + account+" .input").val())).toFixed(2);
+  updInpFld(account,valNum);
+
+return valNum/1; /* casting to floating point from string (.toFixed  returns string */
 
 } /* function getAmts */
 
 function setAmts( account,amt ) {
   /* retrieve current values in account input field */
 $("#" + account+" .balance").text("$ "+ parseFloat(amt).toFixed(2));
-
 } /* function getAmts */
 
-
-
 function handleDeposit() {
-
   var account =$(this).parent().attr("id");  /* Choose Account ( Checking or Savings) */
-  account==CHK?setAmts(account,balChecking+=getAmts(account)):setAmts(account,balSavings+=getAmts(account));
-  setBkgActBox(account,balSavings,balChecking);
+  setAmts(account,setActBal(account,getActBal(account)+getAmts(account)));  /*Set new account balance with added delposit */
+  setBkgActBox(account);
 }
+
+function fundsAvail(act) {
+  return(getActBal(act)-getAmts(act) >=0 );
+}
+
+function handleOverDraft(act,amt) {
+  /* is there enough money in all accounts to cover */
+  /*  yes -> remove money from alternate account and add to account  return True*/
+
+}
+
+function chkForOverDraft( act, amt) {
+  /* check for overdraft mode */
+if (actBal.odProtect) {
+   /* over draft Protection enabled */
+     handleOverDraft(act,amt);
+  } else {
+      /*  no -> return false */
+    return false;
+  }
+} /* chkForOverDraft */
+
 
 
 function handleWithdraw() {
-  console.log("In handleWithdraw")
   /* Choose Account ( Checking or Savings) */
   var account =$(this).parent().attr("id");
-  if(getActBal(account)-getAmts(account) >=0 ) {  /* check if we have enought to widthdrawl */
-    account==CHK?setAmts(account,balChecking-=getAmts(account)):setAmts(account,balSavings-=getAmts(account));
-    setBkgActBox(account,balSavings,balChecking); }
+  var amtToWithdraw=getAmts(account);
+  if( fundsAvail(account) ) {  /* check if we have enough to widthdraw */
+    setAmts(account,setActBal(account,getActBal(account)-amtToWithdraw ));
+    setBkgActBox(account);
+  } else {
+      /* check for overdraft  if ok then call recursive handleWithdraw */
+      chkForOverDraft(account, amtToWithdraw);
+  }
 } /* function handleWithdraw */
-
-/* Add a click listener to the checking account's "Deposit" button */
-ACCOUNTS.forEach( function ( act )  {
-
-  console.log(act)
-  $("#" + act +" .deposit").on( "click", handleDeposit );
-  $("#" + act +" .withdraw").on( "click", handleWithdraw );
-});
-
-// var depositButChecking=$("#checking .deposit");
-// depositButChecking.on( "click", handleDeposit );
-// var depositButSavings=$("#savings .deposit");
-// depositButSavings.on( "click", handleDeposit );
-//
-// var withdrawButChecking=$("#checking .withdraw");
-// withdrawButChecking.on( "click", handleWithdraw );
-// var withdrawButSavings=$("#savings .withdraw");
-// withdrawButSavings.on( "click", handleWithdraw );
-
-
-/*
-When you click the button it should console.log("hello")
-On clicking "Deposit", it should get the user input
-Just console.log it
-You can save some time by hard-coding a value into the input box: <input value="something" />. That way you don't need to type stuff in all the time to test it.
-On clicking "Deposit", it should update the "balance" with the user input
-Just make the user input show up. Don't worry about actually keeping track of a balance yet.
-On "Deposit", it should get the current "balance"
-How can you get the content of the "balance" element?
-The content has a $ at the beginning of it, so Javascript will read it as text rather than as a number. How can you convert this text into a number?
-On "Deposit", it updates the balance
-Now add the user input to the balance, and make it show up in the "balance" element
-On "Withdraw", it updates the balance
-Follow the same steps as before, except you're subtracting instead of adding
-Refactor the existing code
-Challenge: Try to have no function() that's longer than 5 lines. (Sandi Metz's Rule 2)
-*/
