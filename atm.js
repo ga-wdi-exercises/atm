@@ -10,26 +10,35 @@ var amount = parseInt($(".input").val())
 
 var depositbuttonC = $("#checking").children("input.deposit")
 var withdrawbuttonC = $("#checking").children("input.withdraw")
-var depositbuttonC = $("#savings").children("input.deposit")
+var depositbuttonS = $("#savings").children("input.deposit")
 var withdrawbuttonS = $("#savings").children("input.withdraw")
-var balance = parseInt($(".balance").val());
+var balance = parseInt($("#checking.balance").val());
 
-var checkIn = $("checking").children("input.input")
+//var checkIn = $("checking").children("input.input")
 var saveIn  = $("savings").children("input.input")
 
-checkIn.click(parseInt($(".input").val()))
 /*function amountEntered() {
   var checkIn = parseInt($(".input").val())
-}
+}*/
+console.log(depositbuttonC)
+depositbuttonC.on("click", function () {
+  var userInput = parseInt($("#checking .input").val())
+  console.log(userInput)
+  totalInAccount()
+});
 
-depositbuttonC.click("totalInAccount", amountEntered);*/
 function totalInAccount() {
-  if (checkIn > 0) {
-    return $("#checking .balance").text("$" + (checkIn + balance))
+  var userInput = parseInt($("#checking .input").val())
+  var balance = parseInt($("#checking.balance").val());
+  console.log(userInput)
+  console.log(balance)
+  if (userInput > 0) {
+   $("#checking .balance").text("$" + (userInput + balance))
   }
   else  { alert("No withdrawal can be made")
 }
 }
+//checkIn.click(parseInt($(".input").val()))
 //amountEntered()
 //totalInAccount()
 /*function totalInAccount () {
