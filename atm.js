@@ -107,7 +107,10 @@ $('.withdraw').on('click', function() {
 	// Withdraw checking
 	if ($(this).parent().attr('id') === 'checking') {
 		var amt = formatInput($('#checking .input').val());
-		if (amt > checkingAccount.balance) {
+		console.log(checkingAccount.balance + savingsAccount.balance)
+		if (amt > (checkingAccount.balance + savingsAccount.balance)) {
+			throw 'Error: Cannot withdraw amount greater than total balance.';
+		} else if (amt <= (checkingAccount.balance + savingsAccount.balance) && amt > checkingAccount.balance) {
 			overdrawChecking(amt);
 		} else {
 			checkingAccount.withdraw(amt);
