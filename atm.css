@@ -13,7 +13,7 @@ body {
 }
 
 .header {
-  margin: 50px 0px;
+  margin: 50px 0;
 }
 
 .title {
@@ -21,11 +21,6 @@ body {
   font-family: 'Oleo Script', cursive;
   font-size: 50px;
 }
-
-/* temp style
-div {
-  border: 4px solid red;
-}*/
 
 #active {
   margin: 10px;
@@ -37,6 +32,7 @@ div {
 
 ul {
   list-style-type: none;
+  padding: 0;
 }
 
 .flexList {
@@ -54,11 +50,25 @@ ul {
   padding: 5px;
   background: #FBFFA3;
   font-size: 25px;
+  flex-grow: 1;
 }
 
 .option:hover {
   border: 4px solid #C6E872;
   cursor: pointer;
+}
+
+#input-field {
+  flex-grow: 1;
+}
+
+#accounts .account {
+  margin: 10px;
+  border: 4px solid #66D37E;
+  padding: 5px;
+  background: #FBFFA3;
+  font-size: 15px;
+  flex-grow: 1;
 }
 
 .hidden {

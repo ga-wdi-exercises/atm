@@ -10,14 +10,19 @@ var currentAccount = {
   name: "My Primary Checking Account",
   type: "checking",
   balance: 100,
-  overdraftAccount: undefined
+  overdraftAccount: "Emergency Fund"
 };
 var overdraftAccount = {
   name: "Emergency Fund",
   type: "savings",
   balance: 200
 };
-var transferAccount;
+var transferAccount = {
+  name: "Wild Parties Checking Account",
+  type: "checking",
+  balance: 0,
+  overdraftAccount: undefined
+};
 
 var $activeDiv = $("#active")
 var $activeAccount = $("#active .account");
@@ -57,9 +62,10 @@ function createAccountDiv(account) {
   var newAccountNameLi = $("<li class='accountName'></li>").html("Account Name: " + account.name);
   var newAccountTypeLi = $("<li class='accountType'></li>").html("Type: " + account.type);
   var newAccountBalanceLi = $("<li class='accountBalance'></li>").html("Balance: $" + account.balance);
-  newAccountUl.append(newAccountNameLi).append(newAccountTypeLi).append(newAccountBalanceLi);
+  var newAccountOverdraftAccountLi = account.overdraftAccount ? $("<li class='accountOverdraftAccount'></li>").html("Overdraft Protection Enabled: (" + account.overdraftAccount + ")") : "";
+  newAccountUl.append(newAccountNameLi).append(newAccountTypeLi).append(newAccountBalanceLi).append(newAccountOverdraftAccountLi);
   newAccountDiv.append(newAccountUl);
-  return newAccountDiv;
+  return account.balance === 0 ? newAccountDiv.css("background","red") : newAccountDiv;
 }
 
 function refreshCurrentAccount() {
@@ -71,13 +77,22 @@ function refreshCurrentAccount() {
 function refreshOtherAccounts() {
   getOtherAccounts();
   $otherAccountsDivs.remove();
+  // the next two lines will fail when the referenced account variable is undefined
   $accountsDiv.append(createAccountDiv(overdraftAccount));
-  // $accountsDiv.append(createAccountDiv(transferAccount));
+  $accountsDiv.append(createAccountDiv(transferAccount));
+  for (var i = 0; i < accounts.length; i++) {
+    $accountsDiv.append(createAccountDiv(accounts[i]));
+  }
 }
 
 function setTransactionType() {
   transactionType = $(this).attr("id");
-  $button.html(transactionType);
+  $button.html(capitalizeFirstLetter(transactionType));
+  atm.optionsToInput();
+}
+
+function capitalizeFirstLetter(string) {
+  return string.charAt(0).toUpperCase() + string.slice(1);
 }
 
 var atm = {
@@ -87,20 +102,12 @@ var atm = {
     var amount = atm.cleanInput(inputValue);
     if (!atm.validateInput(amount)) {
       return atm.invalidInput();
-    } else if (transactionType === undefined) {
-      return alert("transactionType is undefined");
+    } else if (transactionType === undefined || currentAccount === undefined) {
+      return alert("This ATM is experiencing an error. Please contact customer support.");
     } else if (transactionType === "deposit") {
-      if (atm.deposit(amount)) {
-        return atm.transactionSuccessful();
-      } else {
-        return atm.transactionFailed();
-      }
+      return atm.updateBalance(amount,currentAccount) ? atm.transactionSuccessful() : atm.transactionFailed();
     } else if (transactionType === "withdraw") {
-      if (atm.withdraw(amount)) {
-        return atm.transactionSuccessful();
-      } else {
-        return atm.transactionFailed();
-      }
+      return atm.withdraw(amount) ? atm.transactionSuccessful() : atm.transactionFailed();
     } else if (transactionType === "transfer") {
       // may or may not finish this later
       return atm.transactionFailed();
@@ -137,11 +144,9 @@ var atm = {
   hide: function(object) {
     object.addClass("hidden");
   },
-  // may not be using
-  removeEventHandler: function(object) {
-    object.off();
+  error: function() {
+    alert("An error has occurred cause your banker is a dumb dumb.");
   },
-
 
 
   // secondary - use if time permits
@@ -159,7 +164,7 @@ var atm = {
       accounts.push(overdraftAccount);
       overdraftAccount = undefined;
     } else {
-      alert("An error has occurred cause your banker is a dumb dumb.");
+      atm.error();
     }
   },
   selectAccount: function(purpose) {
@@ -176,7 +181,7 @@ var atm = {
     // remove special characters: $ and ,
     var cleanedInput = input.replace("$","");
     cleanedInput = cleanedInput.replace(",","");
-    return cleanedInput = parseInt(cleanedInput);
+    return cleanedInput = parseFloat(cleanedInput);
   },
   validateInput: function(input) {
     return !isNaN(input);
@@ -189,34 +194,32 @@ var atm = {
 
 
   // math
-  deposit: function(amount) {
-    // add amount to currentAccount.balance
-    return currentAccount.balance += amount;
-    // may need to add in function calls to update displayed elements
+  updateBalance: function(amount,account) {
+    account.balance += amount;
+    return true
   },
   withdraw: function(amount) {
-    if (atm.getBalance(currentAccount) >= amount) {
-      currentAccount.balance -= amount;
-      // may need to add function calls
+    var currentAccountBalance = atm.getBalance(currentAccount);
+    if (currentAccountBalance >= amount) {
+      atm.updateBalance(amount * -1,currentAccount);
       return true;
-    } else if (atm.getBalance(currentAccount) + atm.getBalance(overdraftAccount) >= amount) {
-      atm.overdraw(amount - currentAccount.balance);
-      currentAccount.balance = 0;
-      // may need to add function calls
+    } else if (currentAccountBalance + atm.getBalance(overdraftAccount) >= amount) {
+      atm.overdraw(amount - currentAccountBalance);
+      atm.updateBalance(currentAccountBalance * -1,currentAccount);
       return true
     } else {
-      // may need to add function calls
       return false
     }
   },
   overdraw: function(amount) {
-    // subtract amount from overdraftAccount.balance
-    overdraftAccount.balance -= amount;
-    // may need to add function calls
+    atm.updateBalance(amount * -1,overdraftAccount);
+    alert("You have overdrawn your account, but Overdraft Protection has covered the $" + amount + " that was overdrawn by making a deduction from " + atm.getAccountName(overdraftAccount) + ".");
     return true;
   },
-  // secondary - do if time permits
-  transfer: function() {
+  // secondary - do if time permits - it didn't
+  transfer: function(amount) {
+    atm.updateBalance(amount,transferAccount);
+    atm.updateBalance(amount * -1,currentAccount);
   },
 
 
@@ -234,6 +237,11 @@ var atm = {
     return true
   },
   getAccountName: function(account) {
+    if (account.name === "") {
+      return "your unnamed " + account.type + " account";
+    } else {
+      return account.name;
+    }
   }
 }
 
