@@ -1,3 +1,12 @@
-$(document).ready(function(){
-// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
+console.log("hello");
+
+$("body").on("click", function(){
+  $("body").css("background-color", "red");
+});
+
+$("#checking .deposit").on("click", function(){
+  console.log("hello");
+  
+  var input = $("#checking .input").select().val();
+    console.log(input);
 });
