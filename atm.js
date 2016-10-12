@@ -1,3 +1,17 @@
 $(document).ready(function(){
-// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
+
+  var checkingDepositButton =  $("#checking>input.deposit");
+  var checkingWithdrawButton =  $("#checking>input.withdraw");
+
+  var savingsDepositButton = $("#savings>input.deposit");
+  var savingsWithdrawButton = $("#savings>input.withdraw");
+
+  function withdrawChecking() {
+
+  }
+
+  function depositChecking() {
+
+  }
+
 });
