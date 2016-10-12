@@ -1,3 +1,5 @@
 $(document).ready(function(){
-  console.log("js is working");
+  $("#checking .deposit").on("click", function(){
+    console.log($("#checking .input").val());
+  })
 });
