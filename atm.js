@@ -23,14 +23,37 @@ $("div#checking>input.deposit").on("click", function(){
   bank.checking = newAmount + oldAmount;
   var displayValue = $("div#checking>div.balance");
   displayValue.text("$" + bank.checking);
+  if (bank.checking > 0){
+    $("div#checking").css("background-color", "#6C9A74");
+  }
+  else {
+    $("div#checking").css("background-color", "#F03B4B");
+  }
 });
 
 $("div#checking>input.withdraw").on("click", function(){
-  var newAmount = parseFloat($("div#checking>input.input").val());
-  var oldAmount = bank.checking;
-  bank.checking = oldAmount - newAmount;
-  var displayValue = $("div#checking>div.balance");
-  displayValue.text("$" + bank.checking);
+  var withdrawal = parseFloat($("div#checking>input.input").val());
+  var checkingValue = bank.checking;
+
+if (withdrawal > bank.checking + bank.savings){
+  alert("You don't have enough money in either cheking or saving!")
+}
+
+  else if(checkingValue - withdrawal <0){
+    var overdraw = checkingValue - withdrawal;
+    bank.savings = bank.savings + overdraw;
+    bank.checking = checkingValue - overdraw - withdrawal;
+    $("div#checking>div.balance").text("$" + bank.checking);
+    $("div#savings>div.balance").text("$" + bank.savings);
+    $("div#checking").css("background-color", "#F03B4B");
+  }
+
+  else {
+    bank.checking = checkingValue - withdrawal;
+    var displayValue = $("div#checking>div.balance");
+    displayValue.text("$" + bank.checking);
+  }
+
 });
 
 $("div#savings>input.deposit").on("click", function(){
