@@ -24,6 +24,7 @@ depositChecking.on("click", function (){
     checkingTotal = parseInt(inputValue) + parseInt(checkingBalance)
     checkingBalance = checkingTotal
     balanceDisplayC.text('$' + checkingTotal)
+    inputChecking.val('')
   }
 })
 
@@ -37,9 +38,28 @@ depositSavings.on("click", function (){
    savingsTotal = parseInt(inputValue) + parseInt(savingsBalance)
    savingsBalance = savingsTotal
    balanceDisplayS.text("$" + savingsTotal)
+   inputSavings.val('')
  }
 })
 
+// checking withdraw function
+withdrawChecking.on("click", function() {
+  if (inputChecking.val() === '') {
+  } else if (isNaN(inputChecking.val())) {
+    console.log("error")
+  } else if (parseInt(checkingBalance) - parseInt(inputChecking.val()) < 0) {
+    console.log("error: negative balance")
+  } else {
+    var inputValue = inputChecking.val();
+    checkingTotal = parseInt(checkingBalance) - parseInt(inputValue)
+    checkingBalance = checkingTotal
+    balanceDisplayC.text("$" + checkingTotal)
+    inputChecking.val('')
+  }
+
+
+
+})
 
 
 
