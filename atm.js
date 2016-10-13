@@ -9,22 +9,37 @@ var inputSavings = $("#savings .input")
 var balanceDisplayC = $("#checking .balance")
 var balanceDisplayS = $("#savings .balance")
 var checkingBalance = 0
+var savingsBalance = 0
 var checkingTotal
-var savingsBalance
-var depositValue
+var savingsTotal
+var inputValue
 
-
+// checking deposit function
 depositChecking.on("click", function (){
-  if (isNaN(inputChecking.val())) {
+  if (inputChecking.val() === '') {
+} else if (isNaN(inputChecking.val())) {
     console.log("error")
   } else {
-    var depositValue = inputChecking.val();
-    checkingTotal = parseInt(depositValue) + parseInt(checkingBalance)
+    var inputValue = inputChecking.val();
+    checkingTotal = parseInt(inputValue) + parseInt(checkingBalance)
     checkingBalance = checkingTotal
     balanceDisplayC.text('$' + checkingTotal)
-    console.log(checkingBalance)
   }
 })
+
+// savings deposit function
+depositSavings.on("click", function (){
+    if (inputSavings.val() === ''){
+ } else if (isNaN(inputSavings.val())) {
+   console.log("error")
+ } else {
+   var inputValue = inputSavings.val();
+   savingsTotal = parseInt(inputValue) + parseInt(savingsBalance)
+   savingsBalance = savingsTotal
+   balanceDisplayS.text("$" + savingsTotal)
+ }
+})
+
 
 
 
