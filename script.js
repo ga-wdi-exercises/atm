@@ -1,4 +1,4 @@
-$(document).ready(function(){
+ $(document).ready(function(){
 
 //On deposit summit, add user input to the appropriate variable
 
@@ -42,12 +42,5 @@ $("div#savings > .deposit").on("click", function(){
 })
 
 
-
-
-//);
-
-
-
-//Target the click button to add anything to the amount
 
 });
