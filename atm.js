@@ -15,6 +15,7 @@ var savingsBalance = 0
 var checkingTotal
 var savingsTotal
 var inputValue
+var overdraftValue
 
 //checks balances for zero and changes class
 function zeroChecking() {if (parseInt(checkingBalance) === 0) {
@@ -71,10 +72,25 @@ withdrawChecking.on("click", function() {
   } else if (isNaN(inputChecking.val())) {
     alert("error: please enter a number")
     inputChecking.val('')
-  } else if (parseFloat(checkingBalance) - parseFloat(inputChecking.val()) < 0) {
-    alert("error: withdraw amount exceeds balance. Please withdraw a smaller amount")
+  }
+// overdraft protection function
+  else if (parseFloat(checkingBalance) - parseFloat(inputChecking.val()) < 0) {
+      if (parseFloat(savingsBalance) + (parseFloat(checkingBalance) - parseFloat(inputChecking.val())) < 0 ) {
+        alert("Withdraw amount exceeds Overdraft Protection Amount. Please choose a smaller amount")
+        inputChecking.val('')
+      } else {
+    var overdraftValue = parseFloat(inputChecking.val()) - parseFloat(checkingBalance)
+    savingsTotal = parseFloat((savingsBalance) - parseFloat(overdraftValue)).toFixed(2)
+    savingsBalance = savingsTotal
+    checkingTotal = parseFloat(0).toFixed(2)
+    checkingBalance = parseFloat(0).toFixed(2)
+    balanceDisplayC.text("$" + checkingTotal)
+    balanceDisplayS.text("$" + savingsTotal)
     inputChecking.val('')
-  } else {
+    zeroChecking()
+    zeroSavings()
+  }
+} else {
     var inputValue = inputChecking.val();
     checkingTotal = parseFloat(parseFloat(checkingBalance) - parseFloat(inputValue)).toFixed(2)
     checkingBalance = checkingTotal
