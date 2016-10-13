@@ -18,23 +18,31 @@ var savings = 0;
 
   checkDeposit.on("click", addChTotal)
     function addChTotal() {
-      console.log("Deposit to Checking");
+      // console.log("Deposit to Checking");
       // event.preventDefault();
       var chDep = $("#checking input").val();
       chDep = parseInt(chDep);
       checking = checking + chDep
       $("#checking .balance").html("$" +checking)
 
+
     };
 
   checkWithdraw.on("click", subChTotal)
     function subChTotal() {
-      console.log("Withdraw from Checking")
+      // console.log("Withdraw from Checking")
       // event.preventDefault();
       var chWith = $("#checking input").val();
       chWith = parseInt(chWith);
       checking = checking - chWith
-      $("#checking .balance").html("$" +checking)
+      if (checking < 0) {
+        console.log (checking);
+        console.log("too much many funds");
+        checking = checking + chWith
+        "<br>"
+      } else{
+        $("#checking .balance").html("$" +checking)
+      }
 
 
     };
