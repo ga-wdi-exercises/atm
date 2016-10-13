@@ -9,9 +9,6 @@ checkingBalance = 0;
     $("#checking .balance").html("$"+checkingBalance);
     });
   }
-
-  $("#checking .balance").html("$"+checkingBalance);
-
   function checkingWithdrawl() {
     $("#checking .withdraw").on("click", function(){
     var userInput = Number($("#checking .input").val());
