@@ -31,9 +31,10 @@ $("div#checking > .withdraw").on("click", function(){
 var amount = parseInt($("#checking > .input").val());
 if (isNaN(amount)){
   console.log("error")}
-else {
+else if  (amount <= (checkingAmount + savingsAmount)) {
 checkingAmount = checkingAmount - amount;
 $("div#checking > div.balance").html("$" + checkingAmount);}
+else { alert("You don't have enough")}
 $(".input").val(null)
 overdraftCheck()
 })
@@ -61,7 +62,7 @@ if (isNaN(amount)){
 else if (amount > savingsAmount){
   alert("You don't have enough")
 }
-else{
+else {
 savingsAmount = savingsAmount - amount;
 $("div#savings > div.balance").html("$" + savingsAmount);}
 $(".input").val(null)
@@ -69,7 +70,7 @@ $(".input").val(null)
 
 // check for overdraft on checking
 function overdraftCheck(){
-if (checkingAmount < 0 && amount < (savingsAmount + checkingAmount)) {
+if (checkingAmount < 0 ) {
   savingsAmount = savingsAmount + checkingAmount;
   checkingAmount = 0;
   // $("#checking").removeClass("account");
