@@ -21,37 +21,49 @@ $(document).ready(function(){
   // adds to checking balance
   function addDepositC() {
     xC = parseFloat(checkingInput.val());
-    console.log(totalC);
     totalC = totalC + xC;
     checkingBalance.html("$" + totalC.toFixed(2));
+    // checkingInput.val("");
+
+    if (totalC == 0) {
+      checkingBalance.addClass("zero");
+    } else { checkingBalance.removeClass("zero");}
   }
 
   //withdraws from checking balance
   function addWithdrawC() {
     xC = parseFloat(checkingInput.val());
-    console.log(totalC);
     totalC = totalC - xC;
     checkingBalance.html("$" + totalC.toFixed(2));
+    // checkingInput.val("");
 
-    // if totalC = 0 {
-    //   checkingBalance.addClass("zero");
-    // }
+    if (totalC == 0) {
+      checkingBalance.addClass("zero");
+    } else { checkingBalance.addClass("balance");}
   }
 
   // adds to savings balance
   function addDepositS() {
     xS = parseFloat(savingsInput.val());
-    console.log(totalS);
     totalS = totalS + xS;
     savingsBalance.html("$" + totalS.toFixed(2));
+    // savingsInput.val("");
+
+    if (totalS == 0) {
+      savingsBalance.addClass("zero");
+    } else { savingsBalance.removeClass("zero");}
   }
 
   //withdraws from savings balance
   function addWithdrawS() {
     xS = parseFloat(savingsInput.val());
-    console.log(totalS);
     totalS = totalS - xS;
     savingsBalance.html("$" + totalS.toFixed(2));
+    // savingsInput.val("");
+
+    if (totalS == 0) {
+      savingsBalance.addClass("zero");
+    } else { savingsBalance.addClass("balance");}
   }
 
   //checking deposit button function
