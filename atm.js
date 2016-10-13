@@ -50,6 +50,7 @@ if (isNaN(amount)){
 else {savingsAmount = savingsAmount + amount;
 $("div#savings > div.balance").html("$" + savingsAmount);
 }
+inTheBlack()
 // set input to null afterward
 $(".input").val(null)
 })
@@ -65,10 +66,13 @@ else if (amount > savingsAmount){
 else {
 savingsAmount = savingsAmount - amount;
 $("div#savings > div.balance").html("$" + savingsAmount);}
+isSavingsZero()
 $(".input").val(null)
 })
 
-// check for overdraft on checking
+var feesTimer;
+
+// check for overdraft on checking, if overdraft,
 function overdraftCheck(){
 if (checkingAmount < 0 ) {
   savingsAmount = savingsAmount + checkingAmount;
@@ -76,20 +80,37 @@ if (checkingAmount < 0 ) {
   // $("#checking").removeClass("account");
   $("#checking").addClass("zero");
   $("div#savings > div.balance").html("$" + savingsAmount);
-  $("div#checking > div.balance").html("$" + checkingAmount);}
+  $("div#checking > div.balance").html("$" + checkingAmount);
+  feesTimer = setInterval(overdraftFees, 2500)}
+
 
 }
-
-// check for overdraft on savings
-// function overdraftSavings(){
-//   if (savingsAmount < 0)
-// }
-
-
-//check if checking positive
+//check if either account positive, removes red and stops overdraft if so
 function inTheBlack(){
   if (checkingAmount > 0) {
     $("#checking").removeClass("zero");
+    clearInterval(feesTimer);
+    console.log("back in black");
+  }
+  if (savingsAmount > 0) {
+    $("#savings").removeClass("zero");
+
   }
 }
 })
+//reduces savings by one if overdraft
+function overdraftFees(){
+savingsAmount = savingsAmount -1;
+$("div#savings > div.balance").html("$" + savingsAmount);
+isSavingsZero()
+
+}
+//checks to see if savings is zero, turns red if so
+function isSavingsZero() {
+  if (savingsAmount == 0) {
+    $("#savings").addClass("zero");
+    console.log("asdfsdfjf")
+    alert("You are out of money")
+  }
+}
+;
