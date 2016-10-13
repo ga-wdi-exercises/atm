@@ -33,8 +33,9 @@ if (isNaN(amount)){
   console.log("error")}
 else if  (amount <= (checkingAmount + savingsAmount)) {
 checkingAmount = checkingAmount - amount;
-$("div#checking > div.balance").html("$" + checkingAmount);}
-else { alert("You don't have enough")}
+$("div#checking > div.balance").html("$" + checkingAmount)}
+else
+{ alert("You don't have enough");}
 $(".input").val(null)
 overdraftCheck()
 })
@@ -109,8 +110,8 @@ isSavingsZero()
 function isSavingsZero() {
   if (savingsAmount == 0) {
     $("#savings").addClass("zero");
-    console.log("asdfsdfjf")
-    alert("You are out of money")
+    console.log("asdfsdfjf");
+    alert("You are out of money");
   }
 }
 ;
