@@ -18,7 +18,7 @@ var inputValue
 depositChecking.on("click", function (){
   if (inputChecking.val() === '') {
 } else if (isNaN(inputChecking.val())) {
-    console.log("error")
+    alert("error: please enter a number")
   } else {
     var inputValue = inputChecking.val();
     checkingTotal = parseInt(inputValue) + parseInt(checkingBalance)
@@ -32,7 +32,7 @@ depositChecking.on("click", function (){
 depositSavings.on("click", function (){
     if (inputSavings.val() === ''){
  } else if (isNaN(inputSavings.val())) {
-   console.log("error")
+   alert("error: please enter a number")
  } else {
    var inputValue = inputSavings.val();
    savingsTotal = parseInt(inputValue) + parseInt(savingsBalance)
@@ -46,9 +46,9 @@ depositSavings.on("click", function (){
 withdrawChecking.on("click", function() {
   if (inputChecking.val() === '') {
   } else if (isNaN(inputChecking.val())) {
-    console.log("error")
+    alert("error: please enter a number")
   } else if (parseInt(checkingBalance) - parseInt(inputChecking.val()) < 0) {
-    console.log("error: negative balance")
+    alert("error: withdraw amount exceeds balance. Please withdraw a smaller amount")
   } else {
     var inputValue = inputChecking.val();
     checkingTotal = parseInt(checkingBalance) - parseInt(inputValue)
@@ -56,134 +56,22 @@ withdrawChecking.on("click", function() {
     balanceDisplayC.text("$" + checkingTotal)
     inputChecking.val('')
   }
-
-
-
 })
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-});
+// savings withdraw function
+withdrawSavings.on("click", function() {
+  if (inputSavings.val() === '') {
+  } else if (isNaN(inputSavings.val())) {
+    alert("error: please enter a number")
+  } else if (parseInt(savingsBalance) - parseInt(inputSavings.val()) < 0) {
+    alert("error: withdraw amount exceeds balance. Please withdraw a smaller amount")
+  } else {
+    var inputValue = inputSavings.val();
+    savingsTotal = parseInt(savingsBalance) - parseInt(inputValue)
+    savingsBalance = savingsTotal
+    balanceDisplayS.text("$" + savingsTotal)
+    inputSavings.val('')
+  }
+})
+
+})
