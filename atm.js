@@ -3,7 +3,7 @@ $(document).ready(function(){
 var checkingBalance = 0;
 var savingsBalance = 0;
 //step 1
-$("body").css("background", "red")
+$("body").css("background", "red");
 
 //step 2/3
 $("#checking .deposit").on("click", function(){
@@ -16,6 +16,7 @@ $("#checking .deposit").on("click", function(){
 
 //checking withdrawal
 $("#checking .withdraw").on("click", function(){
+
   var entry = Number($("#checking .input").val());
   checkingBalance -= entry;
   overdraft();
@@ -41,14 +42,16 @@ $("#savings .withdraw").on("click", function(){
 //overdraft protection
 function overdraft(){
 if (checkingBalance < 0){
-  console.log("overdraft")
   savingsBalance += checkingBalance;
   checkingBalance = 0;
+  if (savingsBalance < 0){
+    savingsBalance = 0;
+    alert("Error. Exceeded total balance.");
+  }
 }
-  $("#savings .balance").text( "$" + savingsBalance);
-  $("#savings .balance").val(savingsBalance);
   $("#checking .balance").text( "$" + checkingBalance);
   $("#checking .balance").val(checkingBalance);
+  $("#savings .balance").text( "$" + savingsBalance);
+  $("#savings .balance").val(savingsBalance);
 }
-
 });
