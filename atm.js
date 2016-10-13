@@ -5,7 +5,7 @@ $(document).ready(function(){
 	// var savingsTotal = 0;
 
 	//set click events on withdrawal and deposit buttons
-
+	//trivial comment
 	$(".deposit").on("click", obtainAmount)
 	$(".withdraw").on("click", obtainAmount)
 
@@ -22,8 +22,8 @@ $(document).ready(function(){
 		} else {
 			$("#savings .balance").removeClass("zero");
 		}
-		
-	} 
+
+	}
 	setAccountColor();
 
 	//gather amount value from either checking or savings input fields
@@ -40,12 +40,12 @@ $(document).ready(function(){
 			$("#savings .input").val("");
 		}
 	}
-	
+
 
 	//adjust balance to the respective account
 
 	function adjustBalance(){
-		
+
 		var accountType = $(event.target).parent().attr('id');
 		var accountBalance = parseFloat($("#" + accountType + " .balance").text().replace("$", ""));
 
@@ -60,14 +60,14 @@ $(document).ready(function(){
 			accountBalance += amount;
 			//displays new account value
 			$("#" + accountType + " .balance").html("$" + accountBalance);
-			
+
 		} else if ($(event.target).hasClass("withdraw")) {
 			//updates account value
 			accountBalance -= amount;
 			//displays new account value
 			$("#" + accountType + " .balance").html("$" + accountBalance);
 		}
-		
+
 	}
 		setAccountColor();
 	}
@@ -89,7 +89,7 @@ $(document).ready(function(){
 
 			$("#checking .balance").html("$" + checkingBalance);
 			$("#savings .balance").html("$" + savingsBalance);
-		
+
 		} else {
 			var difference = savingsBalance - amount;
 			checkingBalance += difference;
