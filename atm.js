@@ -2,7 +2,6 @@ $(document).ready(function(){
   // Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
   console.log("js file is connected");
 
-
   var checkingInput = $("#checking .input"); //selects the checking input box
   var checkingDeposit = $("#checking .deposit"); //selects the checking deposit button
   var checkingWithdraw = $("#checking .withdraw");//selects the checking withdraw button
@@ -17,29 +16,25 @@ $(document).ready(function(){
   var totalS = 0;
   var xS;
 
-
   // adds to checking balance
   function addDepositC() {
     xC = parseFloat(checkingInput.val());
     totalC = totalC + xC;
     checkingBalance.html("$" + totalC.toFixed(2));
-    // checkingInput.val("");
-
-    if (totalC == 0) {
-      checkingBalance.addClass("zero");
-    } else { checkingBalance.removeClass("zero");}
+    checkingBalance.removeClass("zero");
   }
 
   //withdraws from checking balance
   function addWithdrawC() {
     xC = parseFloat(checkingInput.val());
-    totalC = totalC - xC;
-    checkingBalance.html("$" + totalC.toFixed(2));
-    // checkingInput.val("");
-
-    if (totalC == 0) {
+    if ((totalC-xC) < 0) {
       checkingBalance.addClass("zero");
-    } else { checkingBalance.addClass("balance");}
+    } else {
+    // withdraws from checking
+      checkingBalance.removeClass("zero");
+      totalC = totalC - xC;
+      checkingBalance.html("$" + totalC.toFixed(2));
+    }
   }
 
   // adds to savings balance
@@ -47,39 +42,31 @@ $(document).ready(function(){
     xS = parseFloat(savingsInput.val());
     totalS = totalS + xS;
     savingsBalance.html("$" + totalS.toFixed(2));
-    // savingsInput.val("");
-
-    if (totalS == 0) {
-      savingsBalance.addClass("zero");
-    } else { savingsBalance.removeClass("zero");}
+    savingsBalance.removeClass("zero");
   }
 
   //withdraws from savings balance
   function addWithdrawS() {
     xS = parseFloat(savingsInput.val());
-    totalS = totalS - xS;
-    savingsBalance.html("$" + totalS.toFixed(2));
-    // savingsInput.val("");
-
-    if (totalS == 0) {
+    if ((totalS-xS) < 0) {
       savingsBalance.addClass("zero");
-    } else { savingsBalance.addClass("balance");}
+    } else {
+      savingsBalance.addClass("balance");
+      totalS = totalS - xS;
+      savingsBalance.html("$" + totalS.toFixed(2));
+    }
   }
 
   //checking deposit button function
   checkingDeposit.on("click", addDepositC);
-    console.log("cheking deposit button");
 
   //checking withdrawal button function
   checkingWithdraw.on("click", addWithdrawC);
-    console.log("checking withdraw button");
 
-    //checking deposit button function
-    savingsDeposit.on("click", addDepositS);
-      console.log("cheking deposit button");
+  //checking deposit button function
+  savingsDeposit.on("click", addDepositS);
 
-    //checking withdrawal button function
-    savingsWithdraw.on("click", addWithdrawS);
-      console.log("checking withdraw button");
+  //checking withdrawal button function
+  savingsWithdraw.on("click", addWithdrawS);
 
 });//the end of document ready function
