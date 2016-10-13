@@ -23,12 +23,18 @@ $(document).ready(function() {
         $("#checking .withdraw").on("click", function(evt) {
             evt.preventDefault();
             var input = Number($('#checking .input').val()); //Captures user input, turns it into a number
-            if (checkingBalance >= input) {
-            checkingBalance -= input; // Updates checkingBalance variable
-            $("#checking .balance").html("$ " + checkingBalance); //Updates HTML with Balance
-          } else {
-            alert ("Cannot perform function: Withdrawl amount exceeds balance");
-          }
+            if (input > savingsBalance + checkingBalance) {
+                alert("Out of money dawg");
+            } else if (checkingBalance - input < 0) {
+                var overdraw = checkingBalance - input;
+                savingsBalance = savingsBalance + overdraw;
+                checkingBalance = checkingBalance - overdraw - input;
+                $("#checking .balance").html("$" + checkingBalance);
+                $("#savings .balance").html("$" + savingsBalance);
+            } else {
+                checkingBalance = checkingBalance - input;
+                $("#checking .balance").html("$" + checkingBalance);
+            }
         });
     }
     //Deposit money into Savings Account
@@ -46,17 +52,17 @@ $(document).ready(function() {
             evt.preventDefault();
             var input = Number($('#savings .input').val()); //Captures user input, turns it into a number
             if (savingsBalance >= input) {
-            savingsBalance -= input; // Updates savingsBalance variable
-            $("#savings .balance").html("$ " + savingsBalance); //Updates HTML with Balance
-          } else {
-            alert("Cannot perform function: Withdrawl amount exceeds balance");
-          }
+                savingsBalance -= input; // Updates savingsBalance variable
+                $("#savings .balance").html("$ " + savingsBalance); //Updates HTML with Balance
+            } else {
+                alert("Cannot perform function: Withdrawl amount exceeds balance");
+            }
         });
     }
 
-checkingDeposit();
-checkingWithdrawl();
-savingsDeposit();
-savingsWithdrawl();
+    checkingDeposit();
+    checkingWithdrawl();
+    savingsDeposit();
+    savingsWithdrawl();
 
 });
