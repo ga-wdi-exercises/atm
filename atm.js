@@ -1,10 +1,4 @@
 $(document).ready(function(){
-  var checkingDepositButton =  $("#checking>input.deposit");
-  var checkingWithdrawButton =  $("#checking>input.withdraw");
-  var checkingInput = $("#checking>input.input");
-  var checkingDisplay =  $("#checking>.balance");
-
-
   var checkingAccount = {
     total: 0,
     input_field: $("#checking>input.input"),
@@ -14,7 +8,6 @@ $(document).ready(function(){
     get_value: function () {
       var amount = parseFloat(this.input_field.val());
       var amount = Number(amount);
-      console.log(typeof amount);
       return amount;
     },deposit: function () {
       this.total += this.get_value();
@@ -34,7 +27,6 @@ $(document).ready(function(){
     get_value: function () {
       var amount = parseFloat(this.input_field.val());
       var amount = Number(amount);
-      console.log(typeof amount);
       return amount;
     },
     deposit: function () {
