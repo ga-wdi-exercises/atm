@@ -56,6 +56,7 @@ $(document).ready(function() {
                 $("#savings .balance").html("$ " + savingsBalance); //Updates HTML with Balance
             } else {
                 alert("Cannot perform function: Withdrawl amount exceeds balance");
+                console.log("hi");
             }
         });
     }
