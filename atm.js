@@ -99,3 +99,20 @@ $("#checking .withdraw").on("click", function(){
                      checkBalance = +checkBalance - +checkInput;
                      $("#checking .balance").html("$" + checkBalance);
                      })
+
+       // Savings account
+
+   $("#savings .deposit").on("click", function(){
+                          var checkInput = $("#savings .input").val()
+
+                      checkBalance = +checkInput + +checkBalance;
+                      $("#savings .balance").html("$" + checkBalance);
+                      })
+
+   //Withdraw from savings
+   $("#savings .withdraw").on("click", function(){
+                          var checkInput = $("#savings .input").val()
+
+                      checkBalance = +checkBalance - +checkInput;
+                      $("#savings .balance").html("$" + checkBalance);
+                      })
