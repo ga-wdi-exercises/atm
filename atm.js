@@ -2,16 +2,18 @@
 
 $(document).ready(function(){
 
+//Pseudo Code for Deposit overall function
+
 // Make Balance an integer without the $
 
-var zeroBalanceText = $("#checking .balance").text();
-var zeroBalanceNoDSign =  zeroBalanceText.split("$")[1];
-var zeroBalanceInt = parseInt(zeroBalanceNoDSign);
-
-//This section is for checking
+// var zeroBalanceText = $("#checking .balance").text();
+// var zeroBalanceNoDSign =  zeroBalanceText.split("$")[1];
+// var zeroBalanceInt = parseInt(zeroBalanceNoDSign);
 
 
-var originalBalance = 0
+
+
+//Code that Workds
 
 
 var depositChecking = $("#checking .deposit");
