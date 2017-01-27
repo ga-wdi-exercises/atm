@@ -14,8 +14,8 @@ var savingsInput = 0;
 var savingsBalance = 50000;
 
 //Set Checking and Savings Balances at Page Load
-$("#checking .balance").html("$ " + checkingBalance);
-$("#savings .balance").html("$ " + savingsBalance);
+$("#checking .balance").html("$" + checkingBalance);
+$("#savings .balance").html("$" + savingsBalance);
 
 //Check for Balances of Zero at Load
 isSavingsZero();
@@ -27,7 +27,7 @@ function checkingWithdraw() {
     checkingBalance = +checkingBalance - +checkingInput;
   } else if ((+checkingBalance + +savingsBalance) >= +checkingInput) {
     savingsBalance = +savingsBalance - (+checkingInput - +checkingBalance);
-    $("#savings .balance").html("$ " + savingsBalance);
+    $("#savings .balance").html("$" + savingsBalance);
     checkingBalance = 0;
   } else if ((+checkingBalance + +savingsBalance) < +checkingInput) {
     alert("You're to poor to do that!");
@@ -40,7 +40,7 @@ function savingsWithdraw() {
     savingsBalance = +savingsBalance - +savingsInput;
   } else if ((+checkingBalance + +savingsBalance) >= +savingsInput) {
     checkingBalance = +checkingBalance - (+savingsInput - +savingsBalance);
-    $("#checking .balance").html("$ " + checkingBalance);
+    $("#checking .balance").html("$" + checkingBalance);
     savingsBalance = 0;
   } else if ((+checkingBalance + +savingsBalance) < +savingsInput) {
     alert("You're to poor to do that!");
@@ -69,7 +69,7 @@ function isSavingsZero() {
 $("#checking .deposit").on("click", function(){
   checkingInput = $("#checking .input").val();
   checkingBalance = +checkingBalance + +checkingInput;
-  $("#checking .balance").html("$ " + checkingBalance);
+  $("#checking .balance").html("$" + checkingBalance);
   $("#checking .input").val("");
   isCheckingZero();
 })
@@ -78,7 +78,7 @@ $("#checking .deposit").on("click", function(){
 $("#checking .withdraw").on("click", function(){
   checkingInput = $("#checking .input").val();
   checkingWithdraw();
-  $("#checking .balance").html("$ " + checkingBalance);
+  $("#checking .balance").html("$" + checkingBalance);
   $("#checking .input").val("");
   isCheckingZero();
 })
@@ -87,7 +87,7 @@ $("#checking .withdraw").on("click", function(){
 $("#savings .deposit").on("click", function(){
   savingsInput = $("#savings .input").val();
   savingsBalance = +savingsBalance + +savingsInput;
-  $("#savings .balance").html("$ " + savingsBalance);
+  $("#savings .balance").html("$" + savingsBalance);
   $("#savings .input").val("");
   isSavingsZero();
 })
@@ -96,7 +96,7 @@ $("#savings .deposit").on("click", function(){
 $("#savings .withdraw").on("click", function(){
   savingsInput = $("#savings .input").val();
   savingsWithdraw();
-  $("#savings .balance").html("$ " + savingsBalance);
+  $("#savings .balance").html("$" + savingsBalance);
   $("#savings .input").val("");
   isSavingsZero();
 })
