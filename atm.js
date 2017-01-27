@@ -31,7 +31,7 @@ function depositClick(){
         if (checkBalance(savchkTotal) && whichAcct == "checkingBalance") {
           updateBalance(null,true);
         } else {
-        resetInputs();
+        window.alert('Insufficient funds.');
         }
       }
   }
