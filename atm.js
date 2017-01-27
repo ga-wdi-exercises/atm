@@ -45,8 +45,18 @@ var checkingBalance = 0;
     $("#savings .withdraw").on("click", function(){
       var savingInput = $("#savings .input").val()
       savingBalance = +savingBalance -  +savingInput;
-      $("#savings .balance").html("$" + savingBalance);
-    })
+      if(savingBalance >= 0){
+        $("#savings .balance").html("$" + savingBalance)
+      };
+      else(savingBalance = 0){
+      $("#checking").addClass("zero");
+
+    }
+
+
+
+
+
 
 
 
