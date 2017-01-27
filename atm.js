@@ -35,27 +35,27 @@ $(".withdraw").click(function() {
   if ($("#checking .input").val() !== '') {
     console.log($(this))
     balanceChecking = valueChecking - parseInt($(this).siblings("#checking .input").val())
-      if (balanceChecking > 0) {
-        $("#checking ").css("background-color", "red")
-      } else {
-        $("#checking ").css("background-color", '#6C9A74')
-      }
       if (balanceChecking < 0) {
         hasInput = false
         return
+      }
+      if (balanceChecking > 0) {
+        $("#checking ").css("background-color", "#6C9A74")
+      } else {
+        $("#checking ").css("background-color", 'red')
       }
     valueChecking = balanceChecking
     $(this).siblings("#checking .balance").html(`$${balanceChecking}`)
   } else if ($("#savings .input").val() !== '') {
     balanceSavings = valueSavings - parseInt($(this).siblings("#savings .input").val())
-      if (balanceChecking > 0) {
-        $("#checking ").css("background-color", "red")
-      } else {
-        $("#checking ").css("background-color", '#6C9A74')
-      }
       if (balanceSavings < 0) {
         hasInput = false
         return
+      }
+      if (balanceSavings > 0) {
+        $("#checking ").css("background-color", "#6C9A74")
+      } else {
+        $("#checking ").css("background-color", '#red')
       }
     valueSavings = balanceSavings
     $(this).siblings("#savings .balance").html(`$${balanceSavings}`)
