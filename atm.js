@@ -44,10 +44,29 @@ $(document).ready(function() {
     $('#savingsW').click(function() {
         withdrawSavings();
     })
+    $(':button').click(function() {
+        zeroCheck();
+    })
 
 
 
 });
+
+
+function zeroCheck() {
+    cbal = parseInt($('#checkbal').text())
+    sbal = parseInt($('#savebal').text())
+        // console.log(cbal)
+
+    if (cbal === 0)
+        $('#checkbal').parent().addClass('zero')
+    if (sbal === 0)
+        $('#savebal').parent().addClass('zero')
+    if (cbal > 0)
+    	$('#checkbal').parent().removeClass('zero')
+    if (sbal > 0)
+    	$('#savebal').parent().removeClass('zero')
+}
 
 
 function withdrawChecking() {
