@@ -1,12 +1,10 @@
-$(document).ready(function(){
-// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
-  console.log("hello world");
-});
 
-
+//checking deposit function
 $('.deposit').on('click', function(){
-var userInputValue = $('.input').val();
-  console.log(userInputValue);
-  $('#checking .balance').html(userInputValue);
-}
-)
+  var userInputValue = parseInt($('.input').val());
+  var currentBalance = parseInt($('.balance').text().replace("$",""));
+  var updatedBalance = "$" + (currentBalance + userInputValue);
+  $('#checking .balance').text(updatedBalance);
+
+
+})
