@@ -24,8 +24,17 @@ cWithdraw = parseInt($("#checking .input:text").val());
 var cBalancePrev = cBalance;
 cBalance = cBalance - cWithdraw;
 if (cBalance < 0) {
+  if (cBalancePrev + sBalance > 0)
+  {sBalance = sBalance - cWithdraw;
+  cBalance = 0;
+  $("#savings > div").html("$"+sBalance);
+  $("#checking > div").html("$"+cBalance)
+  }
+  else {
   $("#checking > div").html("$"+cBalancePrev); //checks to see if withdraw will make balance negative
   cBalance = cBalancePrev;
+  console.log("NOPE!");
+  }
 }
 else {
 $("#checking > div").html("$"+cBalance); //if it will, keeps balance at what it was
