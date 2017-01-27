@@ -31,11 +31,21 @@ $(document).ready(function(){
 
   $("#checking > .withdraw").on("click", function(){
     var checkingInput = $("#checking > .input").val()
-    if(+checkingInput > +checkingBalance){
+    if(+checkingInput > +checkingBalance + +savingsBalance){
       alert("You cannot withdraw this amount.")
-    }else{
+    }else if (+checkingInput < +checkingBalance){
     checkingBalance = +checkingBalance - +checkingInput;
-    $("#checking > .balance").text("$" + checkingBalance);}
+    $("#checking > .balance").text("$" + checkingBalance);
+    console.log("Normal Withdraw");
+    }else if (+checkingInput < (+checkingBalance + +savingsBalance)){
+      savingsBalance = +savingsBalance - (+checkingInput - checkingBalance);
+      checkingBalance = 0;
+      console.log("Harder Withdraw");
+      $("#checking > .balance").text("$" + checkingBalance);
+      $("#savings > .balance").text("$" + savingsBalance);
+
+    }
+
     checkZero();
   });
 
