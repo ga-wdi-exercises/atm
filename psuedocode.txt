@@ -1,0 +1,7 @@
+
+deposit where amount entered into box is added to total in box
+  when deposit clicked, val of input and balance are added and replace value of balance
+withdrawl where amount entered into box is subtracted from total in box
+  when withdrawl is clicked, val of input is subtracked from total in box and new value replaces old. 
+create if checker where if balance minus withdrawl is <1, it won't execute.
+if balance = 0, account should turn red.
