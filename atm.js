@@ -55,6 +55,7 @@ function addValueChecking(){
   checkingTotal = +checkingTotal + +userInputChecking;
   $("#checking > .balance").text("$" + checkingTotal)
   balanceCheck.checking();
+  $("#checking > .input").val("")
 }
 
 //subtract value from checking and update checking total
@@ -63,6 +64,7 @@ function subValueChecking(){
   overdraftProtect.checking(userInputChecking);
   $("#checking > .balance").text("$" + checkingTotal)
   balanceCheck.checking();
+  $("#checking > .input").val("")
 }
 
 //add value to savings and update savings total
@@ -71,6 +73,7 @@ function addValueSavings(){
   savingsTotal = +savingsTotal + +userInputSavings;
   $("#savings > .balance").text("$" + savingsTotal)
   balanceCheck.savings();
+  $("#savings > .input").val("")
 }
 
 //subtract value from savings and update savings total
@@ -79,6 +82,7 @@ function subValueSavings(){
   overdraftProtect.savings(userInputSavings);
   $("#savings > .balance").text("$" + savingsTotal)
   balanceCheck.savings();
+  $("#savings > .input").val("")
 }
 
 //click events
