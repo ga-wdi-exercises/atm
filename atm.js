@@ -11,34 +11,32 @@ $(document).ready(function(){
   //Users of the ATM object can deposit money into bank account
   // Set the value of 0
 
-  var checkingAccount = 0;
-  var checkingBalance = ('checking', div.balance);
-  var checkingInput = ('input', input.input);
-  var checkingDeposit = ('button', input.deposit);
-  var checkingWithdraw = ('button', input.withdraw);
+  // var checkingAccount = 0;
+  // var checkingBalance = ("checking", div.balance);
+  // var checkingInput = ("input", input.input);
+  // var checkingDeposit = ("button", input.deposit);
+  // var checkingWithdraw = ("button", input.withdraw);
 
   //Users of the ATM object with a Savings Account
   //Users of the ATM object can deposit money into bank account
   //Set the value of 0
 
-  var savingsAccount = 0;
-  var savingsBalance = ('saving', div.balance);
-  var savingsInput = ('input', input.input);
-  var savingsDeposit = ('button', input.deposit);
-  var savingsWithdraw = ('button', input.deposit);
-
-  
+  // var savingsAccount = 0;
+  // var savingsBalance = ("saving", div.balance);
+  // var savingsInput = ("input", input.input);
+  // var savingsDeposit = ("button", input.deposit);
+  // var savingsWithdraw = ("button", input.deposit);
 
 
+  //Create an event that listens for click on deposit button from user when a deposit is made
+  //When deposit button is clicked it will console.log('hello')
 
 
+ $(".deposit").on("click", function() {
+      console.log("hello");
 
 
-
-
-
-
-  $('.deposit').on('click', addMoney);
+ });
 
 
 
@@ -50,15 +48,6 @@ $(document).ready(function(){
 });
 
 
-
-//Create an event that listens for click on deposit button from user when a deposit is made
-//When deposit button is clicked it will console.log('hello')
-
-//function handleClickEvent() {
-//
-//     console.log('hello');
-//
-//
 
 
 
@@ -80,13 +69,7 @@ $(document).ready(function(){
 
 //----------------------------------------------------
 
-//Users of the ATM object with a Savings Account
-//Users of the ATM object can deposit money into bank account
-//Set the value of 0
 
-
-//Create an event that listens for click on deposit button from user when a deposit is made
-//When deposit button is clicked it will console.log('hello')
 
 
 //When deposit button is clicked it will return the userinput
