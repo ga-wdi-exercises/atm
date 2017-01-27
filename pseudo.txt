@@ -1,0 +1,38 @@
+//these are the functions to be reinserted into the object later
+subtract (y) {
+  get this amount
+  subtract y
+}
+addition (y) {
+  get this ammount
+  add y
+}
+
+//these are the objects that represent the various bank accounts
+savings = {
+amount: 65;
+add: function,
+subtract: function
+}
+checking = {
+amount: 55;
+add: function,
+subtract: function
+}
+
+//adding appropriate event listeners
+add event listeners to deposit checking
+  get input field
+  execute checking method on input value
+
+add event listener to withdraw checking
+  get input field
+  execute checking method on input value
+
+add event listener to deposit savings
+  get input field
+  execute saving method on input value
+
+add event listener to withdraw savings
+  get input field
+  execute saving method on input value
