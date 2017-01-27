@@ -16,11 +16,12 @@ var originalBalance = 0
 
 var depositChecking = $("#checking .deposit");
 depositChecking.on("click", function(){
-      var prevBalance = $("#checking .balance").val();
+      var prevBalance = $("#checking .balance").val().replace("$","");
       var newEntry = $("#checking .input").val();
 
         var newBalance = prevBalance + newEntry;
-        var prevBalance = newBalance;
+
+        $("#checking .balance").html("$" + newBalance)
 
     })
 
@@ -28,6 +29,23 @@ depositChecking.on("click", function(){
 var withdrawChecking = $("#checking .withdraw")
 
 withdrawChecking.on("click", function(){
+  var prevBalance = $("#checking .balance").val().replace("$","");
+  var newEntry = $("#checking .input").val();
+
+    var newBalance = prevBalance - newEntry;
+
+    $("#checking .balance").html("$" + newBalance)
+
+
+    var overDraft = function(){
+      if(newBalance < 0){
+        alert("You are Overdrawing from your account")
+      }
+      else{
+        $("#checking .balance").html("$" + newBalance)
+      }
+    }
+    overDraft();
 
     })
 
@@ -36,15 +54,33 @@ withdrawChecking.on("click", function(){
 
   var depositSavings = $("#savings .deposit")
     depositSavings.on("click", function(){
+      var prevBalance = $("#savings .balance").val().replace("$","");
+      var newEntry = $("#savings .input").val();
+
+        var newBalance = prevBalance + newEntry;
+
+        $("#savings .balance").html("$" + newBalance)
 
     })
 
   var withdrawSavings = $("#savings .withdraw")
     withdrawSavings.on("click", function(){
+      var prevBalance = $("#savings .balance").val().replace("$","");
+      var newEntry = $("#savings .input").val();
 
+        var newBalance = prevBalance - newEntry;
+
+        $("#savings .balance").html("$" + newBalance)
+        var overDraft = function(){
+          if(newBalance < 0){
+            alert("You are Overdrawing from your account")
+          }
+          else{
+            $("#savings .balance").html("$" + newBalance)
+          }
+        }
+        overDraft();
     })
-
-
 
 
 
