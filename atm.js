@@ -1,3 +1,9 @@
+// SPECS
+// - Users can deposit money into one of the bank accounts
+// - Users can withdraw money from one of the bank accounts
+// - Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
+// - The color of a bank account should reflect its balance. (There's a CSS class called `.zero` already written for this.)
+
 $(document).ready(function(){
 
   function getBalance(accountType) {
@@ -49,12 +55,23 @@ $(document).ready(function(){
       return 0; //then return 0 so the current balance of the other account is set to 0
     } else { //if the amount they want to withdraw is more than the combined total of their account balances
       console.log("You don't have enough money to make that withdrawl."); //tell them they can't withdraw
+//TODO: Get both balances to flash red when user tries to withdraw too much money.
       // flashRed();
       // setTimeout(removeRed, 100);
       return thisBalance; //return the current balance so nothing changes
     }
   }
 
+  //delegate click event listeners to buttons within the accounts
+  $(".account").delegate(":button", "click", function(){
+    var buttonType = $(this).attr('class'); //get the type of the button that was clicked (deposit or withdraw)
+    var accountType = $(this).parent().attr('id'); //get the type of the account containing clicked button (checking or savings)
+    buttonType === "deposit" ? deposit(accountType) : withdraw(accountType); //either deposit or withdraw to that account based on button type
+  });
+});
+
+
+//TODO: Get these working.
   // function flashRed(){
   //   var accounts = $(`.account`).find('.balance').children();
   //   console.log(accounts);
@@ -69,35 +86,3 @@ $(document).ready(function(){
   //     account.removeClass('zero');
   //   });
   // }
-
-  //delegate click event listeners to buttons within the accounts
-  $(".account").delegate(":button", "click", function(){
-    var buttonType = $(this).attr('class'); //get the type of the button that was clicked (deposit or withdraw)
-    var accountType = $(this).parent().attr('id'); //get the type of the account containing clicked button (checking or savings)
-    buttonType === "deposit" ? deposit(accountType) : withdraw(accountType); //either deposit or withdraw to that account based on button type
-  });
-});
-
-// User Stories
-// - Users can deposit money into one of the bank accounts
-// - Users can withdraw money from one of the bank accounts
-// - Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
-// - The color of a bank account should reflect its balance. (There's a CSS class called `.zero` already written for this.)
-// - You may edit the HTML file (but might not need to).
-
-/*PSEUDOCODE
--Checking account
-  - Add click event listener to deposit button
-  **  - *Get ahold of the number in the box so we can change it
-  **  - *Get the entered amount from the input box
-  HOLD- Validate that number (just make sure its a number - use typeof)
-  **  - Add that entered number to the display number
-  **  - Update the display
-  - Add click event listener to withdraw button
-  **  - Get ahold of the number in the box so we can change it
-  **  - Get the entered amount from the input box
-  HOLD- Validate that number
-  **  - Subtract the entered number from the display number
-  **  - Update the display
-- Repeat for savings account
-*/
