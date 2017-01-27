@@ -11,7 +11,7 @@ function deposit(event) {
   // console.log(checkingBalance)
   checkingBalance= (parseFloat(checkingBalance)+parseFloat(checkingInput))
   // console.log(checkingBalance)
-  $("#checking").children().eq(1).text(parseFloat(checkingBalance))
+  $("#checking").children().eq(1).text("$"+(parseFloat(checkingBalance)))
   $("#checking").children().eq(2).val('')
   if (checkingBalance !== 0) {
     // console.log('the zero statment')
@@ -25,7 +25,7 @@ function withdraw(event) {
   var checkingInput =$("#checking").children().eq(2).val()
   if ((parseFloat(checkingBalance)-parseFloat(checkingInput) >= 0)){
     checkingBalance= (parseFloat(checkingBalance)-parseFloat(checkingInput))
-    $("#checking").children().eq(1).text(parseFloat(checkingBalance))
+    $("#checking").children().eq(1).text("$"+(parseFloat(checkingBalance)))
     $("#checking").children().eq(2).val('')
     if (checkingBalance === 0) {
       // console.log('the zero statment')
@@ -48,7 +48,7 @@ function depositSavings(event) {
   // console.log(savingsBalance)
   savingsBalance= (parseFloat(savingsBalance)+parseFloat(savingsInput))
   // console.log(savingsBalance)
-  $("#savings").children().eq(1).text(parseFloat(savingsBalance))
+  $("#savings").children().eq(1).text("$"+(parseFloat(savingsBalance)))
   $("#savings").children().eq(2).val('')
   if (savingsBalance !== 0) {
     // console.log('the zero statment')
@@ -62,7 +62,7 @@ function withdrawSavings(event) {
   var savingsInput =$("#savings").children().eq(2).val()
   if ((parseFloat(savingsBalance)-parseFloat(savingsInput) >= 0)){
     savingsBalance= (parseFloat(savingsBalance)-parseFloat(savingsInput))
-    $("#savings").children().eq(1).text(parseFloat(savingsBalance))
+    $("#savings").children().eq(1).text("$"+(parseFloat(savingsBalance)))
     $("#savings").children().eq(2).val('')
     // console.log('updated!')
     if (savingsBalance === 0) {
