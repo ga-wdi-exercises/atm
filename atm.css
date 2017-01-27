@@ -1,8 +1,8 @@
 @import url(http://fonts.googleapis.com/css?family=Oleo+Script);
-@import url(http://fonts.googleapis.com/css?family=Ruluko);
+@import url(https://fonts.googleapis.com/css?family=Open+Sans);
 
 body {
-  font-family: 'Ruluko', sans-serif;
+  font-family: 'Open Sans', sans-serif;
   margin: 0px auto;
   text-align: center;
   width: 700px;
@@ -21,7 +21,7 @@ body {
 .account {
   background-color: #6C9A74;
   border: 1px solid #295A33;
-  border-radius: 15px;
+  border-radius: 5px;
   display: inline-block;
   margin: 10px;
   padding: 10px;
@@ -31,8 +31,8 @@ body {
 .balance {
   background-color: #E3E3E3;
   border: 1px solid #676767;
-  border-radius: 15px;
-  font-family: 'Ruluko', sans-serif;
+  border-radius: 5px;
+  font-family: 'Open Sans', sans-serif;
   font-size: 50px;
   margin: 5px;
   padding: 25px 0px;
@@ -41,4 +41,8 @@ body {
 .zero {
   background-color: #F52F4F;
   color: #FFFFFF;
+}
+
+.input{
+  border-radius: 5px;
 }
