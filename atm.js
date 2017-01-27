@@ -1,17 +1,51 @@
 $(document).ready(function(){
-});
+//Notes for Anyone Who Cares to Read Them
+console.log("I decided to give myself money when the page loads rather than giving me values of Zero in each account.");
+console.log("The page still checks to see if the accounts are empty when the page loads.");
+console.log("So if you set the Checking and Savings accounts to 0, they will turn red and be flagged Empty.");
+
 
 //Create Checking Input and Checking Balance Variables
 var checkingInput = 0;
-var checkingBalance = 0;
+var checkingBalance = 1750;
 
 //Create Savings Input and Savings Balance Variables
 var savingsInput = 0;
-var savingsBalance = 0;
+var savingsBalance = 50000;
+
+//Set Checking and Savings Balances at Page Load
+$("#checking .balance").html("$ " + checkingBalance);
+$("#savings .balance").html("$ " + savingsBalance);
 
 //Check for Balances of Zero at Load
 isSavingsZero();
 isCheckingZero();
+
+//Function to be Run when Withdrawing from Checking
+function checkingWithdraw() {
+  if (+checkingBalance >= +checkingInput) {
+    checkingBalance = +checkingBalance - +checkingInput;
+  } else if ((+checkingBalance + +savingsBalance) >= +checkingInput) {
+    savingsBalance = +savingsBalance - (+checkingInput - +checkingBalance);
+    $("#savings .balance").html("$ " + savingsBalance);
+    checkingBalance = 0;
+  } else if ((+checkingBalance + +savingsBalance) < +checkingInput) {
+    alert("You're to poor to do that!");
+  }
+}
+
+//Function to be Run when Withdrawing from Savings
+function savingsWithdraw() {
+  if (+savingsBalance >= +savingsInput) {
+    savingsBalance = +savingsBalance - +savingsInput;
+  } else if ((+checkingBalance + +savingsBalance) >= +savingsInput) {
+    checkingBalance = +checkingBalance - (+savingsInput - +savingsBalance);
+    $("#checking .balance").html("$ " + checkingBalance);
+    savingsBalance = 0;
+  } else if ((+checkingBalance + +savingsBalance) < +savingsInput) {
+    alert("You're to poor to do that!");
+  }
+}
 
 //Declare a Function that turns the Checking Account Red if Empty
 function isCheckingZero() {
@@ -43,11 +77,7 @@ $("#checking .deposit").on("click", function(){
 //CHECKING WITHDRAW
 $("#checking .withdraw").on("click", function(){
   checkingInput = $("#checking .input").val();
-  if (+checkingBalance - +checkingInput < 0) {
-    alert("You don't have enough money for that!");
-  } else {
-    checkingBalance = +checkingBalance - +checkingInput;
-  }
+  checkingWithdraw();
   $("#checking .balance").html("$ " + checkingBalance);
   $("#checking .input").val("");
   isCheckingZero();
@@ -65,12 +95,10 @@ $("#savings .deposit").on("click", function(){
 //SAVINGS WITHDRAW
 $("#savings .withdraw").on("click", function(){
   savingsInput = $("#savings .input").val();
-  if (+savingsBalance - +savingsInput < 0) {
-    alert("You don't have enough money for that!");
-  } else {
-    savingsBalance = +savingsBalance - +savingsInput;
-  }
+  savingsWithdraw();
   $("#savings .balance").html("$ " + savingsBalance);
   $("#savings .input").val("");
   isSavingsZero();
 })
+
+});
