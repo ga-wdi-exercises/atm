@@ -16,6 +16,7 @@ $(document).ready(function () {
   var checkingWithdrawButton = $('checking').find(".withdraw")
   var savingsWithdrawButton = $('savings').find(".withdraw")
   var checkingBalanceDisplay = $('#checking').find(".balance")
+  var checkingBalanceDisplay = $('#checking').find(".currentbalance")
   var checkingInput = $('checking').find(".input")
   var savingsInput = $('savings').find(".input")
 
