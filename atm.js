@@ -1,27 +1,22 @@
-// DONE: Cut the link to atm.js from the index.html <head>, and paste it just above '</body'>
-// DONE: Add a link to a jQuery CDN to the line above that.
-// DONE: Make sure that jQuery is working by running console.log('jQuery is working!') inside of the following document-ready event listener.
-
 $(document).ready(function(){
-  $('.updater').click(function() {
+  $(':button').click(function() {
     var account = $(this).parent();
     var input = account.find('.input');
     var amount = parseInt(input.val());
-    if (amount >= 0) {
+    input.val('');
+    if (amount > 0) {
       var balance = account.find('.balance');
       var bal = parseInt(balance.html().slice(1));
       if ($(this).hasClass('deposit')) {
         bal += amount;
+        account.attr('class', 'account');
       } else if (bal >= amount) {
         bal -= amount;
-      }
-      if (bal === 0) {
-        account.attr('class', 'account zero');
-      } else {
-        account.attr('class', 'account')
+        if (bal === 0) {
+          account.attr('class', 'account zero');
+        }
       }
       balance.html('$' + bal.toString());
-      input.val('');
     }
   });
 });
