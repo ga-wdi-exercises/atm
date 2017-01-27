@@ -7,6 +7,7 @@ Objective: Make a program that allows deposits and withdrawals to be make into a
 
 Link Buttons to User Inputs
   Click = submit input
+  Four buttons, but each pair of buttons has the same function
 
 User Input $x
   If Input = Deposit,

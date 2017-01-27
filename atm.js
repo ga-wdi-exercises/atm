@@ -34,7 +34,7 @@ $("#depositChecking").on("click", function(){
 $("#withdrawChecking").on("click", function(){
   var withdraw = parseInt($("#inputChecking").val())
   var balance = parseInt($("balanceChecking").text().replace("$",""))
-  var newBalance = "$" + (balance - withdraw, balance >= 0)
+  var newBalance = "$" + (balance - withdraw)
   $("#balanceChecking").text(newBalance)
 })
 
