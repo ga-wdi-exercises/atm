@@ -2,29 +2,37 @@
 
 $(document).ready(function(){
 
+// Make Balance an integer without the $
+
+var zeroBalanceText = $("#checking .balance").text();
+var zeroBalanceNoDSign =  zeroBalanceText.split("$")[1];
+var zeroBalanceInt = parseInt(zeroBalanceNoDSign);
 
 //This section is for checking
-  var inputChecking = $("#checking .input")
-    inputChecking.on("input", function(){
+
+
+var originalBalance = 0
+
+
+var depositChecking = $("#checking .deposit");
+depositChecking.on("click", function(){
+      var prevBalance = $("#checking .balance").val();
+      var newEntry = $("#checking .input").val();
+
+        var newBalance = prevBalance + newEntry;
+        var prevBalance = newBalance;
 
     })
 
-  var depositChecking = $("#checking .deposit")
-    depositChecking.on("click", function(){
 
-    })
+var withdrawChecking = $("#checking .withdraw")
 
-  var withdrawChecking = $("#checking .withdraw")
-    withdrawChecking.on("click", function(){
+withdrawChecking.on("click", function(){
 
     })
 
 
 //This section is for Savings
-  var inputSavings = $("#savings .input")
-    inputSavings.on("input", function(){
-
-    })
 
   var depositSavings = $("#savings .deposit")
     depositSavings.on("click", function(){
