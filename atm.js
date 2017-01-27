@@ -8,10 +8,13 @@ function changeBackgroundColorToRed(){
 
 changeBackgroundColorToRed();
 
-var depositCheck = $("#checking .deposit");
-var checkingInput = $("checking .input");
+var depositCheck = $("#checking .deposit")
+var checkingInput = $("#checking .input")
+var checkingBalance = $("checking .balance").val()
+
+
 
 
 depositCheck.on("click", function(){
-  $("#checking .balance").console.log("$" + checkingInput.value)
+  $("#checking .balance").text("$" + checkingInput.val())
 });
