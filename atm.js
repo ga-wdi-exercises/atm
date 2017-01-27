@@ -25,6 +25,7 @@
 
 $(document).ready(function() {
     console.log('jquery loaded');
+    
     $('#checkD').click(function(){
         updateCheckBalance();
     })
