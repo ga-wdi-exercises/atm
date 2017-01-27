@@ -1,8 +1,8 @@
-$(document).ready(function(){
-
 //declare global variables for total balance
 var checkingTotal = 0;
 var savingsTotal = 0;
+
+$(document).ready(function(){
 
 //object with methods to check balance and change color if zero/not zero
 var balanceCheck = {
@@ -22,6 +22,33 @@ var balanceCheck = {
   }
 }
 
+var overdraftProtect = {
+  checking: function(a){
+    if (a > checkingTotal && (a - checkingTotal) <= savingsTotal) {
+      savingsTotal = savingsTotal - (a - checkingTotal);
+      checkingTotal = 0;
+      $("#savings > .balance").text("$" + savingsTotal)
+    } else if (a <= checkingTotal) {
+      checkingTotal = +checkingTotal - +a;
+    } else {
+      alert("You cannot withdraw money that you don't have!");
+    }
+    balanceCheck.savings();
+  },
+  savings: function(a){
+    if (a > savingsTotal && (a - savingsTotal) <= checkingTotal){
+      checkingTotal = checkingTotal - (a - savingsTotal);
+      savingsTotal = 0;
+      $("#checking > .balance").text("$" + checkingTotal)
+    } else if (a <= savingsTotal) {
+      savingsTotal = +savingsTotal - +a;
+    } else {
+      alert("You cannot withdraw money that you don't have!")
+    }
+    balanceCheck.checking();
+  }
+}
+
 //add value to checking and update checking total
 function addValueChecking(){
   var userInputChecking = $("#checking > .input").val()
@@ -33,11 +60,7 @@ function addValueChecking(){
 //subtract value from checking and update checking total
 function subValueChecking(){
   var userInputChecking = $("#checking > .input").val()
-  if (userInputChecking <= checkingTotal) {
-    checkingTotal = +checkingTotal - +userInputChecking;
-  } else {
-    alert("You cannot withdraw money that you don't have!");
-  }
+  overdraftProtect.checking(userInputChecking);
   $("#checking > .balance").text("$" + checkingTotal)
   balanceCheck.checking();
 }
@@ -53,11 +76,7 @@ function addValueSavings(){
 //subtract value from savings and update savings total
 function subValueSavings(){
   var userInputSavings = $("#savings > .input").val()
-  if (userInputSavings <= savingsTotal) {
-    savingsTotal = +savingsTotal - +userInputSavings;
-  } else {
-    alert("You cannot withdraw money that you don't have!")
-  }
+  overdraftProtect.savings(userInputSavings);
   $("#savings > .balance").text("$" + savingsTotal)
   balanceCheck.savings();
 }
