@@ -12,6 +12,7 @@ withdrawButton.on('click',withdrawClick);
 
 function depositClick(){
 //depositClick
+  var savechkTotal;
   var negativeAmt;
   jqObjectHolder = $(this)
   inputHolder = jqObjectHolder.siblings('.input').val();
@@ -21,11 +22,17 @@ function depositClick(){
       break;
     case true:
       whichAccount();
-      if (0 <= inputHolder + balances[whichAcct]){
+      if (0 <= parseInt(inputHolder) + balances[whichAcct]){
         updateBalance(1,false);
-        break;
+
       } else {
-        updateBalance(null,true);
+        savchkTotal = balances.savingsBalance + balances.checkingBalance;
+        inputHolder = -inputHolder
+        if (checkBalance(savchkTotal) && whichAcct == "checkingBalance") {
+          updateBalance(null,true);
+        } else {
+        resetInputs();
+        }
       }
   }
 //set input box back to default
@@ -48,6 +55,7 @@ function withdrawClick(){
     sufBal = whichAccount();
     if (sufBal === true) {
       updateBalance(-1,false);
+      resetInputs()
     } else if (sufBal === false && whichAcct == "checkingBalance") { //This is for overdraft protection potential, so if there isn't enough money and you're trying to pull from checking
       savchkTotal = balances.savingsBalance + balances.checkingBalance;
       if (checkBalance(savchkTotal)) { //check if total of checking and savings is sufficient
@@ -64,10 +72,6 @@ function withdrawClick(){
     }
 
   }
-//if checking and not enough, check total of checking and savings and check if enough
-function sufficientBalanceCheck() {
-
-}
 //withdraw
 //set input box back to default
 }
@@ -85,7 +89,7 @@ function updateBalance(typeOfTransaction,overdraftProtection){
     $('#savings').children('.balance').html("$"+balances.savingsBalance);
 
   }
-
+  updateClass();
 }
 
 function checkBalance(balVal){
@@ -126,4 +130,18 @@ function whichAccount() {
       whichAcct = "savingsBalance";
       return sufBalFunc;
   }
+}
+function updateClass(){
+
+  if (balances.savingsBalance == 0){
+    $('#savings').children('.balance').addClass('zero');
+  } else {
+    $('#savings').children('.balance').removeClass('zero');
+  }
+  if (balances.checkingBalance == 0){
+    $('#checking').children('.balance').addClass('zero');
+  } else {
+    $('#checking').children('.balance').removeClass('zero');
+  }
+
 }
