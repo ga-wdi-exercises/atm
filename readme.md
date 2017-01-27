@@ -2,9 +2,9 @@
 
 We're going to build an application to track checking and savings account balances.
 
-## Pseudocode (20 min)
+## Pseudocode
 
-Take 20 minutes to write some pseudocode for the lab. Think carefully about every step involved in using an ATM. For example, it allows users to input a dollar amount when they want deposit money. Also, think about how there are two types of accounts -- checking and savings. Take a look at the **Specifications** below to guide your pseudo.
+Spend up to 20 minutes to write some pseudocode for the lab. Think carefully about every step involved in using an ATM. For example, it allows users to input a dollar amount when they want deposit money. Also, think about how there are two types of accounts -- checking and savings. Take a look at the **Specifications** below to guide your pseudo.
 
 Include your pseudocode as comments within your program.
 
