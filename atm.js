@@ -21,17 +21,25 @@
         // event listen for Function checking deposit
         $('.cdeposit').click(function(num1, num2) {
           cnewsum = $('.cinput').val();
-          depositChecking();
-          $('#checkingBalance').text(cbalance);
-          greenCAlarm();
+          if (isNaN(cnewsum) === true) {
+            alert('This is not a number. You can only use numbers and dots!');
+          } else {
+            depositChecking();
+            $('#checkingBalance').text(cbalance);
+            greenCAlarm();
+          }
         })
 
         // event listen for function checking withdraw
         $('.cwithdraw').click(function(num1, num2) {
           cnewsum = $('.cinput').val();
-          withdrawChecking();
-          $('#checkingBalance').text(cbalance);
-          redCAlarm();
+          if (isNaN(cnewsum) === true) {
+            alert('This is not a number. You can only use numbers and dots!');
+          } else {
+            withdrawChecking();
+            $('#checkingBalance').text(cbalance);
+            redCAlarm();
+          }
         })
 
         // if account reaches zero, turn background red
@@ -74,17 +82,25 @@
         // event listen for Function savings deposit
         $('.sdeposit').click(function(num1, num2) {
           snewsum = $('.sinput').val();
-          depositSavings();
-          $('#savingsBalance').text(sbalance);
-          greenSAlarm();
+          if (isNaN(snewsum) === true) {
+            alert('This is not a number. You can only use numbers and dots!');
+          } else {
+            depositSavings();
+            $('#savingsBalance').text(sbalance);
+            greenSAlarm();
+          }
         })
 
         // event listen for function savings withdraw
         $('.swithdraw').click(function(num1, num2) {
           snewsum = $('.sinput').val();
-          withdrawSavings();
-          $('#savingsBalance').text(sbalance);
-          redSAlarm();
+          if (isNaN(snewsum) === true) {
+            alert('This is not a number. You can only use numbers and dots!');
+          } else {
+            withdrawSavings();
+            $('#savingsBalance').text(sbalance);
+            redSAlarm();
+          }
         })
 
         // if account reaches zero, turn background red
