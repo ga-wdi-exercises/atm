@@ -1,4 +1,4 @@
-//these are the functions to be reinserted into the object later
+//these are the functions to be stuck into the object later
 subtract (y) {
   get this amount
   subtract y
