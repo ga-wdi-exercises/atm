@@ -9,10 +9,26 @@
 //Let's build!
 
 $(document).ready(function () {
-        $("body").css('background-color', '#ff0000');
-});
-  $(".deposit").click(function(event){
-    $('button').val();
+  var checkingBalance = 0
+  var savingsBalance = 0
+  var checkingDepositButton = $('#checking').find(".deposit")
+  var savingsDepositButton = $('#savings').find(".deposit")
+  var checkingWithdrawButton = $('checking').find(".withdraw")
+  var savingsWithdrawButton = $('savings').find(".withdraw")
+  var checkingInput = $('checking').find(".input")
+  var savingsWithdrawButton = $('savings').find(".input")
+
+
+  function depositToChecking() {
     event.preventDefault();
-  });
-    console.log("hello");
+    var amount = $('#checking').find('.input').val();
+    console.log(amount)
+  function depositToWithdraw() {
+    event.preventDefault();
+    var amount = $('#savings').find('.deposit').val();
+    console.log(amount)
+
+
+  }
+
+  checkingDepositButton.click('depositToChecking')
