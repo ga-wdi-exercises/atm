@@ -14,7 +14,12 @@ $(document).ready(function(){
   }
 
   function updateDisplay(accountType, amount) {
-    $(`#${accountType}`).find(".balance").html(`$${amount}`)
+    $(`#${accountType}`).find(".balance").html(`$${amount}`);
+    if (getBalance(`${accountType}`) === 0) {
+      $(`#${accountType}`).find(".balance").addClass('zero');
+    } else if(getBalance(`${accountType}`) !== 0) {
+      $(`#${accountType}`).find(".balance").removeClass('zero');
+    }
   }
 
   function deposit(accountType) {
@@ -27,7 +32,8 @@ $(document).ready(function(){
   function withdraw(accountType) {
     var currentBalance = getBalance(accountType);
     var amount = getInput(accountType);
-    var newBalance = currentBalance - amount;
+    var result = currentBalance - amount;
+    var newBalance = result < 0 ? currentBalance : result;
     updateDisplay(accountType, newBalance);
   }
 
@@ -49,6 +55,12 @@ $(document).ready(function(){
     withdraw("savings");
   });
 
+  // var buttons = $(".account").
+  //
+  // $(".account").delegate("", "click", function(){
+  //   var buttons = $(this).attr('class', )
+  //
+  // });
 });
 
 // User Stories
