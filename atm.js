@@ -9,20 +9,27 @@ var checkingBalance = 0;
 var savingsInput = 0;
 var savingsBalance = 0;
 
-//Check for Balance of Zero at Load
-if (checkingBalance > 0) {
-  $("#checking").removeClass("zero");
-}
-if (checkingBalance == 0) {
-  $("#checking").addClass("zero");
-}
-if (savingsBalance == 0) {
-  $("#savings").addClass("zero");
-}
-if (savingsBalance > 0) {
-  $("#savings").removeClass("zero");
-}
+//Check for Balances of Zero at Load
+isSavingsZero();
+isCheckingZero();
 
+//Declare a Function that turns the Checking Account Red if Empty
+function isCheckingZero() {
+  if (checkingBalance > 0) {
+    $("#checking").removeClass("zero");
+  } else if (checkingBalance == 0) {
+    $("#checking").addClass("zero");
+  }
+}
+//Declare a Function that turns the Savings Account Red if Empty
+function isSavingsZero() {
+  if (savingsBalance == 0) {
+    $("#savings").addClass("zero");
+  }
+  if (savingsBalance > 0) {
+    $("#savings").removeClass("zero");
+  }
+}
 
 //CHECKING DEPOSIT
 $("#checking .deposit").on("click", function(){
@@ -30,9 +37,7 @@ $("#checking .deposit").on("click", function(){
   checkingBalance = +checkingBalance + +checkingInput;
   $("#checking .balance").html("$ " + checkingBalance);
   $("#checking .input").val("");
-  if (checkingBalance > 0) {
-    $("#checking").removeClass("zero");
-  }
+  isCheckingZero();
 })
 
 //CHECKING WITHDRAW
@@ -43,24 +48,18 @@ $("#checking .withdraw").on("click", function(){
   } else {
     checkingBalance = +checkingBalance - +checkingInput;
   }
-  console.log(checkingBalance);
   $("#checking .balance").html("$ " + checkingBalance);
   $("#checking .input").val("");
-  if (checkingBalance == 0) {
-    $("#checking").addClass("zero");
-  }
+  isCheckingZero();
 })
 
 //SAVINGS DEPOSIT
 $("#savings .deposit").on("click", function(){
   savingsInput = $("#savings .input").val();
   savingsBalance = +savingsBalance + +savingsInput;
-  console.log(savingsBalance);
   $("#savings .balance").html("$ " + savingsBalance);
   $("#savings .input").val("");
-  if (savingsBalance > 0) {
-    $("#savings").removeClass("zero");
-  }
+  isSavingsZero();
 })
 
 //SAVINGS WITHDRAW
@@ -71,10 +70,7 @@ $("#savings .withdraw").on("click", function(){
   } else {
     savingsBalance = +savingsBalance - +savingsInput;
   }
-  console.log(savingsBalance);
   $("#savings .balance").html("$ " + savingsBalance);
   $("#savings .input").val("");
-  if (savingsBalance == 0) {
-    $("#savings").addClass("zero");
-  }
+  isSavingsZero();
 })
