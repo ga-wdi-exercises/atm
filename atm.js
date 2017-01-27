@@ -13,8 +13,9 @@ $(document).ready(function(){
     return parseInt(input);
   }
 
-  function updateDisplay(accountType, amount) {
-    $(`#${accountType}`).find(".balance").html(`$${amount}`);
+  //update the display with the new balance for the given account
+  function updateDisplay(accountType, balance) {
+    $(`#${accountType}`).find(".balance").html(`$${balance}`);
     if (getBalance(`${accountType}`) === 0) {
       $(`#${accountType}`).find(".balance").addClass('zero');
     } else if(getBalance(`${accountType}`) !== 0) {
@@ -26,41 +27,28 @@ $(document).ready(function(){
     var currentBalance = getBalance(accountType); //get current balance for the account type
     var amount = getInput(accountType); //get the amount the user wants to deposit
     var newBalance = currentBalance + amount; //add em up
-    updateDisplay(accountType, newBalance); //update the view
+    updateDisplay(accountType, newBalance); //update the display
   }
 
   function withdraw(accountType) {
-    var currentBalance = getBalance(accountType);
-    var amount = getInput(accountType);
-    var result = currentBalance - amount;
-    var newBalance = result < 0 ? currentBalance : result;
-    updateDisplay(accountType, newBalance);
+    var currentBalance = getBalance(accountType); //get current balance
+    var amount = getInput(accountType); //get the amount the user wants to withdraw
+    var result = currentBalance - amount; //calculate the result of the transaction
+    var newBalance = result < 0 ? /* handleOverdraft goes here */ currentBalance : result; //only allow it if the result is greater than 0
+    updateDisplay(accountType, newBalance); //update the display
   }
 
-  //add click event listener to checking deposit button
-  $("#checking").find(".deposit").click(function(){
-    deposit("checking");
-  });
+  function handleOverdraft(accountType) {
 
-  //add click event listener to withdraw deposit button
-  $("#checking").find(".withdraw").click(function(){
-    withdraw("checking");
-  });
+  }
 
-  $("#savings").find(".deposit").click(function(){
-    deposit("savings");
-  });
 
-  $("#savings").find(".withdraw").click(function(){
-    withdraw("savings");
+  //delegate click event listeners to buttons within the accounts
+  $(".account").delegate(":button", "click", function(){
+    var buttonType = $(this).attr('class'); //get the type of the button that was clicked (deposit or withdraw)
+    var accountType = $(this).parent().attr('id'); //get the type of the account containing clicked button (checking or savings)
+    buttonType === "deposit" ? deposit(accountType) : withdraw(accountType); //either deposit or withdraw to that account based on button type
   });
-
-  // var buttons = $(".account").
-  //
-  // $(".account").delegate("", "click", function(){
-  //   var buttons = $(this).attr('class', )
-  //
-  // });
 });
 
 // User Stories
