@@ -41,4 +41,10 @@ body {
 .zero {
   background-color: #F52F4F;
   color: #FFFFFF;
+  border: 1px solid #295A33;
+  border-radius: 15px;
+  display: inline-block;
+  margin: 10px;
+  padding: 10px;
+  width: 300px;
 }
