@@ -4,7 +4,10 @@ var sDeposit;
 var sWithdraw;
 
 var cBalance = parseInt($("#checking > div").html().replace("$", ""));
+$("#checking > div").addClass("zero");
 var sBalance = parseInt($("#savings > div").html().replace("$", ""));
+$("#savings > div").addClass("zero");
+
 
 $("#checking .deposit").click(function(){ //checking deposit button
 cDeposit = parseInt($("#checking .input:text").val());
@@ -26,6 +29,9 @@ if (cBalance < 0) {
 }
 else {
 $("#checking > div").html("$"+cBalance); //if it will, keeps balance at what it was
+if (cBalance == 0) {
+  $("#checking > div").addClass("zero")
+  }
 }
 })
 
@@ -49,13 +55,8 @@ if (sBalance < 0) {                       //checks to see if withdraw will make 
 }
 else {
 $("#savings > div").html("$"+sBalance);
+  if (sBalance == 0) {
+    $("#savings > div").addClass("zero")
+    }
 }
 })
-
-if (cBalance == 0) {
-  $("#checking > div").addClass("zero")
-  }
-
-if (sBalance == 0) {
-  $("#savings > div").addClass("zero")
-  }
