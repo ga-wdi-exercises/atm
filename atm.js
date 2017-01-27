@@ -13,6 +13,10 @@ function deposit(event) {
   // console.log(checkingBalance)
   $("#checking").children().eq(1).text(parseFloat(checkingBalance))
   $("#checking").children().eq(2).val('')
+  if (checkingBalance !== 0) {
+    // console.log('the zero statment')
+    $("#checking").removeClass('zero')
+  }
 }
 checkingDeposit.click(deposit)
 
@@ -23,6 +27,10 @@ function withdraw(event) {
     checkingBalance= (parseFloat(checkingBalance)-parseFloat(checkingInput))
     $("#checking").children().eq(1).text(parseFloat(checkingBalance))
     $("#checking").children().eq(2).val('')
+    if (checkingBalance === 0) {
+      // console.log('the zero statment')
+      $("#checking").addClass('zero')
+    }
   };
 }
 checkingWithdraw.click(withdraw)
@@ -42,6 +50,10 @@ function depositSavings(event) {
   // console.log(savingsBalance)
   $("#savings").children().eq(1).text(parseFloat(savingsBalance))
   $("#savings").children().eq(2).val('')
+  if (savingsBalance !== 0) {
+    // console.log('the zero statment')
+    $("#savings").removeClass('zero')
+  }
 }
 savingsDeposit.click(depositSavings)
 
@@ -52,6 +64,16 @@ function withdrawSavings(event) {
     savingsBalance= (parseFloat(savingsBalance)-parseFloat(savingsInput))
     $("#savings").children().eq(1).text(parseFloat(savingsBalance))
     $("#savings").children().eq(2).val('')
+    // console.log('updated!')
+    if (savingsBalance === 0) {
+      // console.log('the zero statment')
+      $("#savings").addClass('zero')
+    }
   };
 }
 savingsWithdraw.click(withdrawSavings)
+
+//in the red
+if (savingsBalance = 0) {
+  $("#checking").addClass('.zero')
+}
