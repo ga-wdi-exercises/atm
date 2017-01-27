@@ -89,9 +89,10 @@ function overdraft() {
   // $("#checking .balance").html('$0');
   // red();
   if (checkingBalance <= savingsBalance) {
-    $("#checking .balance").html('$0');
+    $("#checking .balance").html('$' + 0);
     $('#checking .balance').addClass('zero');
     savingsBalance -= checkingBalance;
+    checkingBalance = 0;
     $("#savings .balance").html('$' + savingsBalance);
     if (savingsBalance == 0) {
       $('#savings .balance').addClass('zero');
