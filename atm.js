@@ -1,48 +1,44 @@
 $(document).ready(function(){
 
-  function getCheckingBalance() {
-    //get the checking balance and save it in a variable
-    var checkingBalance = $("#checking").find(".balance");
-    //get the number from the balance display and save it
-    var checkingBalanceValue = $("#checking").find('.balance').html();
-    //remove the dollar sign
-    var checkingBalanceNumber = checkingBalanceValue.substring(1, checkingBalanceValue.length);
-    return checkingBalanceNumber;
+  function getBalance(accountType) {
+    var balance = $(`#${accountType}`).find(".balance"); //get the current balance from the display
+    var balanceValue = balance.html(); //get the actual value
+    var balanceNumber = balanceValue.substring(1, balanceValue.length); //remove the dollar sign
+    return parseInt(balanceNumber); //return just the number
   }
 
-  function getCheckingInput() {
-    //get the number from the checking input and save it
-    var checkingInput = $("#checking").find("input").val();
-
-    return checkingInput;
+  //get the number from the checking input and return it
+  function getInput(accountType) {
+    var input = $(`#${accountType}`).find("input").val();
+    return parseInt(input);
   }
 
-
-
-  function depositChecking(currentBalance, depositAmount) {
-    //add the checking input to checking balance
-    var newBalance = parseInt(currentBalance) + parseInt(depositAmount);
-    //update the checking balance html
-    $("#checking").find(".balance").html(`$${newBalance}`);
+  function updateDisplay(accountType, amount) {
+    $(`#${accountType}`).find(".balance").html(`$${amount}`)
   }
 
-  function withdrawChecking(currentBalance, withdrawAmount) {
-    //subtract widthdrawamount from currentBalance
-    var newBalance = parseInt(currentBalance) - parseInt(withdrawAmount);
-    //update the checking balance html
-    checkingBalance.html(`$${newBalance}`);
+  function deposit(accountType) {
+    var currentBalance = getBalance(accountType); //get current balance for the account type
+    var amount = getInput(accountType); //get the amount the user wants to deposit
+    var newBalance = currentBalance + amount; //add em up
+    updateDisplay(accountType, newBalance); //update the view
+  }
+
+  function withdraw(accountType) {
+    var currentBalance = getBalance(accountType);
+    var amount = getInput(accountType);
+    var newBalance = currentBalance - amount;
+    updateDisplay(accountType, newBalance);
   }
 
   //add click event listener to checking deposit button
   $("#checking").find(".deposit").click(function(){
-    var balance = getCheckingBalance();
-    var amount = getCheckingInput();
-    depositChecking(balance, amount);
+    deposit("checking");
   });
 
   //add click event listener to withdraw deposit button
   $("#checking").find(".withdraw").click(function(){
-    withdrawChecking();
+    withdraw("checking");
   });
 
 });
@@ -57,17 +53,16 @@ $(document).ready(function(){
 /*PSEUDOCODE
 -Checking account
   - Add click event listener to deposit button
-      - *Get ahold of the number in the box so we can change it
-      - *Get the entered amount from the input box
+  **  - *Get ahold of the number in the box so we can change it
+  **  - *Get the entered amount from the input box
   HOLD- Validate that number (just make sure its a number - use typeof)
-      - Add that entered number to the display number
-      - Update the display
+  **  - Add that entered number to the display number
+  **  - Update the display
   - Add click event listener to withdraw button
-      - Get ahold of the number in the box so we can change it
-      - Get the entered amount from the input box
-      - Validate that number
-      - Get the number currently in the display box
-      - Subtract the entered number from the display number
-      - Update the display
+  **  - Get ahold of the number in the box so we can change it
+  **  - Get the entered amount from the input box
+  HOLD- Validate that number
+  **  - Subtract the entered number from the display number
+  **  - Update the display
 - Repeat for savings account
 */
