@@ -3,10 +3,13 @@
 //Make sure functions are not longer than five lines,(Sandi Metz's Rule 2)
 
 //Test that the Javascript library, jQuery is working
+console.log('javascript is running');
+console.log($('jQuery is running')); 
 
-$(document).ready(function(){
-// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
-});
+
+// $(document).ready(function(){
+// // Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
+// });
 
 //Users of the ATM object with a Checking Account
 //Users of the ATM object can deposit money into bank account
