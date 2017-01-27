@@ -10,15 +10,9 @@
 
 $(document).ready(function () {
         $("body").css('background-color', '#ff0000');
-  });
-
-$( "#deposit").click(function(event){
-  color = $('#button').val();
-  $('#brush').css('background', color);
+});
+  $(".deposit").click(function(event){
+    $('button').val();
     event.preventDefault();
   });
-
-$( "deposit" ).click(function() {
-    alert( "hello." );
-    console.log;
-});
+    console.log("hello");
