@@ -1,3 +1,25 @@
 $(document).ready(function(){
-// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
+
+  var value =0
+  var balance
+
+  $(".deposit").click(function(){
+
+    var balance = $(".checkingbalance").html()
+    var depositBalance = parseInt (balance) + parseInt( $("#depo").val())
+
+    $(".checkingbalance").html(depositBalance)
+
+  });
+
+  $(".withdraw").click(function(){
+
+    var balance = $(".checkingbalance").html()
+    var withdrawBalance = parseInt (balance) - parseInt( $("#depo").val())
+
+    $(".checkingbalance").html(withdrawBalance)
+
+
+
+  });
 });
