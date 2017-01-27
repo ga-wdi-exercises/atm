@@ -1,31 +1,41 @@
 <!doctype html>
 <html>
-  <head>
+
+<head>
     <title>ATM</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="atm.css">
-    <script src="atm.js"></script>
-  </head>
-  <body>
+</head>
+
+<body>
     <div class="header">
-      <div><img src="ga.png" /></div>
-      <div class="title">Bank of GA</div>
+        <div><img src="ga.png" /></div>
+        <div class="title">Bank of GA</div>
     </div>
 
+    <!-- THE CHECKING ACCOUNT -->
     <div id="checking" class="account">
-      <h2>Checking</h2>
-      <div class="balance">$0</div>
-      <input class="input" type="text" placeholder="enter an amount" />
-      <input class="deposit" type="button" value="Deposit" />
-      <input class="withdraw" type="button" value="Withdraw" />
+        <h2>Checking</h2>
+        <div class="balance">$0</div>
+        <input class="input" type="text" placeholder="enter an amount" />
+        <input class="deposit" type="button" value="Deposit" />
+        <input class="withdraw" type="button" value="Withdraw" />
     </div>
 
+    <!-- THE SAVINGS ACCOUNT -->
     <div id="savings" class="account">
-      <h2>Savings</h2>
-      <div class="balance">$0</div>
-      <input class="input" type="text" placeholder="enter an amount" />
-      <input class="deposit" type="button" value="Deposit" />
-      <input class="withdraw" type="button" value="Withdraw" />
+        <h2>Savings</h2>
+        <div class="balance">$0</div>
+        <input class="input" type="text" placeholder="enter an amount" />
+        <input class="deposit" type="button" value="Deposit" />
+        <input class="withdraw" type="button" value="Withdraw" />
     </div>
-  </body>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+    <script src="atm.js"></script>
+    <!-- <script src="https://code.jquery.com/jquery-2.2.4.js" integrity="sha256-iT6Q9iMJYuQiMWNd9lDyBUStIq/8PuOW33aOqmvFpqI=" crossorigin="anonymous"></script> -->
+    <!-- Lena helped me w this CDN for not-most-recent jquery cdn to fix the // Uh oh -- its saying $ is undefined! Somethings missing from index.html...problem from atm.js file  -->
+    <!-- <script src="atm.js"></script> -->
+</body>
+
 </html>
