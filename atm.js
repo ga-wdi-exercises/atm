@@ -55,6 +55,4 @@ $(document).ready(function(){
     $("#savings > .balance").text("$" + savingsBalance);}
     saveZero();
     });
-
-
 });
