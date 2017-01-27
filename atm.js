@@ -14,12 +14,14 @@ $(document).ready(function(){
   });
 
   $(".withdraw").click(function(){
-    // if current balance - #depo val > = 0, run the function. If current balance - #depo < 0 default.
+
     var balance = $(".checkingbalance").html()
     var withdrawBalance = parseInt (balance) - parseInt( $("#depo").val())
 
     if (balance - ($("#depo").val()) >= 0)   { $(".checkingbalance").html(withdrawBalance)
+
   } else if (balance - ($("#depo").val()) < 0) {
+      $("#checking.account").css("background", "red");
       alert ("You cant withdraw more money than you have available, fool!");
     }
 
@@ -36,8 +38,6 @@ $(document).ready(function(){
 
   $(".savingwithdraw").click(function(){
 
-  // if current balance - #depo val > = 0, run the function. If current balance - #depo < 0 default.
-
     var savingbalance= $(".savingbalance").html()
     var withdrawBalanceSaving = parseInt (savingbalance) - parseInt( $("#savingdepo").val())
 
@@ -45,6 +45,7 @@ $(document).ready(function(){
       $(".savingbalance").html(withdrawBalanceSaving)
 
     } else if (savingbalance - ($("#savingdepo").val()) < 0 ) {
+      $("#savings.account").css("background", "red");
       alert ("You cant withdraw more money than you have available, fool!")
     }
 
