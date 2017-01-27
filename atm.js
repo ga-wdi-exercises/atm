@@ -41,6 +41,10 @@ $(document).ready(function () {
     var amount = $('savings').find('.withdraw').val();
     console.log(amount)
   }
+  function checkingBalanceDisplay() {
+    event.preventDefault
+    var balance = $('checking').find('.balance')
+  }
   checkingDepositButton.click(depositToChecking)
   savingsDepositButton.click(depositToSavings)
 
