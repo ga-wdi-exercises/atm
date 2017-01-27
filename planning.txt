@@ -1,0 +1,61 @@
+Goals:
+
+- Users can deposit money into one of the bank accounts
+- Users can withdraw money from one of the bank accounts
+- Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
+- The color of a bank account should reflect its balance. (There's a CSS class called .zero already written for this.)
+- You may edit the HTML file (but might not need to).
+
+Suggested commits:
+
+CHECKING ACCOUNT
+
+1. Test jQuery is working
+Make the <body>'s background color turn red
+>Link jQuery
+>Console log hello
+
+
+2. Add a click listener to the checking account's "Deposit" button
+When you click the button it should console.log("hello")
+> Use jquery to grab the deposit button
+> Create an event listener on click
+> Return console log to test
+
+
+3. On clicking "Deposit", it should get the user input
+Just console.log it
+You can save some time by hard-coding a value into the input box: <input value="something" />. That way you don't need to type stuff in all the time to test it.
+> Change return val() of user input upon click
+> Print in console log as test
+
+
+4. On clicking "Deposit", it should update the "balance" with the user input
+Just make the user input show up. Don't worry about actually keeping track of a balance yet.
+> Create variable storing the balance, similar to seconds in timer exercise
+> Print number
+
+
+5. On "Deposit", it should get the current "balance"
+How can you get the content of the "balance" element?
+The content has a $ at the beginning of it, so Javascript will read it as text rather than as a number. How can you convert this text into a number?
+> Update the balance while removing the $
+
+
+6. On "Deposit", it updates the balance
+Now add the user input to the balance, and make it show up in the "balance" element
+> Same as in timer exercise
+
+
+On "Withdraw", it updates the balance
+Follow the same steps as before, except you're subtracting instead of adding
+> Review code and mirror new events for withdraw clicks
+
+> Repeat for savings
+
+> Make sure withdraw can't happen if withdraw > balance in either account
+> Prompt that they can only withdraw what is remaining
+> If balance is zero, make color red 
+
+Refactor the existing code
+Challenge: Try to have no function() that's longer than 5 lines. (Sandi Metz's Rule 2)
