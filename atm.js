@@ -1,8 +1,11 @@
-// Follow the commented instructions just above '</body>' in index.html.
-// Make sure that jQuery is working.
-// Then, follow your pseudo-code below, or follow the recommended commits in README.md (or do some combination of these).
-
 $(document).ready(function(){
+
+  // DONE: Follow the commented instructions just above '</body>' in index.html.
+
+  // DONE: Make sure that jQuery is working.
+  console.log('jQuery is working!');
+
+  // Then, follow your pseudo-code below, or follow the recommended commits in README.md (or do some combination of these).
 
   // Add an event listener to each account's deposit button. When it is clicked ...
     // Get the value of this account's input field.
