@@ -2,7 +2,8 @@ $(document).ready(function(){
 
   var value =0
   var balance
-
+  // var depositBalance = parseInt (balance) + parseInt( $("#depo").val())
+  // var savingbalance = $(".savingbalance").html()
 
   $(".deposit").click(function(){
 
@@ -10,6 +11,9 @@ $(document).ready(function(){
     var depositBalance = parseInt (balance) + parseInt( $("#depo").val())
 
     $(".checkingbalance").html(depositBalance)
+    if (balance + ($("#depo").val()) >= 0) {
+      $("#checking.account").css("background", "rgb(108,154,116)");
+    } else {""}
 
   });
 
@@ -22,7 +26,6 @@ $(document).ready(function(){
 
   } else if (balance - ($("#depo").val()) < 0) {
       $("#checking.account").css("background", "red");
-      alert ("You cant withdraw more money than you have available, fool!");
     }
 
   });
@@ -33,6 +36,10 @@ $(document).ready(function(){
     var depositBalanceSaving = parseInt (savingbalance) + parseInt( $("#savingdepo").val())
 
     $(".savingbalance").html(depositBalanceSaving)
+
+    if (savingbalance + ($("#savingdepo").val()) >= 0) {
+      $("#savings.account").css("background", "rgb(108,154,116)");
+    } else {""}
 
   });
 
@@ -46,8 +53,12 @@ $(document).ready(function(){
 
     } else if (savingbalance - ($("#savingdepo").val()) < 0 ) {
       $("#savings.account").css("background", "red");
-      alert ("You cant withdraw more money than you have available, fool!")
     }
 
   });
+
+  // if (depositBalance > 0) {
+  //   $("#checking.account").css("background", "#E3E3E3");
+  //   $("#savings.account").css("background", "#E3E3E3");
+  // }
     });
