@@ -15,6 +15,7 @@ $(document).ready(function () {
   var savingsDepositButton = $('#savings').find(".deposit")
   var checkingWithdrawButton = $('checking').find(".withdraw")
   var savingsWithdrawButton = $('savings').find(".withdraw")
+  var checkingBalanceDisplay = $('#checking').find(".balance")
   var checkingInput = $('checking').find(".input")
   var savingsInput = $('savings').find(".input")
 
@@ -23,24 +24,24 @@ $(document).ready(function () {
     event.preventDefault();
     var amount = $('#checking').find('.input').val();
     console.log(amount)
+  }
   function depositToSavings() {
     event.preventDefault();
     var amount = $('#savings').find('.deposit').val();
     console.log(amount)
+  }
   function withdrawFromChecking() {
     event.preventDefault();
     var amount = $('#checking').find('.withdraw').val();
     console.log(amount)
+  }
   function withdrawFromSaving() {
     event.preventDefault();
     var amount = $('savings').find('.withdraw').val();
     console.log(amount)
-
   }
-
-
-  }
-
   checkingDepositButton.click(depositToChecking)
   savingsDepositButton.click(depositToSavings)
-  
+
+
+})
