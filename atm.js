@@ -18,8 +18,23 @@ $(document).ready(function(){
     var withdrawBalance = parseInt (balance) - parseInt( $("#depo").val())
 
     $(".checkingbalance").html(withdrawBalance)
+  });
 
+  $(".savingdeposit").click(function(){
 
+    var savingbalance = $(".savingbalance").html()
+    var depositBalanceSaving = parseInt (savingbalance) + parseInt( $("#savingdepo").val())
+
+    $(".savingbalance").html(depositBalanceSaving )
 
   });
-});
+
+  $(".savingwithdraw").click(function(){
+
+    var savingbalance= $(".savingbalance").html()
+    var withdrawBalanceSaving = parseInt (savingbalance) - parseInt( $("#savingdepo").val())
+
+    $(".savingbalance").html(withdrawBalanceSaving)
+
+  });
+})
