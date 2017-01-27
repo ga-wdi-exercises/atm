@@ -42,3 +42,10 @@ body {
   background-color: #F52F4F;
   color: #FFFFFF;
 }
+
+img{
+  background-position: center;
+  background-size: cover;
+  height: 75%;
+  width: 75%;
+}
