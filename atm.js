@@ -23,6 +23,7 @@
           cnewsum = $('.cinput').val();
           depositChecking();
           $('#checkingBalance').text(cbalance);
+          greenCAlarm();
         })
 
         // event listen for function checking withdraw
@@ -30,14 +31,28 @@
           cnewsum = $('.cinput').val();
           withdrawChecking();
           $('#checkingBalance').text(cbalance);
+          redCAlarm();
         })
 
+        // if account reaches zero, turn background red
+        function redCAlarm(){
+          if (+cbalance <= 0){
+            $('#checking').addClass('zero');
+          }
+        }
+
+        // if account returns positive, the red background goes away
+        function greenCAlarm(){
+          if (+cbalance > 0){
+            $('#checking').removeClass('zero');
+          }
+        }
+
         //   if account go negative, ignore transaction
-        //   if account reaches zero, turn background red
         //   if a text added, ignore transaction
 
 
-        
+
   // B. savings account
 
         // Set savings balance
@@ -61,6 +76,7 @@
           snewsum = $('.sinput').val();
           depositSavings();
           $('#savingsBalance').text(sbalance);
+          greenSAlarm();
         })
 
         // event listen for function savings withdraw
@@ -68,10 +84,24 @@
           snewsum = $('.sinput').val();
           withdrawSavings();
           $('#savingsBalance').text(sbalance);
+          redSAlarm();
         })
 
+        // if account reaches zero, turn background red
+        function redSAlarm(){
+          if (+sbalance <= 0){
+            $('#savings').addClass('zero');
+          }
+        }
+
+        // if account returns positive, the red background goes away
+        function greenSAlarm(){
+          if (+sbalance > 0){
+            $('#savings').removeClass('zero');
+          }
+        }
+
       //   if account go negative, ignore transaction
-      //   if account reaches zero, turn background red
       //   if a text added, ignore transaction
 
   });
