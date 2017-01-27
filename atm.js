@@ -51,6 +51,9 @@ $(document).ready(function() {
 
 
 });
+// function takefromOther(){
+	// if this.withdrawValue > 
+//}
 
 
 function zeroCheck() {
