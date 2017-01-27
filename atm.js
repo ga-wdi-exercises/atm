@@ -22,6 +22,7 @@ var balanceCheck = {
   }
 }
 
+//prevent user from overdrawing money from an account
 var overdraftProtect = {
   checking: function(a){
     if (a > checkingTotal && (a - checkingTotal) <= savingsTotal) {
