@@ -7,8 +7,8 @@ var whichAcct;
 var jqObjectHolder;
 var inputHolder;
 
-depositButton.on('click',depositClick);
-withdrawButton.on('click',withdrawClick);
+$('.deposit').on('click',depositClick);
+$('.withdraw').on('click',withdrawClick);
 
 function depositClick(){
 //depositClick
@@ -16,6 +16,11 @@ function depositClick(){
   var negativeAmt;
   jqObjectHolder = $(this)
   inputHolder = jqObjectHolder.siblings('.input').val();
+  if(!validateInput()){
+    resetInputs();
+    return null;
+  }
+  inputHolder = parseInt(inputHolder);
   negativeAmt = checkNegative(inputHolder);
   switch (negativeAmt) {
     case false:
@@ -46,6 +51,11 @@ function withdrawClick(){
   var savchkTotal;
   jqObjectHolder = $(this)
   inputHolder = jqObjectHolder.siblings('.input').val();
+  if(!validateInput()){
+    resetInputs();
+    return null;
+  }
+  inputHolder = parseInt(inputHolder);
 //check for negative withdrawal
   if (inputHolder < 0) {
     window.alert("You can not withdraw a negative amount");
@@ -144,4 +154,11 @@ function updateClass(){
     $('#checking').children('.balance').removeClass('zero');
   }
 
+}
+function validateInput() {
+   if (parseInt(inputHolder)){
+     return true;
+   } else {
+     return false;
+   }
 }
