@@ -5,17 +5,62 @@
 //Test that the Javascript library, jQuery is working
 $(document).ready(function(){
   console.log('javascript is running');
-  console.log($('jQuery is running'));
+  console.log($);
+
+  //Users of the ATM object with a Checking Account
+  //Users of the ATM object can deposit money into bank account
+  // Set the value of 0
+
+  var checkingAccount = 0;
+  var checkingBalance = ('checking', div.balance);
+  var checkingInput = ('input', input.input);
+  var checkingDeposit = ('button', input.deposit);
+  var checkingWithdraw = ('button', input.withdraw);
+
+  //Users of the ATM object with a Savings Account
+  //Users of the ATM object can deposit money into bank account
+  //Set the value of 0
+
+  var savingsAccount = 0;
+  var savingsBalance = ('saving', div.balance);
+  var savingsInput = ('input', input.input);
+  var savingsDeposit = ('button', input.deposit);
+  var savingsWithdraw = ('button', input.deposit);
+
+  
+
+
+
+
+
+
+
+
+
+
+  $('.deposit').on('click', addMoney);
+
+
+
+
+
+
+
 
 });
 
-//Users of the ATM object with a Checking Account
-//Users of the ATM object can deposit money into bank account
-//Set the value of 0 to equal red
 
 
 //Create an event that listens for click on deposit button from user when a deposit is made
 //When deposit button is clicked it will console.log('hello')
+
+//function handleClickEvent() {
+//
+//     console.log('hello');
+//
+//
+
+
 
 
 //When deposit button is clicked it will return the userinput
@@ -37,7 +82,7 @@ $(document).ready(function(){
 
 //Users of the ATM object with a Savings Account
 //Users of the ATM object can deposit money into bank account
-//Set the value of 0 to equal red
+//Set the value of 0
 
 
 //Create an event that listens for click on deposit button from user when a deposit is made
