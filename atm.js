@@ -1,3 +1,26 @@
-$(document).ready(function(){
-// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
+$( document ).ready(function() {
+  console.log( "ready!" );
+  //Deposit amount from input//
+  var checking = 0;
+  function notify() {
+  alert( "clicked" );
+}
+
+$( ".deposit" ).on( "click", notify );
+  //Click Deposit//
+  // $('.deposit')
+
+  // Update balance
+
+  //Print balance total//
+
 });
+
+Var checkingBalance =
+Var savingsBalance =
+Var checkingDepositButton =
+Var savingsDepositButton =
+Var checkingWithdrawalButton =
+Var savingsWithdrawlButton =
+Var checkingInput =
+Var savingsInput =
