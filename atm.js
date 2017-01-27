@@ -26,7 +26,27 @@ var checkingBalance = 0;
     $("#checking .balance").html("$" + checkingBalance);
   })
 
+  $("#checking .withdraw").on("click", function(){
+    var checkingInput = $("#checking .input").val()
+    checkingBalance = +checkingBalance -  +checkingInput;
+    $("#checking .balance").html("$" + checkingBalance);
+  })
 
+  var saveDeposit = $("#savings.deposit");
+  var savingInput = $("#savings.input");
+  var savingBalance = 0;
+
+    $("#savings .deposit").on("click", function(){
+      var savingInput = $("#savings .input").val()
+      savingBalance = +savingInput + +savingBalance;
+      $("#savings .balance").html("$" + savingBalance);
+    })
+
+    $("#savings .withdraw").on("click", function(){
+      var savingInput = $("#savings .input").val()
+      savingBalance = +savingBalance -  +savingInput;
+      $("#savings .balance").html("$" + savingBalance);
+    })
 
 
 
