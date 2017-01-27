@@ -13,14 +13,14 @@ body {
 }
 
 .title {
-  color: #F52F4F;
+  color: #f52f4f;
   font-family: 'Oleo Script', cursive;
   font-size: 50px;
 }
 
 .account {
-  background-color: #6C9A74;
-  border: 1px solid #295A33;
+  background-color: #6c9a74;
+  border: 1px solid #295a33;
   border-radius: 15px;
   display: inline-block;
   margin: 10px;
@@ -29,7 +29,7 @@ body {
 }
 
 .balance {
-  background-color: #E3E3E3;
+  background-color: #e3e3e3;
   border: 1px solid #676767;
   border-radius: 15px;
   font-family: 'Ruluko', sans-serif;
@@ -39,6 +39,6 @@ body {
 }
 
 .zero {
-  background-color: #F52F4F;
-  color: #FFFFFF;
+  background-color: #f52f4f;
+  color: #ffffff;
 }

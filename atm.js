@@ -3,7 +3,6 @@
 // DONE: Make sure that jQuery is working by running console.log('jQuery is working!') inside of the following document-ready event listener.
 
 $(document).ready(function(){
-
   // When an account's deposit button is clicked ...
   $('.deposit').click(function() {
     // Assign that button's parent (.account) to a variable.
@@ -15,7 +14,7 @@ $(document).ready(function(){
     // If the input field is not empty ...
     if (input.val() !== '') {
       // Extract the numerical portion of the inner html of the balance div, convert it into a number, and store it in a variable.
-      bal = parseInt(balance.html().substring(1));
+      bal = parseInt(balance.html().slice(1));
       // Convert the input value to a number, and store it in a variable.
       dep = parseInt(input.val());
       // Add the latter to the former.
@@ -30,8 +29,7 @@ $(document).ready(function(){
       input.val('');
     }
   });
-
-// When an account's withdraw button is clicked ...
+  // When an account's withdraw button is clicked ...
   $('.withdraw').click(function() {
     // Assign that button's parent (.account) to a variable.
     var account = $(this).parent();
@@ -42,7 +40,7 @@ $(document).ready(function(){
     // If the input field is not empty ...
     if (input.val() !== '') {
       // Extract the numerical portion of the inner html of the balance div, convert it into a number, and store it in a variable.
-      bal = parseInt(balance.html().substring(1));
+      bal = parseInt(balance.html().slice(1));
       // Convert the input value to a number, and store it in a variable.
       wit = parseInt(input.val());
       // If the balance is greater than or equal to the withdraw ...
