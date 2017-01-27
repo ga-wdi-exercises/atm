@@ -8,102 +8,81 @@
 
 
 // ------- refactoring   -------
- // single function to update balance anytime a button is pressed
- // function updateBalance(){
- //    curentballance = parseInt($(this).siblings('.balance').html().substring(1))
- //    inputVal = parseInt($(this).siblings('.input').val())
+// single function to update balance anytime a button is pressed
+// function updateBalance(){
+//    curentballance = parseInt($(this).siblings('.balance').html().substring(1))
+//    inputVal = parseInt($(this).siblings('.input').val())
 
 
- //    }
- 	//change the number to red if its 0;
- // function checkforZero(){
-	
+//    }
+//change the number to red if its 0;
+// function checkforZero(){
+
 // }
+// function Overdraft
+// function makeRed(){
+//  genballance = parseInt($('.balance').text())
+//  if (genballance == 0)
+//  	(this).parent().addClass('zero')
 
+// }
 
 // ---------- original -----------------
 
 $(document).ready(function() {
     console.log('jquery loaded');
-    
-    $('#checkD').click(function(){
+
+    $('#checkD').click(function() {
         updateCheckBalance();
     })
-    $('#checkW').click(function(){
-    	withdrawChecking();
+    $('#checkW').click(function() {
+        withdrawChecking();
     })
-     $('#savingsD').click(function(){
-    	updateSavingsBalance();
+    $('#savingsD').click(function() {
+        updateSavingsBalance();
     })
-      $('#savingsW').click(function(){
-    	withdrawSavings();
+    $('#savingsW').click(function() {
+        withdrawSavings();
     })
 
 
- 
+
 });
 
 
-function withdrawChecking(){
-	bal = $('#checkbal').text();
-	ballance = parseInt(bal)
-	valTo = $('#inputCheck').val();
-	valtosub = parseInt(valTo)
-	if (valtosub > ballance)
-		alert('you cannot take out that much');
-	else
-	updated = (ballance - valtosub)
-	$('#checkbal').text(updated);
-
-
-
+function withdrawChecking() {
+    ballance = parseInt($('#checkbal').text())
+    valtosub = parseInt($('#inputCheck').val())
+    if (valtosub > ballance)
+        alert('you cannot take out that much');
+    else
+        updated = (ballance - valtosub)
+    $('#checkbal').text(updated);
 }
 
-function withdrawSavings(){
-	bal = $('#savebal').text();
-	ballance = parseInt(bal)
-	
-	
-	valTo = $('#inputSaving').val();
-	valtoadd = parseInt(valTo)
-	if (valtoadd > ballance)
-		alert('you cannot take out that much');
-	else
-	updated = (ballance - valtoadd);
-	
-	$('#savebal').text(updated);
-
-
+function withdrawSavings() {
+    ballance = parseInt($('#savebal').text())
+    valtoadd = parseInt($('#inputSaving').val())
+    if (valtoadd > ballance)
+        alert('you cannot take out that much');
+    else
+        updated = (ballance - valtoadd);
+    $('#savebal').text(updated);
 }
 
-function updateCheckBalance(){
-	bal = $('#checkbal').text();
-	ballance = parseInt(bal)
-	
-	valTo = $('#inputCheck').val();
-	valtoadd = parseInt(valTo)
-	
-	updated = (ballance + valtoadd);
-	
-	$('#checkbal').text(updated);
-
-
+function updateCheckBalance() {
+    ballance = parseInt($('#checkbal').text())
+    valtoadd = parseInt($('#inputCheck').val())
+    updated = (ballance + valtoadd);
+    $('#checkbal').text(updated);
 }
 
 
-function updateSavingsBalance(){
-	bal = $('#savebal').text();
-	ballance = parseInt(bal)
-	console.log(ballance);
-	// ballance = bal.slice(1);
-	valTo = $('#inputSaving').val();
-	valtoadd = parseInt(valTo)
-	console.log(valtoadd)
-	updated = (ballance + valtoadd);
-	console.log(updated);
-	$('#savebal').text(updated);
-
-
+function updateSavingsBalance() {
+    ballance = parseInt($('#savebal').text())
+    valtoadd = parseInt($('#inputSaving').val())
+    updated = (ballance + valtoadd);
+    $('#savebal').text(updated);
 }
 
 
@@ -136,6 +115,6 @@ function updateSavingsBalance(){
 //     balance = parseInt(balance);
 
 
-   
+
 
 // var bal = $('#checkbal').text('$100');
