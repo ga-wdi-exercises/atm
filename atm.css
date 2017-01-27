@@ -13,7 +13,7 @@ body {
 }
 
 .title {
-  color: #F52F4F;
+  color: #F99F5f;
   font-family: 'Oleo Script', cursive;
   font-size: 50px;
 }
@@ -28,7 +28,7 @@ body {
   width: 300px;
 }
 
-.balance {
+.balanceC, .balanceS {
   background-color: #E3E3E3;
   border: 1px solid #676767;
   border-radius: 15px;
