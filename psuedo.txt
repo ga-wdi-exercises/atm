@@ -1,0 +1,21 @@
+ATM Pseudocode
+
+Objective: Make a program that allows deposits and withdrawals to be make into a bank
+  -two separate accounts, savings and checking, that both function the same
+  -deposit any amount
+  -withdrawal up to the balance of the account
+
+User Input $x
+  If Input = Deposit,
+  Account Balance = (starting amount) + x
+
+  If Input = Withdrawal,
+  Account Balance = (starting amount) - x
+
+  x >= 0 always
+
+If Balance = 0,
+  color = red
+
+Else,
+  color = black/green/whatever non-red color
