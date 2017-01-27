@@ -23,6 +23,8 @@
           cnewsum = $('.cinput').val();
           if (isNaN(cnewsum) === true) {
             alert('This is not a number. You can only use numbers and dots!');
+          } else if (cnewsum < 0){
+            alert('Sorry! You can not use negative values!');
           } else {
             depositChecking();
             $('#checkingBalance').text(cbalance);
@@ -35,6 +37,8 @@
           cnewsum = $('.cinput').val();
           if (isNaN(cnewsum) === true) {
             alert('This is not a number. You can only use numbers and dots!');
+          } else if (cnewsum < 0){
+            alert('Sorry! You can not use negative values!');
           } else if( (+cbalance - +cnewsum) < 0) {
             alert('Sorry! You do not have enough credit to perform this transaction!');
           } else {
@@ -57,9 +61,6 @@
             $('#checking').removeClass('zero');
           }
         }
-
-        // Stop depositing negative values
-
 
 
   // B. savings account
@@ -85,6 +86,8 @@
           snewsum = $('.sinput').val();
           if (isNaN(snewsum) === true) {
             alert('This is not a number. You can only use numbers and dots!');
+          } else if (snewsum < 0){
+            alert('Sorry! You can not use negative values!');
           } else {
             depositSavings();
             $('#savingsBalance').text(sbalance);
@@ -97,6 +100,8 @@
           snewsum = $('.sinput').val();
           if (isNaN(snewsum) === true) {
               alert('This is not a number. You can only use numbers and dots!');
+          } else if (snewsum < 0){
+            alert('Sorry! You can not use negative values!');
           } else if( (+sbalance - +snewsum) < 0) {
               alert('Sorry! You do not have enough credit to perform this transaction!');
           } else {
@@ -119,8 +124,5 @@
             $('#savings').removeClass('zero');
           }
         }
-
-      // Stop depositing negative values
-
 
   });
