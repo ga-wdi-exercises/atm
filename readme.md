@@ -10,14 +10,11 @@ Include your pseudocode as comments within your program.
 
 ## Specifications
 
-Users can deposit money into one of the bank accounts
-
-Users can withdraw money from one of the bank accounts
+1. Users can deposit money into one of the bank accounts
+- Users can withdraw money from one of the bank accounts
 - Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
-
-The color of a bank account should reflect its balance. (There's a CSS class called `.zero` already written for this.)
-
-You may edit the HTML file (but might not need to).
+- The color of a bank account should reflect its balance. (There's a CSS class called `.zero` already written for this.)
+- You may edit the HTML file (but might not need to).
 
 ## Commits to Make (Suggested)
 
