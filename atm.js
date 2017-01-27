@@ -1,8 +1,14 @@
 $(document).ready(function(){
 });
 
-//$("body").css("background-color", "red");
+//Temporary Value in Checking Input
+$("#checking .input").val("Something");
 
+//Create Checking Input Variable
+var checkingInput;
+
+//Upon Clicking, grab Checking Input and Console Log It
 $("#checking .deposit").on("click", function(){
-  console.log("You clicked Checking Deposit!");
+  checkingInput = $("#checking .input").val();
+  console.log(checkingInput);
 })
