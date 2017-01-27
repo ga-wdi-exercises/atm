@@ -6,6 +6,8 @@ clearInput = "";
 
 //Checking account
 
+//This controls the deposit button.
+
 $("#checking").children(".deposit").on("click", function () {
 	checkingAmount += parseInt($("#checking .input").val());
 	$("#checking .balance").html("$" + checkingAmount);
@@ -41,13 +43,13 @@ $("#savings").children(".withdraw").on("click", function () {
 } );
 
 function overdraft(){
-	if(checkingAmount <= 0){
+	if(checkingAmount < 0){
 		$("#checking .balance").css("background", "red");
-	} else if (savingsAmount <= 0){
+	} else if (savingsAmount < 0){
 		$("#savings .balance").css("background", "red");
 	} else {
-		$("#checking .balance").css("background", "white");
-		$("#savings .balance").css("background", "white");
+		$("#checking .balance").css("background", "#E3E3E3");
+		$("#savings .balance").css("background", "#E3E3E3");
 	}
 }
 
