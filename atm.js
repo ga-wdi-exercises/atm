@@ -30,18 +30,45 @@ $(document).ready(function(){
     updateDisplay(accountType, newBalance); //update the display
   }
 
-  function withdraw(accountType) {
+  function withdraw(accountType, amount) {
     var currentBalance = getBalance(accountType); //get current balance
-    var amount = getInput(accountType); //get the amount the user wants to withdraw
-    var result = currentBalance - amount; //calculate the result of the transaction
-    var newBalance = result < 0 ? /* handleOverdraft goes here */ currentBalance : result; //only allow it if the result is greater than 0
+    var amountToWithdraw = amount ? amount : getInput(accountType); //get the amount the user wants to withdraw
+    var result = currentBalance - amountToWithdraw; //calculate the result of the transaction
+    var newBalance = result < 0 ? handleOverdraft(accountType, amountToWithdraw) : result; //only allow it if the result is greater than 0
     updateDisplay(accountType, newBalance); //update the display
   }
 
-  function handleOverdraft(accountType) {
-
+  function handleOverdraft(accountType, amountToWithdraw) {
+    var thisAccount = accountType === "savings" ? "savings" : "checking"; //set thisAccount to whichever account is getting withdrawn from
+    var otherAccount = thisAccount === "savings" ? "checking" : "savings"; //set otherAccount to the other account
+    var thisBalance = getBalance(thisAccount); //get the balance of this account
+    var otherBalance = getBalance(otherAccount); //get the balance of the other account
+    if (amountToWithdraw <= thisBalance + otherBalance){ //compare the combined balance to what they want to withdraw
+      var leftover = amountToWithdraw - thisBalance; //if they have enough, withdraw the leftover from the other account
+      withdraw(otherAccount, leftover);
+      return 0; //then return 0 so the current balance of the other account is set to 0
+    } else { //if the amount they want to withdraw is more than the combined total of their account balances
+      console.log("You don't have enough money to make that withdrawl."); //tell them they can't withdraw
+      // flashRed();
+      // setTimeout(removeRed, 100);
+      return thisBalance; //return the current balance so nothing changes
+    }
   }
 
+  // function flashRed(){
+  //   var accounts = $(`.account`).find('.balance').children();
+  //   console.log(accounts);
+  //   accounts.each(function(account){
+  //     console.log(account);
+  //     account.addClass('zero');
+  //   });
+  // }
+  // function removeRed(){
+  //   var accounts = $(`.account`).find('.balance');
+  //   accounts.each(function(account){
+  //     account.removeClass('zero');
+  //   });
+  // }
 
   //delegate click event listeners to buttons within the accounts
   $(".account").delegate(":button", "click", function(){
