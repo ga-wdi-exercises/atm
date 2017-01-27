@@ -2,43 +2,83 @@
 @import url(http://fonts.googleapis.com/css?family=Ruluko);
 
 body {
-  font-family: 'Ruluko', sans-serif;
-  margin: 0px auto;
-  text-align: center;
-  width: 700px;
+	font-family: 'Ruluko', sans-serif;
+	margin: 0 auto;
+	text-align: center;
+	width: 900px;
 }
 
 .header {
-  margin: 50px 0px;
+	margin: 50px 0;
 }
 
 .title {
-  color: #F52F4F;
-  font-family: 'Oleo Script', cursive;
-  font-size: 50px;
+	color: #F52F4F;
+	font-family: 'Oleo Script', cursive;
+	font-size: 50px;
 }
 
 .account {
-  background-color: #6C9A74;
-  border: 1px solid #295A33;
-  border-radius: 15px;
-  display: inline-block;
-  margin: 10px;
-  padding: 10px;
-  width: 300px;
+	background-color: #6C9A74;
+	border: 1px solid #295A33;
+	border-radius: 15px;
+	display: inline-block;
+	margin: 0 10px;
+	padding: 10px;
+	width: 400px;
 }
 
 .balance {
-  background-color: #E3E3E3;
-  border: 1px solid #676767;
-  border-radius: 15px;
-  font-family: 'Ruluko', sans-serif;
-  font-size: 50px;
-  margin: 5px;
-  padding: 25px 0px;
+	background-color: #E3E3E3;
+	border: 1px solid #676767;
+	border-radius: 15px;
+	font-family: 'Ruluko', sans-serif;
+	font-size: 50px;
+	margin: 5px;
+	padding: 25px 0;
 }
 
 .zero {
-  background-color: #F52F4F;
-  color: #FFFFFF;
+	background-color: #F52F4F;
+	color: #FFFFFF;
+}
+
+.log {
+	border-radius: 15px;
+	display: inline-block;
+	margin: 10px;
+	padding: 10px;
+	width: 860px;
+}
+
+.history {
+	border-collapse: collapse;
+	width: 100%;
+}
+
+.history th {
+	font-weight: bold;
+}
+
+.history th,
+.history td {
+	border-bottom: 1px solid #ddd;
+	padding: 15px;
+	text-align: left;
+}
+
+.capitalize {
+    text-transform:capitalize;
+}
+
+.green {
+	color: #a0d468;
+}
+
+.red {
+	color: #ed5565;
+}
+
+.blue {
+	color: #4fc1E9
 }
