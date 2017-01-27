@@ -2,24 +2,22 @@
 
 We're going to build an application to track checking and savings account balances.
 
-## But first... Pseudocode (20 min)
+## Pseudocode (20 min)
 
-Let's take 20 minutes to write some pseudocode for the lab. Think carefully about every step involved in using an ATM. For example, it allows users to input a dollar amount when they want deposit money. Also, think about how there are two types of accounts--checking and savings. Take a look at the **Specifications** below to guide your pseudo.
+Take 20 minutes to write some pseudocode for the lab. Think carefully about every step involved in using an ATM. For example, it allows users to input a dollar amount when they want deposit money. Also, think about how there are two types of accounts -- checking and savings. Take a look at the **Specifications** below to guide your pseudo.
 
-##### Put your pseudocode into comments within your program, **this will factor into your lab's "grade."**
-
-## ...and then Peer Review (10 min)
-
-Take some time to review a peer's pseudo and add suggestions to improve your partner's pseudocode.
+Include your pseudocode as comments within your program.
 
 ## Specifications
 
-You may edit the HTML file (but might not need to).
+Users can deposit money into one of the bank accounts
 
-- Users can deposit money into one of the bank accounts
-- Users can withdraw money from one of the bank accounts
-  - Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
-- The color of a bank account should reflect its balance. (There's a CSS class called `.zero` already written for this.)
+Users can withdraw money from one of the bank accounts
+- Make sure the balance in an account can't go negative. If a user tries to withdraw more money than exists in the account, ignore the transaction.
+
+The color of a bank account should reflect its balance. (There's a CSS class called `.zero` already written for this.)
+
+You may edit the HTML file (but might not need to).
 
 ## Commits to Make (Suggested)
 
@@ -48,8 +46,14 @@ Note that these commits are all for the checking account only. Take this one acc
 
 ...then follow the same series of commits, but for the **savings account**.
 
-## Bonus: Overdraft Protection
+## Bonuses
 
-- What happens when the user wants to withdraw more money from the checking account than is in the account?
-  - If a withdrawal can be covered by the balances in both accounts, bring the withdrawn-from account down to $0 and take the remainder from the other account.
-  - If the withdrawn amount is more than the combined account balance, display an error.
+### Overdraft Protection
+
+What happens when the user wants to withdraw more money from the checking account than is in the account?
+- If a withdrawal can be covered by the balances in both accounts, bring the withdrawn-from account down to $0 and take the remainder from the other account.
+- If the withdrawn amount is more than the combined account balance, display an error.
+
+### Create Bank Accounts on the Fly
+
+Create a form in which a user can input a bank account name. When the user submits this form, a new bank account with the submitted name will appear on the page.
