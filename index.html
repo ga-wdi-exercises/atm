@@ -4,6 +4,7 @@
     <title>ATM</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="atm.css">
+   <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js"></script>
     <script src="atm.js"></script>
   </head>
   <body>
@@ -14,18 +15,19 @@
 
     <div id="checking" class="account">
       <h2>Checking</h2>
-      <div class="balance">$0</div>
-      <input class="input" type="text" placeholder="enter an amount" />
-      <input class="deposit" type="button" value="Deposit" />
-      <input class="withdraw" type="button" value="Withdraw" />
+      <div class="checking balance">$0</div>
+      <input id="checkingInput" type="text" placeholder="enter an amount" />
+      <input id="checkingDeposit" type="button" value="Deposit" />
+      <input id="checkingWithdraw" type="button" value="Withdraw" />
     </div>
 
     <div id="savings" class="account">
       <h2>Savings</h2>
-      <div class="balance">$0</div>
-      <input class="input" type="text" placeholder="enter an amount" />
-      <input class="deposit" type="button" value="Deposit" />
-      <input class="withdraw" type="button" value="Withdraw" />
+      <div class="savings balance">$0</div>
+      <input id="savingsInput" type="text" placeholder="enter an amount" />
+      <input id="savingsDeposit" type="button" value="Deposit" />
+      <input id="savingsWithdraw" type="button" value="Withdraw" />
     </div>
+
   </body>
 </html>
