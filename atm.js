@@ -41,6 +41,14 @@ $(document).ready(function(){
     withdraw("checking");
   });
 
+  $("#savings").find(".deposit").click(function(){
+    deposit("savings");
+  });
+
+  $("#savings").find(".withdraw").click(function(){
+    withdraw("savings");
+  });
+
 });
 
 // User Stories
