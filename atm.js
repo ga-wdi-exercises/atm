@@ -1,5 +1,4 @@
-$(document).ready(function(){
-});
+$(document).ready(function(){});
 
 // Test jQuery is working
 // Make the <body>'s background color turn red
@@ -9,9 +8,41 @@ $(document).ready(function(){
 // Add a click listener to the checking account's "Deposit" button
 // When you click the button it should console.log("hello")
 //
+var depositChecking = $("#depositChecking")
+var withdrawChecking = $("#withdrawChecking")
+var depositSavings = $("#depositSavings")
+var withdrawSavings = $("#withdrawSavings")
+
+function sayHello() {
+  console.log("hello");
+}
+function sayGoodbye() {
+  console.log("goodbye")
+}
+function sayHowdy() {
+  console.log("howdy")
+}
+function sayLater() {
+  console.log("later")
+}
+depositChecking.on("click", sayHello)
+withdrawChecking.on("click", sayGoodbye)
+depositSavings.on("click", sayHowdy)
+withdrawSavings.on("click", sayLater)
 
 
 
+// $("#depositChecking").on("click", function(){
+//    var deposit = parseInt($("#inputChecking").val())
+//  })
+
+
+$("#depositChecking").on("click", function(){
+  var deposit = parseInt($("#inputChecking").val())
+  var balance = parseInt($(".checking.balance").html().replace("$", ""))
+  var newBalance = "$" + (balance + deposit)
+  $(".checking.balance").html(newBalance)
+})
 
 
 // On clicking "Deposit", it should get the user input

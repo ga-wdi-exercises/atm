@@ -5,6 +5,9 @@ Objective: Make a program that allows deposits and withdrawals to be make into a
   -deposit any amount
   -withdrawal up to the balance of the account
 
+Link Buttons to User Inputs
+  Click = submit input
+
 User Input $x
   If Input = Deposit,
   Account Balance = (starting amount) + x
