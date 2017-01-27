@@ -2,22 +2,28 @@
 // $(document).ready(function(){
 // // Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
 // });
-
-
-balance = $(".checkBal").html();
+// totalAmount = 0;
 amountChecking = 0;
-
+amountSavings = 0;
+//checking deposit
 $("#checking").children(".deposit").on("click", function(){
   amountChecking += parseInt($('#checking .input').val());
   $("#checking .balance").html("$" + amountChecking);
 });
-   $("#checking").children(".withdr").on("click", function(){
+//checking withdrawal
+   $("#checking").children(".withdraw").on("click", function(){
     amountChecking -= parseInt($('#checking .input').val());
     $("#checking .balance").html("$" + amountChecking);
 });
 
-// $("#checking").children(".deposit").on("click", function(){
-//   // amount = $("input").val();
-//   console.log($("input").val());
-//   $(".checkBal").html("$" + amount);
-// });
+//Savings Deposit
+  $("#savings").children(".deposit").on("click", function(){
+    amountSavings += parseInt($('#savings .input').val());
+    $("#savings .balance").html("$" + amountSavings);
+});
+
+  //Savings Withdraw
+  $("#savings").children(".withdraw").on("click", function(){
+    amountSavings -= parseInt($('#savings .input').val());
+    $('#savings .balance').html("$" + amountSavings);
+});
