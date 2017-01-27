@@ -20,21 +20,21 @@ if (cBalance > 0 || $("#checking > div").hasClass("zero"))
 })
 
 $("#checking .withdraw").click(function(){ //checking withdraw button
-cWithdraw = parseInt($("#checking .input:text").val());
-var cBalancePrev = cBalance;
-cBalance = cBalance - cWithdraw;
+cWithdraw = parseInt($("#checking .input:text").val()); //100
+var cBalancePrev = cBalance; //CPB = 80
+cBalance = cBalance - cWithdraw; //cBalance = -20
 if (cBalance < 0) {
-  if (cBalancePrev + sBalance > 0)
-  {sBalance = sBalance - cWithdraw;
-  cBalance = 0;
-  $("#savings > div").html("$"+sBalance);
-  $("#checking > div").html("$"+cBalance)
-  }
-  else {
-  $("#checking > div").html("$"+cBalancePrev); //checks to see if withdraw will make balance negative
-  cBalance = cBalancePrev;
-  console.log("NOPE!");
-  }
+  if (cBalance + sBalance > 0)
+    {sBalance = sBalance + cBalance;
+      cBalance = 0;
+      $("#savings > div").html("$"+sBalance);
+      $("#checking > div").html("$"+cBalance)
+    }
+    else {
+      $("#checking > div").html("$"+cBalancePrev); //checks to see if withdraw will make balance negative
+      cBalance = cBalancePrev;
+      console.log("NOPE!");
+    }
 }
 else {
 $("#checking > div").html("$"+cBalance); //if it will, keeps balance at what it was
