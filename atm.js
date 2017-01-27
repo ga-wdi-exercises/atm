@@ -10,22 +10,33 @@ var atm = {
     var value = parseInt($("#checking input.input").val());
     this.checking += value;
     $("#checking .balance").text("$" + this.checking);
-    console.log($("#checking .balance"))
+    $("#savings").removeClass("zero");
   },
   depositToSavings: function(){
     var value = parseInt($("#savings input.input").val());
     this.savings += value;
     $("#savings .balance").text("$" + this.savings);
+    $("#savings").removeClass("zero")
   },
   withdrawFromSavings: function(){
     var value = parseInt($("#savings input.input").val());
     this.savings -= value ;
+    if(this.savings >= 0){
     $("#savings .balance").text("$" + this.savings);
+  } else {
+     this.savings = 0;
+    $("#savings").addClass("zero")
+  }
   },
   withdrawFromChecking: function(){
     var value = parseInt($("#checking input.input").val());
     this.checking -= value ;
+    if(this.checking >= 0){
     $("#checking .balance").text("$" + this.checking);
+  } else {
+     this.checking = 0;
+    $("#checking").addClass("zero")
+  }
 }
 }
 savingsWithdraw.on("click", atm.withdrawFromSavings.bind(atm));
