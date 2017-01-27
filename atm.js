@@ -103,10 +103,10 @@ $("#checking .withdraw").on("click", function(){
        // Savings account
 
    $("#savings .deposit").on("click", function(){
-                          var checkInput = $("#savings .input").val()
+                          var savingInput = $("#savings .input").val()
 
-                      checkBalance = +checkInput + +checkBalance;
-                      $("#savings .balance").html("$" + checkBalance);
+                    savingsBalance = +savingInput + +savingsBalance;
+                      $("#savings .balance").html("$" + savingsBalance);
                       })
 
    //Withdraw from savings
