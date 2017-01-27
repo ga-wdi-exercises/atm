@@ -20,28 +20,34 @@ if (cBalance > 0 || $("#checking > div").hasClass("zero"))
 })
 
 $("#checking .withdraw").click(function(){ //checking withdraw button
-cWithdraw = parseInt($("#checking .input:text").val()); //100
-var cBalancePrev = cBalance; //CPB = 80
-cBalance = cBalance - cWithdraw; //cBalance = -20
+cWithdraw = parseInt($("#checking .input:text").val());
+var cBalancePrev = cBalance;
+cBalance = cBalance - cWithdraw;
+console.log("checking balance is" + cBalance)
 if (cBalance < 0) {
-  if (cBalance + sBalance > 0)
+  if (cBalance + sBalance >= 0)
     {sBalance = sBalance + cBalance;
       cBalance = 0;
+      if (sBalance == 0) {
+      $("#savings > div").addClass("zero")
+      }
       $("#savings > div").html("$"+sBalance);
       $("#checking > div").html("$"+cBalance)
+      console.log("checking balance is" + cBalance)
+      console.log("savings balance is" + sBalance)
     }
     else {
       $("#checking > div").html("$"+cBalancePrev); //checks to see if withdraw will make balance negative
       cBalance = cBalancePrev;
-      console.log("NOPE!");
+      alert("No money, mo' problems.");
     }
 }
 else {
-$("#checking > div").html("$"+cBalance); //if it will, keeps balance at what it was
+$("#checking > div").html("$"+cBalance);
+}//if it will, keeps balance at what it was
 if (cBalance == 0) {
   $("#checking > div").addClass("zero")
   }
-}
 })
 
 $("#savings .deposit").click(function(){
@@ -58,14 +64,26 @@ $("#savings .withdraw").click(function(){  //savings withdraw  button
 sWithdraw = parseInt(($("#savings .input:text").val()));
 var sBalancePrev = sBalance;
 sBalance = sBalance - sWithdraw;
-if (sBalance < 0) {                       //checks to see if withdraw will make balance negative
+if (sBalance < 0) {                           //checks to see if withdraw will make balance negative
+  if (cBalance + sBalance >= 0) {
+      cBalance = cBalance + sBalance;
+      sBalance = 0;
+      if (cBalance == 0) {
+      $("#checking > div").addClass("zero")
+      }
+      $("#savings > div").html("$"+sBalance);
+      $("#checking > div").html("$"+cBalance)
+    }
+  else {
   $("#checking > div").html("$"+sBalancePrev); //if it will, keeps balance at what it was
   sBalance = sBalancePrev;
+  alert("No money, mo' problems.");
+}
 }
 else {
 $("#savings > div").html("$"+sBalance);
-  if (sBalance == 0) {
-    $("#savings > div").addClass("zero")
-    }
 }
+if (sBalance == 0) {
+$("#savings > div").addClass("zero")
+    }
 })
