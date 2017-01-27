@@ -26,9 +26,6 @@ if (cBalance < 0) {
 }
 else {
 $("#checking > div").html("$"+cBalance); //if it will, keeps balance at what it was
-if (cBalance == 0) {
-  $("#checking > div").addClass("zero")
-  }
 }
 })
 
@@ -52,8 +49,13 @@ if (sBalance < 0) {                       //checks to see if withdraw will make 
 }
 else {
 $("#savings > div").html("$"+sBalance);
-  if (sBalance == 0) {
-    $("#savings > div").addClass("zero")
-    }
 }
 })
+
+if (cBalance == 0) {
+  $("#checking > div").addClass("zero")
+  }
+
+if (sBalance == 0) {
+  $("#savings > div").addClass("zero")
+  }
