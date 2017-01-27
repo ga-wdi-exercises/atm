@@ -2,7 +2,7 @@
   var checkingDeposit = $("#checking").find(".deposit");
   var checkingWithdraw = $("#checking").find(".withdraw");
   var savingsDeposit = $("#savings").find(".deposit");
-  var savingsWithdraw = $("#savings").find(".deposit");
+  var savingsWithdraw = $("#savings").find(".withdraw");
 var atm = {
   checking: 0,
   savings: 0,
@@ -11,8 +11,19 @@ var atm = {
     this.checking += value;
     $("#checking .balance").text("$" + this.checking);
     console.log($("#checking .balance"))
-  }
-},
+  },
+  depositToSavings: function(){
+    var value = parseInt($("#savings input.input").val());
+    this.savings += value;
+    $("#savings .balance").text("$" + this.savings);
+  },
+  withdrawFromSavings: function(){
+    var value = parseInt($("#savings input.input").val());
+    this.savings -= value ;
+    $("#savings .balance").text("$" + this.savings);
+}
+savingsWithdraw.on("click", atm.depositToSavings.bind(atm));
+savingsDeposit.on("click", atm.depositToSavings.bind(atm));
 checkingDeposit.on("click", atm.depositToChecking.bind(atm));
 // });
 //make variables for jquery objects: input.deposit, input.withdraw, input.text;
