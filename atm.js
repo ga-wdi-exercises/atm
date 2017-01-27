@@ -1,24 +1,39 @@
   $(document).ready(function(){
 
-  // Checking account
-  // set checking balance
-  // var cbalance = $('#checkingBalance').text();
-  cbalance = +$('#checkingBalance').text();
-  cdepositsum = +0;
+  // A. Checking account
 
-  //Set up Checking Deposit Function
-  function depositChecking(){
-    cbalance = +cbalance + +cdepositsum;
-  }
+        // Set checking balance
+        cbalance = +$('#checkingBalance').text();
 
-  // event listen for Function deposit
-  $('.cdeposit').click(function(num1, num2) {
-    cdepositsum = $('.cinput').val();
-    depositChecking();
-    $('#checkingBalance').text(cbalance);
-  })
+        // Set new sum
+        cnewsum = +0;
 
-  // event listen for function withdraw
+        //Set up Checking Deposit Function
+        function depositChecking(){
+          cbalance = +cbalance + +cnewsum;
+        }
+
+        //Set up Checking Withdraw Function
+        function withdrawChecking(){
+          cbalance = +cbalance - +cnewsum;
+        }
+
+        // event listen for Function checking deposit
+        $('.cdeposit').click(function(num1, num2) {
+          cnewsum = $('.cinput').val();
+          depositChecking();
+          $('#checkingBalance').text(cbalance);
+        })
+
+        // event listen for function checking withdraw
+        $('.cwithdraw').click(function(num1, num2) {
+          cnewsum = $('.cinput').val();
+          withdrawChecking();
+          $('#checkingBalance').text(cbalance);
+        })
+
+
+
   //   if account go negative, ignore transaction
   //   if account reaches zero, turn background red
   //
@@ -28,5 +43,8 @@
   // event listen for function withdraw
   //   if account go negative, ignore transaction
   //   if account reaches zero, turn background red
+
+
+//if a text added, ignore transaction
 
   });
