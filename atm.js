@@ -1,3 +1,4 @@
+
 $(document).ready(function(){
 // $('body').css('background','red');--jquery test
 //get the number displayed in the balance field
@@ -13,39 +14,34 @@ function getCheckingBalance() {
   //remove the dollar sign for manipulation
   var checkingBalanceNumber = checkingBalanceValue.substr(1,checkingBalanceValue.length);
 
-  return checkingBalanceNumber;
+  return parseInt(checkingBalanceNumber);
 }
 
+function checkingInput() {
+  var checkingInput = $('#checking').find('input').val();
 
-function updateCheckingBalance() {
-
-
+  return parseInt(checkingInput);
 }
-
-// function withdrawChecking(currentBalance, withdrawalAmount){
-//   var newBalance = parseInt(currentBalance)-parseInt(withdrawalAmount);
-//   checkingBalance.html(`$${newBalance}`);
-// }
 
 function depositChecking(currentBalance, depositAmount){
   var newBalance = parseInt(currentBalance)+ parseInt(depositAmount);
   checkingBalance.html(`$${newBalance}`);
 }
 
+function withdrawChecking(currentBalance, withdrawalAmount){
+  var newBalance = parseInt(currentBalance)-parseInt(withdrawalAmount);
+  checkingBalance.html(`$${newBalance}`);
+}
 
 // add click function for the deposit button on checking account
 $('#checking').find('.deposit').click(function(){
-    var checkingInput = $('#checking').find('input').val();
-    depositChecking(getCheckingBalance(),checkingInput);
+    depositChecking(getCheckingBalance(),checkingInput());
 
 });
 
-//add click listener to withdraw button
+//add click listener to withdraw button and call 
 $('#checking').find('.withdraw').click(function(){
-  console.log('clicked');
-  var checkingInput = $('#checking').find('input').val();
-  withdrawChecking();
-
+  withdrawChecking(getCheckingBalance(),checkingInput());
 })
 
 
