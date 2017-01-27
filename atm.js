@@ -10,13 +10,18 @@ var atm = {
     var value = parseInt($("#checking input.input").val());
     this.checking += value;
     $("#checking .balance").text("$" + this.checking);
-    $("#savings").removeClass("zero");
+    if (this.checking > 0){
+      $("#checking").removeClass("zero");
+    }
+
   },
   depositToSavings: function(){
     var value = parseInt($("#savings input.input").val());
     this.savings += value;
     $("#savings .balance").text("$" + this.savings);
+    if (this.savings > 0){
     $("#savings").removeClass("zero")
+  }
   },
   withdrawFromSavings: function(){
     var value = parseInt($("#savings input.input").val());
