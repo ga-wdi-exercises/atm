@@ -32,18 +32,13 @@ withdrawSavings.on("click", sayLater)
 
 
 
-// $("#depositChecking").on("click", function(){
-//    var deposit = parseInt($("#inputChecking").val())
-//  })
-
 
 $("#depositChecking").on("click", function(){
   var deposit = parseInt($("#inputChecking").val())
-  var balance = parseInt($(".checking.balance").html().replace("$", ""))
+  var balance = parseInt($("#balanceChecking").text().replace("$",""))
   var newBalance = "$" + (balance + deposit)
-  $(".checking.balance").html(newBalance)
+  $("#balanceChecking").text(newBalance)
 })
-
 
 // On clicking "Deposit", it should get the user input
 // Just console.log it
