@@ -1,15 +1,39 @@
 $(document).ready(function(){
 
 var accountType='';
+var checkBal =$(`#checking`).find('.balance').html();
+var savBal =$(`#savings`).find('.balance').html();
 
+checkAccountStatus();
+
+function checkAccountStatus(){
+  var checking = 'checking';
+  var savings = 'savings';
+  if(getBalance(checking)==0){
+    $('#checking').addClass('zero');
+  }else{
+    $('#checking').removeClass('zero');
+    }
+  if(getBalance(savings)== 0){
+    $('#savings').addClass('zero');
+  }else{
+    $('#savings').removeClass('zero');
+    }
+}
 function deposit(accountType,curBal,depAmt){
   var newBalance = parseInt(curBal)+ parseInt(depAmt);
   $(`#${accountType}`).find('.balance').html(`$${newBalance}`);
+  checkAccountStatus();
 }
 
 function withdraw(accountType,curBal,withdrawAmt){
+  if(withdrawAmt > curBal){
+    alert('You do NOT have enough money for that');
+    return;
+  }
   var newBalance = parseInt(curBal)- parseInt(withdrawAmt);
   $(`#${accountType}`).find('.balance').html(`$${newBalance}`);
+  checkAccountStatus();
 }
 
 function getBalance(accountType){
@@ -20,13 +44,12 @@ function getBalance(accountType){
   //remove the dollar sign for manipulation
   var checkingBalanceNumber = checkingBalanceValue.substr(1,checkingBalanceValue.length);
 
-  return parseInt(checkingBalanceNumber);
+    return parseInt(checkingBalanceNumber);
   }
 
   function getAmount(accountType){
     var input = $(`#${accountType}`).find('input').val();
-
-      return parseInt(input);
+    return parseInt(input);
   }
 
 
