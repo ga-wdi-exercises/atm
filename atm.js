@@ -69,17 +69,33 @@ $(document).ready(function(){
 
 });
 
-var checkingDeposit = $( "#checking" ).children(".deposit");
-console.log("Checking");
-
-checkingDeposit.click(function(){
- console.log("works fine");
-});
 
 
-var savingDeposit = $( "#savings" ).children(".deposit");
-console.log("saving");
 
-savingDeposit.click(function(){
- console.log("works with saving");
-});
+
+
+var checkDeposit = $("#checking .deposit");
+var checkInput = $("#checking .input");
+
+
+
+
+var checkBalance = 0;
+var savingsBalance = 0;
+
+//checking deposit
+$("#checking .deposit").on("click", function(){
+                       var checkInput = $("#checking .input").val()
+
+                   checkBalance = +checkInput + +checkBalance;
+                   $("#checking .balance").html("$" + checkBalance);
+                              })
+
+//checking withdraw
+
+$("#checking .withdraw").on("click", function(){
+                         var checkInput = $("#checking .input").val()
+
+                     checkBalance = +checkBalance - +checkInput;
+                     $("#checking .balance").html("$" + checkBalance);
+                     })
