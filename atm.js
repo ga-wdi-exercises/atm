@@ -35,6 +35,8 @@
           cnewsum = $('.cinput').val();
           if (isNaN(cnewsum) === true) {
             alert('This is not a number. You can only use numbers and dots!');
+          } else if( (+cbalance - +cnewsum) < 0) {
+            alert('Sorry! You do not have enough credit to perform this transaction!');
           } else {
             withdrawChecking();
             $('#checkingBalance').text(cbalance);
@@ -56,8 +58,7 @@
           }
         }
 
-        //   if account go negative, ignore transaction
-        //   if a text added, ignore transaction
+        // Stop depositing negative values
 
 
 
@@ -95,11 +96,13 @@
         $('.swithdraw').click(function(num1, num2) {
           snewsum = $('.sinput').val();
           if (isNaN(snewsum) === true) {
-            alert('This is not a number. You can only use numbers and dots!');
+              alert('This is not a number. You can only use numbers and dots!');
+          } else if( (+sbalance - +snewsum) < 0) {
+              alert('Sorry! You do not have enough credit to perform this transaction!');
           } else {
-            withdrawSavings();
-            $('#savingsBalance').text(sbalance);
-            redSAlarm();
+              withdrawSavings();
+              $('#savingsBalance').text(sbalance);
+              redSAlarm();
           }
         })
 
@@ -117,7 +120,7 @@
           }
         }
 
-      //   if account go negative, ignore transaction
-      //   if a text added, ignore transaction
+      // Stop depositing negative values
+
 
   });
