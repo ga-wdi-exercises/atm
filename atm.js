@@ -3,5 +3,5 @@ $(document).ready(function(){
 });
 
 $(".deposit").on("click", function () {
-	console.log("Hello");
+	console.log($("input").val());
 } )
