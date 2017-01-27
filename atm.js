@@ -1,3 +1,14 @@
 $(document).ready(function(){
-// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
+  $("body").css("background", "orange")
 });
+
+$(".deposit").on("click", function() {
+  console.log("hello");
+  console.log("dom");
+})
+
+// $("button").on("click", function () {
+//   console.log("dom");
+// })
+
+// $("")
