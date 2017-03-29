@@ -15,12 +15,11 @@ function updateChecking(){
 		console.log('cleared');
 	$("#checking-balance").text("$" + checkingBalance);
 		console.log(checkingBalance);
-	if (checkingBalance < 0) {
+	if (checkingBalance <= 0) {
 			console.log("rednering number");
-			$('#checking').css("color", "red");
+			$('#checking').addClass("zero");
 		};
 };
-
 
 function updateSavings() {
 	$("#savings-balance").text("");
@@ -28,7 +27,7 @@ function updateSavings() {
 	$("#savings-balance").text("$" + savingsBalance);
 		console.log(savingsBalance);
 	if (savingsBalance <= 0) {
-			$('body').addclass("zero");
+			$('#savings').addClass("zero");
 		};
 
 };
