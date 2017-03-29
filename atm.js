@@ -19,32 +19,33 @@ savingsW.click(withdrawSavings);
 function depChecking() {
   checkingBal = addToBalance(checkingBal, parseFloat(inputCheck.val()));
   inputCheck.val("0");
-  checkingBalDiv.text('$' + checkingBal.toFixed(2));
+  checkingBalDiv.text(formatBalance(checkingBal));
 }
 
 function depSavings() {
   savingsBal = addToBalance(savingsBal, parseFloat(inputSavings.val()));
   inputSavings.val("0");
-  savingsBalDiv.text('$' + savingsBal.toFixed(2));
+  savingsBalDiv.text(formatBalance(savingsBal));
 }
 
 function withdrawChecking() {
   if (checkingBal - parseFloat(inputCheck.val()) < 0) {
-
   } else {
     checkingBal = subFromBalance(checkingBal, parseFloat(inputCheck.val()));
     inputCheck.val("0");
-    checkingBalDiv.text('$' + checkingBal.toFixed(2));
+    checkingBalDiv.text(formatBalance(checkingBal));
   }
 }
 
-function withdrawSavings() {
-  if (savingsBal - parseFloat(inputCheck.val()) < 0) {
 
+
+function withdrawSavings() {
+  if (savingsBal - parseFloat(inputSavings.val()) < 0) {
+    // overdraftProtection(savingsBal, checkingBal, parseFloat(inputSavings.val()));
   } else {
-    savingsBal = subFromBalance(savingsBal, parseFloat(inputCheck.val()));
-    inputCheck.val("0");
-    savingsBalDiv.text('$' + savingsBal.toFixed(2));
+    savingsBal = subFromBalance(savingsBal, parseFloat(inputSavings.val()));
+    inputSavings.val("0");
+    savingsBalDiv.text(formatBalance(savingsBal));
   }
 }
 
@@ -54,6 +55,25 @@ function addToBalance(bal, x) {
 
 function subFromBalance(bal, x) {
   return bal -= x;
+}
+
+//Bal1 is the account you are withdrawing from
+//Bal2 is your second account
+function overdraftProtection(bal1, bal2, withdraw) {
+  if (bal1 + bal2 < withdraw) {
+    alert('The withdrawal amount, ' + withdraw + ', is greater than both of your accounts.');
+  } else {
+    subtractFromOtherAccount(bal1, bal2, withdraw);
+  }
+}
+
+function formatBalance(bal) {
+  return '$' + bal.toFixed(2)
+}
+
+function subtractFromOtherAccount(bal1, bal2, withdraw) {
+  inputSavings.val("0");
+  return bal2 + (bal1 - withdraw)
 }
 
 $(document).ready(function(){
