@@ -9,7 +9,16 @@ var checkingDeposit = $('#checking input.deposit');
 
 var savedChecking = 0;
 
-checkingWithdraw.on('click', handleWithdraw)
+function check0() {
+  if(!savedChecking) {
+    checkingBalance.addClass('zero');
+  }
+  else {
+    checkingBalance.removeClass('zero');
+  }
+}
+check0();
+checkingWithdraw.on('click', handleWithdraw);
 checkingDeposit.on('click', handleDeposit);
 
 function handleDeposit() {
@@ -17,8 +26,8 @@ function handleDeposit() {
   console.log('Hello');
   savedChecking += inputNumber;
   checkingBalance.html('$' + savedChecking);
+  check0();
 }
-
 function handleWithdraw() {
   let inputNumber = parseInt(checkingInput.val());
   if(savedChecking < inputNumber) {
@@ -27,5 +36,6 @@ function handleWithdraw() {
   else {
     savedChecking -= inputNumber
     checkingBalance.html('$' + savedChecking);
+    check0();
   }
 }
