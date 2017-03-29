@@ -50,3 +50,9 @@ Note that these commits are all for the checking account only. Take this one acc
 What happens when the user wants to withdraw more money from the checking account than is in the account?
 - If a withdrawal can be covered by the balances in both accounts, bring the withdrawn-from account down to $0 and take the remainder from the other account.
 - If the withdrawn amount is more than the combined account balance, display an error.
+
+
+
+//withdrawCheckingButton.click(withdrawFromChecking)//
+//addSavingsButton.click(depositToSavings)//
+//withdrawSavingsButton.click(withdrawFromSavings)//
