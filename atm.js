@@ -1,15 +1,18 @@
-var checkingDeposit = $('#checking input.deposit');
+  var checkingDeposit = $('#checking input.deposit');
   var checkingWithdraw = $('#checking input.withdraw');
   var checkingInput = $('#checking input.input')
-  var savingsDeposit = $('#savings input.deposit');
-    var savingsWithdraw = $('#savings input.deposit');
-    var checkingBalance = $('#checking div.balance');
-    var savingsInput = $('#savings input.input');
+  var checkingBalance = $('#checking div.balance');
 
+
+  var savingsWithdraw = $('#savings input.deposit');
+  var savingsInput = $('#savings input.input');
+  var savingsBalance = $('#savings div.balance');
+  var savingsDeposit = $('#savings input.deposit');
 
 var savedChecking = 0;
+//creat a variable to store balance
 
-function check0() {
+function checkChecking() {
   if(!savedChecking) {
     checkingBalance.addClass('zero');
   }
@@ -17,18 +20,22 @@ function check0() {
     checkingBalance.removeClass('zero');
   }
 }
-check0();
-checkingWithdraw.on('click', handleWithdraw);
-checkingDeposit.on('click', handleDeposit);
+checkChecking();
+//check in balance is 0, if yes, make the background-color red.
 
-function handleDeposit() {
+checkingWithdraw.on('click', handleCheckingWithdraw);
+checkingDeposit.on('click', handleCheckingDeposit);
+//add event handlers to buttons
+
+
+function handleCheckingDeposit() {
   let inputNumber = parseInt(checkingInput.val());
   console.log('Hello');
   savedChecking += inputNumber;
   checkingBalance.html('$' + savedChecking);
-  check0();
+  checkChecking();
 }
-function handleWithdraw() {
+function handleCheckingWithdraw() {
   let inputNumber = parseInt(checkingInput.val());
   if(savedChecking < inputNumber) {
     console.log('not enough dough!');
@@ -36,6 +43,41 @@ function handleWithdraw() {
   else {
     savedChecking -= inputNumber
     checkingBalance.html('$' + savedChecking);
-    check0();
+    checkChecking();
+  }
+}
+
+var savedSavings = 0;
+
+function checkSavings() {
+  if(!savedSavings) {
+    savingsBalance.addClass('zero');
+  }
+  else {
+    savingsBalance.removeClass('zero');
+  }
+}
+checkSavings();
+
+savingsWithdraw.on('click', handleSavingsWithdraw);
+savingsDeposit.on('click', handleSavingsDeposit);
+
+function handleSavingsDeposit() {
+  console.log('Hello');
+  let inputNumber = parseInt(savingsInput.val());
+  savedSavings += inputNumber;
+  savingsBalance.html('$' + savedSavings);
+  checkSavings();
+}
+
+function handleSavingsWithdraw() {
+  let inputNumber = parseInt(savingsInput.val());
+  if(savedSavings < inputNumber) {
+    console.log('not enough dough!');
+  }
+  else {
+    savedSavings -= inputNumber
+    savingsBalance.html('$' + savedSavings);
+    checkSavings();
   }
 }
