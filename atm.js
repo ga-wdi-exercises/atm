@@ -42,6 +42,12 @@ var depositC = function() {
 	
 	// var balanceAmt = current + inputValue;
 	balanceWindowC.html("$" + balanceC);
+
+	if (balanceC == 0){
+		$("#checking").addClass("zero");
+	} else {
+		$("#checking").removeClass("zero");
+	}
 };
 
 var withdrawC = function() {
@@ -52,6 +58,10 @@ var withdrawC = function() {
 	// var balanceAmt = current + inputValue;
 	balanceWindowC.html("$" + balanceC);
 	};
+
+	if (balanceC == 0){
+		$("#checking").addClass("zero");
+	}
 };
 
 var depositS = function() {
@@ -61,6 +71,12 @@ var depositS = function() {
 	
 	// var balanceAmt = current + inputValue;
 	balanceWindowS.html("$" + balanceS);
+
+	if (balanceS == 0){
+		$("#savings").addClass("zero");
+	} else {
+		$("#savings").removeClass("zero");
+	}
 };
 
 var withdrawS = function() {
@@ -71,7 +87,12 @@ var withdrawS = function() {
 	// var balanceAmt = current + inputValue;
 	balanceWindowS.html("$" + balanceS);
 	};
+
+	if (balanceS == 0){
+		$("#savings").addClass("zero");
+	}
 };
+
 
 
 
