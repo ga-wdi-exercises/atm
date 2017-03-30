@@ -4,7 +4,7 @@
   var checkingBalance = $('#checking div.balance');
 
 
-  var savingsWithdraw = $('#savings input.deposit');
+  var savingsWithdraw = $('#savings input.withdraw');
   var savingsInput = $('#savings input.input');
   var savingsBalance = $('#savings div.balance');
   var savingsDeposit = $('#savings input.deposit');
