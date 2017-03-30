@@ -18,7 +18,9 @@ function updateChecking(){
 	if (checkingBalance <= 0) {
 			console.log("rednering number");
 			$('#checking').addClass("zero");
-		};
+		} else {
+			$('#checking').removeClass("zero");
+		}
 };
 
 function updateSavings() {
@@ -28,7 +30,9 @@ function updateSavings() {
 		console.log(savingsBalance);
 	if (savingsBalance <= 0) {
 			$('#savings').addClass("zero");
-		};
+		} else {
+			$('#savings').removeClass("zero");
+		}
 
 };
 
