@@ -69,12 +69,3 @@ $(document).ready(function(){
 
 
 });
-
-
-//
-// $("#checkingDeposit").on("click", function(){
-//     var deposit = parseInt($("#checkingInput").val())
-//     var balance = parseInt($(".checking.balance").text().replace("$", ""))
-//     var newBalance = "$" + (balance + deposit)
-//     $(".checking.balance").text(newBalance)
-//   })
