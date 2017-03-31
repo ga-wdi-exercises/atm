@@ -27,7 +27,6 @@ body {
   padding: 10px;
   width: 300px;
 }
-
 .balance {
   background-color: #E3E3E3;
   border: 1px solid #676767;
@@ -35,7 +34,11 @@ body {
   font-family: 'Ruluko', sans-serif;
   font-size: 50px;
   margin: 5px;
-  padding: 25px 0px;
+  padding: 5px 45px;
+  margin-left: 75px;
+}
+#dollarSign{
+  text-align: left;
 }
 
 .zero {
