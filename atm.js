@@ -2,7 +2,6 @@
 $(document).ready(function(){
    var history = [];
    var savingsHistory = [];
-   // Declare Buttons
    var depositCheckingButton = $('#checking .deposit');
    var withdrawCheckingButton = $('#checking .withdraw');
    var depositSavingsButton = $('#savings .deposit');
