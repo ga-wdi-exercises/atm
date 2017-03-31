@@ -1,22 +1,71 @@
 $(document).ready(function(){
 
-var checkingBalance = $("#checking .balance");
-var checkingInput = $("#checking .checkingInput");
-var checkingDeposit = $("#checking .checkingDeposit");
-var checkingWithdraw = $("#checking .checkingWithdraw");
+  function addMoney(){
+    // checking variables
+      // buttons
+      var checkingDeposit = $('#checking input.deposit');
+      var checkingWithdraw = $('#checking input.withdraw');
+      // input
+      var checkingInput = $('#checking input.input');
+      //balance
 
-    // checking deposit
-  $(".checkingDeposit").on("click", function(){
-    $(checkingBalance).text().replace("$", "") // get balance, replace text with val
-    var deposit = parseInt(checkingInput).val()
-    var newBalance = "$" + (checkingBalance + checking)
-    $(checkingBalance).text(deposit)
-})
+      var result = prevBalance.text();
 
-// checking withdrawal /w overdraft protection
+      // turns the input value int
 
-// savings deposit
 
-// savings withdraw
+          $('.deposit').on('click'function(){
 
-})
+            var deposit = parseInt($('.balance').val())
+            var prevBalance = parseInt($('#checking div.balance').val())
+            var balance = parseInt(result.replace('$', ''))
+            var total = '$' + (balance + prevBalance)
+              $('.balance').text(total)
+            });
+      }
+
+  })
+
+
+  //-------------------------------------------------------
+    // savings variables
+      // buttons
+        var savingsDeposit = $('#savings input.deposit');
+      var savingsWithdraw = $('#savings input.deposit');
+      // input
+      var savingsInput = $('#savings input.input');
+      //balance
+      var savingsBalance = $('#savings div.balance');
+
+      var checkingBalance = 0;
+      var checkingBalance = 0;
+
+
+
+
+
+   var depositChecking = function() {
+      var inputVal = checkingInput.val()
+      console.log(inputVal);
+      var balance = checkingBalance.text('$' + inputVal);
+      }
+
+
+    var withdrawChecking = function() {
+          console.log('hello')
+        }
+
+        var colorButton = $("#set-color");
+        var colorField = $("#color-field");
+
+
+
+  colorButton.on("click", setColor);
+  checkingDeposit.on('click', depositChecking);
+  checkingWithdraw.on('click', withdrawChecking);
+
+
+  //savingsDeposit.on('click', depositSaving);
+  //savingsWithdraw.on('click', withdrawSaving);
+
+  });
