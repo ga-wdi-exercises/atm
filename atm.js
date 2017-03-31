@@ -1,63 +1,60 @@
 $(document).ready(function(){
-  console.log('jQuery Works!');
+  // Create a variable to store all transaction history
+  var transactionHistory = [];
+  var savTransactionHistory = [];
+  // Declare Buttons
+  var depositCheckingButton = $('#checking .deposit');
+  var withdrawCheckingButton = $('#checking .withdraw');
+  var depositSavingsButton = $('#savings .deposit');
+  var withdrawSavingsButton = $('#savings .withdraw')
+  //Deposit Checking function
+  // When Deposit is clicked, add input value to checking balance displayed
+  depositCheckingButton.on('click',function(){
+    var inputVal = parseInt($('#checking .input').val());
+    var checkingBalanceDisplay = parseInt($('#checking .balance').text().replace("$",""));
+    var newBalance = inputVal + checkingBalanceDisplay;
 
-  // checking variables
-  // buttons
-  var checkingDeposit = $('#checking .deposit');
-  var checkingWithdraw = $('#checking .withdraw');
-  // input
-  var checkingInput = $('#checking .input');
-  //balance
-  var checkingBalanceDisplay = $('#checking .balance');
+    $('#checking .balance').text('$' + newBalance);
+    // Add each new deposit to transactionHistory array
+    transactionHistory.push(inputVal);
+    console.log(transactionHistory);
+  });
 
-  // savings variables
-  // buttons
-  var savingsDeposit = $('#savings .deposit');
-  var savingsWithdraw = $('#savings .withdraw');
-  // input
-  var savingsInput = $('#savings .input');
-  //balance
-  var savingsBalanceDisplay = $('#savings .balance');
+  withdrawCheckingButton.on('click',function(){
+    console.log('withdraw')
+    var inputVal = parseInt($('#checking .input').val());
+    var checkingBalanceDisplay = parseInt($('#checking .balance').text().replace("$",""));
+    var newBalance = checkingBalanceDisplay - inputVal;
 
-  // var checkingInputVal = checkingInput.val();
-  // var checkingsUpdateBalance = checkingBalance.text('$' + checkingInputVal);
+    $('#checking .balance').text('$' + newBalance);
+    // Add each new deposit to transactionHistory array
+    transactionHistory.push(-inputVal);
+    console.log(transactionHistory);
+  });
 
-  var savingBalance = 0;
-  var checkingBalance = 0;
+  depositSavingsButton.on('click',function(){
+    console.log('deposit savings');
+    var inputVal = parseInt($('#savings .input').val());
+    var savingsBalanceDisplay = parseInt($('#savings .balance').text().replace("$",""));
+    var newBalance = savingsBalanceDisplay + inputVal;
 
-  //checking functions
-  //fires when you click the checking deposit button
-  var depositChecking = function() {
-    var checkingInputVal = checkingInput.val();
-    var newValue = parseInt(checkingInputVal);
+    $('#savings .balance').text('$' + newBalance);
+    savTransactionHistory.push(inputVal);
+    console.log(savTransactionHistory);
+  })
 
-    checkingBalance += newValue;
-    checkingBalanceDisplay.text('$' + checkingBalance);
-  };
+  withdrawSavingsButton.on('click',function(){
+    console.log('withdraw savings');
+  })
 
-  //fires when you click the checking withdraw button
-  var withdrawChecking = function() {
-    console.log('withdrew some money')
-    var checkingInputVal = checkingInput.val();
-    var newValue = parseInt(checkingInputVal);
 
-    checkingBalance -= checkingInputVal;
-    console.log(checkingBalance);
-  };
-
-  //savings functions
-  //fires when you click the savings deposit button
-  var depositSavings = function() {
-    console.log('made a savings deposit')
-  };
-  //fires when you click the savings withdraw button
-  var withdrawSavings = function() {
-    console.log('made a savings withdrawal')
-  };
-
-  checkingDeposit.on('click', depositChecking)
-  checkingWithdraw.on('click', withdrawChecking)
-
-  savingsDeposit.on('click', depositSavings)
-  savingsWithdraw.on('click', withdrawSavings)
 });
+
+
+//
+// $("#checkingDeposit").on("click", function(){
+//     var deposit = parseInt($("#checkingInput").val())
+//     var balance = parseInt($(".checking.balance").text().replace("$", ""))
+//     var newBalance = "$" + (balance + deposit)
+//     $(".checking.balance").text(newBalance)
+//   })
