@@ -28,7 +28,6 @@ $(document).ready(function(){
   withdrawCheckingButton.on('click',function(){
     var inputVal = parseInt($('#checking .input').val());
     var checkingBalanceDisplay = parseInt($('#checking .balance').text().replace("$",""));
-    var savingsBalanceDisplay = parseInt($('#savings .balance').text().replace("$",""));
     var newBalance = checkingBalanceDisplay - inputVal;
     $('#checking .balance').text("$" + newBalance);
     // Add each new deposit to transactionHistory array
