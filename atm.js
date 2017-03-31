@@ -37,6 +37,7 @@ $(document).ready(function(){
       $('#checking .balance').addClass('zero');
       // Force balance text to remain 0 when the condition is met
       $('#checking .balance').text('$0');
+      // Create an overdraft amount to subtract from savings when condition is met
     }
   });
 
