@@ -35,7 +35,8 @@ body {
   font-family: 'Ruluko', sans-serif;
   font-size: 50px;
   margin: 5px;
-  padding: 25px 0px;
+  padding: 5px 45px;
+  margin-left: 75px;
 }
 
 .zero {
