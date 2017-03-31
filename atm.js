@@ -22,7 +22,6 @@ $(document).ready(function(){
     if(newBalance > 0) {
       $('#checking .balance').removeClass('zero');
     }
-
   });
 
   withdrawCheckingButton.on('click',function(){
@@ -36,6 +35,8 @@ $(document).ready(function(){
     // Add zero class for amounts less than or equal to
     if(newBalance < 0) {
       $('#checking .balance').addClass('zero');
+      // Force balance text to remain 0 when the condition is met
+      $('#checking .balance').text('$0');
     }
   });
 
@@ -61,9 +62,11 @@ $(document).ready(function(){
     // Add each new deposit to savTransactionHistory array
     savTransactionHistory.push(-inputVal);
     console.log(savTransactionHistory);
-    // Add zero class for amounts less than or equal to
+    // Add zero class for amounts less than or equal to 0
     if(newBalance < 0) {
       $('#savings .balance').addClass('zero');
+      // Force balance text to remain 0 when the condition is met
+      $('#savings .balance').text('$0');
     }
   })
 
