@@ -1,10 +1,12 @@
 $(document).ready(function(){
-updateBalance()// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
+updateBalance()
 });
 
+//Define balance variables
 checkingBalance = 0
 savingsBalance = 0
 
+//Define display, input and button variables
 checkingBalanceDisplay = $("#checking .balance")
 savingsBalanceDisplay = $("#savings .balance")
 depositCheckingButton = $("#checking .deposit")
@@ -14,9 +16,7 @@ withdrawSavingsButton = $("#savings .withdraw")
 checkingInput = $("#checking .input")
 savingsInput = $("#savings .input")
 
-
-//$("body").css("background", "red")
-
+//Add JQuery events for button clicks
 depositCheckingButton.on("click",depositChecking)
 withdrawCheckingButton.on("click",withdrawChecking)
 
@@ -24,26 +24,23 @@ depositSavingsButton.on("click",depositSavings)
 withdrawSavingsButton.on("click",withdrawSavings)
 
 
-
+//Function for deposit into checking account
 function depositChecking() {
   var depositAmount = parseInt(checkingInput.val())
-  //var accountId = $(this).parent().attr('id')
   checkingBalance += depositAmount
   updateBalance()
 }
 
-
+//Function for deposit into savings account
 function depositSavings() {
   var depositAmount = parseInt(savingsInput.val())
-  //var accountId = $(this).parent().attr('id')
   savingsBalance += depositAmount
   updateBalance()
 }
 
-
+//Function for withdraw from checking account
 function withdrawChecking(){
   var withdrawAmount = parseInt(checkingInput.val())
-  //var accountId = $(this).parent().attr('id')
 
   if (checkingBalance < withdrawAmount) {
     if (confirm("Would you like to enable overdraft protection and withdraw from you Savings?")) {
@@ -51,15 +48,13 @@ function withdrawChecking(){
     }
     return;
   }
-
   checkingBalance -= withdrawAmount
   updateBalance()
 }
 
-
+//Function for withdraw from savings account
 function withdrawSavings(){
   var withdrawAmount = parseInt(savingsInput.val())
-  //var accountId = $(this).parent().attr('id')
 
   if (savingsBalance  < withdrawAmount) {
     if (confirm("Would you like to enable overdraft protection and withdraw from you Checking?")) {
@@ -72,14 +67,14 @@ function withdrawSavings(){
   updateBalance()
 }
 
-
+//Update the balance displayed on view.  Should be invoked every time something is changed.
 function updateBalance(){
   checkingBalanceDisplay.text("$" + checkingBalance)
   savingsBalanceDisplay.text("$" + savingsBalance)
   checkforZero()
 }
 
-
+//Check for balance of zero in either account.  Should be invoked whenever the balance is updated.
 function checkforZero(){
   if (checkingBalance == 0){
     checkingBalanceDisplay.addClass("zero")
@@ -93,7 +88,7 @@ function checkforZero(){
   }
 }
 
-
+//Overdraft Protection.  Check to see if the total is more than the amount and subtract from savings.
 function overdraftChecking(amount){
   var totalBalance = checkingBalance + savingsBalance
   var remainder = checkingBalance - amount
@@ -107,6 +102,7 @@ function overdraftChecking(amount){
   updateBalance()
 }
 
+//Overdraft Protection.  Check to see if the total is more than the amount and subtract from checking.
 function overdraftSavings(amount){
   var totalBalance = checkingBalance + savingsBalance
   var remainder = savingsBalance - amount
