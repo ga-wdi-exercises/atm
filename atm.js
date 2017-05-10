@@ -22,18 +22,33 @@ withdrawButton.on("click",withdraw)
 
 function deposit() {
   var depositAmount = parseInt(checkingInput.val())
-  checkingBalance += depositAmount
+  var accountId = $(this).parent().attr('id')
+
+  if (accountId == "checking") {
+    checkingBalance += depositAmount
+  }else if (accountId == "savings") {
+    savingsBalance += depositAmount
+  }
+
   updateBalance()
   console.log("You made a deposit")
 }
 
 function withdraw(){
   var withdrawAmount = parseInt(checkingInput.val())
-  if (checkingBalance < withdrawAmount) {
+  var accountId = $(this).parent().attr('id')
+
+  if (accountType < withdrawAmount) {
     alert("You need more moneyz!")
     return;
   }
-  checkingBalance -= withdrawAmount
+
+  if (accountId == "checking") {
+    checkingBalance -= withdrawAmount
+  } else if (accountId == "savings") {
+    savingsBalance -= withdrawAmount
+  }
+
   updateBalance()
 }
 
@@ -45,9 +60,13 @@ function updateBalance(){
 
 function checkforZero(){
   if (checkingBalance == 0){
-    checkingBalanceDisplay.css("color", "red")
+    checkingBalanceDisplay.addClass("zero")
+  }else{
+    checkingBalanceDisplay.removeClass("zero")
   }
   if (savingsBalanceDisplay == 0){
-    savingsBalanceDisplay.css("color", "red")
+    savingsBalanceDisplay.addClass("zero")
+  }else{
+    savingsBalanceDisplay.removeClass("zero")
   }
 }
