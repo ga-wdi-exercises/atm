@@ -3,9 +3,9 @@ $(document).ready(function(){
 		checkings : 0,
 		savings : 0
 	};
+
 	//deposit checking
 	$('#checking .deposit').on("click",function(){
-		
 		moneyCheck()
 		inTheRedCheckings()
 	})
@@ -18,6 +18,7 @@ $(document).ready(function(){
 	$('#checking .withdraw').on("click", function(){
 		
 		withdrawlCheck()
+
 		inTheRedCheckings()
 
 	})
@@ -25,6 +26,7 @@ $(document).ready(function(){
 	$('#savings .withdraw').on("click", function(){
 
 		withdrawlSave()
+
 		inTheRedSavings()
 	})
 
@@ -34,20 +36,45 @@ $(document).ready(function(){
 	function withdrawlCheck() {
 		var withdrawlAmount = $('#checking .input').val()
 		if(userAccounts.checkings - withdrawlAmount < 0){
-			return
+			overDraftProtection()
 		}else{
 			userAccounts.checkings -= withdrawlAmount
-			$('#checking .balance').text("$"+userAccounts.checkings)
+			displayCheck()
 		}
+	}
+/////////////////////////////////////
+function overDraftProtection() {
+	var withdrawlAmount = $('#checking .input').val()
+	var theDifference = withdrawlAmount - userAccounts.checkings
+	console.log(theDifference)
+	console.log(theDifference - userAccounts.savings)
+	if(userAccounts.savings - theDifference < 0){
+		alert("Error! you do not have enough funds");
+		return
+	}else{
+		userAccounts.savings -= theDifference
+		displaySave();
+		userAccounts.checkings = 0;
+		displayCheck();
+		
+	}
+}
+///////////////////////////////////////
+	function displayCheck() {
+		$('#checking .balance').text("$"+userAccounts.checkings)
+	}
+	function displaySave() {
+		$('#savings .balance').text("$"+userAccounts.savings)
 	}
 	//function to withdrawl $$$ savings
 	function withdrawlSave() {
 		var withdrawlAmount = $('#savings .input').val()
 		if(userAccounts.savings - withdrawlAmount < 0){
+			// alert("You do not have enough funds");
 			return
 		}else{
 			userAccounts.savings -= withdrawlAmount
-			$('#savings .balance').text("$"+userAccounts.savings)
+			displaySave()
 		}
 	}
 
@@ -56,14 +83,14 @@ $(document).ready(function(){
 		var deposit = $('#checking .input').val()
 		deposit = parseInt(deposit,10)
 		userAccounts.checkings += deposit;
-		$('#checking .balance').text("$"+userAccounts.checkings)
+		displayCheck()
 	}
 	//function to deposit $$$ saving
 	function moneySave() {
 		var deposit = $('#savings .input').val()
 		deposit = parseInt(deposit,10)
 		userAccounts.savings += deposit;
-		$('#savings .balance').text("$"+userAccounts.savings)
+		displaySave()
 	}
 	//color checkings
 	function inTheRedCheckings() {
