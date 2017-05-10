@@ -11,7 +11,26 @@ $(document).ready(function(){
 	$('#savings .deposit').on("click",function(){
 		moneySave()
 	})
-
+	//withdrawl form checkings
+	$('#checking .withdraw').on("click", function(){
+		withdrawlCheck()
+	})
+	//withdrawl form savings
+	$('#savings .withdraw').on("click", function(){
+		withdrawlSave()
+	})
+	//function to withdrawl $$$ checkings
+	function withdrawlCheck() {
+		var withdrawlAmount = $('#checking .input').val()
+		userAccounts.checkings -= withdrawlAmount
+		$('#checking .balance').text("$"+userAccounts.checkings)
+	}
+	//function to withdrawl $$$ savings
+	function withdrawlSave() {
+		var withdrawlAmount = $('#savings .input').val()
+		userAccounts.savings -= withdrawlAmount
+		$('#savings .balance').text("$"+userAccounts.savings)
+	}
 
 	//function to deposit $$$ checking
 	function moneyCheck() {
