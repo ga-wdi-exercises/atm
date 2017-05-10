@@ -25,7 +25,7 @@
 		"oA": 0,
 		"oAP": "\/build\/atm.js",
 		"oF": 0,
-		"sC": 1,
+		"sC": 3,
 		"tS": 1
 		},
 	"\/build": {
@@ -1853,7 +1853,7 @@
 		"autoOutputPathStyle": 0,
 		"createSourceMap": 0,
 		"minifyOutput": 1,
-		"syntaxCheckerStyle": 1,
+		"syntaxCheckerStyle": 3,
 		"transpilerStyle": 1
 		},
 	"languageDefaultsJSON": {

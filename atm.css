@@ -7,13 +7,21 @@ body {
   text-align: center;
   width: 700px;
 }
-
+.alert {
+  width: 100%;
+  font-size: 40px;
+  color: black;
+  position: relative;
+}
+.hide {
+  display: none;
+}
 .header {
   margin: 50px 0px;
 }
 
 .title {
-  color: #F52F4F;
+  font-color: black;
   font-family: 'Oleo Script', cursive;
   font-size: 50px;
 }
