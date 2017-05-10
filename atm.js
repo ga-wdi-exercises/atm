@@ -13,12 +13,17 @@ $(document).ready(function(){
 	})
 	//withdrawl form checkings
 	$('#checking .withdraw').on("click", function(){
+		if(userAccounts)
 		withdrawlCheck()
 	})
 	//withdrawl form savings
 	$('#savings .withdraw').on("click", function(){
+
 		withdrawlSave()
 	})
+
+
+
 	//function to withdrawl $$$ checkings
 	function withdrawlCheck() {
 		var withdrawlAmount = $('#checking .input').val()
@@ -28,8 +33,12 @@ $(document).ready(function(){
 	//function to withdrawl $$$ savings
 	function withdrawlSave() {
 		var withdrawlAmount = $('#savings .input').val()
-		userAccounts.savings -= withdrawlAmount
-		$('#savings .balance').text("$"+userAccounts.savings)
+		if(userAccounts.savings - withdrawlAmount < 0){
+			return
+		}else{
+			userAccounts.savings -= withdrawlAmount
+			$('#savings .balance').text("$"+userAccounts.savings)
+		}
 	}
 
 	//function to deposit $$$ checking
