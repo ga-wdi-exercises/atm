@@ -5,7 +5,9 @@ $(document).ready(function(){
 	};
 	//deposit checking
 	$('#checking .deposit').on("click",function(){
+		
 		moneyCheck()
+		inTheRedCheckings()
 	})
 	//deposit saving
 	$('#savings .deposit').on("click",function(){
@@ -13,8 +15,10 @@ $(document).ready(function(){
 	})
 	//withdrawl form checkings
 	$('#checking .withdraw').on("click", function(){
-
+		
 		withdrawlCheck()
+		inTheRedCheckings()
+		console.log(userAccounts.checkings)
 	})
 	//withdrawl form savings
 	$('#savings .withdraw').on("click", function(){
@@ -58,6 +62,14 @@ $(document).ready(function(){
 		deposit = parseInt(deposit,10)
 		userAccounts.savings += deposit;
 		$('#savings .balance').text("$"+userAccounts.savings)
+	}
+	//color 
+	function inTheRedCheckings() {
+		if(userAccounts.checkings === 0){
+			$('div#checking').addClass('zero')
+		}else{
+			$('div#checking').removeClass('zero')
+		}
 	}
 	//
 });
