@@ -30,8 +30,8 @@ $(document).ready(function(){
 	})
 
 
-
-	//function to withdrawl $$$ checkings
+//////////////////////////////////////////////////////////
+	//function to withdrawl $$$ from checkings
 	function withdrawlCheck() {
 		var withdrawlAmount = $('#checking .input').val()
 		if(userAccounts.checkings - withdrawlAmount < 0){
@@ -62,6 +62,7 @@ $(document).ready(function(){
 	function displaySave() {
 		$('#savings .balance').text("$"+userAccounts.savings)
 	}
+
 	//function to withdrawl $$$ savings
 	function withdrawlSave() {
 		var withdrawlAmount = $('#savings .input').val()
@@ -76,15 +77,13 @@ $(document).ready(function(){
 
 	//function to deposit $$$ checking
 	function moneyCheck() {
-		var deposit = $('#checking .input').val()
-		deposit = parseInt(deposit,10)
+		var deposit = parseInt($('#checking .input').val(),10)
 		userAccounts.checkings += deposit;
 		displayCheck()
 	}
 	//function to deposit $$$ saving
 	function moneySave() {
-		var deposit = $('#savings .input').val()
-		deposit = parseInt(deposit,10)
+		var deposit = parseInt($('#savings .input').val(),10)
 		userAccounts.savings += deposit;
 		displaySave()
 	}
