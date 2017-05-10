@@ -6,18 +6,18 @@ $(document).ready(function(){
 //if Deposit is clicked amount typed in is added to account
 
 $(".deposit").on("click", function(){
-  console.log("hello")
-  var inputValue = $(".input").val()
+  var inputValue = $("#checking .input").val()
   var newInputValue = inputValue.replace("$", "")
-  console.log(newInputValue)
+  var iValue = parseInt(newInputValue)
+  // console.log(iValue)
 
   var currentBalance = $(".balance").html()
   var noDollarCurrent = currentBalance.replace("$", "")
   var newCurrentBalance = parseInt(noDollarCurrent)
-  console.log(newCurrentBalance)
+  // console.log(newCurrentBalance)
 
-  $(".balance").html("$" + (+newInputValue + +newCurrentBalance))
-  console.log(typeof newCurrentBalance)
+  $(".balance").html("$" + (+iValue + +newCurrentBalance))
+  // console.log(typeof newCurrentBalance)
 })
 
 //if Withdraw is clicked balance of account is checked for sufficient funds
@@ -26,8 +26,22 @@ $(".deposit").on("click", function(){
 
 $(".withdraw").on("click", function(){
   console.log("step two")
-  var withdrawValue = $(".input").val()
-  var wValue = withdrawValue.replace("$", "")
+  var withdrawValue = $("#checking .input").val()
+  var newWithdrawValue = withdrawValue.replace("$", "")
+  var wValue = parseInt(newWithdrawValue)
+  console.log(wValue)
+
+  var currentBalance = $(".balance").html()
+  var noDollarCurrent = currentBalance.replace("$", "")
+  var newCurrentBalance = parseInt(noDollarCurrent)
+  console.log(newCurrentBalance)
+
+  if ((newCurrentBalance - wValue) >= 0) {
+    $(".balance").html("$" + (newCurrentBalance - wValue))
+    // console.log(typeof newCurrentBalance)
+  } else {
+    alert("insufficient funds")
+  }
 })
 
 
