@@ -12,18 +12,20 @@ $(document).ready(function(){
 	//deposit saving
 	$('#savings .deposit').on("click",function(){
 		moneySave()
+		inTheRedSavings()
 	})
 	//withdrawl form checkings
 	$('#checking .withdraw').on("click", function(){
 		
 		withdrawlCheck()
 		inTheRedCheckings()
-		console.log(userAccounts.checkings)
+
 	})
 	//withdrawl form savings
 	$('#savings .withdraw').on("click", function(){
 
 		withdrawlSave()
+		inTheRedSavings()
 	})
 
 
@@ -63,7 +65,7 @@ $(document).ready(function(){
 		userAccounts.savings += deposit;
 		$('#savings .balance').text("$"+userAccounts.savings)
 	}
-	//color 
+	//color checkings
 	function inTheRedCheckings() {
 		if(userAccounts.checkings === 0){
 			$('div#checking').addClass('zero')
@@ -71,5 +73,12 @@ $(document).ready(function(){
 			$('div#checking').removeClass('zero')
 		}
 	}
-	//
+	//color savings
+	function inTheRedSavings() {
+		if(userAccounts.savings === 0){
+			$('div#savings').addClass('zero')
+		}else{
+			$('div#savings').removeClass('zero')
+		}
+	}
 });
