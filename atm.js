@@ -1,7 +1,5 @@
 $(document).ready( function(){
-
-var balance = 0;
-//Once the page loads, it is waiting for user input/event
+/*Once the page loads, it is waiting for user input/event
   /* 1.Users can deposit money into one of the bank accounts
   2.Users can withdraw money from one of the bank accounts
   3.Make sure the balance in an account can't go negative. If a user
@@ -27,51 +25,63 @@ var balance = 0;
 
   //DEPOSIT MONEY
   //Event Listeners for button clicks
-$("#checking input.deposit").on("click", addMoney);
+var checkingBalance = 0;
+var savingsBalance = 0;
+$("#checking .deposit").click(function() {
+
+   //function reference!
 console.log('hello');
-$("#savings input.deposit").on("click", addMoney);
+var inputAmount = $("#checking .input").val();
+var cleanedInput = inputAmount.replace("$","");
+  var resultInput = parseInt(cleanedInput);
+ checkingBalance = (checkingBalance + resultInput) //need more here to push this to the display
+ $("#checking .balance").text("$" + checkingBalance);
+//console.log(balance);
+ if(checkingBalance <= 0){
+   $("#checking").removeClass("zero");
+ }
+})
+
+$("#savings .deposit").click(function() {  //function reference!
 console.log('hello2');
-
-
-  //on deposit click, execute this function
-
-  function addMoney(){
-    console.log(this);
-    //prevBalance + inputAmount = return NewBalance
-      //prevBalance is what is in the bank account upon the click
-    var inputAmount = $("#checking .input").val();
+    var inputAmount = $("#savings .input").val();
     var cleanedInput = inputAmount.replace("$","");
       var resultInput = parseInt(cleanedInput);
-     balance = (balance + resultInput) //need more here to push this to the display
-     $("#checking .balance").text("$" + balance)
-  }
+     savingsBalance = (savingsBalance + resultInput) //need more here to push this to the display
+     $("#savings .balance").text("$" + savingsBalance);
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+     if(savingsBalance <= 0){
+       $("#checking").removeClass("zero");
+     }
+   })
 
 
   //WITHDRAW MONEY
+  $("#checking .withdraw").click(function() {
 
-  //EVENT LISTENERS
-  var checkingWithdraw = $("#checking input.withdraw").on("click", subtractMoney);
-  var savingsWithdraw =$("#savings input.withdraw").on("click", subtractMoney);
+     //function reference!
+  console.log('hello3');
+  var inputAmount = $("#checking .input").val();
+  var cleanedInput = inputAmount.replace("$","");
+    var resultInput = parseInt(cleanedInput);
+   checkingBalance = (checkingBalance - resultInput) //need more here to push this to the display
+   $("#checking .balance").text("$" + checkingBalance);
+  //console.log(balance);
+   if(checkingBalance <= 0){
+     $("#checking").addClass("zero");
+   }
+  })
 
-  //on withdraw button click, execute this function
-  function subtractMoney(){
+  $("#savings .withdraw ").click(function() {  //function reference!
+  console.log('hello4');
+      var inputAmount = $("#savings .input").val();
+      var cleanedInput = inputAmount.replace("$","");
+        var resultInput = parseInt(cleanedInput);
+       savingsBalance = (savingsBalance - resultInput) //need more here to push this to the display
+       $("#savings .balance").text("$" + savingsBalance);
 
-  }
+       if(savingsBalance <= 0){
+         $("#checking").addClass("zero");
+       }
+     })
 });
