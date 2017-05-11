@@ -13,7 +13,7 @@ body {
 }
 
 .title {
-  color: #F52F4F;
+  color: red;
   font-family: 'Oleo Script', cursive;
   font-size: 50px;
 }
@@ -40,5 +40,5 @@ body {
 
 .zero {
   background-color: #F52F4F;
-  color: #FFFFFF;
+  color: black;
 }
