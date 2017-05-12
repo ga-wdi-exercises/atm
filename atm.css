@@ -6,6 +6,7 @@ body {
   margin: 0px auto;
   text-align: center;
   width: 700px;
+  background: red;
 }
 
 .header {
@@ -13,7 +14,8 @@ body {
 }
 
 .title {
-  color: #F52F4F;
+  /*color: #F52F4F;*/
+  color: black;
   font-family: 'Oleo Script', cursive;
   font-size: 50px;
 }
@@ -40,5 +42,5 @@ body {
 
 .zero {
   background-color: #F52F4F;
-  color: #FFFFFF;
+  color: white;
 }
