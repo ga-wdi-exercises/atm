@@ -1,9 +1,10 @@
-<!doctype html>
+<!DOCTYPE html>
 <html>
   <head>
     <title>ATM</title>
     <meta charset="utf-8">
     <link rel="stylesheet" href="atm.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.js"></script>
     <script src="atm.js"></script>
   </head>
   <body>
@@ -15,17 +16,17 @@
     <div id="checking" class="account">
       <h2>Checking</h2>
       <div class="balance">$0</div>
-      <input class="input" type="text" placeholder="enter an amount" />
-      <input class="deposit" type="button" value="Deposit" />
-      <input class="withdraw" type="button" value="Withdraw" />
+      <input class="checkInput" type="text" placeholder="enter an amount" />
+      <input class="checkDeposit" type="button" value="Deposit" />
+      <input class="checkWithdraw" type="button" value="Withdraw" />
     </div>
 
     <div id="savings" class="account">
       <h2>Savings</h2>
       <div class="balance">$0</div>
-      <input class="input" type="text" placeholder="enter an amount" />
-      <input class="deposit" type="button" value="Deposit" />
-      <input class="withdraw" type="button" value="Withdraw" />
+      <input class="savingsInput" type="text" placeholder="enter an amount" />
+      <input class="savingsDeposit" type="button" value="Deposit" />
+      <input class="savingsWithdraw" type="button" value="Withdraw" />
     </div>
   </body>
 </html>
