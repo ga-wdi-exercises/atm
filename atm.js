@@ -1,41 +1,51 @@
 $(document).ready(function(){
 
+var deposit;
+var withdraw;
+var CheckingTotal = 0;
+var SavingsTotal = 0;
+
+
+$("#checkingDeposit").on("click", function(){
+	deposit = parseInt($("#checkingInput").val())
+	console.log(deposit)
+
+	CheckingTotal = deposit += CheckingTotal;
+
+	$("#checkingBalance").text("$" + CheckingTotal)
 });
-// Attempted to be a google ninja and did something complicated.
-// Scrapped most of the code.
-// $('#input').change(function() {
-//     $(event.target).text().val($(this).val());
-// });
 
-var checkDeposit = $("#checking .checking")
-var checkSubmission = $("#checking .input")
-var checkWithdrawl = $("#checking .withdraw")
-var checkBalance = $("#checking .balance")
-var savingDeposit = $("#savings .deposit")
-var savingSubmission = $("#savings .input")
-var savingWithdrawl = $("#savings .withdraw")
-var savingBalance = $("#savings .balance")
+$("#checkingWithdraw").on("click", function(){
+	deposit = parseInt($("#checkingInput").val())
+	console.log(deposit)
 
+	CheckingTotal = CheckingTotal -= deposit;
 
-function accountAdd (){
-	// obtaining the value
-	var lastValue = $(this).siblings("div.balance");
-	var totalValue = lastValue.text();
-	//This should show temp value and remove the "$"
-	var tempValue = parseInt(result.replace("$"));
+	$("#checkingBalance").text("$" + CheckingTotal)
 
-}
+	var checkingFailSafe = if(CheckingTotal < 0) CheckingTotal = 0;
+});
 
-function accountSubtract(){
+	$("#savingsDeposit").on("click", function(){
+	deposit = parseInt($("#savingsInput").val())
+	console.log(deposit)
 
+	SavingsTotal = deposit += SavingsTotal;
 
-}
+	$("#savingsBalance").text("$" + SavingsTotal)
 
-$("#WithdrawChecking").on("click", accountAdd)
-$("#WithdrawSavings").on("click", accountAdd)
-$("#depositChecking").on("click", accountSubtract)
-$("#depositSavings").on("click", accountSubtract)
+});
+$("#savingsWithdraw").on("click", function(){
+	deposit = parseInt($("#savingsInput").val())
+	console.log(deposit)
+
+	SavingsTotal = SavingsTotal -= deposit;
+
+	$("#savingsBalance").text("$" + SavingsTotal)
+
+	var savingsFailSafe = if ( SavingsTotal < 0) SavingsTotal = 0;
+});
 
 
-
+});
 
