@@ -1,6 +1,7 @@
 var savings;
 var checking;
 var $alert;
+var difference;
 
 $(document).ready(function(){
     var $body =  $('body');
@@ -61,6 +62,7 @@ $(document).ready(function(){
         checking.input = parseInt($checkingInput.val());
         checking.withdraw(checking.input);
         $checkingBalance.text(`$${checking.balance}`);
+
     })
 
 
@@ -73,11 +75,12 @@ $(document).ready(function(){
         if (this.balance - withdrawAmount >= 0) {
             this.balance -= withdrawAmount;
         } else if (checking.balance + savings.balance >= withdrawAmount) {
-            var difference = withdrawAmount - checking.balance;
-            checking.balance -= difference;
-            console.log(withdrawAmount);
-            console.log(difference);
+            difference = withdrawAmount - checking.balance;
+            checking.balance -= withdrawAmount - difference;
             savings.balance -= difference;
+            console.log(difference);
+            $checkingBalance.text(`$${parseInt(checking.balance)}`)
+            $savingsBalance.text(`$${savings.balance}`);
         } else {
             setTimeout(function() {
                 $alert.fadeIn('slow', function() {
@@ -89,13 +92,6 @@ $(document).ready(function(){
                     });
                 },3000);
             }, 0)
-        }
-    }
-    function isBalanceZero(balance) {
-        if (this.balance === 0) {
-            addClass('');
-        } else {
-            removeClass
         }
     }
 });
