@@ -6,6 +6,7 @@ var CheckingTotal = 0;
 var SavingsTotal = 0;
 
 
+
 $("#checkingDeposit").on("click", function(){
 	deposit = parseInt($("#checkingInput").val())
 	console.log(deposit)
@@ -23,7 +24,8 @@ $("#checkingWithdraw").on("click", function(){
 
 	$("#checkingBalance").text("$" + CheckingTotal)
 
-	var checkingFailSafe = if(CheckingTotal < 0) CheckingTotal = 0;
+	// var checkingFailSafe = if(CheckingTotal < 0) CheckingTotal = 0;
+	// This local scoped variable I created is an attempt in stopping the balance from hitting the negatives.
 });
 
 	$("#savingsDeposit").on("click", function(){
