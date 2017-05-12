@@ -24,7 +24,7 @@ Note that these commits are all for the checking account only. Take this one acc
 
 1. Test jQuery is working
   - Make the `<body>`'s background color turn red
-- Add a click listener to the **checking account's** "Deposit" button
+- Add a click listener to the **clicking account's** "Deposit" button
   - When you click the button it should `console.log("hello")`
 - On clicking "Deposit", it should get the user input
   - Just `console.log` it
