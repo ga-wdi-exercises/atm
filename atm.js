@@ -12,14 +12,15 @@ $(document).ready(function(){
     var total = checkingBalance - withdraw;
     $("#checkingBalance").html("$" + total);
 
-    if (total === 0) {
+    if (total <= 0) {
       $("#checking").addClass("zero");
-      event.preventDefault();
+
     } else {
       $("#checking").removeClass("zero")
     }
     if (total < 0) {
       alert("Nice try but you don't have enough balance.")
+      $("#checkingBalance").html("$ " + 0);
     }
 })
   $("#savingDepositt").on("click", function(){
@@ -34,14 +35,14 @@ $(document).ready(function(){
     var total = savingBalance - withdraw;
     $("#savingBalance").html("$" + total);
 
-    if (total === 0) {
+    if (total <= 0) {
       $("#savings").addClass("zero");
-      event.preventDefault();
     } else {
       $("#savings").removeClass("zero");
     }
     if (total < 0) {
-      alert("Nice try but you don't have enough balance.")
+      alert("Nice try but you don't have enough balance.");
+      $("#savingBalance").html("$ " + 0);
     }
 })
 });
