@@ -1,3 +1,5 @@
 $(document).ready(function () {
-  $('body').css('background', 'red')
+  $('#checking .deposit').on('click', function () {
+    alert('hi')
+  })
 })
