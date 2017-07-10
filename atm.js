@@ -6,25 +6,10 @@
 //create balance variable, withdrawal and deposit functions
 
 //var balance = 0
-//var amount = $('input').val()
-
-
-/*var withdraw = function (amount) {
-  return balance -= amount
-  console.log(balance)
-} */
-
-/*var deposit = function (amount) {
-  return balance += amount
-  console.log(balance)
-} */
 
 //define withdrawal and deposit buttons in jquery
-/*var deposit = $('.deposit')
-var withdraw = $('withdraw') */
 
 //add event listeners to deposit and withdrawal buttons
-
 var checkingInput = $('#checking .input').val()
 var checkingBalance = 0
 var checkingDeposit = $('#checking .deposit')
@@ -66,6 +51,9 @@ var withdraw = function () {
 checkingDeposit.on('click', deposit)
 checkingWithdraw.on('click', withdraw)
 
+savingsDeposit.on('click', depositS)
+savingsWithdraw.on('click', withdrawS)
+
 
 
 var depositSavings = function () {
@@ -78,7 +66,7 @@ var withdrawSavings = function () {
 
 
 var depositS = function () {
-    console.log($('input').val())
+    console.log($('#savings .input').val())
     depositSavings()
     console.log(savingsBalance)
     savingsBalanceDisplay.text(`$ ${savingsBalance}`)
@@ -94,8 +82,8 @@ var withdrawS = function () {
 
 
 
-savingsDeposit.on('click', depositS)
-savingsWithdraw.on('click', withdrawS)
+
+
 
 
 
