@@ -20,7 +20,7 @@ function depositCheck () {
 
 function withdrawCheck () {
   var diff = checkBalance - checkInputVal.val()
-  if (diff < 0 && saveBalance > -diff) {
+  if (diff < 0 && saveBalance >= -diff) {
     negativeCheck()
   } else if (diff < 0 && checkBalance < -diff) {
     alert(`Sorry you dont have $${checkInputVal.val()} available.`)
@@ -62,14 +62,25 @@ function depositSave () {
 }
 
 function withdrawSave () {
-  if (saveInputVal.val() < saveBalance) {
+  var diff = saveBalance - saveInputVal.val()
+  if (diff < 0 && checkBalance >= -diff) {
+    negativeSave()
+  } else if (diff < 0 && saveBalance < -diff) {
+    alert(`Sorry you dont have $${saveInputVal.val()} available.`)
+  } else {
     saveBalance -= parseInt(saveInputVal.val())
     updateBalSave()
     saveInputVal.val('')
-  } else {
-    alert(`Sorry you dont have $${saveInputVal.val()} available.`)
   }
 
+  function negativeSave () {
+    var diff = saveBalance - saveInputVal.val()
+    checkBalance += diff
+    saveBalance = 0
+    updateBalSave()
+    updateBalCheck()
+    saveInputVal.val('')
+  }
 }
 
 function updateBalSave () {
@@ -81,7 +92,7 @@ function isZeroSave () {
   if (saveBalance !== 0) {
     saveBalVal.removeClass('zero')
     saveBalVal.css('balance')
-  } else if (checkBalance === 0) {
+  } else if (saveBalance === 0) {
     saveBalVal.toggleClass('zero')
   }
 }
