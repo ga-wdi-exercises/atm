@@ -9,7 +9,6 @@ var checkBalVal = $('#checking').children('.balance')
 var saveBalVal = $('#savings').children('.balance')
 var checkBalance = 0
 var saveBalance = 0
-var amount = 0
 
 //Functions
   //Functions for checking
@@ -43,6 +42,16 @@ function negativeCheck () {
 
 function updateBalCheck () {
   checkBalVal.text('$' + checkBalance)
+  isZeroCheck()
+}
+
+function isZeroCheck () {
+  if (checkBalance !== 0) {
+    checkBalVal.removeClass('zero')
+    checkBalVal.css('balance')
+  } else if (checkBalance === 0) {
+    checkBalVal.toggleClass('zero')
+  }
 }
 
   //Functions for savings
@@ -53,14 +62,30 @@ function depositSave () {
 }
 
 function withdrawSave () {
-  saveBalance -= parseInt(saveInputVal.val())
-  updateBalSave()
-  saveInputVal.val('')
+  if (saveInputVal.val() < saveBalance) {
+    saveBalance -= parseInt(saveInputVal.val())
+    updateBalSave()
+    saveInputVal.val('')
+  } else {
+    alert(`Sorry you dont have $${saveInputVal.val()} available.`)
+  }
+
 }
 
 function updateBalSave () {
   saveBalVal.text('$' + saveBalance)
+  isZeroSave()
 }
+
+function isZeroSave () {
+  if (saveBalance !== 0) {
+    saveBalVal.removeClass('zero')
+    saveBalVal.css('balance')
+  } else if (checkBalance === 0) {
+    saveBalVal.toggleClass('zero')
+  }
+}
+
 
 //Listeners
 checkDepositBut.on('click', depositCheck)
@@ -68,3 +93,7 @@ checkWithdrawBut.on('click', withdrawCheck)
 
 saveDepositBut.on('click', depositSave)
 saveWithdrawBut.on('click', withdrawSave)
+
+if (checkBalVal <= 0) {
+  $('.checkBalVal').toggle('.zero')
+}
