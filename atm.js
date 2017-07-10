@@ -17,7 +17,7 @@ var savingsInput = $('#savings .input')
 balanceChecking.addClass('zero')
 balanceSavings.addClass('zero')
 
-var depositDisplay = function () {
+var deposit = function () {
   var input = parseInt(checkingInput.val())
   balanceCheck += input
   totalBalance += input
@@ -25,7 +25,7 @@ var depositDisplay = function () {
   isZero()
   }
 
-var withdrawDisplay = function () {
+var withdraw = function () {
   var input = parseInt(checkingInput.val())
   if (balanceCheck >= input) {
     balanceCheck -= input
@@ -46,7 +46,7 @@ var withdrawDisplay = function () {
 }
 
 
-var depositDisplaySavings = function () {
+var depositSavings = function () {
   var input = parseInt(savingsInput.val())
   balanceSav += input
   totalBalance += input
@@ -54,7 +54,7 @@ var depositDisplaySavings = function () {
   isZero()
 }
 
-var withdrawDisplaySavings = function () {
+var withdrawSavings = function () {
   var input = parseInt(savingsInput.val())
   if (balanceSav >= input) {
     balanceSav -= input
@@ -86,10 +86,10 @@ function isZero () {
     balanceSavings.removeClass('zero')
   }
 }
-checkingDeposit.on('click', depositDisplay)
-checkingWithdraw.on('click', withdrawDisplay)
-savingsDeposit.on('click', depositDisplaySavings)
-savingsWithdraw.on('click', withdrawDisplaySavings)
+checkingDeposit.on('click', deposit)
+checkingWithdraw.on('click', withdraw)
+savingsDeposit.on('click', depositSavings)
+savingsWithdraw.on('click', withdrawSavings)
 
 
 
