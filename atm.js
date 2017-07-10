@@ -1,3 +1,3 @@
-$(document).ready(function(){
-// Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
-});
+$(document).ready(function () {
+  $('body').css('background', 'red')
+})
