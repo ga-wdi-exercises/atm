@@ -6,7 +6,14 @@ $(document).ready(function () {
   // Uh oh -- it's saying `$` is undefined! Something's missing from `index.html`...
 
   // make background red as a test
-  // $('html').css('background', 'red')
+  var balanceDiv = $('.balance')
+  function balanceCheck () {
+    if (this.bal === 0) {
+      $('balanceDiv').addClass('zero')
+    } else {
+      $('balanceDiv').removeClass('zero')
+    }
+  }
 
   // create a class = atm
   class Atm {
@@ -15,23 +22,23 @@ $(document).ready(function () {
     constructor (name, begBal = 0, backupAcc = null) { // name
       this.name = name // starting balance
       this.bal = begBal // backup
-      this.backupAcc = backupAcc
     } // methods: deposit, withdraw (calls verBal [integrated in withdraw])
     deposit (amt) {
       console.log(`Depositing money to current ${this.bal}`)
       this.bal += amt
+      balanceCheck()
       return this.bal
     }
     withdraw (amt) {
       console.log(`Verifying amount in account...`) // ternary
       this.bal >= amt ? this.bal -= amt : alert('Insufficient funds, transaction cancelled')
+      balanceCheck()
       return this.bal
     }
   }
-
+// $(this) when attached to a function in Jquery refers to the element it is attached to
   var checkings = new Atm('checking', 0)
   var savings = new Atm('saving', 0)
-
   // checking related variables
   var checkAccDep = $('#checking .deposit')
   var checkInput = $('#checking .input')
@@ -75,3 +82,6 @@ $(document).ready(function () {
   savAccDep.on('click', eventDep)
   savWithdraw.on('click', eventWith)
 })
+
+// red background on 0 balance
+// overdraft protection
