@@ -31,6 +31,13 @@ var checkingDeposit = $('#checking .deposit')
 var checkingWithdraw = $('#checking .withdraw')
 var balanceDisplay = $('#checking .balance')
 
+var savingsInput = $('#savings .input').val()
+var savingsBalance = 0
+var savingsDeposit = $('#savings .deposit')
+var savingsWithdraw = $('#savings .withdraw')
+var savingsBalanceDisplay = $('#savings .balance')
+
+
 
 var depositChecking = function () {
   checkingBalance += parseInt($('input').val(), 10)
@@ -61,6 +68,34 @@ checkingWithdraw.on('click', withdraw)
 
 
 
+var depositSavings = function () {
+  savingsBalance += parseInt($('input').val(), 10)
+}
+
+var withdrawSavings = function () {
+  savingsBalance -= parseInt($('input').val(), 10)
+}
+
+
+var depositS = function () {
+    console.log($('input').val())
+    depositSavings()
+    console.log(savingsBalance)
+    savingsBalanceDisplay.text(`$ ${savingsBalance}`)
+}
+
+
+var withdrawS = function () {
+  console.log($('#savings .input').val())
+  withdrawSavings()
+  console.log(savingsBalance)
+  savingsBalanceDisplay.text(`$ ${savingsBalance}`)
+}
+
+
+
+savingsDeposit.on('click', depositS)
+savingsWithdraw.on('click', withdrawS)
 
 
 
