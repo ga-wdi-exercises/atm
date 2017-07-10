@@ -21,6 +21,7 @@ var outputSavings = $('#savings .balance')
 $('#checking .deposit').on('click',depositChecking)
 
 function depositChecking (){
+    $('#checking').removeClass('zero');
   balanceChecking += parseInt(inputChecking.val());
   outputChecking.text("$" + balanceChecking);
 }
@@ -62,6 +63,9 @@ function overdraft(num)
     outputSavings.text("$" + balanceSavings);
   }
   else {
-    alert("transaction is not possible, both your checking and savings account are not enough, try another amount.");
+
+    $('#checking').addClass('zero');
+
+
   }
 }
