@@ -11,9 +11,15 @@ var checkBalance = 0
 var saveBalance = 0
 var amount = 0
 
-function getValue () {
+function deposit () {
   console.log(checkInputVal.val())
+  checkBalance += parseInt(checkInputVal.val())
+  updateBal()
   checkInputVal.val('enter an ammount')
 }
 
-checkDepositBut.on('click', getValue)
+function updateBal () {
+  checkBalVal.text('$' + checkBalance)
+}
+
+checkDepositBut.on('click', deposit)
