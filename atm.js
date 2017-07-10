@@ -20,7 +20,7 @@ function depositCheck () {
 
 function withdrawCheck () {
   var diff = checkBalance - checkInputVal.val()
-  if (diff < 0 && checkBalance >= -diff) {
+  if (diff < 0 && saveBalance > -diff) {
     negativeCheck()
   } else if (diff < 0 && checkBalance < -diff) {
     alert(`Sorry you dont have $${checkInputVal.val()} available.`)
