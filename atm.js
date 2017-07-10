@@ -1,11 +1,13 @@
 /* global $ */
 
 $(document).ready(function () {
-  $('#checking .deposit').on('click', function () {
-    var currentBalance = parseInt($('#checking .balance').text().replace('$', ''))
-    console.log(currentBalance)
+  $('.deposit').on('click', function () {
+    var currentBalance = parseInt($(this).siblings('.balance').text().replace('$', ''))
+    console.log('currentBalance=' + currentBalance)
 
-    var input = $('#checking .input').val()
+    var input = $(this).siblings('.input').val()
+    console.log('input=' + input)
+
     var number
 
     function isNumber (n) {
@@ -14,7 +16,7 @@ $(document).ready(function () {
 
     if (isNumber(input)) {
       number = parseInt(input)
-      $('#checking .balance').text(`\n$${number + currentBalance}`)
+      $(this).siblings('.balance').text(`\n$${number + currentBalance}`)
       $('.error').remove()
     } else {
       var errorMessage = $('<div class="error"></div>')
@@ -22,12 +24,23 @@ $(document).ready(function () {
       errorMessage.css('color', 'red')
       errorMessage.appendTo($('.header'))
     }
-    console.log(input)
-  })
-})
 
-// On "Deposit", it updates the balance
-// Now add the user input to the balance, and make it show up in the "balance" element
+  }) // end event listener
+
+  //$('.balance').attr('class', 'balance zero')
+
+  $('#savings .withdraw').on('click', function () {
+  console.log('hello')
+
+  })
+
+
+
+
+}) // end ready
+
+
+
 
 // On "Withdraw", it updates the balance
 // Follow the same steps as before, except you're subtracting instead of adding
