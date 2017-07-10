@@ -52,20 +52,10 @@ function withdrawSavings(){
 
 
 
-function overdraft(num)
-{
-  console.log(num+" "+balanceChecking +"   "+balanceSavings)
-  if(num<=(balanceChecking + balanceSavings))
-  {
+function overdraft(num){
+  if(num<=(balanceChecking + balanceSavings)){
     balanceSavings -= num - balanceChecking;
     balanceChecking =0;
     outputChecking.text("$" + balanceChecking);
-    outputSavings.text("$" + balanceSavings);
-  }
-  else {
-
-    $('#checking').addClass('zero');
-
-
-  }
-}
+    outputSavings.text("$" + balanceSavings);  }
+  else {  $('#checking').addClass('zero');}}
