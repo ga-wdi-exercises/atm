@@ -30,6 +30,7 @@ $(document).ready(function (balance) {
 
     if (total < 0) {
       balanceChecking.addClass('zero')
+      throw 'Insufficient funds'
     } else { balanceChecking.text('$' + total) }
   })
   withdrawSavings.on('click', function () {
@@ -39,6 +40,7 @@ $(document).ready(function (balance) {
 
     if (total < 0) {
       balanceSavings.addClass('zero')
+      throw 'Insufficient funds'
     } else { balanceSavings.text('$' + total) }
   })
 })
