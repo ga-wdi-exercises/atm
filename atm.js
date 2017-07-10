@@ -1,10 +1,10 @@
-var depositChecking = $('#checking .deposit') // define variable for deposit button (checking)
+var depositChecking = $('#checking .deposit') // define variable for checking
 var balanceChecking = $('#checking .balance')
 var inputChecking = $('#checking .input')
 
-var depositSavings = $('')
-var balanceSavings = $('')
-var inputSavings = $('')
+var depositSavings = $('#savings .deposit')  //define variables for savings
+var balanceSavings = $('#savings .balance')
+var inputSavings = $('#savings .input')
 
 
 $(document).ready(function (balance) { //update balance div for checking account
@@ -15,6 +15,9 @@ depositChecking.on('click', function () {
   balanceChecking.text('$' + total)
 })
 depositSavings.on ('click', function() {  //do same for savings account
-
+  var balance = parseInt(balanceSavings.text().replace("$", ''))
+  var deposit = parseInt(inputSavings.val())
+  var total = balance + deposit
+  balanceSavings.text('$' + total)
 })
 })
