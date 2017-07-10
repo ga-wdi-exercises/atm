@@ -1,5 +1,8 @@
+/* global $ */
+
 $(document).ready(function () {
   $('#checking .deposit').on('click', function () {
-    alert('hi')
+    depositInput = $('#checking .input').val()
+    console.log(depositInput)
   })
 })
