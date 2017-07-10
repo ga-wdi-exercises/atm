@@ -1,4 +1,5 @@
 /* global $ */
+/* global alert */
 
 $(document).ready(function () {
   console.log('ready for transactions')
@@ -51,4 +52,26 @@ $(document).ready(function () {
 
   checkAccDep.on('click', eventDep)
   checkWithdraw.on('click', eventWith)
+
+  //savings functions
+  // checking related variables
+  var savAccDep = $('#savings .deposit')
+  var savInput = $('#savings .input')
+  var savWithdraw = $('#savings .withdraw')
+  var savBal = $('#savings .balance')
+
+  var eventDep = function () {
+    var actInput = parseInt(savInput.val())
+    savings.bal = savings.deposit(actInput)
+    savBal.text(savings.bal)
+  }
+
+  var eventWith = function () {
+    var actInput = parseInt(savInput.val())
+    savings.bal = savings.withdraw(actInput)
+    savBal.text(savings.bal)
+  }
+
+  savAccDep.on('click', eventDep)
+  savWithdraw.on('click', eventWith)
 })
