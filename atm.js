@@ -7,6 +7,8 @@ $('body').css('background','red')
 
 var inputChecking = $('#checking .input');
 var inputSaving   = $('#savings .input');
+var outputChecking = $('#checking .balance')
+var outputSavings = $('#savings .balance')
 
 
 
@@ -15,4 +17,6 @@ $('#checking .deposit').on('click',write)
 function write ()
 {
   console.log(inputChecking.val())
+  outputChecking.text("$" + inputChecking.val());
+
 }
