@@ -10,13 +10,13 @@
 //define withdrawal and deposit buttons in jquery
 
 //add event listeners to deposit and withdrawal buttons
-var checkingInput = $('#checking .input').val()
+var checkingInput = $('#checking .input')
 var checkingBalance = 0
 var checkingDeposit = $('#checking .deposit')
 var checkingWithdraw = $('#checking .withdraw')
 var balanceDisplay = $('#checking .balance')
 
-var savingsInput = $('#savings .input').val()
+var savingsInput = $('#savings .input')
 var savingsBalance = 0
 var savingsDeposit = $('#savings .deposit')
 var savingsWithdraw = $('#savings .withdraw')
@@ -25,11 +25,11 @@ var savingsBalanceDisplay = $('#savings .balance')
 
 
 var depositChecking = function () {
-  checkingBalance += parseInt($('input').val(), 10)
+  checkingBalance += parseInt(checkingInput.val(), 10)
 }
 
 var withdrawChecking = function () {
-  checkingBalance -= parseInt($('input').val(), 10)
+  checkingBalance -= parseInt(checkingInput.val(), 10)
 }
 
 
@@ -57,15 +57,14 @@ savingsWithdraw.on('click', withdrawS)
 
 
 var depositSavings = function () {
-  savingsBalance += parseInt($('input').val(), 10)
+  savingsBalance += parseInt(savingsInput.val(), 10)
 }
 
 var withdrawSavings = function () {
-  savingsBalance -= parseInt($('input').val(), 10)
+  savingsBalance -= parseInt(savingsInput.val(), 10)
 }
 
-
-var depositS = function () {
+function depositS () {
     console.log($('#savings .input').val())
     depositSavings()
     console.log(savingsBalance)
@@ -73,7 +72,7 @@ var depositS = function () {
 }
 
 
-var withdrawS = function () {
+function withdrawS () {
   console.log($('#savings .input').val())
   withdrawSavings()
   console.log(savingsBalance)
