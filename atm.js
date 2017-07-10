@@ -2,7 +2,9 @@ $(document).ready(function () {
 /* global $ */
 
 
-var balanceNum = 0
+var balanceCheck = 0
+var balanceSav = 0
+var totalBalance = 0
 var balanceChecking = $('#checking .balance')
 var balanceSavings = $('#savings .balance')
 var checkingDeposit = $('#checking .deposit')
@@ -12,35 +14,83 @@ var savingsWithdraw = $('#savings .withdraw')
 var checkingInput = $('#checking .input')
 var savingsInput = $('#savings .input')
 
+balanceChecking.addClass('zero')
+balanceSavings.addClass('zero')
+
 var depositDisplay = function () {
   var input = parseInt(checkingInput.val())
-  balanceNum += input
-  balanceChecking.text(`$ ${balanceNum}`)
-}
+  balanceCheck += input
+  totalBalance += input
+  balanceChecking.text(`$ ${balanceCheck}`)
+  isZero()
+  }
 
 var withdrawDisplay = function () {
   var input = parseInt(checkingInput.val())
-  balanceNum -= input
-  balanceChecking.text(`$ ${balanceNum}`)
+  if (balanceCheck >= input) {
+    balanceCheck -= input
+    totalBalance -= input
+    balanceChecking.text(`$ ${balanceCheck}`)
+  } else if (balanceSav && totalBalance >= input) {
+      var diff = balanceCheck - input
+      balanceSav += diff
+      balanceCheck -= diff
+      balanceCheck -= input
+      totalBalance = balanceSav + balanceCheck
+      balanceChecking.text(`$ ${balanceCheck}`)
+      balanceSavings.text(`$ ${balanceSav}`)
+    } else {
+      alert('You tried to withdraw more than you have in Savings and Checking combined!')
+    }
+    isZero()
 }
 
 
 var depositDisplaySavings = function () {
   var input = parseInt(savingsInput.val())
-  balanceNum += input
-  balanceSavings.text(`$ ${balanceNum}`)
+  balanceSav += input
+  totalBalance += input
+  balanceSavings.text(`$ ${balanceSav}`)
+  isZero()
 }
 
 var withdrawDisplaySavings = function () {
   var input = parseInt(savingsInput.val())
-  balanceNum -= input
-  balanceSavings.text(`$ ${balanceNum}`)
+  if (balanceSav >= input) {
+    balanceSav -= input
+    totalBalance -= input
+    balanceSavings.text(`$ ${balanceSav}`)
+  } else if (balanceCheck && totalBalance >= input) {
+      var diff = balanceSav - input
+      balanceCheck += diff
+      balanceSav -= diff
+      balanceSav -= input
+      totalBalance = balanceSav + balanceCheck
+      balanceChecking.text(`$ ${balanceCheck}`)
+      balanceSavings.text(`$ ${balanceSav}`)
+    } else {
+      alert('You tried to withdraw more than you have in Savings and Checking combined!')
+    }
+  isZero()
 }
 
+function isZero () {
+  if(balanceCheck === 0) {
+    balanceChecking.addClass('zero')
+  } else {
+    balanceChecking.removeClass('zero')
+  }
+  if(balanceSav === 0) {
+    balanceSavings.addClass('zero')
+  } else {
+    balanceSavings.removeClass('zero')
+  }
+}
 checkingDeposit.on('click', depositDisplay)
 checkingWithdraw.on('click', withdrawDisplay)
 savingsDeposit.on('click', depositDisplaySavings)
 savingsWithdraw.on('click', withdrawDisplaySavings)
+
 
 
 // Do not delete these braces fool
