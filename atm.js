@@ -5,10 +5,14 @@ $(document).ready(function(){
 $('body').css('background','red')
 
 
+var inputChecking = $('#checking .input');
+var inputSaving   = $('#savings .input');
 
-$('.deposit').on('click',write)
+
+
+$('#checking .deposit').on('click',write)
 
 function write ()
 {
-  console.log("hello")
+  console.log(inputChecking.val())
 }
