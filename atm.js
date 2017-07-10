@@ -24,7 +24,7 @@ $(document).ready(function () {
     }
     withdraw (amt) {
       console.log(`Verifying amount in account...`) // ternary
-      this.bal >= amt ? this.bal -= amt : alert('Insufficient funds, transaction cancelled') && console.log('Insufficient Funds, Transaction Cancelled')
+      this.bal >= amt ? this.bal -= amt : alert('Insufficient funds, transaction cancelled')
       return this.bal
     }
   }
@@ -53,7 +53,7 @@ $(document).ready(function () {
   checkAccDep.on('click', eventDep)
   checkWithdraw.on('click', eventWith)
 
-  //savings functions
+  // savings functions
   // checking related variables
   var savAccDep = $('#savings .deposit')
   var savInput = $('#savings .input')
