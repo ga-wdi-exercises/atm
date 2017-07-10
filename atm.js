@@ -17,6 +17,7 @@ var sBalanceNum = 0
 cDeposit.on('click', function() {
   cBalanceNum += parseInt(cInput.val())
   cBalance.text('$' + cBalanceNum)
+  cInput.val('')
   if (cBalanceNum > 0) {
     cAccount.attr('class', 'account')
   }
@@ -26,6 +27,7 @@ cWithdraw.on('click', function() {
   if (cBalanceNum >= parseInt(cInput.val())) {
   cBalanceNum -= parseInt(cInput.val())
   cBalance.text('$' + cBalanceNum)
+  cInput.val('')
     if (cBalanceNum === 0) {
       cAccount.attr('class', 'zero')
     }
@@ -41,6 +43,7 @@ cWithdraw.on('click', function() {
       cBalanceNum = 0
       cBalance.text('$' + cBalanceNum)
       sBalance.text('$' + sBalanceNum)
+      cInput.val('')
       if (cBalanceNum === 0) {
         cAccount.attr('class', 'zero')
       }
@@ -54,6 +57,7 @@ cWithdraw.on('click', function() {
 sDeposit.on('click', function() {
   sBalanceNum += parseInt(sInput.val())
   sBalance.text('$' + sBalanceNum)
+  sInput.val('')
     if (sBalanceNum > 0) {
       sAccount.attr('class', 'account')
     }
@@ -63,6 +67,7 @@ sWithdraw.on('click', function() {
   if (sBalanceNum >= parseInt(sInput.val())) {
     sBalanceNum -= parseInt(sInput.val())
     sBalance.text('$' + sBalanceNum)
+    sInput.val('')
     if (sBalanceNum === 0) {
       sAccount.attr('class', 'zero')
     }
