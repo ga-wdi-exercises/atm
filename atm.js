@@ -3,3 +3,12 @@ $(document).ready(function(){
 });
 
 $('body').css('background','red')
+
+
+
+$('.deposit').on('click',write)
+
+function write ()
+{
+  console.log("hello")
+}
