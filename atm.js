@@ -8,6 +8,8 @@ $(document).ready(function () {
 
 /* Informs the user they inputed an invalid amount */
   function addErrorMessage () {
+    removeErrorMessage()
+
     var errorMessage = $('<div class="error"></div>')
 
     errorMessage.text('invalid amount')
@@ -15,6 +17,12 @@ $(document).ready(function () {
     errorMessage.css('color', 'red')
 
     errorMessage.appendTo($('.header'))
+  }
+
+  function removeErrorMessage (balance) {
+    if (balance !== -1) {
+      $('.error').remove()
+    }
   }
 
 /* returns 'deposit' or 'withdrawal' */
@@ -25,6 +33,7 @@ $(document).ready(function () {
 /* checks for the type of transaction and sends it to the proper function */
   function changeBalance (type, input, currentBalance, $el) {
     var inputAsNumber
+
     // convert input to number
     if (isNumber(input)) {
       inputAsNumber = parseInt(input)
@@ -40,12 +49,10 @@ $(document).ready(function () {
 
       // The color of a bank account should reflect its balance
       changeColor(balance, $el.parent())
-
       // remove error if any
-      if (balance !== -1) {
-        $('.error').remove()
-      }
-    } else {
+      removeErrorMessage(balance)
+    } else { // NaN
+      // the user entered an invalid ammount
       addErrorMessage()
     }
   }
@@ -63,7 +70,6 @@ $(document).ready(function () {
   function makeWithdrawal (amount, currentBalance, $el) {
     // overdraft protection
     var result
-
     // check if overdraft needed
     if (currentBalance - amount < 0) {
       var otherType = $el.parent().attr('id') === 'checking' ? 'savings' : 'checking'
@@ -82,14 +88,13 @@ $(document).ready(function () {
 
 /* handles overdrafting */
   function overdraft (amount, balance, $el, $otherAccount) {
-    var otherBalance = parseInt($otherAccount.children('.input').val().replace('$', ''))
-
+    var otherBalance = parseInt($otherAccount.children('.balance').text().replace('$', ''))
     // If a withdrawal can be covered by the balances
     if (otherBalance + balance >= amount) {
       // in both accounts, bring the withdrawn-from account
       // down to $0 and take the remainder from the other account.
       makeWithdrawal(balance, balance, $el)
-      makeWithdrawal(amount - balance, otherBalance, $otherAccount.children('.input'))
+      makeWithdrawal(amount - balance, otherBalance, $otherAccount.children('.withdraw'))
     } else {
       // If the withdrawn amount is more than the combined
       // account balance, display an error.
