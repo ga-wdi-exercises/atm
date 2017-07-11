@@ -1,4 +1,4 @@
-var depositChecking = $('#checking .deposit') // define variable for checking
+/*var depositChecking = $('#checking .deposit') // define variable for checking
 var balanceChecking = $('#checking .balance')
 var inputChecking = $('#checking .input')
 var withdrawChecking = $('#checking .withdraw')
@@ -21,9 +21,10 @@ $(document).ready(function (balance) { // update balance div for checking accoun
     var withdraw = parseInt(inputChecking.val())
     var total = balance - withdraw
 
-    if (total >= 0) {
-      balanceChecking.text('$' + total)
+    if (total < 0) { // does not allow balance to go past zero and changes background
       balanceChecking.addClass('zero')
+    } else {
+      balanceChecking.text('$' + total)
     }
   })
 
@@ -33,13 +34,16 @@ $(document).ready(function (balance) { // update balance div for checking accoun
     var total = balance + deposit
     balanceSavings.text('$' + total)
   })
-  withdrawSavings.on('click', function () { //withdraw for savings
+  withdrawSavings.on('click', function () { // withdraw for savings
     var balance = parseInt(balanceSavings.text().replace('$', ''))
     var withdraw = parseInt(inputSavings.val())
     var total = balance - withdraw
-    if (total >= 0) {
-    balanceSavings.text('$' + total)
-    balanceSavings.addClass('zero')
-  }
+
+    if (total < 0) { // does not allow balance to go past zero and changes background (not yet)
+      balanceSavings.addClass('zero')
+    } else {
+      balanceSavings.text('$' + total)
+    }
   })
-})
+
+})*/
