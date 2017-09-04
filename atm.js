@@ -15,6 +15,7 @@ button1.on("click", function(){
     var balance = parseInt($("#checking .balance").text().replace("$", ""))
     var newBalance = "$" + (balance + deposit)
     $("#checking .balance").text(newBalance)
+    $('#checking .input').val('');
   })
 
   button2.on("click", function(){
@@ -22,6 +23,7 @@ button1.on("click", function(){
       var balance = parseInt($("#checking .balance").text().replace("$", ""))
       var newBalance = "$" + (balance - deposit)
       $("#checking .balance").text(newBalance)
+      $('#checking .input').val('');
     })
 
     // Savings
@@ -30,6 +32,7 @@ button1.on("click", function(){
         var balance = parseInt($("#savings .balance").text().replace("$", ""))
         var newBalance = "$" + (balance + deposit)
         $("#savings .balance").text(newBalance)
+        $('#savings .input').val('');
       })
 
       button4.on("click", function(){
@@ -37,4 +40,5 @@ button1.on("click", function(){
           var balance = parseInt($("#savings .balance").text().replace("$", ""))
           var newBalance = "$" + (balance - deposit)
           $("#savings .balance").text(newBalance)
+          $('#savings .input').val('');
         })
